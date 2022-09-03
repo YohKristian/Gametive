@@ -1,0 +1,2 @@
+# Gametive
+Our website will list the ongoing gaming / e-sports competitions in certain areas (co: Jabodetabek). Users can register the events they want to host. Users who wish to participate in an event can register themselves and make payments upon registration. Our website makes it easy to provide space to the local gaming community on a competitive basis and also promotes related games that allow games to be competed through our platform (Web App)
