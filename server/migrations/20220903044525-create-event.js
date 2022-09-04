@@ -9,34 +9,56 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       price: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       rules: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       eventStatus: {
-        type: Sequelize.STRING
+        defaultValue: "Pending",
+        type: Sequelize.STRING,
       },
       eventDate: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATE,
       },
       eventType: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       UserId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
       },
       GameId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Games',
+          key: 'id'
+        },
       },
       LocationId: {
-        type: Sequelize.INTEGER
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Locations',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,

@@ -9,24 +9,31 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       gameImg: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       youtubeUrl: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       gameUrl: {
-        type: Sequelize.TEXT
+        allowNull: false,
+        type: Sequelize.TEXT,
       },
       releaseDate: {
-        type: Sequelize.DATE
+        allowNull: false,
+        type: Sequelize.DATE,
       },
       developer: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.STRING,
       },
       genre: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
