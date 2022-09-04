@@ -11,16 +11,86 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Game.hasMany(models.Event)
     }
   }
   Game.init({
-    name: DataTypes.STRING,
-    gameImg: DataTypes.TEXT,
-    youtubeUrl: DataTypes.TEXT,
-    gameUrl: DataTypes.TEXT,
-    releaseDate: DataTypes.DATE,
-    developer: DataTypes.STRING,
-    genre: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Name is required"
+        },
+        notEmpty: {
+          msg: "Name is required"
+        },
+      }
+    },
+    gameImg: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Image Url is required"
+        },
+        notEmpty: {
+          msg: "Image Url is required"
+        },
+      }
+    },
+    youtubeUrl: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Youtube Url is required"
+        },
+        notEmpty: {
+          msg: "Youtube Url is required"
+        },
+      }
+    },
+    gameUrl: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Game Url is required"
+        },
+        notEmpty: {
+          msg: "Game Url is required"
+        },
+      }
+    },
+    releaseDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Release Date is required"
+        },
+        notEmpty: {
+          msg: "Release Date is required"
+        },
+      }
+    },
+    developer: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Developer is required"
+        },
+        notEmpty: {
+          msg: "Developer is required"
+        },
+      }
+    },
+    genre: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   }, {
     sequelize,
     modelName: 'Game',

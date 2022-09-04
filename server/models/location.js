@@ -11,11 +11,46 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Location.hasOne(models.Event)
     }
   }
   Location.init({
-    name: DataTypes.STRING,
-    ProvinceId: DataTypes.INTEGER
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Address is required"
+        },
+        notEmpty: {
+          msg: "Address is required"
+        },
+      }
+    },
+    ProvinceId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Province is required"
+        },
+        notEmpty: {
+          msg: "Province is required"
+        },
+      }
+    },
+    RegencyId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Regency is required"
+        },
+        notEmpty: {
+          msg: "Regency is required"
+        },
+      }
+    },
   }, {
     sequelize,
     modelName: 'Location',

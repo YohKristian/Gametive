@@ -1,0 +1,8 @@
+All Table and All field not null not empty
+<Table> - <field>
+User - username & email unique
+User - password minimum length 5
+User - role default value 'Customer'
+Event - price minimum 0
+Event - eventStatus default value 'Pending'
+Game - genre allow empty allow null
