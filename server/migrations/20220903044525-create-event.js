@@ -28,6 +28,10 @@ module.exports = {
         defaultValue: "Pending",
         type: Sequelize.STRING,
       },
+      eventPoster: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
       eventDate: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -74,6 +74,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       defaultValue: "Pending",
     },
+    eventPoster: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Poster is required"
+        },
+        notEmpty: {
+          msg: "Poster is required"
+        },
+      }
+    },
     eventDate: {
       type: DataTypes.DATE,
       allowNull: false,
