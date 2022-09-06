@@ -6,3 +6,5 @@ User - role default value 'Customer'
 Event - price minimum 0
 Event - eventStatus default value 'Pending'
 Game - genre allow empty allow null
+Participant - statusPay default values 'Unpaid'
+Team - MemberName1-4 allow empty allow null

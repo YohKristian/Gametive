@@ -11,26 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Participant.belongsTo(models.User)
+      Participant.belongsTo(models.Team)
       Participant.belongsTo(models.Event)
     }
   }
   Participant.init({
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
-    UserId: {
+    TeamId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
-          msg: "User is required"
+          msg: "Team is required"
         },
         notEmpty: {
-          msg: "User is required"
+          msg: "Team is required"
         },
       }
     },
@@ -43,6 +37,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: "Event is required"
+        },
+      }
+    },
+    statusPay: {
+      type: DataTypes.STRING,
+      defaultValue: "Unpaid",
+    },
+    paymentDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Date is required"
+        },
+        notEmpty: {
+          msg: "Date is required"
         },
       }
     },
