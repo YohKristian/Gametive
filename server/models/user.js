@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Event)
-      User.hasMany(models.Participant)
+      User.hasMany(models.Team)
     }
   }
   User.init({

@@ -8,11 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      UserId: {
+      TeamId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Teams',
           key: 'id'
         },
       },
@@ -23,6 +23,14 @@ module.exports = {
           model: 'Events',
           key: 'id'
         },
+      },
+      statusPay: {
+        defaultValue: "Unpaid",
+        type: Sequelize.STRING
+      },
+      paymentDate: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
