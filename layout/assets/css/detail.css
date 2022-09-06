@@ -1,0 +1,29 @@
+.detail > div:nth-child(2) > * {
+  margin: 15px 0;
+}
+
+.detail-img {
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.detail-img > img {
+  width: 100%;
+}
+
+.detail span.status {
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #a7a7a7;
+  padding: 6px 10px;
+  border-radius: 10px;
+  color: white;
+}
+
+.detail h2 {
+  font-weight: lighter;
+}

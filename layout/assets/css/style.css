@@ -1,0 +1,15 @@
+@import "./loginPage.css";
+@import "./registerPage.css";
+@import "./header.css";
+@import "./main.css";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
