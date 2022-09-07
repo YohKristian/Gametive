@@ -1,26 +1,18 @@
 [
-    {
-        "name": "testing",
-        "CaptainName": "kapten1",
-        "MemberName1": "member1",
-        "MemberName2": "member2",
-        "MemberName3": "member3",
-        "MemberName4": "member4"
-    },
-    {
-        "name": "testing1",
-        "CaptainName": "kapten2",
-        "MemberName1": "member11",
-        "MemberName2": "member22",
-        "MemberName3": "member33",
-        "MemberName4": "member44"
-    },
-    {
-        "name": "testing2",
-        "CaptainName": "kapten3",
-        "MemberName1": "member111",
-        "MemberName2": "member222",
-        "MemberName3": "member333",
-        "MemberName4": "member444"
-    }
+  {
+    "name": "testingTeam",
+    "CaptainName": "customer",
+    "MemberName1": "member1",
+    "MemberName2": "member2",
+    "MemberName3": "member3",
+    "MemberName4": "member4"
+  },
+  {
+    "name": "testingTeam2",
+    "CaptainName": "customer",
+    "MemberName1": "",
+    "MemberName2": "",
+    "MemberName3": "",
+    "MemberName4": ""
+  }
 ]
