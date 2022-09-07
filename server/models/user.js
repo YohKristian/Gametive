@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			User.hasMany(models.Event);
-			User.hasMany(models.Team);
+			User.hasMany(models.Team, { foreignKey: "CaptainName" });
 		}
 	}
 	User.init(
@@ -70,6 +70,12 @@ module.exports = (sequelize, DataTypes) => {
 			hooks: {
 				beforeCreate: (user, options) => {
 					user.password = hashPassword(user.password);
+				},
+				beforeUpdate: (user, options) => {
+					user.password = hashPassword(user.password);
+				},
+				afterUpdate: (user, options) => {
+					delete user.password;
 				},
 			},
 			sequelize,
