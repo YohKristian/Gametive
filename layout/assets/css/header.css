@@ -1,0 +1,24 @@
+header {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 50px;
+  align-items: center;
+  background-color: #0000003a;
+}
+
+header > .img {
+  width: 250px;
+}
+
+header > .img > img {
+  width: 100%;
+}
+
+header > div > a {
+  margin: 0 10px;
+  color: white;
+  font-weight: bold;
+}
+
