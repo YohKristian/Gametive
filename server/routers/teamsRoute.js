@@ -5,7 +5,7 @@ const router = require('express').Router();
 router.get('/all-teams', TeamController.getAllTeam)
 router.get('/:teamId', TeamController.getDetailTeam)
 router.post('/create', TeamController.createTeam)
-router.put('/edit', TeamController.editTeam)
-router.delete('/delete', TeamController.deleteTeam)
+router.put('/edit/:teamId', TeamController.editTeam)
+router.delete('/delete/:teamId', TeamController.deleteTeam)
 
 module.exports = router;

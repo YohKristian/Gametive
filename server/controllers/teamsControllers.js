@@ -14,16 +14,14 @@ class TeamController {
     static async getDetailTeam(req, res, next) {
         try {
             const teamId = req.body.teamId;
+
             const data = await Team.findByPk(teamId, {
                 include: Participant, User
             })
 
-            if (!data) throw { code: 999 };
+            if (!data) throw { code: 40 };
 
-            res.status(200).json({
-                message: "Get Detail",
-                team: data
-            })
+            res.status(200).json(data)
         } catch (error) {
             next(error)
         }
@@ -31,9 +29,18 @@ class TeamController {
 
     static async createTeam(req, res, next) {
         try {
-            res.status(201).json({
-                message: "Create Team"
-            })
+            const newTeam = {
+                name: req.body.name,
+                CaptainName: req.user.username,
+                MemberName1: req.body.MemberName1,
+                MemberName2: req.body.MemberName2,
+                MemberName3: req.body.MemberName3,
+                MemberName4: req.body.MemberName4,
+            }
+
+            const data = await Team.create(newTeam)
+
+            res.status(201).json(data)
         } catch (error) {
             next(error)
         }
@@ -41,9 +48,28 @@ class TeamController {
 
     static async editTeam(req, res, next) {
         try {
-            res.status(200).json({
-                message: "Edit Team"
+            const teamId = req.body.teamId;
+
+            const findTeam = await Team.findByPk(teamId)
+
+            if (!findTeam) throw { code: 41 };
+
+            const updateTeam = {
+                name: req.body.name,
+                CaptainName: req.user.username,
+                MemberName1: req.body.MemberName1,
+                MemberName2: req.body.MemberName2,
+                MemberName3: req.body.MemberName3,
+                MemberName4: req.body.MemberName4,
+            }
+
+            const data = await Team.update(updateTeam, {
+                where: {
+                    id: teamId
+                }
             })
+
+            res.status(200).json(data)
         } catch (error) {
             next(error)
         }
@@ -55,7 +81,7 @@ class TeamController {
 
             const findTeam = await Team.findByPk(teamId)
 
-            if (!findTeam) throw { code: 999 };
+            if (!findTeam) throw { code: 42 };
 
             await Team.destroy({
                 where: {
