@@ -18,6 +18,8 @@ module.exports = errorHandler = (error, req, res, next) => {
 			return res.status(403).json({ code, message: "invalid authorization" });
 		case 6:
 			return res.status(400).json({ code, message: "invalid access_token" });
+		case 100:
+			return res.status(404).json({ code, message: "user not found" });
 	}
 	//sequelize errors
 	if (error.name == "SequelizeValidationError" || error.name == "SequelizeUniqueConstraintError") {
