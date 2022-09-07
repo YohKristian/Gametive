@@ -2,6 +2,7 @@ const router = require("express").Router();
 //routes
 const users = require("./usersRoute");
 const participants = require("./participantsRoute");
+const teams = require("./teamsRoute");
 const midtrans = require("./midtransRoute");
 const games = require("./gamesRoute");
 
@@ -13,6 +14,7 @@ router.get("/", (req, res) => {
 
 router.use("/users", users);
 router.use("/participants", participants);
+router.use("/teams", teams);
 router.use("/midtrans", midtrans);
 
 //Games
