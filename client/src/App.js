@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import MainPage from "./pages/MainPage";
 import DetailGame from "./components/DetailGame";
 import SearchGames from "./components/SearchGames";
+import SelectLocation from "./components/SelectLocation";
 import "./App.css";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<MainPage />}>
         <Route path="search" element={<SearchGames />} />
         <Route path="detail" element={<DetailGame />} />
+        <Route path="select" element={<SelectLocation />} />
       </Route>
     </Routes>
   );
