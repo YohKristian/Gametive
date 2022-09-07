@@ -4,16 +4,15 @@ const { Op } = require("sequelize");
 module.exports = class participantsController {
   static async create(req, res, next) {
     try {
-      const { username, email, password } = req.body;
-      if (!username || !email || !password) throw { code: 1 };
+      const { TeamId, EventId } = req.body;
+      if (!TeamId || !EventId) throw { code: 1 };
 
-      const [createResponse, created] = await User.findOrCreate({
-        where: { username, email },
-        defaults: { username, email, password },
+      const [createResponse, created] = await Participant.findOrCreate({
+        where: { TeamId, EventId },
+        defaults: { TeamId, EventId, paymentDate: new Date() },
       });
-      if (!created) throw { code: 2 };
 
-      res.status(201).json(created);
+      res.status(201).json(createResponse || created);
     } catch (error) {
       next(error);
     }
@@ -29,11 +28,11 @@ module.exports = class participantsController {
       next(error);
     }
   }
-  static async fetchOneParticipant(req, res, next) {
+  static async fetchOneParticipantByEventId(req, res, next) {
     try {
-      const { participantId } = req.params;
+      const { eventId } = req.params;
       const fetchResponse = await Participant.findOne({
-        where: { id: +participantId },
+        where: { EventId: +eventId },
         include: [{ model: Team }, { model: Event }],
       });
 
@@ -45,20 +44,61 @@ module.exports = class participantsController {
       next(error);
     }
   }
-  static async update(req, res, next) {
+  static async updateByTeamId(req, res, next) {
     try {
-      //update only accept password change for now (even admin cant change anything other than password)
-      // const {id} = req.user //from authentication
-      const { password } = req.body;
-      const updateResponse = await User.update({ password }, { where: { id } });
-      res.status(200).json(updateResponse);
+      const { teamId } = req.params;
+
+      const fetchResponse = await Participant.findOne({
+        where: { TeamId: +teamId },
+      });
+
+      if (!fetchResponse)
+        return res.status(404).json({ message: "data not found" });
+
+      const payload = {
+        paidStatus: "Paid",
+        currentDate: new Date(),
+      };
+
+      await Participant.update(
+        {
+          statusPay: payload.paidStatus,
+          paymentDate: payload.currentDate,
+        },
+        { where: { TeamId: +teamId } }
+      );
+
+      res.status(200).json({
+        id: fetchResponse.id,
+        TeamId: fetchResponse.TeamId,
+        EventId: fetchResponse.EventId,
+        statusPay: payload.paidStatus,
+        paymentDate: payload.currentDate,
+        createdAt: fetchResponse.createdAt,
+        updatedAt: fetchResponse.updatedAt,
+      });
     } catch (error) {
       next(error);
     }
   }
-  static async delete(req, res, next) {
-    //soft delete (change status from active -> inactive)
+  static async deleteParticipantById(req, res, next) {
     try {
+      const { participantId } = req.params;
+
+      const fetchResponse = await Participant.findOne({
+        where: { id: +participantId },
+      });
+
+      if (!fetchResponse)
+        return res.status(404).json({ message: "data not found" });
+
+      await Participant.destroy({
+        where: { id: +participantId },
+      });
+
+      res.status(200).json(
+        fetchResponse
+      );
     } catch (error) {
       next(error);
     }
