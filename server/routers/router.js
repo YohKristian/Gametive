@@ -7,9 +7,9 @@ const midtrans = require("./midtransRoute");
 const games = require("./gamesRoute");
 
 router.get("/", (req, res) => {
-  res.status(200).json({
-    message: "OK",
-  });
+	res.status(200).json({
+		message: "OK",
+	});
 });
 
 router.use("/users", users);
