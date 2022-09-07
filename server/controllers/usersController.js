@@ -1,6 +1,7 @@
 const { User } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
+const { createToken } = require("../helpers/jsonwebtoken");
 
 module.exports = class usersController {
 	static async login(req, res, next) {
@@ -13,12 +14,14 @@ module.exports = class usersController {
 				where: {
 					[Op.or]: [{ username: username }, { email: username }],
 				},
-				attributes: { exclude: ["createdAt", "updatedAt", "role", "id"] },
+				attributes: { exclude: ["createdAt", "updatedAt"] },
 			});
 
 			if (!loginResponse || !comparePassword(password, loginResponse.password)) throw { code: 4 };
 
-			res.status(200).json(Boolean(loginResponse));
+			const token = createToken({ username: loginResponse.username, email: loginResponse.email, id: loginResponse.id, role: loginResponse.role });
+
+			res.status(200).json({ login: Boolean(loginResponse), access_token: token });
 		} catch (error) {
 			next(error);
 		}

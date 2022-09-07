@@ -1,4 +1,5 @@
 module.exports = errorHandler = (error, req, res, next) => {
+	console.log(error);
 	//human-made errors
 	const { code } = error;
 	switch (code) {
@@ -12,6 +13,8 @@ module.exports = errorHandler = (error, req, res, next) => {
 			return res.status(400).json({ code, message: "username / password invalid" });
 		case 5:
 			return res.status(403).json({ code, message: "invalid authorization" });
+		case 6:
+			return res.status(400).json({ code, message: "invalid access_token" });
 	}
 	//sequelize errors
 	if (error.name == "SequelizeValidationError" || error.name == "SequelizeUniqueConstraintError") {
