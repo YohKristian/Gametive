@@ -1,6 +1,7 @@
 const router = require("express").Router();
 //routes
 const users = require("./usersRoute");
+const games = require("./gamesRoute")
 
 router.get("/", (req, res) => {
 	res.status(200).json({
@@ -9,5 +10,8 @@ router.get("/", (req, res) => {
 });
 
 router.use("/users", users);
+
+//Games
+router.use("/games", games)
 
 module.exports = router;
