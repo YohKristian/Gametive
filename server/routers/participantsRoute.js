@@ -3,9 +3,9 @@ const participants = require("express").Router();
 const participantsController = require("../controllers/participantsController");
 
 participants.get("/", participantsController.fetchAll);
-participants.get("/:participantId", participantsController.fetchOneParticipant);
+participants.get("/:eventId", participantsController.fetchOneParticipantByEventId);
 participants.post("/", participantsController.create);
-// participants.put("/:username", usersController.update);
-// participants.patch("/:username", usersController.delete);
+participants.put("/:teamId", participantsController.updateByTeamId);
+participants.delete("/:participantId", participantsController.deleteParticipantById);
 
 module.exports = participants;
