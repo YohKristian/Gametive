@@ -11,7 +11,9 @@ module.exports = authentication = async (req, res, next) => {
 
 		if (!tokenResponse) throw { code: 6 };
 
+		//!TODO : need to adjust the information
 		const { id, role, username, email } = tokenVerify;
+
 		req.user = { id, role, username, email };
 		next();
 	} catch (error) {
