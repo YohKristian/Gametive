@@ -19,6 +19,7 @@ module.exports = class usersController {
 
 			if (!loginResponse || !comparePassword(password, loginResponse.password)) throw { code: 4 };
 
+			//!TODO : need to adjust the information what to send as the token
 			const token = createToken({ username: loginResponse.username, email: loginResponse.email, id: loginResponse.id, role: loginResponse.role });
 
 			res.status(200).json({ login: Boolean(loginResponse), access_token: token });
