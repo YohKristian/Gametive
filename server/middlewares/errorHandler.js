@@ -19,6 +19,12 @@ module.exports = errorHandler = (error, req, res, next) => {
 			return res.status(400).json({ code, message: "please fill your password" });
 		case 8:
 			return res.status(400).json({ code, message: "update password failed" });
+		case 40:
+			return res.status(404).json({ code, message: "team detail not found" });
+		case 41:
+			return res.status(404).json({ code, message: "fail to update, team detail not found" });
+		case 42:
+			return res.status(404).json({ code, message: "fail to delete, team detail not found" });
 		case 100:
 			return res.status(404).json({ code, message: "user not found" });
 	}

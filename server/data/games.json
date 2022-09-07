@@ -1,65 +1,65 @@
 [
-    {
-        "name": "League of Legends: Wild Rift",
-        "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
-        "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
-        "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
-        "releaseDate": "27-10-2020",
-        "developer": "RIOT GAMES",
-        "genre": "MOBA"
-    },
-    {
-        "name": "Mobile Legends: Bang Bang",
-        "gameImg": "https://cdn0-production-images-kly.akamaized.net/Hyl2S_OHDEDCGayRTeriz3hPi38=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3488932/original/008102000_1624278462-Mobile_Legends_11.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=cftqT7au9gk",
-        "gameUrl": "https://m.mobilelegends.com/en",
-        "releaseDate": "14-07-2016",
-        "developer": "Moonton",
-        "genre": "MOBA"
-    },
-    {
-        "name": "Arena Of Valor",
-        "gameImg": "https://gamebrott.com/wp-content/uploads/2020/11/arena_of_valor.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=JM_UdSUW1ao",
-        "gameUrl": "https://www.arenaofvalor.com/",
-        "releaseDate": "13-10-2016",
-        "developer": "Tencet Games",
-        "genre": "MOBA"
-    },
-    {
-        "name": "VALORANT",
-        "gameImg": "https://cdn1-production-images-kly.akamaized.net/2cz3nNAb61C_WtZDIByp9jys2Ww=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3142622/original/000361800_1591163362-valorant-2.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=IhhjcB2ZjIM",
-        "gameUrl": "https://playvalorant.com/id-id/",
-        "releaseDate": "02-06-2020",
-        "developer": "RIOT GAMES",
-        "genre": "FPS"
-    },
-    {
-        "name": "CS:GO",
-        "gameImg": "https://estnn.com/wp-content/uploads/2022/05/20491388.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=edYCtaNueQY",
-        "gameUrl": "https://blog.counter-strike.net/",
-        "releaseDate": "21-08-2012",
-        "developer": "Valve Corporation",
-        "genre": "FPS"
-    },
-    {
-        "name": "Garena Free Fire",
-        "gameImg": "https://aidsindonesia.or.id/wp-content/uploads/2021/12/Garena-Free-Fire.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=pKUu6PKNyzk",
-        "gameUrl": "https://ff.garena.com/en/",
-        "releaseDate": "04-12-2017",
-        "developer": "111dots Studio",
-        "genre": "Battle royale"
-    },
-    {
-        "name": "PUBG Mobile",
-        "gameImg": "https://cdn.urbandigital.id/wp-content/uploads/2018/09/youtubegaming2560_1440-768x380.jpg",
-        "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
-        "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
-        "releaseDate": "19-03-2018",
-        "developer": "Tencent Games",
-        "genre": "Battle royale"
-    }
+  {
+    "name": "League of Legends: Wild Rift",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "RIOT GAMES",
+    "genre": "MOBA"
+  },
+  {
+    "name": "Mobile Legends: Bang Bang",
+    "gameImg": "https://cdn0-production-images-kly.akamaized.net/Hyl2S_OHDEDCGayRTeriz3hPi38=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3488932/original/008102000_1624278462-Mobile_Legends_11.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=cftqT7au9gk",
+    "gameUrl": "https://m.mobilelegends.com/en",
+    "releaseDate": "2016-07-14",
+    "developer": "Moonton",
+    "genre": "MOBA"
+  },
+  {
+    "name": "Arena Of Valor",
+    "gameImg": "https://gamebrott.com/wp-content/uploads/2020/11/arena_of_valor.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=JM_UdSUW1ao",
+    "gameUrl": "https://www.arenaofvalor.com/",
+    "releaseDate": "2016-10-13",
+    "developer": "Tencet Games",
+    "genre": "MOBA"
+  },
+  {
+    "name": "VALORANT",
+    "gameImg": "https://cdn1-production-images-kly.akamaized.net/2cz3nNAb61C_WtZDIByp9jys2Ww=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3142622/original/000361800_1591163362-valorant-2.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=IhhjcB2ZjIM",
+    "gameUrl": "https://playvalorant.com/id-id/",
+    "releaseDate": "2020-06-02",
+    "developer": "RIOT GAMES",
+    "genre": "FPS"
+  },
+  {
+    "name": "CS:GO",
+    "gameImg": "https://estnn.com/wp-content/uploads/2022/05/20491388.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=edYCtaNueQY",
+    "gameUrl": "https://blog.counter-strike.net/",
+    "releaseDate": "2012-08-21",
+    "developer": "Valve Corporation",
+    "genre": "FPS"
+  },
+  {
+    "name": "Garena Free Fire",
+    "gameImg": "https://aidsindonesia.or.id/wp-content/uploads/2021/12/Garena-Free-Fire.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=pKUu6PKNyzk",
+    "gameUrl": "https://ff.garena.com/en/",
+    "releaseDate": "2017-12-04",
+    "developer": "111dots Studio",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "PUBG Mobile",
+    "gameImg": "https://cdn.urbandigital.id/wp-content/uploads/2018/09/youtubegaming2560_1440-768x380.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
+    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
+    "releaseDate": "2018-03-19",
+    "developer": "Tencent Games",
+    "genre": "Battle royale"
+  }
 ]

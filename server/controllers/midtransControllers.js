@@ -31,11 +31,8 @@ class MidtransController {
                 }
             };
 
-            const transaction = await snap.createTransaction(parameter)
-            res.status(201).json({
-                message: "Success Create Token Transaction Midtrans",
-                transaction
-            })
+            const { token } = await snap.createTransaction(parameter)
+            res.status(201).json(token)
         } catch (error) {
             next(error);
         }
