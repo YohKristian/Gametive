@@ -13,10 +13,10 @@ class TeamController {
 
     static async getDetailTeam(req, res, next) {
         try {
-            const teamId = req.body.teamId;
+            const teamId = +req.params.teamId;
 
             const data = await Team.findByPk(teamId, {
-                include: Participant, User
+                // include: Participant, User
             })
 
             if (!data) throw { code: 40 };
@@ -48,7 +48,7 @@ class TeamController {
 
     static async editTeam(req, res, next) {
         try {
-            const teamId = req.body.teamId;
+            const teamId = req.params.teamId;
 
             const findTeam = await Team.findByPk(teamId)
 
@@ -77,7 +77,7 @@ class TeamController {
 
     static async deleteTeam(req, res, next) {
         try {
-            const teamId = req.body.teamId;
+            const teamId = req.params.teamId;
 
             const findTeam = await Team.findByPk(teamId)
 

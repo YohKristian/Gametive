@@ -1,8 +1,5 @@
 module.exports = errorHandler = (error, req, res, next) => {
 	console.log(error);
-	res.json({
-		error
-	})
 	//human-made errors
 	const { code } = error;
 	switch (code) {
@@ -18,6 +15,12 @@ module.exports = errorHandler = (error, req, res, next) => {
 			return res.status(403).json({ code, message: "invalid authorization" });
 		case 6:
 			return res.status(400).json({ code, message: "invalid access_token" });
+		case 7:
+			return res.status(400).json({ code, message: "please fill your password" });
+		case 8:
+			return res.status(400).json({ code, message: "update password failed" });
+    case 20:
+			return res.status(404).json({code, message: 'Event not found'});
 		case 40:
 			return res.status(404).json({ code, message: "team detail not found" });
 		case 41:
@@ -34,4 +37,7 @@ module.exports = errorHandler = (error, req, res, next) => {
 		return res.status(400).json({ message: error });
 	}
 	//axios errors (if any)
+
+	//LAST ERROR 500
+	return res.status(500).json({ message: error });
 };
