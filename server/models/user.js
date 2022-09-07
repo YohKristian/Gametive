@@ -71,6 +71,13 @@ module.exports = (sequelize, DataTypes) => {
 				beforeCreate: (user, options) => {
 					user.password = hashPassword(user.password);
 				},
+				beforeUpdate: (user, options) => {
+					user.password = hashPassword(user.password);
+				},
+				afterUpdate: (user, options) => {
+					console.log(user);
+					delete user.password;
+				},
 			},
 			sequelize,
 			modelName: "User",
