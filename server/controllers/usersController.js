@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword, hashPassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
@@ -63,23 +63,33 @@ module.exports = class usersController {
 		}
 	}
 	static async update(req, res, next) {
+		const t = await sequelize.transaction();
 		try {
 			//update only accept password change for now (even admin cant change anything other than password)
 			// const {id} = req.user //from authentication
-			const { id } = req.user;
+			const { id, username } = req.user;
 			const { oldPassword, newPassword } = req.body;
+			if (!oldPassword || !newPassword) throw { code: 7 };
+
 			//check oldPass
 			const oldData = await User.findOne({ where: { id } });
 			let dataCorrect = false,
 				newData = null;
+
 			//compare oldPassword with the password on database
 			comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
+
 			//if correct, proceed to update the newPassword into database
-			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true });
+			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
+
 			//check newData
-			if (!newData) throw { code: 7 };
-			res.status(200).json({ newData, message: "password has been changed" });
+			if (!newData) throw { code: 8 };
+
+			await t.commit();
+
+			res.status(200).json({ username, message: "password has been changed" });
 		} catch (error) {
+			await t.rollback();
 			next(error);
 		}
 	}
