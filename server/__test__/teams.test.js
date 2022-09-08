@@ -158,17 +158,9 @@ describe('GET Detail Teams', () => {
 });
 
 describe('POST Create Teams', () => {
-    // Reset DB
-    afterAll(() => {
-        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
-            .then(() => {
-                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
-            });
-    })
-
     describe('Success POST Create Teams - token customer', () => {
         it('should return object of team', async () => {
-            const body = { name: "Burstmon", CaptainName: "customer", MemberName1: "Shiki" };
+            const body = { name: "Burstmon", MemberName1: "Shiki" };
 
             const response = await request(app)
                 .post('/teams/create')
@@ -185,7 +177,7 @@ describe('POST Create Teams', () => {
 
     describe('Fail POST Create Teams - no name', () => {
         it('should return object of team', async () => {
-            const body = { name: "", CaptainName: "customer", MemberName1: "Shikigami" };
+            const body = { name: "", MemberName1: "Shikigami" };
 
             const response = await request(app)
                 .post('/teams/create')
@@ -207,6 +199,31 @@ describe('POST Create Teams', () => {
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty('code', expect.any(Number));
             expect(response.body).toHaveProperty('message', expect.any(String));
+        });
+    });
+});
+
+describe('PUT Edit Teams', () => {
+    // Reset DB
+    afterAll(() => {
+        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
+            .then(() => {
+                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
+            });
+    })
+
+    describe('Success PUT Edit Teams - token customer', () => {
+        it('should return object of team', async () => {
+            const body = { name: "Burstmon", MemberName1: "Shiki" };
+
+            const response = await request(app)
+                .put('/teams/edit/4')
+                .send(body)
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Array);
+            expect(response.body).toContain(1);
         });
     });
 });
