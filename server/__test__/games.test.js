@@ -102,6 +102,18 @@ describe('POST /games', () => {
             expect(response.status).toBe(400);
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(Array));
+        })
+    })
+
+    describe('POST /games - error', () => {
+        it('should be return an object with message', async () => {
+
+            const response = await request(app).post('/games').set('access_token', '')
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(String));
         })
     })
 })
@@ -122,9 +134,22 @@ describe('PUT /games/:gamesId', () => {
     describe('PUT /games/:gamesId - error', () => {
         it('should be return an object with message', async () => {
 
+            const response = await request(app).put('/games/a').set('access_token', '')
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        })
+    })
+
+    describe('PUT /games/:gamesId - error', () => {
+        it('should be return an object with message', async () => {
+
             const response = await request(app).put('/games/a').set('access_token', admin_token)
             expect(response.status).toBe(404);
             expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(String));
         })
     })
 })
@@ -143,9 +168,22 @@ describe('DEL /games/:gamesId', () => {
     describe('DEL /games/:gamesId - error', () => {
         it('should be return an object with message', async () => {
 
+            const response = await request(app).del('/games/a').set('access_token', '')
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        })
+    })
+
+    describe('DEL /games/:gamesId - error', () => {
+        it('should be return an object with message', async () => {
+
             const response = await request(app).del('/games/a').set('access_token', admin_token)
             expect(response.status).toBe(404);
             expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+            expect(response.body).toHaveProperty('message', expect.any(String));
         })
     })
 })
