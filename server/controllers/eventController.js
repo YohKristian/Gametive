@@ -29,7 +29,7 @@ class Controller {
         RegencyId
       } = req.body;
 
-      let locationCreate= await Location.create({name: locationName,ProvinceId: "31", RegencyId: "3174"},{transaction : t})
+      let locationCreate= await Location.create({name: locationName,ProvinceId, RegencyId},{transaction : t})
       
       let data = await Event.create({
         name: eventName,
@@ -40,7 +40,7 @@ class Controller {
         eventPoster,
         eventDate,
         eventType,
-        UserId: "1",
+        UserId: req.user.id,
         GameId,
         LocationId: locationCreate.id
       },{transaction : t});
@@ -100,7 +100,8 @@ class Controller {
     try {
         const {id}= req.params
         const {
-            name,
+            eventName,
+            locationName,
             description,
             price,
             rules,
@@ -108,10 +109,13 @@ class Controller {
             eventDate,
             eventType,
             GameId,
-            LocationId
+            ProvinceId,
+            RegencyId
           } = req.body;
+          const events= await Event.findOne({where:{id:id}})
+          const lokasi= await Location.findOne({where:{id: events.LocationId}})
         const data= await Event.update({
-            name,
+            name: eventName,
             description,
             price,
             rules,
@@ -119,8 +123,9 @@ class Controller {
             eventDate,
             eventType,
             GameId,
-            LocationId
+            LocationId: lokasi.id
           },{where: {id:id}})
+          await Location.update({name:locationName, ProvinceId, RegencyId},{where: {id: lokasi.id}})
           res.status(200).json(data)
     } catch (error) {
         next(error)
