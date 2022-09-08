@@ -1,6 +1,6 @@
 const { User, sequelize } = require("../models");
 const { Op } = require("sequelize");
-const { comparePassword, hashPassword } = require("../helpers/bcryptjs");
+const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
 
 module.exports = class usersController {
@@ -63,16 +63,16 @@ module.exports = class usersController {
 		}
 	}
 	static async update(req, res, next) {
+		//update only accept password change for now (even admin cant change anything other than password)
 		const t = await sequelize.transaction();
 		try {
-			//update only accept password change for now (even admin cant change anything other than password)
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
 			const { oldPassword, newPassword } = req.body;
 			if (!oldPassword || !newPassword) throw { code: 7 };
 
 			//check oldPass
-			const oldData = await User.findOne({ where: { id } });
+			const oldData = await User.findOne({ where: { id }, transaction: t });
 			let dataCorrect = false,
 				newData = null;
 
