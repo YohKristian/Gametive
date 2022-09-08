@@ -12,6 +12,7 @@ module.exports = errorHandler = (error, req, res, next) => {
 		4: [401, "username / password invalid"],
 		5: [403, "invalid authorization"],
 		6: [400, "invalid access_token"],
+		20: [404, "Event not found"],
 		40: [404, "team detail not found"],
 		41: [404, "fail to update, team detail not found"],
 		42: [404, "fail to delete, team detail not found"],

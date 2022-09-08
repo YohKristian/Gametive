@@ -126,7 +126,7 @@ class Controller {
             LocationId: lokasi.id
           },{where: {id:id}})
           await Location.update({name:locationName, ProvinceId, RegencyId},{where: {id: lokasi.id}})
-          res.status(200).json(data)
+          res.status(200).json({message: 'Success edit event'})
     } catch (error) {
         next(error)
     }
