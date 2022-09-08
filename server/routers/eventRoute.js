@@ -1,11 +1,12 @@
 const router= require('express').Router();
 const Controller= require('../controllers/eventController');
+const authentication = require('../middlewares/authentication');
 
 router.get('/', Controller.showAllEvent)
-router.post('/add', Controller.addEvent)
+router.post('/add', authentication, Controller.addEvent)
 router.get('/:id', Controller.showEventDetail)
-router.put('/:id', Controller.editEvent)
-router.patch('/:id', Controller.patchStatus)
+router.put('/:id', authentication, Controller.editEvent)
+router.patch('/:id', authentication, Controller.patchStatus)
 
 
 
