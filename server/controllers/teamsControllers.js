@@ -7,7 +7,11 @@ class TeamController {
             const teamsDataCache = JSON.parse(await redis.get("app:teams"));
 
             if (!teamsDataCache) {
-                const data = await Team.findAll()
+                const data = await Team.findAll({
+                    where: {
+                        CaptainName: req.user.username
+                    }
+                })
 
                 await redis.set("app:teams", JSON.stringify(data));
 
