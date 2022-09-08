@@ -1,5 +1,5 @@
-const { Team, Participant, User } = require("../models");
-const redis = require("../config/redis");
+const { Team } = require("../models");
+const { redis } = require("../config/redis");
 
 class TeamController {
     static async getAllTeam(req, res, next) {
