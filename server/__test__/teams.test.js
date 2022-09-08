@@ -117,16 +117,8 @@ describe('GET All Teams', () => {
 });
 
 describe('GET Detail Teams', () => {
-    // Reset DB
-    afterAll(() => {
-        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
-            .then(() => {
-                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
-            });
-    })
-
     describe('Success GET Detail Teams - token customer', () => {
-        it('should return array of object of all teams', async () => {
+        it('should return array of object of detail team', async () => {
             const response = await request(app)
                 .get('/teams/1')
                 .set('access_token', customer_token)
@@ -140,12 +132,78 @@ describe('GET Detail Teams', () => {
     });
 
     describe('Fail GET Detail Teams - wrong teamId 999', () => {
-        it('should return array of object of all teams', async () => {
+        it('should return of object', async () => {
             const response = await request(app)
                 .get('/teams/999')
                 .set('access_token', customer_token)
 
             expect(response.status).toBe(404);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('code', expect.any(Number));
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        });
+    });
+
+    describe('Fail GET Team Detail - no token', () => {
+        it('should return object', async () => {
+            const response = await request(app)
+                .get('/teams/1')
+
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('code', expect.any(Number));
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        });
+    });
+});
+
+describe('POST Create Teams', () => {
+    // Reset DB
+    afterAll(() => {
+        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
+            .then(() => {
+                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
+            });
+    })
+
+    describe('Success POST Create Teams - token customer', () => {
+        it('should return object of team', async () => {
+            const body = { name: "Burstmon", CaptainName: "customer", MemberName1: "Shiki" };
+
+            const response = await request(app)
+                .post('/teams/create')
+                .send(body)
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(201);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('id', expect.any(Number));
+            expect(response.body).toHaveProperty('name', expect.any(String));
+            expect(response.body).toHaveProperty('CaptainName', expect.any(String));
+        });
+    });
+
+    describe('Fail POST Create Teams - no name', () => {
+        it('should return object of team', async () => {
+            const body = { name: "", CaptainName: "customer", MemberName1: "Shikigami" };
+
+            const response = await request(app)
+                .post('/teams/create')
+                .send(body)
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message', expect.any(Array));
+        });
+    });
+
+    describe('Fail POST Create Team - no token', () => {
+        it('should return object', async () => {
+            const response = await request(app)
+                .get('/teams/1')
+
+            expect(response.status).toBe(400);
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty('code', expect.any(Number));
             expect(response.body).toHaveProperty('message', expect.any(String));
