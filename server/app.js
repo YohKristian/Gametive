@@ -19,3 +19,5 @@ app.use(errorHandler);
 app.listen(port, () => {
 	console.log(`http://localhost:${port}`);
 });
+
+module.exports = app
