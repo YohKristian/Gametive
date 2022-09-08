@@ -1,14 +1,20 @@
 [
-    {
-        "username": "testing",
-        "email": "testing@gmail.com",
-        "password": "12345",
-        "role": "Admin"
-    },
-    {
-        "username": "testing1",
-        "email": "testing1@gmail.com",
-        "password": "12345",
-        "role": "Admin"
-    }
+  {
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "customer",
+    "email": "customer@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "customer1",
+    "email": "customer1@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  }
 ]
