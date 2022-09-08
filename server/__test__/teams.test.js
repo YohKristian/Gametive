@@ -193,7 +193,7 @@ describe('POST Create Teams', () => {
     describe('Fail POST Create Team - no token', () => {
         it('should return object', async () => {
             const response = await request(app)
-                .get('/teams/1')
+                .post('/teams/1')
 
             expect(response.status).toBe(400);
             expect(response.body).toBeInstanceOf(Object);
@@ -204,16 +204,8 @@ describe('POST Create Teams', () => {
 });
 
 describe('PUT Edit Teams', () => {
-    // Reset DB
-    afterAll(() => {
-        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
-            .then(() => {
-                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
-            });
-    })
-
     describe('Success PUT Edit Teams - token customer', () => {
-        it('should return object of team', async () => {
+        it('should return array of num', async () => {
             const body = { name: "Burstmon", MemberName1: "Shiki" };
 
             const response = await request(app)
@@ -224,6 +216,74 @@ describe('PUT Edit Teams', () => {
             expect(response.status).toBe(200);
             expect(response.body).toBeInstanceOf(Array);
             expect(response.body).toContain(1);
+        });
+    });
+
+    describe('Fail PUT Edit Teams - wrong teamId 999', () => {
+        it('should return of object', async () => {
+            const response = await request(app)
+                .get('/teams/edit/999')
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(404);
+            expect(response.body).toBeInstanceOf(Object);
+        });
+    });
+
+    describe('Fail PUT Edit Team - no token', () => {
+        it('should return object', async () => {
+            const response = await request(app)
+                .put('/teams/4')
+
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('code', expect.any(Number));
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        });
+    });
+});
+
+describe('DELETE Delete Teams', () => {
+    // Reset DB
+    afterAll(() => {
+        return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
+            .then(() => {
+                return queryInterface.bulkDelete("Teams", null, { truncate: true, cascade: true, restartIdentity: true })
+            });
+    })
+
+    describe('Success DELETE Delete Teams - token customer', () => {
+        it('should return object of message', async () => {
+            const response = await request(app)
+                .delete('/teams/delete/4')
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message', expect.any(String));
+        });
+    });
+
+    describe('Fail DELETE Delete Teams - wrong teamId 999', () => {
+        it('should return of object', async () => {
+            const response = await request(app)
+                .get('/teams/delete/999')
+                .set('access_token', customer_token)
+
+            expect(response.status).toBe(404);
+            expect(response.body).toBeInstanceOf(Object);
+        });
+    });
+
+    describe('Fail DELETE Delete Team - no token', () => {
+        it('should return object', async () => {
+            const response = await request(app)
+                .delete('/teams/1')
+
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('code', expect.any(Number));
+            expect(response.body).toHaveProperty('message', expect.any(String));
         });
     });
 });
