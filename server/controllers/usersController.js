@@ -2,6 +2,8 @@ const { User, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
+const { redis } = require("../config/redis");
+// 			await redis.del("store:users_fetchAll");
 
 module.exports = class usersController {
 	static async login(req, res, next) {
@@ -43,8 +45,12 @@ module.exports = class usersController {
 	static async fetchAll(req, res, next) {
 		try {
 			// if (req.user.role !== "admin") throw { code: 5 }; //ONLY UNCOMMENT AFTER AUTHORIZATION & AUTHENTICATION DONE
+			let storeFetchAll = await redis.get("store:users_fetchAll");
+			if (storeFetchAll) return res.status(200).json(JSON.parse(storeFetchAll));
+
 			const fetchResponse = await User.findAll({ attributes: { exclude: ["password"] } });
 
+			await redis.set("store:users_fetchAll", JSON.stringify(fetchResponse));
 			res.status(200).json(fetchResponse || { message: "there is no data" });
 		} catch (error) {
 			next(error);
@@ -53,10 +59,13 @@ module.exports = class usersController {
 	static async fetchOne(req, res, next) {
 		try {
 			const { username } = req.params;
+			let storeFetchOne = JSON.parse(await redis.get("store:users_fetchOne")); //fetch and parse it
+			if (storeFetchOne.username === username) return res.status(200).json(storeFetchOne); //if the fetch username is the same as current username. then send it.
 			const fetchResponse = await User.findOne({ where: { username }, attributes: { exclude: ["password"] } });
 
-			if (!fetchResponse) return res.status(404).json({ message: "data not found" });
+			if (!fetchResponse) throw { code: 404 };
 
+			await redis.set("store:users_fetchOne", JSON.stringify(fetchResponse)); //set the detail as the new cache.
 			res.status(200).json(fetchResponse);
 		} catch (error) {
 			next(error);
@@ -86,7 +95,8 @@ module.exports = class usersController {
 			if (!newData) throw { code: 8 };
 
 			await t.commit();
-
+			await redis.del("store:users_fetchOne");
+			await redis.del("store:users_fetchAll");
 			res.status(200).json({ username, message: "password has been changed" });
 		} catch (error) {
 			await t.rollback();
