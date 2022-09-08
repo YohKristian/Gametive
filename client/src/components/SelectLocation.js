@@ -62,7 +62,6 @@ export default function SelectLocation() {
     getKec(value, (kec) => setKecData(kec));
     setIsDisabled({ ...isDisabled, isKota: false });
   };
-  // useEffect(() => console.log(provData), [provData]);
   return (
     <>
       <Select onChange={fetchKota} options={provData} />

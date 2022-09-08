@@ -1,25 +1,64 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../logo.png";
 
 export default function RegisterPage() {
+  const [registerData, setRegisterData] = useState({
+    email: "",
+    password: "",
+    phoneNumber: "",
+    address: "",
+  });
+
+  const handleInput = (e) => {
+    const { value, name } = e.target;
+    setRegisterData({ ...registerData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <section className="register-page">
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="img">
             <img src={logo} alt="" />
           </div>
           <h2>Register</h2>
-          <label for="">Email</label>
-          <input type="email" placeholder="Input your email" />
-          <label for="">Password</label>
-          <input type="password" placeholder="Input your password" />
-          <label for="">Phone Number</label>
-          <input type="tel" placeholder="Input your password" />
-          <label for="">Address</label>
-          <input type="text" placeholder="Input your password" />
+          <label>Email</label>
+          <input
+            onChange={handleInput}
+            name="email"
+            type="email"
+            placeholder="Input your email"
+          />
+          <label>Password</label>
+          <input
+            onChange={handleInput}
+            name="password"
+            type="password"
+            placeholder="Input your password"
+          />
+          <label>Phone number</label>
+          <input
+            onChange={handleInput}
+            name="phoneNumber"
+            type="tel"
+            placeholder="Input your Phone number"
+          />
+          <label>Address</label>
+          <input
+            onChange={handleInput}
+            name="address"
+            type="text"
+            placeholder="Input your address"
+          />
           <button>Log in</button>
           <p>
-            Dont have an account? click here to <a>Log in</a>
+            Dont have an account? click here to{" "}
+            <Link to={"/login"}>Log in</Link>
           </p>
         </form>
       </div>
