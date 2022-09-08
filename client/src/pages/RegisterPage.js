@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import logo from "../logo.png";
+import { register } from "../store/actions";
+import { errorPopup, successPopup } from "../helpers";
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({
+    username: "",
     email: "",
     password: "",
-    phoneNumber: "",
-    address: "",
+    // phoneNumber: "",
+    // address: "",
   });
 
   const handleInput = (e) => {
@@ -17,6 +23,13 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(
+      register(registerData, (error) => {
+        if (error) return errorPopup(error);
+        successPopup("Register success");
+        navigate("/login");
+      })
+    );
   };
 
   return (
@@ -27,6 +40,13 @@ export default function RegisterPage() {
             <img src={logo} alt="" />
           </div>
           <h2>Register</h2>
+          <label>Username</label>
+          <input
+            onChange={handleInput}
+            name="username"
+            type="username"
+            placeholder="Input your username"
+          />
           <label>Email</label>
           <input
             onChange={handleInput}
@@ -41,7 +61,7 @@ export default function RegisterPage() {
             type="password"
             placeholder="Input your password"
           />
-          <label>Phone number</label>
+          {/* <label>Phone number</label>
           <input
             onChange={handleInput}
             name="phoneNumber"
@@ -54,8 +74,8 @@ export default function RegisterPage() {
             name="address"
             type="text"
             placeholder="Input your address"
-          />
-          <button>Log in</button>
+          /> */}
+          <button>Register</button>
           <p>
             Dont have an account? click here to{" "}
             <Link to={"/login"}>Log in</Link>
