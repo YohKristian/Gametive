@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "test": "jest --runInBand --forceExit",
+    "test": "npx sequelize db:drop --env test && npx sequelize db:create --env test && npx sequelize db:migrate --env test && jest --runInBand --forceExit",
     "start": "node app.js"
   },
   "keywords": [],

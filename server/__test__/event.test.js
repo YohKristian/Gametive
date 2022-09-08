@@ -176,7 +176,7 @@ describe('CREATE event',()=>{
             .send(body)
             .set('access_token', customer_token)
 
-            expect(response.status).toBe(200);
+            expect(response.status).toBe(201);
             expect(response.body).toBeInstanceOf(Object);
             expect(response.body).toHaveProperty('id', expect.any(Number));
         })
