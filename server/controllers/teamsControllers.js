@@ -80,6 +80,8 @@ class TeamController {
 
             if (!findTeam) throw { code: 41 };
 
+            if (findTeam.CaptainName !== req.user.username) throw { code: 43 };
+
             const updateTeam = {
                 name: req.body.name,
                 CaptainName: req.user.username,
@@ -111,6 +113,8 @@ class TeamController {
             const findTeam = await Team.findByPk(teamId)
 
             if (!findTeam) throw { code: 42 };
+
+            if (findTeam.CaptainName !== req.user.username) throw { code: 44 };
 
             await Team.destroy({
                 where: {
