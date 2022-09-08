@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import logo from "../logo.png";
 import { login } from "../store/actions";
+import { errorPopup } from "../helpers";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -20,8 +22,9 @@ export default function LoginPage() {
     e.preventDefault();
     dispatch(
       login(loginData, (error, success) => {
-        if (error) return console.log(error);
-        console.log(success);
+        if (error) return errorPopup(error);
+        localStorage.setItem("access_token", success.access_token);
+        navigate("/")
       })
     );
   };
