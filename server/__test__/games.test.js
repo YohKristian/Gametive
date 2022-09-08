@@ -65,3 +65,71 @@ describe('GET /games/:gamesId', () => {
         })
     })
 })
+
+//Create games
+
+describe('POST /games', () => {
+    describe('POST /games - success test', () => {
+        it('should be return an object of game data', async () => {
+            const body = { name: 'testing', gameImg: 'testing', youtubeUrl: 'testing', gameUrl: 'testing', releaseDate: '2022-01-01', developer: 'testing', genre: 'testing' };
+
+            const response = await (await request(app).post('/games').send(body).set('access_token', access_token))
+            expect(response.status).toBe(201);
+            expect(response.body).toBeInstanceOf(Object);
+        })
+    })
+
+    describe('POST /games - error', () => {
+        it('should be return an object with message', async () => {
+
+            const response = await request(app).post('/games').set('access_token', access_token)
+            expect(response.status).toBe(400);
+            expect(response.body).toBeInstanceOf(Object);
+            expect(response.body).toHaveProperty('message');
+        })
+    })
+})
+
+//Update games
+
+describe('PUT /games/:gamesId', () => {
+    describe('PUT /games/:gamesId - success test', () => {
+        it('should be return an object of game data', async () => {
+            const body = { name: 'testing', gameImg: 'testing', youtubeUrl: 'testing', gameUrl: 'testing', releaseDate: '2022-01-01', developer: 'testing', genre: 'testing' };
+
+            const response = await (await request(app).put('/games/1').send(body).set('access_token', access_token))
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Object);
+        })
+    })
+
+    describe('PUT /games/:gamesId - error', () => {
+        it('should be return an object with message', async () => {
+
+            const response = await request(app).put('/games/a').set('access_token', access_token)
+            expect(response.status).toBe(404);
+            expect(response.body).toBeInstanceOf(Object);
+        })
+    })
+})
+
+// Delete games
+describe('DEL /games/:gamesId', () => {
+    describe('DEL /games/:gamesId - success test', () => {
+        it('should be return an object of game data', async () => {
+
+            const response = await (await request(app).del('/games/1').set('access_token', access_token))
+            expect(response.status).toBe(200);
+            expect(response.body).toBeInstanceOf(Object);
+        })
+    })
+
+    describe('DEL /games/:gamesId - error', () => {
+        it('should be return an object with message', async () => {
+
+            const response = await request(app).del('/games/a').set('access_token', access_token)
+            expect(response.status).toBe(404);
+            expect(response.body).toBeInstanceOf(Object);
+        })
+    })
+})
