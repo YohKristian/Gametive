@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
 const { redis } = require("../config/redis");
-const { off } = require("../app");
 // 			await redis.del("store:users_fetchAll");
 
 module.exports = class usersController {
