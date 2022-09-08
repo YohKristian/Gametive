@@ -1,11 +1,20 @@
-const { Team, Participant, User } = require("../models");
+const { Team } = require("../models");
+const { redis } = require("../config/redis");
 
 class TeamController {
     static async getAllTeam(req, res, next) {
         try {
-            const data = await Team.findAll()
+            const teamsDataCache = JSON.parse(await redis.get("app:teams"));
 
-            res.status(200).json(data)
+            if (!teamsDataCache) {
+                const data = await Team.findAll()
+
+                await redis.set("app:teams", JSON.stringify(data));
+
+                res.status(200).json(data)
+            } else {
+                res.status(200).json(teamsDataCache)
+            }
         } catch (error) {
             next(error);
         }
@@ -15,13 +24,23 @@ class TeamController {
         try {
             const teamId = +req.params.teamId;
 
-            const data = await Team.findByPk(teamId, {
-                // include: Participant, User
-            })
+            const lastIdCache = await redis.get("app:teamId");
 
-            if (!data) throw { code: 40 };
+            if (teamId !== lastIdCache) {
+                const data = await Team.findByPk(teamId)
 
-            res.status(200).json(data)
+                if (!data) throw { code: 40 };
+
+                await redis.set("app:teamId", teamId);
+
+                await redis.set("app:team", JSON.stringify(data));
+
+                res.status(200).json(data)
+            } else {
+                const teamDetail = JSON.parse(await redis.get("app:team"));
+
+                res.status(200).json(teamDetail)
+            }
         } catch (error) {
             next(error)
         }
@@ -39,6 +58,9 @@ class TeamController {
             }
 
             const data = await Team.create(newTeam)
+
+            await redis.del("app:teams");
+            await redis.del("app:teamId");
 
             res.status(201).json(data)
         } catch (error) {
@@ -69,6 +91,9 @@ class TeamController {
                 }
             })
 
+            await redis.del("app:teams");
+            await redis.del("app:teamId");
+
             res.status(200).json(data)
         } catch (error) {
             next(error)
@@ -88,6 +113,9 @@ class TeamController {
                     id: teamId
                 }
             })
+
+            await redis.del("app:teams");
+            await redis.del("app:teamId");
 
             res.status(200).json({
                 message: "Success Delete Team"
