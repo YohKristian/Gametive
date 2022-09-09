@@ -32,6 +32,7 @@ module.exports = class usersController {
 	static async create(req, res, next) {
 		try {
 			const { username, email, password } = req.body;
+
 			if (!username || !email || !password) throw { code: 1 };
 
 			const [createResponse, created] = await User.findOrCreate({ where: { username, email }, defaults: { username, email, password } });
@@ -59,8 +60,8 @@ module.exports = class usersController {
 	static async fetchOne(req, res, next) {
 		try {
 			const { username } = req.params;
-			let storeFetchOne = JSON.parse(await redis.get("store:users_fetchOne")); //fetch and parse it
-			if (storeFetchOne.username === username) return res.status(200).json(storeFetchOne); //if the fetch username is the same as current username. then send it.
+			// let storeFetchOne = JSON.parse(await redis.get("store:users_fetchOne")); //fetch and parse it
+			// if (storeFetchOne.username === username) return res.status(200).json(storeFetchOne); //if the fetch username is the same as current username. then send it.
 			const fetchResponse = await User.findOne({ where: { username }, attributes: { exclude: ["password"] } });
 
 			if (!fetchResponse) throw { code: 404 };
@@ -78,7 +79,7 @@ module.exports = class usersController {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
 			const { oldPassword, newPassword } = req.body;
-			if (!oldPassword || !newPassword) throw { code: 7 };
+			if (!oldPassword || !newPassword) throw { code: 1 };
 
 			//check oldPass
 			const oldData = await User.findOne({ where: { id }, transaction: t });

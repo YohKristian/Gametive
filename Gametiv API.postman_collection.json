@@ -1,0 +1,883 @@
+{
+	"info": {
+		"_postman_id": "e0fd5edf-7fca-4008-a8c1-4b8e53ac33af",
+		"name": "Gametiv API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22321714"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "fajar1",
+									"description": "unique",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "fajar1@fajar.com",
+									"description": "unique",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"description": "min. 5 characters",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{users}}/register",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhamFyMSIsImVtYWlsIjoiZmFqYXIxQGZhamFyLmNvbSIsImlkIjo0LCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE2NjI1NDIzMjB9.DZpE5uK5gObRkGmf5dMi9ys3_lsG9NUMypxy_bbqb5Q",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "access_token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "fajar111",
+									"description": "username",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "fajar@fajar.com",
+									"description": "email",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchAll",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhamFyMSIsImVtYWlsIjoiZmFqYXIxQGZhamFyLmNvbSIsImlkIjoxMiwicm9sZSI6IkN1c3RvbWVyIiwiaWF0IjoxNjYyNjYzNDk1fQ.vOgw3Qsp3FP0i12ictH1waX_2Q3da0fxDoDC0MxZ-IM",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "access_token",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{users}}/",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{users}}/:username",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "fajar1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "password2",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "password3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{users}}/:username",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete (soft)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{users}}/:username",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhamFyMSIsImVtYWlsIjoiZmFqYXIxQGZhamFyLmNvbSIsImlkIjo0LCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE2NjI1NDc4MzJ9.KJrnHH3XXEgabyi2x35BdFOWFELVa2ygr6n6Q8mLBMg",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "access_token",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "participants",
+			"item": [
+				{
+					"name": "fetchAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participants/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participants/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/participants/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"participants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "events",
+			"item": []
+		},
+		{
+			"name": "games",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "gameImg",
+									"value": "gameimage",
+									"type": "text"
+								},
+								{
+									"key": "youtubeUrl",
+									"value": "youtubeurl",
+									"type": "text"
+								},
+								{
+									"key": "gameUrl",
+									"value": "gameurl",
+									"type": "text"
+								},
+								{
+									"key": "releaseDate",
+									"value": "2020-03-03",
+									"type": "text"
+								},
+								{
+									"key": "developer",
+									"value": "BAMBANG",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "MOBA",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/games",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchAll",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/games",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetchOne",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/games/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "gameImg",
+									"value": "gameimage",
+									"type": "text"
+								},
+								{
+									"key": "youtubeUrl",
+									"value": "youtubeurl",
+									"type": "text"
+								},
+								{
+									"key": "gameUrl",
+									"value": "gameurl",
+									"type": "text"
+								},
+								{
+									"key": "releaseDate",
+									"value": "2020-03-03",
+									"type": "text"
+								},
+								{
+									"key": "developer",
+									"value": "BAMBANG",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "MOBA",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/games/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/games/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"games",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpZCI6MSwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjYyNjM3NTIyfQ.Q1IsZYmTTH8WCq1I95G5YGt7cB3-qyIlsJ6DR_lA0Ck",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "access_token",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "locations",
+			"item": []
+		},
+		{
+			"name": "teams",
+			"item": [
+				{
+					"name": "Get All Teams",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/teams/all-teams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"all-teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Team Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/teams/:teamId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								":teamId"
+							],
+							"variable": [
+								{
+									"key": "teamId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Team",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Basterd",
+									"type": "text"
+								},
+								{
+									"key": "CaptainName",
+									"value": "admin",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "MemberName1",
+									"value": "Astra",
+									"type": "text"
+								},
+								{
+									"key": "MemberName2",
+									"value": "312",
+									"type": "text"
+								},
+								{
+									"key": "MemberName3",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "MemberName4",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Team",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpZCI6MSwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjYyNjQzODk2fQ.Li6px4cmXtiGaU3fh4LmYXFXgGF-GAWeETAuj7u4pe8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Basterd",
+									"type": "text"
+								},
+								{
+									"key": "CaptainName",
+									"value": "admin",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "MemberName1",
+									"value": "Astra",
+									"type": "text"
+								},
+								{
+									"key": "MemberName2",
+									"value": "Sustri",
+									"type": "text"
+								},
+								{
+									"key": "MemberName3",
+									"value": "Masi",
+									"type": "text"
+								},
+								{
+									"key": "MemberName4",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/teams/edit/:teamId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"edit",
+								":teamId"
+							],
+							"variable": [
+								{
+									"key": "teamId",
+									"value": "999"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Team",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpZCI6MSwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjYyNjQzODk2fQ.Li6px4cmXtiGaU3fh4LmYXFXgGF-GAWeETAuj7u4pe8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/teams/delete/:teamId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"teams",
+								"delete",
+								":teamId"
+							],
+							"variable": [
+								{
+									"key": "teamId",
+									"value": "999"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sandbox (ONLY TEST API HERE)",
+			"item": [
+				{
+					"name": "axios",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Midtrans",
+			"item": [
+				{
+					"name": "Midtrans Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "totalCostNeedToPay",
+									"value": "100000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/midtrans/snap-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"midtrans",
+								"snap-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "users",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}
