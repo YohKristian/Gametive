@@ -1,0 +1,30 @@
+.video-carousel .carousel:nth-child(1) {
+  background-color: black;
+}
+
+.video-carousel .carousel:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+
+.video-carousel .vid-slide {
+  position: relative;
+}
+
+.video-carousel .vid-slide > div:nth-child(2) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: #e7e7e7;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.video-carousel .vid-slide > div:nth-child(2) > h1 {
+  font-size: 3vw;
+  user-select: none;
+}

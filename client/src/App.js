@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import DetailGame from "./components/DetailGame";
 import SearchGames from "./components/SearchGames";
 import SelectLocation from "./components/SelectLocation";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 
 function RequireAuth({ children }) {
@@ -31,6 +32,7 @@ function App() {
         <Route path="search" element={<SearchGames />} />
         <Route path="detail" element={<DetailGame />} />
         <Route path="select" element={<SelectLocation />} />
+        <Route path="" element={<Navigate to={"/home"} />} />
       </Route>
     </Routes>
   );
