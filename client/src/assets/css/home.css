@@ -13,12 +13,12 @@
   overflow: hidden;
 }
 
-.img-slide > img{
+.img-slide>img {
   transform: translateY(-90px);
   filter: brightness(50%);
 }
 
-.img-slide > div {
+.img-slide>div {
   top: 0;
   left: 0;
   width: 100%;
@@ -30,6 +30,6 @@
   justify-content: center;
 }
 
-.img-slide > div > h1 {
+.img-slide>div>h1 {
   font-size: 5vw;
 }
