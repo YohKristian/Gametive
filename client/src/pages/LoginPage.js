@@ -51,11 +51,15 @@ export default function LoginPage() {
             type="password"
             placeholder="Input your password"
           />
+          <br></br>
           <button>Log in</button>
           <div className="g-sign-in"></div>
           <p>
             Dont have an account? click here to{" "}
             <Link to={"/register"}>Create</Link>
+            <br></br>
+            or back to{" "}
+            <Link to={"/"}>Home</Link>
           </p>
         </form>
       </div>

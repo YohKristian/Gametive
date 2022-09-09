@@ -6,41 +6,41 @@
   height: 100vh;
 }
 
-.login-page > div {
+.login-page>div {
   width: 500px;
   background-color: white;
   padding: 50px;
   border-radius: 10px;
 }
 
-.login-page > div > form {
+.login-page>div>form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.login-page > div > form > .img > img {
+.login-page>div>form>.img>img {
   width: 100%;
 }
 
-.login-page form > * {
+.login-page form>* {
   margin: 10px 0;
   width: 100%;
   text-align: center;
 }
 
-.login-page form > h2 {
+.login-page form>h2 {
   margin: 30px 0;
 }
 
-.login-page form > label {
+.login-page form>label {
   margin: 20px 0 10px;
   color: rgb(185, 185, 185);
   font-size: 14px;
 }
 
-.login-page form > input {
+.login-page form>input {
   margin: 0;
   border: 1px solid gainsboro;
   outline: none;
@@ -49,7 +49,7 @@
   text-align: left;
 }
 
-.login-page form > button {
+.login-page form>button {
   padding: 12px;
   font-weight: bold;
   color: white;
@@ -58,18 +58,18 @@
   border-radius: 5px;
 }
 
-.login-page form > .g-sign-in {
+.login-page form>.g-sign-in {
   width: 200px;
   height: 50px;
   background-color: gainsboro;
   border-radius: 5px;
 }
 
-.login-page form > p {
+.login-page form>p {
   border-top: 1px solid black;
   padding-top: 10px;
 }
 
-.login-page form > p > a {
+.login-page form>p>a {
   font-weight: bold;
 }

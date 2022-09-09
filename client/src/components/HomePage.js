@@ -33,7 +33,7 @@ export default function HomePage() {
       <div className="img-slide">
         <img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg " />
         <div>
-          <h1>Wild rift</h1>
+          <h1>Wild Rift</h1>
         </div>
       </div>
       <div className="img-slide">
