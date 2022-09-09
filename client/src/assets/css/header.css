@@ -1,11 +1,14 @@
 header {
-  position: sticky;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 50px;
   align-items: center;
-  background-color: #0000003a;
+  background-color: #00000070;
 }
 
 header > .img {

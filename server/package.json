@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
+    "dev": "nodemon ./bin/www",
     "test": "npx sequelize db:drop --env test && npx sequelize db:create --env test && npx sequelize db:migrate --env test && jest --runInBand --forceExit",
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "keywords": [],
   "author": "",

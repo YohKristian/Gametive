@@ -1,6 +1,7 @@
 @import "./loginPage.css";
 @import "./registerPage.css";
 @import "./header.css";
+@import "./home.css";
 @import "./main.css";
 
 * {
@@ -12,4 +13,3 @@
 body {
   font-family: sans-serif;
 }
-
