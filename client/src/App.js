@@ -7,8 +7,9 @@ import DetailGame from "./components/DetailGame";
 import SearchGames from "./components/SearchGames";
 import SelectLocation from "./components/SelectLocation";
 import NotFoundPage from "./pages/NotFoundPage";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function RequireAuth({ children }) {
   const { access_token } = localStorage;
@@ -21,7 +22,6 @@ function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="*" element={<NotFoundPage />} />
       <Route
         path="/"
         element={
@@ -34,7 +34,9 @@ function App() {
         <Route path="search" element={<SearchGames />} />
         <Route path="detail" element={<DetailGame />} />
         <Route path="select" element={<SelectLocation />} />
+        <Route path="" element={<Navigate to={"/home"} />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
