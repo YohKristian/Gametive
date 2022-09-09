@@ -1,4 +1,4 @@
-# API Spec
+# API Spec Users
 
 ## Authentication
 
@@ -142,7 +142,7 @@ Request :
 - Endpoint : `/users/{username}`
 - Header :
     - acces_token : "your secret access token"
-    
+
 Response :
 - 200 OK
 ```json
