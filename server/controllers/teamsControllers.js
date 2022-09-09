@@ -59,6 +59,8 @@ class TeamController {
                 MemberName2: req.body.MemberName2,
                 MemberName3: req.body.MemberName3,
                 MemberName4: req.body.MemberName4,
+                BenchMemberName1: req.body.BenchMemberName1,
+                BenchMemberName2: req.body.BenchMemberName2,
             }
 
             const data = await Team.create(newTeam)
@@ -89,6 +91,8 @@ class TeamController {
                 MemberName2: req.body.MemberName2,
                 MemberName3: req.body.MemberName3,
                 MemberName4: req.body.MemberName4,
+                BenchMemberName1: req.body.BenchMemberName1,
+                BenchMemberName2: req.body.BenchMemberName2,
             }
 
             const data = await Team.update(updateTeam, {
