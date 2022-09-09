@@ -30,8 +30,24 @@ const slideImage = [
     legend: "Wild rift",
   },
   {
+    img: "https://images6.alphacoders.com/110/1103575.jpg",
+    legend: "Arena Of Valor",
+  },
+  {
     img: "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3fffb73d23d87d08/5efb8b0540426d0f56b44fe8/SUB_KV.jpg",
-    legend: "Valorant",
+    legend: "Valorantr",
+  },
+  {
+    img: "https://wallpaperboat.com/wp-content/uploads/2021/04/26/77161/csgo-15.jpg",
+    legend: "CS:GO",
+  },
+  {
+    img: "https://images7.alphacoders.com/107/1079489.jpg",
+    legend: "Free Fire",
+  },
+  {
+    img: "https://esportsku.com/wp-content/uploads/2021/02/pubg-uhdpaper.com-4K-5.2324-wallpaper-hd-scaled.jpg",
+    legend: "PUBG Mobile",
   },
 ];
 

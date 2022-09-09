@@ -30,7 +30,7 @@ function App() {
           </RequireAuth>
         }
       >
-        <Route path="" element={<HomePage />} />
+        <Route path="home" element={<HomePage />} />
         <Route path="search" element={<SearchGames />} />
         <Route path="detail" element={<DetailGame />} />
         <Route path="select" element={<SelectLocation />} />
