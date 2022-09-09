@@ -24,6 +24,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      size: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
       eventStatus: {
         defaultValue: "Pending",
         type: Sequelize.STRING,
@@ -63,6 +67,10 @@ module.exports = {
           model: 'Locations',
           key: 'id'
         },
+      },
+      Bracket: {
+        allowNull: true,
+        type: Sequelize.TEXT,
       },
       createdAt: {
         allowNull: false,

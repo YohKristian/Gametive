@@ -70,6 +70,18 @@ module.exports = (sequelize, DataTypes) => {
         },
       }
     },
+    size: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Size is required"
+        },
+        notEmpty: {
+          msg: "Size is required"
+        }
+      }
+    },
     eventStatus: {
       type: DataTypes.STRING,
       defaultValue: "Pending",
@@ -145,6 +157,10 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Location is required"
         },
       }
+    },
+    Bracket: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
   }, {
     sequelize,
