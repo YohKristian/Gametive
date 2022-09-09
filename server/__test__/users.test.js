@@ -14,12 +14,20 @@ beforeAll(() => {
 	]);
 });
 
+afterAll(() => {
+	return queryInterface.bulkDelete("Users", null, {
+		truncate: true,
+		cascade: true,
+		restartIdentity: true,
+	});
+});
+
 describe("POST Account Register", () => {
 	describe("Success Register Account", () => {
 		it("should return boolean true", async () => {
 			const body = { username: "customer02", email: "customer02@gmail.com", password: "password" };
 
-			const response = await request(app).then("/users/register").send(body);
+			const response = await request(app).post("/users/register").send(body);
 
 			expect(response.status).toBe(201);
 			expect(response.body).toBe(true);
@@ -29,7 +37,7 @@ describe("POST Account Register", () => {
 		it("should return object with code and message", async () => {
 			const body = { username: "", email: "customer02@gmail.com", password: "password" };
 
-			const response = await request(app).then("/users/register").send(body);
+			const response = await request(app).post("/users/register").send(body);
 
 			expect(response.status).toBe(400);
 			expect(response.body).toBeInstanceOf(Object);
@@ -42,7 +50,7 @@ describe("POST Account Register", () => {
 		it("should return object with code and message", async () => {
 			const body = { username: "customer02", email: "customer02@gmail.com", password: "password" };
 
-			const response = await request(app).then("/users/register").send(body);
+			const response = await request(app).post("/users/register").send(body);
 
 			expect(response.status).toBe(400);
 			expect(response.body).toBeInstanceOf(Object);
@@ -55,7 +63,7 @@ describe("POST Account Register", () => {
 		it("should return object of message with array of errors", async () => {
 			const body = { username: "customer03", email: "customer03@gmail.com", password: "pass" };
 
-			const response = await request(app).then("/users/register").send(body);
+			const response = await request(app).post("/users/register").send(body);
 
 			expect(response.status).toBe(400);
 			expect(response.body).toBeInstanceOf(Object);
@@ -66,18 +74,18 @@ describe("POST Account Register", () => {
 	describe("Failed Register Account - email and password must be unique", () => {
 		it("should return object of message with array of errors", async () => {
 			//EMAIL UNIQUE CHECK
-			const bodyEmail = { username: "customer03", email: "customer03@gmail.com", password: "password" };
+			const bodyEmail = { username: "customer03", email: "customer02@gmail.com", password: "password" };
 
-			const responseEmail = await request(app).then("/users/register").send(bodyEmail);
+			const responseEmail = await request(app).post("/users/register").send(bodyEmail);
 
 			expect(responseEmail.status).toBe(400);
 			expect(responseEmail.body).toBeInstanceOf(Object);
 			expect(responseEmail.body).toHaveProperty("message", ["email must be unique"]);
 
 			//USERNAME UNIQUE CHECK
-			const bodyUsername = { username: "customer03", email: "customer03@gmail.com", password: "password" };
+			const bodyUsername = { username: "customer02", email: "customer03@gmail.com", password: "password" };
 
-			const responseUsername = await request(app).then("/users/register").send(bodyUsername);
+			const responseUsername = await request(app).post("/users/register").send(bodyUsername);
 
 			expect(responseUsername.status).toBe(400);
 			expect(responseUsername.body).toBeInstanceOf(Object);
@@ -91,7 +99,7 @@ describe("POST Account Login", () => {
 		it("should return object with login and access_token", async () => {
 			const body = { username: "customer01", password: "password" };
 
-			const response = await request(app).then("/users/login").send(body);
+			const response = await request(app).post("/users/login").send(body);
 
 			expect(response.status).toBe(200);
 			expect(response.body).toBeInstanceOf(Object);
@@ -105,9 +113,9 @@ describe("POST Account Login", () => {
 		it("should return object with code and message", async () => {
 			const body = { username: "customer01", password: "password1" };
 
-			const response = await request(app).then("/users/login").send(body);
+			const response = await request(app).post("/users/login").send(body);
 
-			expect(response.status).toBe(200);
+			expect(response.status).toBe(401);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", 4);
 			expect(response.body).toHaveProperty("message", "username / password invalid");
@@ -118,9 +126,9 @@ describe("POST Account Login", () => {
 		it("should return object with code and message", async () => {
 			const body = { username: "", password: "password" };
 
-			const response = await request(app).then("/users/login").send(body);
+			const response = await request(app).post("/users/login").send(body);
 
-			expect(response.status).toBe(200);
+			expect(response.status).toBe(400);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", 3);
 			expect(response.body).toHaveProperty("message", "username / password cannot be empty");
@@ -133,7 +141,7 @@ describe("GET All users account - FOR ADMIN ACCOUNT", () => {
 	describe("Success fetch all account", () => {
 		it("should return array of object for every accounts", async () => {
 			const body = { username: "administrator", password: "password" };
-			let response = await request(app).then("/users/login").send(body);
+			let response = await request(app).post("/users/login").send(body);
 			access_token = response.body.access_token;
 
 			response = await request(app).get("/users/").set("access_token", access_token);
@@ -153,7 +161,7 @@ describe("GET All users account - FOR ADMIN ACCOUNT", () => {
 	describe("Failed fetch all account - not an admin", () => {
 		it("should return boolean true", async () => {
 			const body = { username: "customer01", password: "password" };
-			let response = await request(app).then("/users/login").send(body);
+			let response = await request(app).post("/users/login").send(body);
 			access_token = response.body.access_token;
 
 			response = await request(app).get("/users/").set("access_token", access_token);

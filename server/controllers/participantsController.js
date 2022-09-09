@@ -1,6 +1,6 @@
 const { Participant, Team, Event } = require("../models");
 const { Op } = require("sequelize");
-const { redis } = require('../config/redis')
+const { redis } = require("../config/redis");
 
 module.exports = class participantsController {
   static async create(req, res, next) {
@@ -13,8 +13,8 @@ module.exports = class participantsController {
         defaults: { TeamId, EventId, paymentDate: new Date() },
       });
 
-      await redis.del('app:participants')
-      await redis.del('app:participantId')
+      await redis.del("app:participants");
+      await redis.del("app:participantId");
 
       res.status(201).json(createResponse || created);
     } catch (error) {
@@ -23,12 +23,12 @@ module.exports = class participantsController {
   }
   static async fetchAll(req, res, next) {
     try {
-      const participantsCache = await redis.get('app:participants')
+      const participantsCache = await redis.get("app:participants");
 
       if (participantsCache) {
-        const participants = JSON.parse(participantsCache)
+        const participants = JSON.parse(participantsCache);
 
-        res.status(200).json(participants || { message: "there is no data" })
+        res.status(200).json(participants || { message: "there is no data" });
       } else {
         const fetchResponse = await Participant.findAll({
           include: [{ model: Team }, { model: Event }],
@@ -54,12 +54,14 @@ module.exports = class participantsController {
         if (!fetchResponse)
           return res.status(404).json({ message: "data not found" });
 
-        await redis.set("app:participantDetailId", eventId)
-        await redis.set('app:participant', JSON.stringify(fetchResponse))
+        await redis.set("app:participantDetailId", eventId);
+        await redis.set("app:participant", JSON.stringify(fetchResponse));
         res.status(200).json(fetchResponse);
       } else {
-        const participantDetail = JSON.parse(await redis.get('app:participant'))
-        res.status(200).json(participantDetail)
+        const participantDetail = JSON.parse(
+          await redis.get("app:participant")
+        );
+        res.status(200).json(participantDetail);
       }
     } catch (error) {
       next(error);
@@ -67,10 +69,13 @@ module.exports = class participantsController {
   }
   static async updateByTeamId(req, res, next) {
     try {
-      const { teamId } = req.params;
+      const { eventId, teamId } = req.params;
 
       const fetchResponse = await Participant.findOne({
-        where: { TeamId: +teamId },
+        where: {
+          EventId: +eventId,
+          TeamId: +teamId,
+        },
       });
 
       if (!fetchResponse)
@@ -86,11 +91,11 @@ module.exports = class participantsController {
           statusPay: payload.paidStatus,
           paymentDate: payload.currentDate,
         },
-        { where: { TeamId: +teamId } }
+        { where: { EventId: +eventId, TeamId: +teamId } }
       );
 
-      await redis.del('app:participants')
-      await redis.del('app:participantId')
+      await redis.del("app:participants");
+      await redis.del("app:participantId");
 
       res.status(200).json({
         id: fetchResponse.id,
@@ -107,25 +112,24 @@ module.exports = class participantsController {
   }
   static async deleteParticipantById(req, res, next) {
     try {
-      const { participantId } = req.params;
+      // const { participantId } = req.params;
+      const { eventId, teamId } = req.params;
 
       const fetchResponse = await Participant.findOne({
-        where: { id: +participantId },
+        where: { EventId: +eventId, TeamId: +teamId },
       });
 
       if (!fetchResponse)
         return res.status(404).json({ message: "data not found" });
 
       await Participant.destroy({
-        where: { id: +participantId },
+        where: { EventId: +eventId, TeamId: +teamId },
       });
 
-      await redis.del('app:participants')
-      await redis.del('app:participantId')
+      await redis.del("app:participants");
+      await redis.del("app:participantId");
 
-      res.status(200).json(
-        fetchResponse
-      );
+      res.status(200).json(fetchResponse);
     } catch (error) {
       next(error);
     }

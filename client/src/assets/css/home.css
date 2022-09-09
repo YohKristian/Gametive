@@ -1,0 +1,35 @@
+.carousel:nth-child(1) {
+  height: 500px;
+}
+
+.carousel:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+
+.img-slide {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.img-slide > img{
+  transform: translateY(-90px);
+  filter: brightness(50%);
+}
+
+.img-slide > div {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: #e7e7e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-slide > div > h1 {
+  font-size: 5vw;
+}
