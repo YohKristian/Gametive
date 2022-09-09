@@ -1,0 +1,20 @@
+{
+	"participant": [
+		{ "id": 0, "tournament_id": 0, "name": "A" },
+		{ "id": 1, "tournament_id": 0, "name": "B" },
+		{ "id": 2, "tournament_id": 0, "name": "C" },
+		{ "id": 3, "tournament_id": 0, "name": "D" }
+	],
+	"stage": [{ "id": 0, "tournament_id": 0, "name": "Template4Slot", "type": "single_elimination", "number": 1, "settings": { "seedOrdering": ["natural"], "consolationFinal": false, "matchesChildCount": 0, "size": 4 } }],
+	"group": [{ "id": 0, "stage_id": 0, "number": 1 }],
+	"round": [
+		{ "id": 0, "number": 1, "stage_id": 0, "group_id": 0 },
+		{ "id": 1, "number": 2, "stage_id": 0, "group_id": 0 }
+	],
+	"match": [
+		{ "id": 0, "number": 1, "stage_id": 0, "group_id": 0, "round_id": 0, "child_count": 0, "status": 2, "opponent1": { "id": 0, "position": 1 }, "opponent2": { "id": 1, "position": 2 } },
+		{ "id": 1, "number": 2, "stage_id": 0, "group_id": 0, "round_id": 0, "child_count": 0, "status": 2, "opponent1": { "id": 2, "position": 3 }, "opponent2": { "id": 3, "position": 4 } },
+		{ "id": 2, "number": 1, "stage_id": 0, "group_id": 0, "round_id": 1, "child_count": 0, "status": 0, "opponent1": { "id": null }, "opponent2": { "id": null } }
+	],
+	"match_game": []
+}
