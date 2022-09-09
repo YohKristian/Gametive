@@ -1,151 +1,186 @@
 const { Game } = require("../models");
 const { Op } = require("sequelize");
-const { redis } = require('../config/redis')
-const { getPagination, getPagingData } = require('../helpers/pagination')
+const { redis } = require("../config/redis");
+const { getPagination, getPagingData } = require("../helpers/pagination");
 
 module.exports = class gamesController {
-    static async create(req, res, next) {
-        try {
-            const { name, gameImg, youtubeUrl, gameUrl, releaseDate, developer, genre } = req.body
+  static async create(req, res, next) {
+    try {
+      const {
+        name,
+        gameImg,
+        youtubeUrl,
+        gameUrl,
+        releaseDate,
+        developer,
+        genre,
+      } = req.body;
 
-            const created = await Game.create({ name, gameImg, youtubeUrl, gameUrl, releaseDate, developer, genre })
+      const created = await Game.create({
+        name,
+        gameImg,
+        youtubeUrl,
+        gameUrl,
+        releaseDate,
+        developer,
+        genre,
+      });
 
-            await redis.del('app:games')
-            await redis.del('app:gameId')
+      await redis.del("app:games");
+      await redis.del("app:gameId");
 
-            res.status(201).json(created)
-        } catch (error) {
-            next(error)
-        }
+      res.status(201).json(created);
+    } catch (error) {
+      next(error);
     }
+  }
 
-    static async fetchAll(req, res, next) {
-        try {
-            const reg = new RegExp('^[0-9]*$')
+  static async fetchAll(req, res, next) {
+    try {
+      const reg = new RegExp("^[0-9]*$");
 
-            const { page, size, search } = req.query
+      const { page, size, search } = req.query;
 
-            if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "game not found" });
+      if (reg.test(page) == false || page <= 0)
+        return res.status(404).json({ message: "game not found" });
 
-            const pageLastPageCache = await redis.get('app:games:page')
+      const pageLastPageCache = await redis.get("app:games:page");
 
-            if (pageLastPageCache !== page || search) {
-                await redis.del('app:games')
-            }
+      if (pageLastPageCache !== page || search) {
+        await redis.del("app:games");
+      }
 
-            const gamesCache = await redis.get('app:games')
+      const gamesCache = await redis.get("app:games");
 
-            if (gamesCache) {
-                const games = JSON.parse(gamesCache)
+      if (gamesCache) {
+        const games = JSON.parse(gamesCache);
 
-                res.status(200).json(games || { message: "there is no data" })
-            } else {
-                const { limit, offset } = getPagination(page, size)
-                const fetchResponse = await Game.findAndCountAll({
-                    order: [["id", "desc"]],
-                    where: {
-                        name: {
-                            [Op.iLike]: `%${search}%`
-                        }
-                    },
-                    limit: limit,
-                    offset: offset
-                })
-                const response = getPagingData(fetchResponse, page, limit)
-                const { count: totalItems, rows: products } = fetchResponse
+        res.status(200).json(games || { message: "there is no data" });
+      } else {
+        const { limit, offset } = getPagination(page, size);
+        const fetchResponse = await Game.findAndCountAll({
+          order: [["id", "desc"]],
+          where: {
+            name: {
+              [Op.iLike]: `%${search}%`,
+            },
+          },
+          limit: limit,
+          offset: offset,
+        });
 
-                await redis.set('app:games', JSON.stringify(response))
-                await redis.set('app:games:page', page)
+        const response = getPagingData(fetchResponse, page, limit);
+        const { count: totalItems, rows: products } = fetchResponse;
 
-                res.status(200).json(response || { message: "there is no data" })
-            }
-        } catch (error) {
-            next(error)
-        }
+        await redis.set("app:games", JSON.stringify(response));
+        await redis.set("app:games:page", page);
+
+        res.status(200).json(response || { message: "there is no data" });
+      }
+    } catch (error) {
+      next(error);
     }
+  }
 
-    static async fetchOne(req, res, next) {
-        try {
-            const reg = new RegExp('^[0-9]*$')
-            const gamesId = req.params.gamesId
-            const lastIdCache = await redis.get("app:gameId");
+  static async fetchOne(req, res, next) {
+    try {
+      const reg = new RegExp("^[0-9]*$");
+      const gamesId = req.params.gamesId;
+      const lastIdCache = await redis.get("app:gameId");
 
-            if (reg.test(gamesId) == false) return res.status(404).json({ message: "game not found" });
+      if (reg.test(gamesId) == false)
+        return res.status(404).json({ message: "game not found" });
 
-            if (gamesId !== lastIdCache) {
-                const fetchResponse = await Game.findByPk(+gamesId)
+      if (gamesId !== lastIdCache) {
+        const fetchResponse = await Game.findByPk(+gamesId);
 
-                if (!fetchResponse) return res.status(404).json({ message: "game not found" });
+        if (!fetchResponse)
+          return res.status(404).json({ message: "game not found" });
 
-                await redis.set("app:gameDetailId", gamesId)
+        await redis.set("app:gameDetailId", gamesId);
 
-                await redis.set('app:game', JSON.stringify(fetchResponse))
+        await redis.set("app:game", JSON.stringify(fetchResponse));
 
-                res.status(200).json(fetchResponse)
-            } else {
-                const gameDetail = JSON.parse(await redis.get('app:game'))
-                res.status(200).json(gameDetail)
-            }
-        } catch (error) {
-            next(error)
-        }
+        res.status(200).json(fetchResponse);
+      } else {
+        const gameDetail = JSON.parse(await redis.get("app:game"));
+        res.status(200).json(gameDetail);
+      }
+    } catch (error) {
+      next(error);
     }
+  }
 
-    static async update(req, res, next) {
-        try {
-            const reg = new RegExp('^[0-9]*$')
-            const gamesId = req.params.gamesId
+  static async update(req, res, next) {
+    try {
+      const reg = new RegExp("^[0-9]*$");
+      const gamesId = req.params.gamesId;
 
-            if (reg.test(gamesId) == false) return res.status(404).json({ message: "game not found" });
+      if (reg.test(gamesId) == false)
+        return res.status(404).json({ message: "game not found" });
 
-            const { name, gameImg, youtubeUrl, gameUrl, releaseDate, developer, genre } = req.body
+      const {
+        name,
+        gameImg,
+        youtubeUrl,
+        gameUrl,
+        releaseDate,
+        developer,
+        genre,
+      } = req.body;
 
-            const fetchResponse = await Game.findByPk(+gamesId)
+      const fetchResponse = await Game.findByPk(+gamesId);
 
-            if (!fetchResponse) return res.status(404).json({ message: "game not found" });
+      if (!fetchResponse)
+        return res.status(404).json({ message: "game not found" });
 
-            await Game.update({ name, gameImg, youtubeUrl, gameUrl, releaseDate, developer, genre }, {
-                where: {
-                    id: +gamesId
-                }
-            })
-
-            await redis.del('app:games')
-            await redis.del('app:gameId')
-
-            res.status(200).json({
-                message: `Success update game ${fetchResponse.name}`
-            });
-        } catch (error) {
-            next(error)
+      await Game.update(
+        { name, gameImg, youtubeUrl, gameUrl, releaseDate, developer, genre },
+        {
+          where: {
+            id: +gamesId,
+          },
         }
+      );
+
+      await redis.del("app:games");
+      await redis.del("app:gameId");
+
+      res.status(200).json({
+        message: `Success update game ${fetchResponse.name}`,
+      });
+    } catch (error) {
+      next(error);
     }
+  }
 
-    static async delete(req, res, next) {
-        try {
-            const reg = new RegExp('^[0-9]*$')
-            const gamesId = req.params.gamesId
+  static async delete(req, res, next) {
+    try {
+      const reg = new RegExp("^[0-9]*$");
+      const gamesId = req.params.gamesId;
 
-            if (reg.test(gamesId) == false) return res.status(404).json({ message: "game not found" });
+      if (reg.test(gamesId) == false)
+        return res.status(404).json({ message: "game not found" });
 
-            const fetchResponse = await Game.findByPk(+gamesId)
+      const fetchResponse = await Game.findByPk(+gamesId);
 
-            if (!fetchResponse) return res.status(404).json({ message: "game not found" });
+      if (!fetchResponse)
+        return res.status(404).json({ message: "game not found" });
 
-            await Game.destroy({
-                where: {
-                    id: gamesId
-                }
-            })
+      await Game.destroy({
+        where: {
+          id: gamesId,
+        },
+      });
 
-            await redis.del('app:games')
-            await redis.del('app:gameId')
+      await redis.del("app:games");
+      await redis.del("app:gameId");
 
-            res.status(200).json({
-                message: `Success delete game ${fetchResponse.name}`
-            });
-        } catch (error) {
-            next(error)
-        }
+      res.status(200).json({
+        message: `Success delete game ${fetchResponse.name}`,
+      });
+    } catch (error) {
+      next(error);
     }
+  }
 };
