@@ -177,7 +177,7 @@ describe("GET All users account - FOR ADMIN ACCOUNT", () => {
 describe("GET Account Details", () => {
 	describe("Success fetch account details", () => {
 		it("should return object of that account detail", async () => {
-			let response = await request(app).get("/users/customer01");
+			let response = await request(app).get("/users/administrator");
 
 			expect(response.status).toBe(200);
 			//ASSUME THERE IS ALWAYS AT LEAST ONE ACCOUNT
@@ -199,6 +199,56 @@ describe("GET Account Details", () => {
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", 404);
 			expect(response.body).toHaveProperty("message", "data not found");
+		});
+	});
+});
+
+describe("PUT Account Password", () => {
+	let access_token = null;
+	describe("Success change account password", () => {
+		it("should return object with username and message", async () => {
+			const body = { username: "customer01", password: "password" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			let passwordChange = { newPassword: "passwordNew", oldPassword: "password" };
+			let passwordResponse = await request(app).put("/users/customer1").send(passwordChange).set("access_token", access_token);
+
+			expect(passwordResponse.status).toBe(200);
+			expect(passwordResponse.body).toBeInstanceOf(Object);
+			expect(passwordResponse.body).toHaveProperty("username", expect.any(String));
+			expect(passwordResponse.body).toHaveProperty("message", "password has been changed");
+		});
+	});
+
+	describe("Failed change account password - invalid form", () => {
+		it("should return object with code and message", async () => {
+			const body = { username: "customer01", password: "passwordNew" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			let passwordChange = { newPassword: "password", oldPassword: "" };
+			let passwordResponse = await request(app).put("/users/customer1").send(passwordChange).set("access_token", access_token);
+
+			expect(passwordResponse.status).toBe(400);
+			expect(passwordResponse.body).toBeInstanceOf(Object);
+			expect(passwordResponse.body).toHaveProperty("code", 1);
+			expect(passwordResponse.body).toHaveProperty("message", "invalid form data, please check your input");
+		});
+	});
+	describe("Failed change account password - bad oldpassword", () => {
+		it("should return object with code and message", async () => {
+			const body = { username: "customer01", password: "passwordNew" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			let passwordChange = { newPassword: "password", oldPassword: "password" };
+			let passwordResponse = await request(app).put("/users/customer1").send(passwordChange).set("access_token", access_token);
+
+			expect(passwordResponse.status).toBe(400);
+			expect(passwordResponse.body).toBeInstanceOf(Object);
+			expect(passwordResponse.body).toHaveProperty("code", 8);
+			expect(passwordResponse.body).toHaveProperty("message", "failed to change password");
 		});
 	});
 });

@@ -79,7 +79,7 @@ module.exports = class usersController {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
 			const { oldPassword, newPassword } = req.body;
-			if (!oldPassword || !newPassword) throw { code: 7 };
+			if (!oldPassword || !newPassword) throw { code: 1 };
 
 			//check oldPass
 			const oldData = await User.findOne({ where: { id }, transaction: t });
