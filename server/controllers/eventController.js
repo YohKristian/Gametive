@@ -45,9 +45,24 @@ class Controller {
 	static async addEvent(req, res, next) {
 		let t = await sequelize.transaction();
 		try {
-			const { eventName, description, price, rules, eventStatus, eventPoster, eventDate, eventType, UserId, GameId, locationName, LocationId, ProvinceId, RegencyId } = req.body;
+			const { eventName, description, price, rules, eventStatus, eventPoster, eventDate, eventType, UserId, GameId, locationName, LocationId, ProvinceId, RegencyId, size } = req.body;
 
 			let locationCreate = await Location.create({ name: locationName, ProvinceId, RegencyId }, { transaction: t });
+			console.log(size); //
+			let Bracket;
+			switch (+size) {
+				case 4:
+					Bracket = require("../template/4slot.json");
+					break;
+				case 8:
+					Bracket = require("../template/8slot.json");
+					break;
+				case 16:
+					Bracket = require("../template/16slot.json");
+					break;
+				default:
+					throw { code: 21 };
+			}
 
 			let data = await Event.create(
 				{
@@ -62,43 +77,46 @@ class Controller {
 					UserId: req.user.id,
 					GameId,
 					LocationId: locationCreate.id,
+					size,
+					Bracket: JSON.stringify(Bracket),
 				},
 				{ transaction: t },
 			);
 
-			if (typeof eventName !== "string") {
-				let result = [];
-				for (let i = 0; i < eventName.length; i++) {
-					let element = { LocationId: locationCreate.id };
-					element.eventName = eventName[i];
-					element.description = description[i];
-					element.price = price[i];
-					element.rules = rules[i];
-					element.eventPoster = eventPoster[i];
-					element.eventDate = eventDate[i];
-					element.eventType = eventType[i];
-					element.GameId = GameId[i];
-					result.push(element);
-				}
-				await Event.bulkCreate(result, { transaction: t });
-			} else {
-				await Event.bulkCreate(
-					{
-						name: eventName,
-						description,
-						price,
-						rules,
-						eventStatus: "Pending",
-						eventPoster,
-						eventDate,
-						eventType,
-						UserId: req.user.id,
-						GameId,
-						LocationId: locationCreate.id,
-					},
-					{ transaction: t },
-				);
-			}
+			// if (typeof eventName !== "string") {
+			// 	let result = [];
+			// 	for (let i = 0; i < eventName.length; i++) {
+			// 		let element = { LocationId: locationCreate.id };
+			// 		element.eventName = eventName[i];
+			// 		element.description = description[i];
+			// 		element.price = price[i];
+			// 		element.rules = rules[i];
+			// 		element.eventPoster = eventPoster[i];
+			// 		element.eventDate = eventDate[i];
+			// 		element.eventType = eventType[i];
+			// 		element.GameId = GameId[i];
+			// 		result.push(element);
+			// 	}
+			// 	await Event.bulkCreate(result, { transaction: t });
+			// } else {
+			// 	await Event.bulkCreate(
+			// 		{
+			// 			name: eventName,
+			// 			description,
+			// 			price,
+			// 			rules,
+			// 			eventStatus: "Pending",
+			// 			eventPoster,
+			// 			eventDate,
+			// 			eventType,
+			// 			UserId: req.user.id,
+			// 			GameId,
+			// 			LocationId: locationCreate.id,
+			// 		},
+			// 		{ transaction: t },
+			// 	);
+			// }
+
 			await t.commit();
 			await redis.del("app:event");
 			res.status(201).json(data);
