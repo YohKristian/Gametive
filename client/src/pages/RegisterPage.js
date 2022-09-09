@@ -75,9 +75,10 @@ export default function RegisterPage() {
             type="text"
             placeholder="Input your address"
           /> */}
+          <br></br>
           <button>Register</button>
           <p>
-            Dont have an account? click here to{" "}
+            Already have an account? click here to{" "}
             <Link to={"/login"}>Log in</Link>
           </p>
         </form>

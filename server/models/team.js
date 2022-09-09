@@ -55,6 +55,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.STRING,
       },
+      BenchMemberName1: {
+        allowNull: true,
+        type: DataTypes.STRING,
+      },
+      BenchMemberName2: {
+        allowNull: true,
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,
