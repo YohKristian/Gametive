@@ -119,10 +119,10 @@ describe('GET all event',()=>{
             const response= await request(app).get('/events')
             console.log(response.body);
             expect(response.status).toBe(200);
-            expect(response.body).toBeInstanceOf(Array)
-            expect(response.body[0]).toHaveProperty('id', expect.any(Number))
-            expect(response.body[0]).toHaveProperty('name', expect.any(String))
-            expect(response.body[0]).toHaveProperty('description', expect.any(String))
+            expect(response.body).toBeInstanceOf(Object)
+            expect(response.body).toHaveProperty('totalItems', expect.any(Number))
+            expect(response.body.products).toBeInstanceOf(Array)
+            expect(response.body.products[0]).toHaveProperty('id', expect.any(Number))
         })
     })
 })
