@@ -36,6 +36,14 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
+      BenchMemberName1: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      BenchMemberName2: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
