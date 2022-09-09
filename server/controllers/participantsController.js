@@ -106,7 +106,7 @@ module.exports = class participantsController {
         include: Team,
         where: {
           EventId: +eventId,
-          paidStatus: "Paid"
+          statusPay: "Paid"
         },
         order: [
           ['paymentDate', 'DESC'],
@@ -129,7 +129,7 @@ module.exports = class participantsController {
         oldBracket.participant[idx].name = Bracket.Team.name
       })
 
-      await Event.update({ Bracket: oldBracket }, {
+      await Event.update({ Bracket: JSON.stringify(oldBracket) }, {
         where: {
           id: +eventId
         },
