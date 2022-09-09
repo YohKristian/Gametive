@@ -1,6 +1,7 @@
 const { Game } = require("../models");
 const { Op } = require("sequelize");
 const { redis } = require('../config/redis')
+const { getPagination, getPagingData } = require('../helpers/pagination')
 
 module.exports = class gamesController {
     static async create(req, res, next) {
@@ -20,6 +21,18 @@ module.exports = class gamesController {
 
     static async fetchAll(req, res, next) {
         try {
+            const reg = new RegExp('^[0-9]*$')
+
+            const { page, size, search } = req.query
+
+            if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "game not found" });
+
+            const pageLastPageCache = await redis.get('app:games:page')
+
+            if (pageLastPageCache !== page || search) {
+                await redis.del('app:games')
+            }
+
             const gamesCache = await redis.get('app:games')
 
             if (gamesCache) {
@@ -27,13 +40,24 @@ module.exports = class gamesController {
 
                 res.status(200).json(games || { message: "there is no data" })
             } else {
-                const fetchResponse = await Game.findAll({
-                    order: [["id", "desc"]]
+                const { limit, offset } = getPagination(page, size)
+                const fetchResponse = await Game.findAndCountAll({
+                    order: [["id", "desc"]],
+                    where: {
+                        name: {
+                            [Op.iLike]: `%${search}%`
+                        }
+                    },
+                    limit: limit,
+                    offset: offset
                 })
+                const response = getPagingData(fetchResponse, page, limit)
+                const { count: totalItems, rows: products } = fetchResponse
 
-                await redis.set('app:games', JSON.stringify(fetchResponse))
+                await redis.set('app:games', JSON.stringify(response))
+                await redis.set('app:games:page', page)
 
-                res.status(200).json(fetchResponse || { message: "there is no data" })
+                res.status(200).json(response || { message: "there is no data" })
             }
         } catch (error) {
             next(error)

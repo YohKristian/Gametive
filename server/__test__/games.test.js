@@ -50,7 +50,7 @@ describe('GET /games', () => {
     describe('GET /games - success test', () => {
         it('should be return an array of games data from database', async () => {
 
-            const response = await request(app).get('/games')
+            const response = await request(app).get('/games?page=1&size=3&search')
             expect(response.status).toBe(200);
             expect(response.body).toBeInstanceOf(Object);
         })
