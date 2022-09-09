@@ -1,25 +1,4 @@
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-const getConfigurableProps = () => ({
-  showArrows: true,
-  showStatus: false,
-  showIndicators: true,
-  infiniteLoop: true,
-  showThumbs: true,
-  useKeyboardArrows: true,
-  autoPlay: true,
-  stopOnHover: true,
-  swipeable: true,
-  dynamicHeight: true,
-  emulateTouch: true,
-  autoFocus: false,
-  thumbWidth: 100,
-  selectedItem: 0,
-  interval: 3000,
-  transitionTime: 500,
-  swipeScrollTolerance: 5,
-});
+import VideoCarousel from "./VideoCarousel";
 
 export default function HomePage() {
   return (
@@ -67,5 +46,8 @@ export default function HomePage() {
         </div>
       </div>
     </Carousel>
+    <>
+      <VideoCarousel />
+    </>
   );
 }
