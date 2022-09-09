@@ -1,4 +1,4 @@
-const { Participant, Team, Event } = require("../models");
+const { Participant, Team, Event, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { redis } = require("../config/redis");
 
@@ -68,6 +68,7 @@ module.exports = class participantsController {
     }
   }
   static async updateByTeamId(req, res, next) {
+    let t = await sequelize.transaction()
     try {
       const { eventId, teamId } = req.params;
 
@@ -76,6 +77,7 @@ module.exports = class participantsController {
           EventId: +eventId,
           TeamId: +teamId,
         },
+        transaction: t
       });
 
       if (!fetchResponse)
@@ -91,9 +93,50 @@ module.exports = class participantsController {
           statusPay: payload.paidStatus,
           paymentDate: payload.currentDate,
         },
-        { where: { EventId: +eventId, TeamId: +teamId } }
+        {
+          where: {
+            EventId: +eventId,
+            TeamId: +teamId
+          },
+          transaction: t
+        }
       );
 
+      const fetchAllBracket = await Participant.findAll({
+        include: Team,
+        where: {
+          EventId: +eventId,
+          paidStatus: "Paid"
+        },
+        order: [
+          ['paymentDate', 'DESC'],
+        ],
+        transaction: t
+      });
+
+      const findEvent = await Event.findOne({
+        where: {
+          id: +teamId
+        },
+        transaction: t
+      })
+
+      let oldBracket = JSON.parse(findEvent.Bracket);
+
+      oldBracket.stage[0].name = findEvent.name;
+
+      fetchAllBracket.forEach((Bracket, idx) => {
+        oldBracket.participant[idx].name = Bracket.Team.name
+      })
+
+      await Event.update({ Bracket: oldBracket }, {
+        where: {
+          id: +eventId
+        },
+        transaction: t
+      })
+
+      await t.commit()
       await redis.del("app:participants");
       await redis.del("app:participantId");
 
@@ -107,6 +150,7 @@ module.exports = class participantsController {
         updatedAt: fetchResponse.updatedAt,
       });
     } catch (error) {
+      await t.rollback()
       next(error);
     }
   }
