@@ -8,7 +8,7 @@ export default function EventRow(props) {
                 <td>{props.item.eventType}</td>
                 <td>{props.item.eventDate}</td>
                 <td>{props.item.Location.name}</td>
-                <td>{props.item.UserId}</td>
+                <td>{props.item.User.username}</td>
                 <td>{props.item.Game.name}</td>
                 <td><p style={{ backgroundColor: '#59CE8F', borderRadius: '10px' }}>{props.item.eventStatus}</p></td>
                 <td >

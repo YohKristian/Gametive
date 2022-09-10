@@ -1,4 +1,4 @@
-const { Event, Game, Location, sequelize } = require("../models");
+const { User, Event, Game, Location, sequelize } = require("../models");
 const { redis } = require("../config/redis");
 const { getPagination, getPagingData } = require("../helpers/pagination");
 const { Op } = require("sequelize");
@@ -22,7 +22,7 @@ class Controller {
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				let fetchEvent = await Event.findAndCountAll({
-					include: [Game, Location],
+					include: [{ model: User, attributes: { exclude: ['password'] } }, Game, Location],
 					where: {
 						name: {
 							[Op.iLike]: `%${search}%`,
