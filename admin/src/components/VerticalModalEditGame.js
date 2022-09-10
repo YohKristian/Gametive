@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { submitEditGameDetail } from '../store/action/gamesAction';
-import { useNavigate } from "react-router-dom";
+import { fetchGames, submitEditGameDetail } from '../store/action/gamesAction';
 import { errorPopup } from "../helpers";
 
 export default function VerticalModalEditGame(props) {
     const dispacth = useDispatch();
-    const navigate = useNavigate();
 
     const detail_game = useSelector((state) => {
         return state.game.detailGame;
@@ -65,7 +63,17 @@ export default function VerticalModalEditGame(props) {
                     return errorPopup(error);
                 }
                 // console.log(success);
-                navigate("/");
+                dispacth(fetchGames());
+                props.onHide();
+                setNewGame({
+                    name: "",
+                    gameImg: "",
+                    youtubeUrl: "",
+                    gameUrl: "",
+                    releaseDate: "",
+                    developer: "",
+                    genre: "",
+                })
             })
         );
     };
