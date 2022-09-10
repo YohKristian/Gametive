@@ -1,4 +1,4 @@
-import { baseURL } from "./actionTypes";
+import { baseURL } from "./actionType";
 import axios from "axios";
 
 export const loginUser = (payload, cb) =>
