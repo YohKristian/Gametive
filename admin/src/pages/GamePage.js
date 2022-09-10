@@ -1,4 +1,31 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { fetchGames } from "../store/action/gamesAction";
+import { errorPopup } from "../helpers";
+import GameRow from "../components/GameRow";
+
+
 export default function GamePage() {
+  const dispacth = useDispatch();
+
+  const game = useSelector((state) => {
+    return state.game.game;
+  })
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispacth(
+      fetchGames((error, success) => {
+        if (error) {
+          return errorPopup(error);
+        }
+        // console.log(success)
+        setLoading(false);
+      })
+    );
+  }, [])
+
   return (
     <div>
       <div style={{ textAlign: 'center' }}>
@@ -22,17 +49,12 @@ export default function GamePage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">League of Legends wildrift</th>
-                <td><img style={{ width: '100px', height: '100px' }} src="https://statics.indozone.news/content/2021/06/24/qEsgoxB/league-of-legends-wild-rift-bakal-hadirkan-fitur-ban-pick-di-patch-barunya98_700.jpg" alt="" /></td>
-                <td>2022-10-27</td>
-                <td>RIOT GAMES</td>
-                <td>MOBA</td>
-                <td>
-                  <button type="button" className="btn btn-secondary" style={{ marginRight: '10px' }}>Edit</button>
-                  <button type="button" className="btn btn-danger">Delete</button>
-                </td>
-              </tr>
+              {loading && <tr>
+                <td colSpan={6}>Loading</td>
+              </tr>}
+              {!loading && game.items.map(game => {
+                return <GameRow key={game.id} game={game} />
+              })}
             </tbody>
           </table>
         </div>
