@@ -15,6 +15,7 @@ module.exports = errorHandler = (error, req, res, next) => {
 		8: [400, "failed to change password"],
 		20: [404, "Event not found"],
 		21: [400, "only size 4/8/16 are available"],
+		22: [400, "failed to change bracket"],
 		40: [404, "team detail not found"],
 		41: [404, "fail to update, team detail not found"],
 		42: [404, "fail to delete, team detail not found"],
