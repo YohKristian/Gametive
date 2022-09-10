@@ -8,14 +8,50 @@ export default function EventRow(props) {
         console.log(props.item.id, "<<<< ID ITEM NIH")
     }
 
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+        }).format(price);
+    }
+
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const day = [
+            "Minggu",
+            "Senin",
+            "Selasa",
+            "Rabu",
+            "Kamis",
+            "Jumat",
+            "Sabtu",
+        ];
+        const month = [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember",
+        ];
+        return `${day[d.getDay()]}, ${d.getDate()} ${month[d.getMonth()]
+            } ${d.getFullYear()}`;
+    }
+
     return (
         <>
             <tr>
                 <th scope="row">{props.item.name}</th>
-                <td>{props.item.price}</td>
+                <td>{formatPrice(props.item.price)}</td>
                 <td><img style={{ width: '100px', height: '100px' }} src={props.item.eventPoster} alt={props.item.name} /></td>
                 <td>{props.item.eventType}</td>
-                <td>{props.item.eventDate}</td>
+                <td>{formatDate(props.item.eventDate)}</td>
                 <td>{props.item.Location.name}</td>
                 <td>{props.item.User.username}</td>
                 <td>{props.item.Game.name}</td>
@@ -28,14 +64,14 @@ export default function EventRow(props) {
                             style={{ marginBottom: '10px' }}
                             onClick={handlerOnClickEdit}
                         >
-                            <i class="bi bi-pencil-square"> Edit</i>
+                            <i className="bi bi-pencil-square"> Edit</i>
                         </button>
                         <button
                             type="button"
                             className="btn btn-danger"
                             onClick={handlerOnClickDelete}
                         >
-                            <i class="bi bi-trash3-fill"> Delete</i>
+                            <i className="bi bi-trash3-fill"> Delete</i>
                         </button>
                     </div>
                 </td>
