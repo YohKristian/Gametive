@@ -1,4 +1,4 @@
-import { baseURL, FETCH_ALL_EVENT, FETCH_DETAIL_EVENT } from "./actionType";
+import { baseURL, FETCH_ALL_EVENT, FETCH_ALL_PROVINCE, FETCH_ALL_REGENCY, FETCH_DETAIL_EVENT } from "./actionType";
 import axios from "axios";
 
 export const eventsFetchSuccess = function (payload) {
@@ -38,7 +38,7 @@ export const patchStatusEvents = (eventId, eventStatus, cb) =>
         }
     }
 
-    const fetchEventDetailSuccess= (payload)=>{
+    export const fetchEventDetailSuccess= (payload)=>{
         return{
             type: FETCH_DETAIL_EVENT,
             payload
@@ -75,5 +75,41 @@ export const patchStatusEvents = (eventId, eventStatus, cb) =>
         }
     }
 
+export const fetchProvinceSuccess= (payload)=>{
+    return{
+        type: FETCH_ALL_PROVINCE,
+        payload
+    }
+}
 
-    
+export const fetchProvince= (cb)=> async(dispatch)=>{
+    try {
+        const{data}= await axios("https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json",{
+            method: 'get'
+        })
+
+        dispatch(fetchProvinceSuccess(data))
+        cb(null,data)
+    } catch (error) {
+        cb(error)
+    }
+}
+
+export const fetchRegencySuccess= (payload)=>{
+    return{
+        type: FETCH_ALL_REGENCY,
+        payload
+    }
+}
+
+export const fetchRegency= (id,cb)=> async(dispatch)=>{
+    try {
+        const{data}= await axios(`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${id}.json`,{
+            method: 'get'
+        })
+        dispatch(fetchRegencySuccess(data))
+        cb(null,data)
+    } catch (error) {
+        cb(error)
+    }
+}

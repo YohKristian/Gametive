@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addGames, fetchGames } from '../store/action/gamesAction';
 import { errorPopup } from "../helpers";
 import { updateUsersPassword } from '../store/action/usersAction';
-import { editEvent, fetchDetailEvent } from '../store/action/eventsActions';
+import { editEvent, fetchDetailEvent, fetchProvince, fetchRegency } from '../store/action/eventsActions';
 
 export default function VerticalModalEditEvent(props) {
     const dispatch = useDispatch();
     const {detailEvent}= useSelector((state)=> state.event)
     const {game}= useSelector((state)=> state.game)
+    const {province}= useSelector((state)=> state.event)
+    const {regencies}= useSelector((state)=> state.event)
 
     const [newEvent, setNewEvent] = useState({
         name: "",
@@ -25,6 +27,20 @@ export default function VerticalModalEditEvent(props) {
         ProvinceId:"",
         RegencyId: ""
     });
+
+    useEffect(()=>{
+        dispatch(fetchRegency(newEvent.ProvinceId, (error,success)=>{
+            if(error){
+                return errorPopup(error);
+            }
+        }))
+
+        dispatch(fetchProvince((error,success)=>{
+            if(error){
+                return errorPopup(error);
+            }
+        }))
+    },[newEvent])
 
     useEffect(()=>{
         dispatch(
@@ -46,8 +62,8 @@ export default function VerticalModalEditEvent(props) {
             eventType: detailEvent.eventType,
             GameId: detailEvent.GameId,
             locationName: detailEvent?.Location?.name,
-            ProvinceId:detailEvent.Location?.ProvinceId,
-            RegencyId: detailEvent.Location?.RegencyId
+            ProvinceId:detailEvent?.Location?.ProvinceId,
+            RegencyId: detailEvent?.Location?.RegencyId
         })
         console.log(populateDate);
     },[detailEvent])
@@ -240,30 +256,24 @@ export default function VerticalModalEditEvent(props) {
                                 <label className="form-label" htmlFor="genre">
                                     Regency
                                 </label>
-                                <input
-                                    type="text"
-                                    id="genre"
-                                    name="RegencyId"
-                                    className="form-control form-control-lg"
-                                    placeholder="Input your game genre"
-                                    defaultValue={newEvent.RegencyId}
-                                    onChange={inputEditEvent}
-                                />
+                                <select name="RegencyId" onChange={inputEditEvent}  value={newEvent.RegencyId} style={{width: '465px', height: '40px', borderRadius: 12}}>
+                                    {regencies.map((el)=>
+                                    detailEvent?.Location?.RegencyId == el.id ? <option key={el.id} value={el.id} selected>{el.name}</option> : <option key={el.id} value={el.id}>{el.name}</option>
+                                    )}
+
+                                </select>
                             </div>
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="genre">
                                     Province
                                 </label>
-                                <input
-                                    type="text"
-                                    id="genre"
-                                    name="ProvinceId"
-                                    className="form-control form-control-lg"
-                                    placeholder="Input your game genre"
-                                    defaultValue={newEvent.ProvinceId}
-                                    onChange={inputEditEvent}
-                                />
+                                  <select name="ProvinceId" onChange={inputEditEvent}  value={newEvent.ProvinceId} style={{width: '465px', height: '40px', borderRadius: 12}} >
+                                    {province.map((el)=>
+                                    detailEvent?.Location?.ProvinceId == el.id ? <option key={el.id} value={el.id} selected>{el.name}</option> : <option key={el.id} value={el.id}>{el.name}</option>
+                                    )}
+
+                                </select>
                             </div>
 
 

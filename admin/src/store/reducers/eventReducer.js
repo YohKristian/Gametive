@@ -1,8 +1,10 @@
-import { FETCH_ALL_EVENT, FETCH_DETAIL_EVENT } from "../action/actionType"
+import { FETCH_ALL_EVENT, FETCH_ALL_PROVINCE, FETCH_ALL_REGENCY, FETCH_DETAIL_EVENT } from "../action/actionType"
 
 let initialState = {
     event: {},
-    detailEvent: []
+    detailEvent: [],
+    province: [],
+    regencies:[]
 }
 
 function eventReducer(state = initialState, action) {
@@ -17,6 +19,16 @@ function eventReducer(state = initialState, action) {
                 ...state,
                 detailEvent: action.payload
             }
+        case FETCH_ALL_PROVINCE:
+            return{
+                ...state,
+                province: action.payload
+            }
+        case FETCH_ALL_REGENCY:
+            return{
+                ...state,
+                regencies: action.payload
+                }
         default:
             return state
     }
