@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchGames } from "../store/action/gamesAction";
 import { errorPopup } from "../helpers";
 import GameRow from "../components/GameRow";
-
+import VerticalModalAddGame from "../components/VerticalModalAddGame";
+import Button from 'react-bootstrap/Button';
 
 export default function GamePage() {
   const dispacth = useDispatch();
@@ -13,6 +14,8 @@ export default function GamePage() {
   })
 
   const [loading, setLoading] = useState(true);
+
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     dispacth(
@@ -35,6 +38,16 @@ export default function GamePage() {
         </div>
         <div style={{ paddingTop: '20px' }}>
           <h2>Game</h2>
+        </div>
+        <div style={{ marginLeft: '75vh', paddingTop: '20px' }}>
+          <Button variant="success" onClick={() => setModalShow(true)}>
+            Add New Game
+          </Button>
+
+          <VerticalModalAddGame
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
         </div>
         <div style={{ paddingTop: "30px", paddingLeft: '50px', paddingRight: '50px' }}>
           <table className="table table-striped">
