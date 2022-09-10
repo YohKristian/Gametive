@@ -20,3 +20,20 @@ export const fetchGames = (cb) =>
             cb(error);
         }
     }
+
+export const addGames = (payload, cb) =>
+    async () => {
+        try {
+            const { data } = await axios(baseURL + `/games`, {
+                method: "POST",
+                data: payload,
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            });
+
+            cb(null, data);
+        } catch (error) {
+            cb(error);
+        }
+    }
