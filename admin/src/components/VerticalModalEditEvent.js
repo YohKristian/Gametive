@@ -44,7 +44,7 @@ export default function VerticalModalEditEvent(props) {
             eventPoster: detailEvent.eventPoster,
             eventDate: populateDate,
             eventType: detailEvent.eventType,
-            GameId: detailEvent?.Game?.name,
+            GameId: detailEvent.GameId,
             locationName: detailEvent?.Location?.name,
             ProvinceId:detailEvent.Location?.ProvinceId,
             RegencyId: detailEvent.Location?.RegencyId
@@ -86,6 +86,7 @@ export default function VerticalModalEditEvent(props) {
         }))
         
     }
+
 
 
     return (
@@ -214,7 +215,7 @@ export default function VerticalModalEditEvent(props) {
                                 </label><br></br>
                                 <select name="GameId" onChange={inputEditEvent}  value={newEvent.GameId} style={{width: '465px', height: '40px', borderRadius: 12}}>
                                     {game?.items?.map((el)=>
-                                    <option key={el.id} value={el.id}>{el.name}</option>
+                                     detailEvent?.Game?.id == el.id ? <option key={el.id} value={el.id} selected>{el.name}</option> : <option key={el.id} value={el.id}>{el.name}</option>
                                     )}
                                 </select>
                                
