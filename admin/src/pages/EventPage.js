@@ -1,9 +1,6 @@
-import NavBar from "../components/NavBar";
-
 export default function EventPage() {
   return (
     <div>
-      <NavBar />
       <div style={{ textAlign: 'center' }}>
         <div style={{ paddingTop: '50px' }}>
           <i className="fa-solid fa-magnifying-glass" style={{ color: '#FF7F3F', position: 'absolute', paddingTop: '6px', paddingLeft: '5px', fontSize: '25px' }} ></i>

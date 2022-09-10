@@ -19,9 +19,37 @@ header > .img > img {
   width: 100%;
 }
 
+header > div:nth-child(2) {
+  display: flex;
+  flex-direction: row;
+}
+
 header > div > a {
+  position: relative;
   margin: 0 10px;
   color: white;
   font-weight: bold;
+  text-decoration: none;
+  padding: 8px 0;
 }
 
+header > div > a:hover {
+  color: white;
+  cursor: pointer;
+}
+
+header > div > a::after {
+  content: "";
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  width: 0;
+  height: 4px;
+  background-color: orange;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+header > div > a.active::after {
+  width: 100%;
+}

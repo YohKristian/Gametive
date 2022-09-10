@@ -27,4 +27,5 @@
 .video-carousel .vid-slide>div:nth-child(2)>h1 {
   font-size: 3vw;
   user-select: none;
+  font-weight: bold;
 }

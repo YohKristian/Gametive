@@ -3,8 +3,7 @@
 }
 
 .image-carousel .carousel:nth-child(2) {
-  display: flex;
-  justify-content: center;
+  display: none;
 }
 
 .image-carousel .img-slide {
@@ -32,4 +31,6 @@
 
 .image-carousel .img-slide>div>h1 {
   font-size: 5vw;
+  font-weight: bold;
+  user-select: none;
 }

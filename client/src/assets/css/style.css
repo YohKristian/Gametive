@@ -3,6 +3,8 @@
 @import "./header.css";
 @import "./home.css";
 @import "./main.css";
+@import "./imageCarousel.css";
+@import "./videoCarousel.css";
 
 * {
   padding: 0;

@@ -26,6 +26,7 @@ const YoutubeSlide = ({ url, isSelected, legend }) => (
       playing={isSelected}
       loop={true}
       muted={true}
+      controls={false}
       height={"80vh"}
     />
     <div>
