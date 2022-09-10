@@ -1,13 +1,22 @@
 import { FETCH_ALL_USER, FETCH_DETAIL_USER } from "../action/actiontypes"
 
-let initialState= {user:[],detailUser:[]}
+let initialState = {
+    user: [],
+    detailUser: []
+}
 
-function userReducer(state= initialState, action){
-    switch(action.type){
+function userReducer(state = initialState, action) {
+    switch (action.type) {
         case FETCH_ALL_USER:
-            return{...state, user: action.payload}
+            return {
+                ...state,
+                user: action.payload
+            }
         case FETCH_DETAIL_USER:
-            return{...state,detailUser: action.payload}
+            return {
+                ...state,
+                detailUser: action.payload
+            }
         default:
             return state
     }
