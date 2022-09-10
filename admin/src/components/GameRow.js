@@ -1,11 +1,24 @@
+import { useDispatch } from "react-redux"
+import { errorPopup } from "../helpers";
+import { deleteGame, fetchGames } from "../store/action/gamesAction";
+
 export default function GameRow(props) {
+    const dispacth = useDispatch();
 
     const handlerOnClickEdit = () => {
         console.log(props.game.id, "<<<< ID ITEM NIH")
     }
 
     const handlerOnClickDelete = () => {
-        console.log(props.game.id, "<<<< ID ITEM NIH")
+        dispacth(
+            deleteGame(props.game.id, (error, success) => {
+                if (error) {
+                    return errorPopup(error);
+                }
+                console.log(success)
+                dispacth(fetchGames());
+            })
+        );
     }
 
     const formatDate = (date) => {
