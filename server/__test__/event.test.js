@@ -91,9 +91,7 @@ describe("POST Customers Login", () => {
 	describe("Success Login Get Token", () => {
 		it("should return object of token", async () => {
 			const body = { username: "customer", password: "12345" };
-
 			const response = await request(app).post("/users/login").send(body);
-
 			customer_token = response.body.access_token;
 			expect(response.status).toBe(200);
 		});
@@ -103,13 +101,13 @@ describe("POST Customers Login", () => {
 describe("GET all event", () => {
 	describe("success fetch", () => {
 		it("should return array", async () => {
-			const response = await request(app).get("/events");
+			const response = await request(app).get("/events?page=1&size=&search=");
 			console.log(response.body);
 			expect(response.status).toBe(200);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("totalItems", expect.any(Number));
-			expect(response.body.products).toBeInstanceOf(Array);
-			expect(response.body.products[0]).toHaveProperty("id", expect.any(Number));
+			expect(response.body.items).toBeInstanceOf(Array);
+			expect(response.body.items[0]).toHaveProperty("id", expect.any(Number));
 		});
 	});
 });
