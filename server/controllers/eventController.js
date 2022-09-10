@@ -51,6 +51,7 @@ class Controller {
 			let locationCreate = await Location.create({ name: locationName, ProvinceId, RegencyId }, { transaction: t });
 			console.log(size); //
 			let Bracket;
+			/* CREATE TEMPLATE BRACKET */
 			switch (+size) {
 				case 4:
 					Bracket = require("../template/4slot.json");
@@ -64,6 +65,8 @@ class Controller {
 				default:
 					throw { code: 21 };
 			}
+			/* FILL stage name with eventName */
+			Bracket.stage.name = eventName;
 
 			let data = await Event.create(
 				{
