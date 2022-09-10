@@ -18,7 +18,6 @@ export default function NavBar() {
                     <NavLink to='/event' style={{ paddingRight: '50px', textDecoration: 'none', color: 'white' }}>Event Table</NavLink>
                     <NavLink to='/user' style={{ paddingRight: '50px', textDecoration: 'none', color: 'white' }}>User Table</NavLink>
                     <NavLink to='/game' style={{ paddingRight: '50px', textDecoration: 'none', color: 'white' }}>Game Table</NavLink>
-                    <NavLink to='/user' style={{ paddingRight: '50px', textDecoration: 'none', color: 'white' }}>User Page</NavLink>
                     <button
                         type="button"
                         className="btn btn-danger"

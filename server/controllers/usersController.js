@@ -128,6 +128,15 @@ module.exports = class usersController {
 	static async delete(req, res, next) {
 		//soft delete (change status from active -> inactive)
 		try {
+			const id = req.params.userId; //from authentication
+
+			const findUser = await User.findByPk(id);
+
+			if (!findUser) throw { code: 9 };
+
+			const newData = await User.destroy({ where: { id }, returning: true });
+
+			res.status(200).json({ username: newData.username, message: "user has been deleted" });
 		} catch (error) {
 			next(error);
 		}
