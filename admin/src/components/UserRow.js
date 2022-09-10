@@ -1,13 +1,25 @@
 import { useState } from "react";
 import VerticalModalEditPasswordUser from "../components/VerticalModalEditPasswordUser";
 import Button from 'react-bootstrap/Button';
+import { useDispatch } from "react-redux";
+import { deleteUser, fetchUsers } from "../store/action/usersAction";
+import { errorPopup } from "../helpers";
 
 export default function UserRow(props) {
+    const dispatch = useDispatch();
 
     const [modalShow, setModalShow] = useState(false);
 
     const handlerOnClickDelete = () => {
-        console.log(props.user.id, "<<<< ID ITEM NIH")
+        dispatch(
+            deleteUser(props.user.id, (error, success) => {
+                if (error) {
+                    return errorPopup(error);
+                }
+                // console.log(success)
+                dispatch(fetchUsers());
+            })
+        )
     }
 
     return (
