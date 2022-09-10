@@ -1,8 +1,9 @@
 import { dateFormat } from "../helpers"
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { patchStatusEvents } from "../store/action/eventsActions";
+import { fetchDetailEvent, patchStatusEvents } from "../store/action/eventsActions";
 import { errorPopup } from "../helpers";
+import VerticalModalEditEvent from "./VerticalModalEditEvent";
 
 export default function EventRow(props) {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function EventRow(props) {
     useEffect(() => {
         setStatusEvent(props.item.eventStatus);
     }, [])
+    const [modalShow, setModalShow] = useState(false);
 
     const onChangeStatusEvent = (e) => {
         const eventId = +props.item.id;
@@ -28,7 +30,14 @@ export default function EventRow(props) {
     }
 
     const handlerOnClickEdit = () => {
-        console.log(props.item.id, "<<<< ID ITEM NIH")
+        
+        dispatch(fetchDetailEvent(props.item.id, (error, success) => {
+            if (error) {
+                return errorPopup(error);
+            }
+            // console.log(success)
+        }))
+        setModalShow(true);
     }
 
     const formatPrice = (price) => {
@@ -52,6 +61,10 @@ export default function EventRow(props) {
 
     return (
         <>
+        <VerticalModalEditEvent
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             <tr>
                 <th scope="row">{props.item.name}</th>
                 <td>{formatPrice(props.item.price)}</td>

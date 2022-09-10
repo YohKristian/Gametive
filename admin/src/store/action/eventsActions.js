@@ -1,4 +1,4 @@
-import { baseURL, FETCH_ALL_EVENT } from "./actionType";
+import { baseURL, FETCH_ALL_EVENT, FETCH_DETAIL_EVENT } from "./actionType";
 import axios from "axios";
 
 export const eventsFetchSuccess = function (payload) {
@@ -37,3 +37,43 @@ export const patchStatusEvents = (eventId, eventStatus, cb) =>
             cb(error);
         }
     }
+
+    const fetchEventDetailSuccess= (payload)=>{
+        return{
+            type: FETCH_DETAIL_EVENT,
+            payload
+        }
+    }
+
+    export const fetchDetailEvent= (id, cb) => async (dispatch)=>{
+       try {
+        const { data } = await axios(baseURL + `/events/${+id}`, {
+            method: "get"
+        });
+        dispatch(fetchEventDetailSuccess(data));
+        cb(null, data);
+       } catch (error) {
+        cb(error);
+       }
+    }
+
+    export const editEvent=(id,input,cb)=>async(dispatch)=>{
+        try {
+            console.log(input);
+            const{data}= await axios(`${baseURL}/events/${id}`,{
+                method:'PUT',
+                data: input,
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            })
+            dispatch(fetchEvents())
+            cb(null,data)
+        } catch (error) {
+            cb(error)
+            
+        }
+    }
+
+
+    
