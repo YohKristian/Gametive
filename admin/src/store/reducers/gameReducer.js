@@ -1,15 +1,24 @@
 import { FETCH_ALL_GAME, FETCH_DETAIL_GAME } from "../action/actiontypes"
 
+let initialState = {
+  game: [],
+  detailGame: []
+}
 
-let initialState= {game:[], detailGame:[]}
-function gameReducer(state=initialState,action){
-  switch(action.type){
+function gameReducer(state = initialState, action) {
+  switch (action.type) {
     case FETCH_ALL_GAME:
-        return{...state, game: action.payload}
+      return {
+        ...state,
+        game: action.payload
+      }
     case FETCH_DETAIL_GAME:
-        return{...state, detailGame: action.payload}
+      return {
+        ...state,
+        detailGame: action.payload
+      }
     default:
-        return state
+      return state
   }
 }
 
