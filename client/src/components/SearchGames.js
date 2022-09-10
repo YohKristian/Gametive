@@ -9,7 +9,16 @@ export default function SearchGames() {
   const navigate = useNavigate();
   const { events } = useSelector((state) => state.eventsReducer);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState();
+
+  const fetchData = () => {
+    dispatch(fetchEvents(keyword))
+      .catch((err) => {
+        errorPopup(err);
+      })
+      .finally(() => setLoading(false));
+  };
 
   const handleKeyword = (e) => {
     const { value } = e.target;
@@ -17,16 +26,12 @@ export default function SearchGames() {
   };
 
   const handleSearch = () => {
-    dispatch(fetchEvents(keyword)).catch((err) => {
-      errorPopup(err);
-    });
+    fetchData();
   };
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      dispatch(fetchEvents(keyword)).catch((err) => {
-        errorPopup(err);
-      });
+      fetchData();
     }
   };
 
@@ -35,9 +40,7 @@ export default function SearchGames() {
   };
 
   useEffect(() => {
-    dispatch(fetchEvents(keyword)).catch((err) => {
-      errorPopup(err);
-    });
+    fetchData();
   }, []);
 
   return (
@@ -51,10 +54,10 @@ export default function SearchGames() {
           placeholder="Search here..."
         />
       </div>
-      {events ? (
+      {!loading ? (
         <div>
           {events.map((event, idx) => (
-            <div key={idx} onClick={toDetail(event.id)}>
+            <div className="search-item" key={idx} onClick={toDetail(event.id)}>
               <div className="img">
                 <img src={event.eventPoster} alt="" />
               </div>
