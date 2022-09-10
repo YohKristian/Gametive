@@ -26,13 +26,12 @@ export const patchStatusEvents = (eventId, eventStatus, cb) =>
         try {
             const { data } = await axios(baseURL + `/events/${+eventId}`, {
                 method: "PATCH",
-                data: eventStatus,
+                data: { eventStatus },
                 headers: {
                     access_token: localStorage.access_token
                 }
             });
 
-            // dispatch(fetchEvents());
             cb(null, data);
         } catch (error) {
             cb(error);

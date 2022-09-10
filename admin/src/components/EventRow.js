@@ -38,6 +38,18 @@ export default function EventRow(props) {
         }).format(price);
     }
 
+    const styleColor = (value) => {
+        if (value === "Pending") {
+            return { backgroundColor: "#ffd32a", borderRadius: 12, padding: 4 }
+        } else if (value === "Active") {
+            return { backgroundColor: "#05c46b", borderRadius: 12, padding: 4 }
+        } else if (value === "Finished") {
+            return { backgroundColor: "#ff5e57", borderRadius: 12, padding: 4 }
+        } else if (value === "Archived") {
+            return { backgroundColor: "#575fcf", color: "white", borderRadius: 12, padding: 4 }
+        }
+    }
+
     return (
         <>
             <tr>
@@ -50,12 +62,11 @@ export default function EventRow(props) {
                 <td>{props.item.User.username}</td>
                 <td>{props.item.Game.name}</td>
                 <td>
-                    <p style={{ backgroundColor: '#59CE8F', borderRadius: '10px' }}>{props.item.eventStatus}</p>
-                    <select value={statusEvent} onChange={onChangeStatusEvent}>
-                        <option value="Pending">Pending</option>
-                        <option value="Active">Active</option>
-                        <option value="Finished">Finished</option>
-                        <option value="Archived">Archived</option>
+                    <select value={statusEvent} onChange={onChangeStatusEvent} style={styleColor(statusEvent)}>
+                        <option value="Pending" style={{ backgroundColor: "white", color: "black" }}>Pending</option>
+                        <option value="Active" style={{ backgroundColor: "white", color: "black" }}>Active</option>
+                        <option value="Finished" style={{ backgroundColor: "white", color: "black" }}>Finished</option>
+                        <option value="Archived" style={{ backgroundColor: "white", color: "black" }}>Archived</option>
                     </select>
                 </td>
                 <td>
