@@ -33,3 +33,16 @@ export const errorPopup = (error) => {
     title: message,
   });
 };
+
+export const rupiahFormat = (num) => `Rp. ${num?.toLocaleString("id-ID")},00`;
+export const dateFormat = (date) => {
+  if (date) {
+    const d = new Date(date);
+    return d.toLocaleDateString("id-ID", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
+};

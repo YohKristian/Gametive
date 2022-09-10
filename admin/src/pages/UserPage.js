@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../store/action/usersAction";
 import { errorPopup } from "../helpers";
 import UserRow from "../components/UserRow";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 export default function UserPage() {
   const dispacth = useDispatch();
 
   const user = useSelector((state) => {
     return state.user.user;
-  })
+  });
 
   const [loading, setLoading] = useState(true);
 
@@ -19,11 +20,11 @@ export default function UserPage() {
         if (error) {
           return errorPopup(error);
         }
-        console.log(success)
+        console.log(success);
         setLoading(false);
       })
     );
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -50,36 +51,40 @@ export default function UserPage() {
             placeholder="Search Here..."
           />
         </div>
-        <div style={{ paddingTop: "20px" }}>
-          <h2>User</h2>
-        </div>
-        <div
-          style={{
-            paddingTop: "30px",
-            paddingLeft: "50px",
-            paddingRight: "50px",
-          }}
-        >
-          <table className="table table-striped">
-            <thead>
-              <tr style={{ backgroundColor: "#EAE3D2" }}>
-                <th scope="col">ID</th>
-                <th scope="col">Username</th>
-                <th scope="col">Email</th>
-                <th scope="col">Role</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading && <tr>
-                <td colSpan={5}>Loading</td>
-              </tr>}
-              {!loading && user.map((user, idx) => {
-                return <UserRow key={user.id} user={user} idx={idx} />
-              })}
-            </tbody>
-          </table>
-        </div>
+        {loading ? (
+          <LoadingAnimation />
+        ) : (
+          <>
+            <div style={{ paddingTop: "20px" }}>
+              <h2>User</h2>
+            </div>
+            <div
+              style={{
+                paddingTop: "30px",
+                paddingLeft: "50px",
+                paddingRight: "50px",
+              }}
+            >
+              <table className="table table-striped">
+                <thead>
+                  <tr style={{ backgroundColor: "#EAE3D2" }}>
+                    <th scope="col">ID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!loading &&
+                    user.map((user, idx) => {
+                      return <UserRow key={user.id} user={user} idx={idx} />;
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

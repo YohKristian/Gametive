@@ -1,3 +1,5 @@
+import { dateFormat } from "../helpers"
+
 export default function EventRow(props) {
 
     const handlerOnClickEdit = () => {
@@ -15,35 +17,6 @@ export default function EventRow(props) {
         }).format(price);
     }
 
-    const formatDate = (date) => {
-        const d = new Date(date);
-        const day = [
-            "Minggu",
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-        ];
-        const month = [
-            "Januari",
-            "Februari",
-            "Maret",
-            "April",
-            "Mei",
-            "Juni",
-            "Juli",
-            "Agustus",
-            "September",
-            "Oktober",
-            "November",
-            "Desember",
-        ];
-        return `${day[d.getDay()]}, ${d.getDate()} ${month[d.getMonth()]
-            } ${d.getFullYear()}`;
-    }
-
     return (
         <>
             <tr>
@@ -51,7 +24,7 @@ export default function EventRow(props) {
                 <td>{formatPrice(props.item.price)}</td>
                 <td><img style={{ width: '100px', height: '100px' }} src={props.item.eventPoster} alt={props.item.name} /></td>
                 <td>{props.item.eventType}</td>
-                <td>{formatDate(props.item.eventDate)}</td>
+                <td>{dateFormat(props.item.eventDate)}</td>
                 <td>{props.item.Location.name}</td>
                 <td>{props.item.User.username}</td>
                 <td>{props.item.Game.name}</td>

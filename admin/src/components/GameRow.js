@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { errorPopup } from "../helpers";
+import { dateFormat, errorPopup } from "../helpers";
 import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
 import VerticalModalEditGame from "../components/VerticalModalEditGame";
 import Button from 'react-bootstrap/Button';
@@ -34,41 +34,12 @@ export default function GameRow(props) {
         );
     }
 
-    const formatDate = (date) => {
-        const d = new Date(date);
-        const day = [
-            "Minggu",
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-        ];
-        const month = [
-            "Januari",
-            "Februari",
-            "Maret",
-            "April",
-            "Mei",
-            "Juni",
-            "Juli",
-            "Agustus",
-            "September",
-            "Oktober",
-            "November",
-            "Desember",
-        ];
-        return `${day[d.getDay()]}, ${d.getDate()} ${month[d.getMonth()]
-            } ${d.getFullYear()}`;
-    }
-
     return (
         <>
             <tr>
                 <th scope="row">{props.game.name}</th>
                 <td><img style={{ width: '100px', height: '100px' }} src={props.game.gameImg} alt={props.game.name} /></td>
-                <td>{formatDate(props.game.releaseDate)}</td>
+                <td>{dateFormat(props.game.releaseDate)}</td>
                 <td>{props.game.developer}</td>
                 <td>{props.game.genre}</td>
                 <td>
