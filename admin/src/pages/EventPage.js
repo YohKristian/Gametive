@@ -19,7 +19,7 @@ export default function EventPage() {
         if (error) {
           return errorPopup(error);
         }
-        console.log(success)
+        // console.log(success)
         setLoading(false);
       })
     );
