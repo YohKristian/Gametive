@@ -1,4 +1,30 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { fetchEvents } from "../store/action/eventsActions";
+import { errorPopup } from "../helpers";
+import EventRow from "../components/EventRow";
+
 export default function EventPage() {
+  const dispacth = useDispatch();
+
+  const event = useSelector((state) => {
+    return state.event.event;
+  })
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispacth(
+      fetchEvents((error, success) => {
+        if (error) {
+          return errorPopup(error);
+        }
+        console.log(success)
+        setLoading(false);
+      })
+    );
+  }, [])
+
   return (
     <div>
       <div style={{ textAlign: 'center' }}>
@@ -26,23 +52,12 @@ export default function EventPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">wildrift for noobs</th>
-                <td>Rp 150.000</td>
-                <td><img style={{ width: '100px', height: '100px' }} src="https://statics.indozone.news/content/2021/06/24/qEsgoxB/league-of-legends-wild-rift-bakal-hadirkan-fitur-ban-pick-di-patch-barunya98_700.jpg" alt="" /></td>
-                <td>online</td>
-                <td>2022-03-15</td>
-                <td>Jakarta Barat</td>
-                <td>123</td>
-                <td>league of legend - wild rift</td>
-                <td><p style={{ backgroundColor: '#59CE8F', borderRadius: '10px' }}>approved</p></td>
-                <td >
-                  <div className="d-flex flex-column">
-                    <button type="button" className="btn btn-secondary" style={{ marginBottom: '10px' }}>Edit</button>
-                    <button type="button" className="btn btn-danger">Delete</button>
-                  </div>
-                </td>
-              </tr>
+              {loading && <tr>
+                <td colSpan={10}>Loading</td>
+              </tr>}
+              {!loading && event.items.map(item => {
+                return <EventRow key={item.id} item={item} />
+              })}
             </tbody>
           </table>
         </div>
