@@ -1,12 +1,29 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { errorPopup } from "../helpers";
-import { deleteGame, fetchGames } from "../store/action/gamesAction";
+import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
+import VerticalModalEditGame from "../components/VerticalModalEditGame";
+import Button from 'react-bootstrap/Button';
+import { useState } from "react";
 
 export default function GameRow(props) {
     const dispacth = useDispatch();
 
+    const [modalShow, setModalShow] = useState(false);
+
+    const detail_game = useSelector((state) => {
+        return state.game.detailGame;
+    })
+
     const handlerOnClickEdit = () => {
-        console.log(props.game.id, "<<<< ID ITEM NIH")
+        dispacth(
+            fetchGameDetail(props.game.id, (error, success) => {
+                if (error) {
+                    return errorPopup(error);
+                }
+                // console.log(success)
+            })
+        );
+        setModalShow(true);
     }
 
     const handlerOnClickDelete = () => {
@@ -15,7 +32,7 @@ export default function GameRow(props) {
                 if (error) {
                     return errorPopup(error);
                 }
-                console.log(success)
+                // console.log(success)
                 dispacth(fetchGames());
             })
         );
@@ -59,14 +76,19 @@ export default function GameRow(props) {
                 <td>{props.game.developer}</td>
                 <td>{props.game.genre}</td>
                 <td>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        style={{ marginRight: '10px' }}
+                    <Button
+                        variant="secondary"
                         onClick={handlerOnClickEdit}
+                        style={{ marginRight: '10px' }}
                     >
                         <i className="bi bi-pencil-square"> Edit</i>
-                    </button>
+                    </Button>
+
+                    <VerticalModalEditGame
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        detail_game={detail_game}
+                    />
                     <button
                         type="button"
                         className="btn btn-danger"

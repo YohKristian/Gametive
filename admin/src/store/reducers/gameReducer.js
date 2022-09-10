@@ -2,7 +2,7 @@ import { FETCH_ALL_GAME, FETCH_DETAIL_GAME } from "../action/actionType"
 
 let initialState = {
   game: {},
-  detailGame: []
+  detailGame: {}
 }
 
 function gameReducer(state = initialState, action) {
