@@ -1,5 +1,5 @@
 const initialState = {
-  events: [],
+  events: "",
 };
 
 export function eventsReducer(state = initialState, action) {
