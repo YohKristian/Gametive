@@ -41,7 +41,7 @@ export default function GamePage() {
         </div>
         <div style={{ marginLeft: '75vh', paddingTop: '20px' }}>
           <Button variant="success" onClick={() => setModalShow(true)}>
-            Add New Game
+            <i className="bi bi-clipboard2-plus"> Add New Game</i>
           </Button>
 
           <VerticalModalAddGame

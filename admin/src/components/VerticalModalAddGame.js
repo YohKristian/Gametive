@@ -2,13 +2,11 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
-import { addGames } from '../store/action/gamesAction';
-import { useNavigate } from "react-router-dom";
+import { addGames, fetchGames } from '../store/action/gamesAction';
 import { errorPopup } from "../helpers";
 
 export default function VerticalModalAddGame(props) {
     const dispacth = useDispatch();
-    const navigate = useNavigate();
 
     const [newGame, setNewGame] = useState({
         name: "",
@@ -38,7 +36,17 @@ export default function VerticalModalAddGame(props) {
                     return errorPopup(error);
                 }
                 // console.log(success);
-                navigate("/");
+                dispacth(fetchGames());
+                props.onHide();
+                setNewGame({
+                    name: "",
+                    gameImg: "",
+                    youtubeUrl: "",
+                    gameUrl: "",
+                    releaseDate: "",
+                    developer: "",
+                    genre: "",
+                })
             })
         );
     };
