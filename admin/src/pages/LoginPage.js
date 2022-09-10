@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/action/usersAction";
 import { errorPopup } from "../helpers";
+import LoadingHorizontal from "../components/LoadingHorizontal";
 
 export default function LoginPage() {
   const dispacth = useDispatch();
@@ -12,6 +13,7 @@ export default function LoginPage() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleOnChangeForm = (e) => {
     const { value, name } = e.target;
@@ -24,9 +26,11 @@ export default function LoginPage() {
 
   const handleOnSubmitForm = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     dispacth(
       loginUser(loginData, (error, success) => {
+        setLoading(false);
         if (error) {
           return errorPopup(error);
         }
@@ -94,7 +98,7 @@ export default function LoginPage() {
                     style={{ width: "420px", backgroundColor: "#FF7F3F" }}
                     type="submit"
                   >
-                    Login
+                    {loading ? <LoadingHorizontal /> : <span>Login</span>}
                   </button>
                 </div>
               </form>

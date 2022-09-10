@@ -4,6 +4,7 @@ import { fetchEvents } from "../store/action/eventsActions";
 import { errorPopup } from "../helpers";
 import EventRow from "../components/EventRow";
 import LoadingAnimation from "../components/LoadingAnimation";
+import VerticalModalEditEvent from "../components/VerticalModalEditEvent";
 
 export default function EventPage() {
   const dispacth = useDispatch();
@@ -11,6 +12,8 @@ export default function EventPage() {
   const event = useSelector((state) => {
     return state.event.event;
   });
+
+  const [modalShow, setModalShow] = useState(false);
 
   const [loading, setLoading] = useState(true);
 
@@ -65,6 +68,10 @@ export default function EventPage() {
                 paddingRight: "50px",
               }}
             >
+               <VerticalModalEditEvent
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
               <table className="table table-striped">
                 <thead>
                   <tr style={{ backgroundColor: "#EAE3D2" }}>

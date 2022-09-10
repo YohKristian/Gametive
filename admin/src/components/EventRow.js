@@ -1,8 +1,9 @@
 import { dateFormat } from "../helpers"
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux"
-import { patchStatusEvents } from "../store/action/eventsActions";
+import { fetchDetailEvent, patchStatusEvents } from "../store/action/eventsActions";
 import { errorPopup } from "../helpers";
+import VerticalModalEditEvent from "./VerticalModalEditEvent";
 
 export default function EventRow(props) {
     const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function EventRow(props) {
     useEffect(() => {
         setStatusEvent(props.item.eventStatus);
     }, [])
+    const [modalShow, setModalShow] = useState(false);
 
     const onChangeStatusEvent = (e) => {
         const eventId = +props.item.id;
@@ -28,7 +30,14 @@ export default function EventRow(props) {
     }
 
     const handlerOnClickEdit = () => {
-        console.log(props.item.id, "<<<< ID ITEM NIH")
+        
+        dispatch(fetchDetailEvent(props.item.id, (error, success) => {
+            if (error) {
+                return errorPopup(error);
+            }
+            // console.log(success)
+        }))
+        setModalShow(true);
     }
 
     const formatPrice = (price) => {
@@ -38,8 +47,24 @@ export default function EventRow(props) {
         }).format(price);
     }
 
+    const styleColor = (value) => {
+        if (value === "Pending") {
+            return { backgroundColor: "#ffd32a", borderRadius: 12, padding: 4 }
+        } else if (value === "Active") {
+            return { backgroundColor: "#05c46b", borderRadius: 12, padding: 4 }
+        } else if (value === "Finished") {
+            return { backgroundColor: "#ff5e57", borderRadius: 12, padding: 4 }
+        } else if (value === "Archived") {
+            return { backgroundColor: "#575fcf", color: "white", borderRadius: 12, padding: 4 }
+        }
+    }
+
     return (
         <>
+        <VerticalModalEditEvent
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
             <tr>
                 <th scope="row">{props.item.name}</th>
                 <td>{formatPrice(props.item.price)}</td>
@@ -50,12 +75,11 @@ export default function EventRow(props) {
                 <td>{props.item.User.username}</td>
                 <td>{props.item.Game.name}</td>
                 <td>
-                    <p style={{ backgroundColor: '#59CE8F', borderRadius: '10px' }}>{props.item.eventStatus}</p>
-                    <select value={statusEvent} onChange={onChangeStatusEvent}>
-                        <option value="Pending">Pending</option>
-                        <option value="Active">Active</option>
-                        <option value="Finished">Finished</option>
-                        <option value="Archived">Archived</option>
+                    <select value={statusEvent} onChange={onChangeStatusEvent} style={styleColor(statusEvent)}>
+                        <option value="Pending" style={{ backgroundColor: "white", color: "black" }}>Pending</option>
+                        <option value="Active" style={{ backgroundColor: "white", color: "black" }}>Active</option>
+                        <option value="Finished" style={{ backgroundColor: "white", color: "black" }}>Finished</option>
+                        <option value="Archived" style={{ backgroundColor: "white", color: "black" }}>Archived</option>
                     </select>
                 </td>
                 <td>
