@@ -1,8 +1,10 @@
+import { useState } from "react";
+import VerticalModalEditPasswordUser from "../components/VerticalModalEditPasswordUser";
+import Button from 'react-bootstrap/Button';
+
 export default function UserRow(props) {
 
-    const handlerOnClickEdit = () => {
-        console.log(props.user.id, "<<<< ID ITEM NIH")
-    }
+    const [modalShow, setModalShow] = useState(false);
 
     const handlerOnClickDelete = () => {
         console.log(props.user.id, "<<<< ID ITEM NIH")
@@ -16,14 +18,19 @@ export default function UserRow(props) {
                 <td>{props.user.email}</td>
                 <td>{props.user.role}</td>
                 <td>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        style={{ marginRight: "10px" }}
-                        onClick={handlerOnClickEdit}
+                    <Button
+                        variant="secondary"
+                        onClick={() => { setModalShow(true); }}
+                        style={{ marginRight: '10px' }}
                     >
                         <i className="bi bi-pencil-square"> Edit</i>
-                    </button>
+                    </Button>
+
+                    <VerticalModalEditPasswordUser
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                        user_id={props.user.id}
+                    />
                     <button
                         type="button"
                         className="btn btn-danger"

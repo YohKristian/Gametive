@@ -11,6 +11,7 @@ users.get("/:username", usersController.fetchOne);
 users.use(authentication);
 users.get("/", Authorization.admin, usersController.fetchAll);
 users.put("/:username", Authorization.customer, usersController.update);
+users.put("/admin/:userId", Authorization.admin, usersController.updateAdmin);
 users.patch("/:username", Authorization.customer, usersController.delete);
 
 module.exports = users;
