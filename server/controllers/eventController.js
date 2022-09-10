@@ -49,8 +49,8 @@ class Controller {
 			const { eventName, description, price, rules, eventStatus, eventPoster, eventDate, eventType, UserId, GameId, locationName, LocationId, ProvinceId, RegencyId, size } = req.body;
 
 			let locationCreate = await Location.create({ name: locationName, ProvinceId, RegencyId }, { transaction: t });
-			console.log(size); //
 			let Bracket;
+
 			/* CREATE TEMPLATE BRACKET */
 			switch (+size) {
 				case 4:
@@ -66,7 +66,7 @@ class Controller {
 					throw { code: 21 };
 			}
 			/* FILL stage name with eventName */
-			Bracket.stage.name = eventName;
+			Bracket.stage[0].name = eventName;
 
 			let data = await Event.create(
 				{
@@ -86,40 +86,6 @@ class Controller {
 				},
 				{ transaction: t },
 			);
-
-			// if (typeof eventName !== "string") {
-			// 	let result = [];
-			// 	for (let i = 0; i < eventName.length; i++) {
-			// 		let element = { LocationId: locationCreate.id };
-			// 		element.eventName = eventName[i];
-			// 		element.description = description[i];
-			// 		element.price = price[i];
-			// 		element.rules = rules[i];
-			// 		element.eventPoster = eventPoster[i];
-			// 		element.eventDate = eventDate[i];
-			// 		element.eventType = eventType[i];
-			// 		element.GameId = GameId[i];
-			// 		result.push(element);
-			// 	}
-			// 	await Event.bulkCreate(result, { transaction: t });
-			// } else {
-			// 	await Event.bulkCreate(
-			// 		{
-			// 			name: eventName,
-			// 			description,
-			// 			price,
-			// 			rules,
-			// 			eventStatus: "Pending",
-			// 			eventPoster,
-			// 			eventDate,
-			// 			eventType,
-			// 			UserId: req.user.id,
-			// 			GameId,
-			// 			LocationId: locationCreate.id,
-			// 		},
-			// 		{ transaction: t },
-			// 	);
-			// }
 
 			await t.commit();
 			await redis.del("app:event");
@@ -179,6 +145,36 @@ class Controller {
 			await redis.del("app:event");
 			res.status(200).json(data);
 		} catch (error) {
+			next(error);
+		}
+	}
+
+	static async editBracket(req, res, next) {
+		/**
+		 *
+		 * @info : req.body = bracket <object>
+		 * this will need 3 items, { participant, stage, match }
+		 * to manipulate bracket later.
+		 *
+		 */
+		const t = await sequelize.transaction();
+		try {
+			const { id } = req.params;
+			let { bracket } = req.body; //MAKE SURE IT IS STRINGIFIED WHEN RECEIVED
+			let { participant: newParticipant, stage: newStage, match: newMatch } = JSON.parse(bracket);
+
+			let dataBracket = await Event.findByPk(id, { transaction: t });
+			dataBracket = { ...dataBracket.dataValues, Bracket: JSON.parse(dataBracket.Bracket) };
+			let newBracket = { ...dataBracket.Bracket, participant: newParticipant, stage: newStage, match: newMatch };
+
+			const updateCheck = await Event.update({ Bracket: JSON.stringify(newBracket) }, { where: { id }, transaction: t, returning: true });
+			if (!updateCheck) throw { code: 22 };
+
+			await t.commit();
+			await redis.del("app:event");
+			res.status(200).json({ event: dataBracket.name, message: "bracket has been changed" });
+		} catch (error) {
+			await t.rollback();
 			next(error);
 		}
 	}
