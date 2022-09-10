@@ -21,7 +21,7 @@
   padding: 12px;
   border-radius: 10px;
   width: 700px;
-  box-shadow: 0 0 10px gray;
+  box-shadow: 0 0 10px silver;
   outline: none;
   border: none;
   font-size: 16px;
@@ -38,13 +38,21 @@
   align-items: center;
 }
 
-.search-page > div:nth-child(2) > div {
+.search-page > div:nth-child(2) > .search-item {
   display: flex;
   width: 80%;
   margin: 10px 0;
+  border-radius: 10px;
+  transition: all 1s;
+  box-shadow: 0 0 10px silver;
 }
 
-.search-page > div:nth-child(2) > div > .img {
+.search-page > div:nth-child(2) > .search-item:hover {
+  cursor: pointer;
+  box-shadow: 0 10px 10px silver;
+}
+
+.search-page > div:nth-child(2) > .search-item > .img {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,15 +62,15 @@
   box-shadow: 0 0 20px gray;
 }
 
-.search-page > div:nth-child(2) > div > .img > img {
+.search-page > div:nth-child(2) > .search-item > .img > img {
   width: 600px;
 }
 
-.search-page > div:nth-child(2) > div > div:nth-child(2) {
+.search-page > div:nth-child(2) > .search-item > div:nth-child(2) {
   padding: 20px;
 }
 
-.search-page > div:nth-child(2) > div > div:nth-child(2) > * {
+.search-page > div:nth-child(2) > .search-item > div:nth-child(2) > * {
   margin: 15px 0;
 }
 
