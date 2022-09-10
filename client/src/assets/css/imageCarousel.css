@@ -1,5 +1,5 @@
 .image-carousel .carousel:nth-child(1) {
-  height: 500px;
+  height: 80vh;
 }
 
 .image-carousel .carousel:nth-child(2) {
@@ -9,16 +9,16 @@
 
 .image-carousel .img-slide {
   position: relative;
-  height: 500px;
+  height: 80vh;
   overflow: hidden;
 }
 
-.image-carousel .img-slide > img {
+.image-carousel .img-slide>img {
   transform: translateY(-90px);
   filter: brightness(50%);
 }
 
-.image-carousel .img-slide > div {
+.image-carousel .img-slide>div {
   top: 0;
   left: 0;
   width: 100%;
@@ -30,6 +30,6 @@
   justify-content: center;
 }
 
-.image-carousel .img-slide > div > h1 {
+.image-carousel .img-slide>div>h1 {
   font-size: 5vw;
 }

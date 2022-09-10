@@ -4,7 +4,8 @@ import VideoCarousel from "./VideoCarousel";
 export default function HomePage() {
   return (
     <>
-      <ImageCarousel /> 
+      <ImageCarousel />
+      <h1 className="trailers" style={{ backgroundColor: "orange", color: "white", textAlign: "center", margin: "0 0 0 0" }}>Trailers</h1>
       <VideoCarousel />
     </>
   );

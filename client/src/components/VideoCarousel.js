@@ -36,20 +36,32 @@ const YoutubeSlide = ({ url, isSelected, legend }) => (
 
 const slideVideo = [
   {
-    url: "https://www.youtube.com/embed/zbtEZz0KnI0",
-    legend: "Mobile Legends",
-  },
-  {
     url: "https://www.youtube.com/embed/TFzkbos0oeo",
     legend: "Wild Rift",
   },
   {
-    url: "https://www.youtube.com/embed/e_E9W2vsRbQ",
+    url: "https://www.youtube.com/embed/zbtEZz0KnI0",
+    legend: "Mobile Legends",
+  },
+  {
+    url: "https://www.youtube.com/embed/JM_UdSUW1ao",
+    legend: "Arena of Valor",
+  },
+  {
+    url: "https://www.youtube.com/embed/h7MYJghRWt0",
     legend: "Valorant",
   },
   {
     url: "https://www.youtube.com/embed/edYCtaNueQY",
     legend: "CSGO",
+  },
+  {
+    url: "https://www.youtube.com/embed/oq2Rz2I11l0",
+    legend: "Free Fire",
+  },
+  {
+    url: "https://www.youtube.com/embed/uCd6tbUAy6o",
+    legend: "PUBG Mobile",
   },
 ];
 

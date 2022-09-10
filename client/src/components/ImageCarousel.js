@@ -22,27 +22,27 @@ const getConfigurableProps = () => ({
 
 const slideImage = [
   {
-    img: "https://www.pockettactics.com/wp-content/uploads/2021/01/mobile-legends-wallpaper-6.jpg",
-    legend: "Mobile legends",
-  },
-  {
     img: "https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg",
     legend: "Wild rift",
+  },
+  {
+    img: "https://www.pockettactics.com/wp-content/uploads/2021/01/mobile-legends-wallpaper-6.jpg",
+    legend: "Mobile legends",
   },
   {
     img: "https://images6.alphacoders.com/110/1103575.jpg",
     legend: "Arena Of Valor",
   },
   {
-    img: "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3fffb73d23d87d08/5efb8b0540426d0f56b44fe8/SUB_KV.jpg",
-    legend: "Valorantr",
+    img: "https://pt.moyens.net/wp-content/uploads/2022/02/1644959338_O-Valorant-esta-sendo-desenvolvido-pela-Riot-para-as-plataformas.jpg",
+    legend: "Valorant",
   },
   {
     img: "https://wallpaperboat.com/wp-content/uploads/2021/04/26/77161/csgo-15.jpg",
     legend: "CS:GO",
   },
   {
-    img: "https://images7.alphacoders.com/107/1079489.jpg",
+    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlcFoZMx0aw1lrf_heuPS_Pf__TOCQPIxTEdPZRlwbXNh6s4IgfxGF8DrwP3x4Vy05eiCo5rT1Cv8X1Zo9c5EpcFw_xVV-QTXsTWRgrUaK2MCkcT3mpt91_j2t84RMY545YSF_0q83QhXvoIU3iryKehH0CDfeNVd2yFbNT2QSxwcWOCkzWWxDD0Wl/s3072/free-fire-wallpapers%20(58).webp",
     legend: "Free Fire",
   },
   {

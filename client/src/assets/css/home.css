@@ -1,3 +1,10 @@
-
 @import "./imageCarousel.css";
 @import "./videoCarousel.css";
+
+
+.trailers {
+    background-color: orange;
+    color: white;
+    text-align: center;
+    margin: 0 0 0 0
+}
