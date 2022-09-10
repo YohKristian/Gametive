@@ -37,3 +37,19 @@ export const addGames = (payload, cb) =>
             cb(error);
         }
     }
+
+export const deleteGame = (gameId, cb) =>
+    async () => {
+        try {
+            const { data } = await axios(baseURL + `/games/${+gameId}`, {
+                method: "DELETE",
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            });
+
+            cb(null, data);
+        } catch (error) {
+            cb(error);
+        }
+    }
