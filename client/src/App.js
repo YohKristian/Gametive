@@ -55,7 +55,7 @@ function App() {
       >
         <Route path="home" element={<HomePage />} />
         <Route path="search" element={<SearchGames />} />
-        <Route path="detail" element={<DetailGame />} />
+        <Route path="detail/:id" element={<DetailGame />} />
         <Route path="select" element={<SelectLocation />} />
         <Route path="event-registration" element={<EventRegistration />} />
         <Route path="" element={<Navigate to={"/home"} />} />

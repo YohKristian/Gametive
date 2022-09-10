@@ -23,13 +23,12 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      register(registerData, (error) => {
-        if (error) return errorPopup(error);
+    dispatch(register(registerData))
+      .then(() => {
         successPopup("Register success");
         navigate("/login");
       })
-    );
+      .catch((error) => errorPopup(error));
   };
 
   return (

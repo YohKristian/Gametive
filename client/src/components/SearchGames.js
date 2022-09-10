@@ -1,35 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { fetchEvents } from '../store/actions/events';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchEvents } from "../store/actions";
+import { errorPopup } from "../helpers";
 
 export default function SearchGames() {
-  const navigate = useNavigate()
-  const { events } = useSelector((state) => state.eventsReducer)
+  const navigate = useNavigate();
+  const { events } = useSelector((state) => state.eventsReducer);
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  function clickImg() {
-    navigate('/detail')
-  }
+  const clickImg = (id) => () => {
+    navigate("/detail/" + id);
+  };
 
   useEffect(() => {
     dispatch(fetchEvents())
       .catch((err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: err.message
-        })
+        errorPopup(err);
       })
-      .finally(() => setLoading(false))
-    console.log(events);
-  }, [])
-
-  useEffect(() => {
-    console.log(events);
-  }, [events])
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <div className="search-page">
@@ -39,13 +30,9 @@ export default function SearchGames() {
       </div>
       <div>
         {events.map((event, idx) => (
-          <div>
+          <div key={idx} onClick={clickImg(event.id)}>
             <div className="img">
-              <img
-                src={event.eventPoster}
-                alt=""
-                onClick={() => clickImg()}
-              />
+              <img src={event.eventPoster} alt="" />
             </div>
             <div>
               <h1>{event.name}</h1>

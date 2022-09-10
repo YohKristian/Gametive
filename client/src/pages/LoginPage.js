@@ -7,7 +7,7 @@ import { errorPopup } from "../helpers";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -20,13 +20,12 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      login(loginData, (error, success) => {
-        if (error) return errorPopup(error);
-        localStorage.setItem("access_token", success.access_token);
-        navigate("/")
+    dispatch(login(loginData))
+      .then(({ data }) => {
+        localStorage.setItem("access_token", data.access_token);
+        navigate("/");
       })
-    );
+      .catch((error) => errorPopup(error));
   };
 
   return (
@@ -58,8 +57,7 @@ export default function LoginPage() {
             Dont have an account? click here to{" "}
             <Link to={"/register"}>Create</Link>
             <br></br>
-            or back to{" "}
-            <Link to={"/"}>Home</Link>
+            or back to <Link to={"/"}>Home</Link>
           </p>
         </form>
       </div>

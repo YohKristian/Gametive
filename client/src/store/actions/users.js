@@ -1,21 +1,10 @@
 import axios from "axios";
+import baseUrl from "./baseUrl";
 
-export const login = (payload, cb) => async (_, useState) => {
-  try {
-    const { baseUrl } = useState();
-    const { data } = await axios.post(baseUrl + "/users/login", payload);
-    cb(null, data);
-  } catch (error) {
-    cb(error);
-  }
+export const login = (payload) => async () => {
+  return await axios.post(baseUrl + "/users/login", payload);
 };
 
-export const register = (payload, cb) => async (_, useState) => {
-  try {
-    const { baseUrl } = useState();
-    await axios.post(baseUrl + "/users/register", payload);
-    cb();
-  } catch (error) {
-    cb(error);
-  }
+export const register = (payload) => async () => {
+  return await axios.post(baseUrl + "/users/register", payload);
 };

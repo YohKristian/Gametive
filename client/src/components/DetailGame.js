@@ -1,39 +1,43 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { fetchEventDetail } from "../store/actions";
+import { dateFormat, rupiahFormat } from "../helpers";
+
 export default function DetailGame() {
-  return (
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const { eventDetailReducer } = useSelector((state) => state);
+  const [detail, setDetail] = useState();
+
+  useEffect(() => {
+    dispatch(fetchEventDetail(id));
+  }, []);
+
+  useEffect(() => {
+    setDetail(eventDetailReducer);
+  }, [eventDetailReducer]);
+
+  return detail ? (
     <div className="detail">
       <div className="detail-img">
-        <img
-          src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg"
-          alt=""
-        />
+        <img src={detail.eventPoster} alt="" />
       </div>
       <div>
         <h1>Wildrift Competition for Noobs</h1>
-        <span className="status">OFFLINE</span>
+        <span className="status">{detail.eventStatus}</span>
         <h2>Description</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero beatae
-          ipsum a quaerat nisi. Soluta cum tenetur laborum, nam obcaecati atque
-          corporis quas fugiat error placeat, consectetur dolore saepe iusto
-          deserunt sequi voluptas pariatur facilis quisquam natus reiciendis
-          aperiam possimus explicabo repudiandae! Eius quas beatae debitis ullam
-          eum aliquid ipsam!
-        </p>
+        <p>{detail.description}</p>
         <h2>Rules</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero beatae
-          ipsum a quaerat nisi. Soluta cum tenetur laborum, nam obcaecati atque
-          corporis quas fugiat error placeat, consectetur dolore saepe iusto
-          deserunt sequi voluptas pariatur facilis quisquam natus reiciendis
-          aperiam possimus explicabo repudiandae! Eius quas beatae debitis ullam
-          eum aliquid ipsam!
-        </p>
+        <p>{detail.rules}</p>
         <div>
           <p>Lokasi: Jakarta Selatan</p>
-          <p>Mulai: Jumat, 15 September 2050</p>
-          <p>Regestration Fee: Rp. 150.000,00</p>
+          <p>Mulai: {dateFormat(detail.eventDate)}</p>
+          <p>Regestration Fee: {rupiahFormat(detail.price)}</p>
         </div>
       </div>
     </div>
+  ) : (
+    <h1>Loading</h1>
   );
 }
