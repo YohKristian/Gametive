@@ -1,4 +1,4 @@
-import { FETCH_ALL_EVENT, FETCH_DETAIL_EVENT } from "../action/actiontypes"
+import { FETCH_ALL_EVENT, FETCH_DETAIL_EVENT } from "../action/actionTypes"
 
 let initialState = {
     event: [],

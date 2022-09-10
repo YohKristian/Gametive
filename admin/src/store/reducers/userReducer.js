@@ -1,4 +1,4 @@
-import { FETCH_ALL_USER, FETCH_DETAIL_USER } from "../action/actiontypes"
+import { FETCH_ALL_USER, FETCH_DETAIL_USER } from "../action/actionTypes"
 
 let initialState = {
     user: [],
