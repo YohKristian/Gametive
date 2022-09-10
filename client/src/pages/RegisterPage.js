@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import logo from "../logo.png";
 import { register } from "../store/actions";
 import { errorPopup, successPopup } from "../helpers";
+import LoadingHorizontal from "../components/LoadingHorizontal";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ export default function RegisterPage() {
     // phoneNumber: "",
     // address: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -23,12 +25,14 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     dispatch(register(registerData))
       .then(() => {
         successPopup("Register success");
         navigate("/login");
       })
-      .catch((error) => errorPopup(error));
+      .catch((error) => errorPopup(error))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -75,7 +79,9 @@ export default function RegisterPage() {
             placeholder="Input your address"
           /> */}
           <br></br>
-          <button>Register</button>
+          <button>
+            {loading ? <LoadingHorizontal /> : <span>Register</span>}
+          </button>
           <p>
             Already have an account? click here to{" "}
             <Link to={"/login"}>Log in</Link>

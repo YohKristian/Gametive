@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import logo from "../logo.png";
 import { login } from "../store/actions";
 import { errorPopup } from "../helpers";
+import LoadingHorizontal from "../components/LoadingHorizontal";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function LoginPage() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -20,12 +22,14 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     dispatch(login(loginData))
       .then(({ data }) => {
         localStorage.setItem("access_token", data.access_token);
         navigate("/");
       })
-      .catch((error) => errorPopup(error));
+      .catch((error) => errorPopup(error))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -51,7 +55,9 @@ export default function LoginPage() {
             placeholder="Input your password"
           />
           <br></br>
-          <button>Log in</button>
+          <button>
+            {loading ? <LoadingHorizontal /> : <span>Login</span>}
+          </button>
           <div className="g-sign-in"></div>
           <p>
             Dont have an account? click here to{" "}

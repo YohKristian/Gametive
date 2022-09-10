@@ -6,7 +6,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px 50px;
+  padding: 8px 50px;
   align-items: center;
   background-color: #00000070;
 }
