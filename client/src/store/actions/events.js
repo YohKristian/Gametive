@@ -16,11 +16,12 @@ export const fetchEvents = (keyword = "") => {
 export const fetchEventDetail = (id) => {
 	return async (dispatch, useState) => {
 		const { eventsReducer } = useState();
-		if (!eventsReducer.events.length) {
-			return axios.get(baseUrl + "/events/" + id).then(({ data }) => {
-				dispatch(fetchDetailSuccess(data));
-			});
-		}
+		// if (!eventsReducer.events.length) {
+		return axios.get(baseUrl + "/events/" + id).then(({ data }) => {
+			dispatch(fetchDetailSuccess(data));
+			return data;
+		});
+		// }
 		const data = eventsReducer.events.filter((el) => el.id === +id)[0];
 		dispatch(fetchDetailSuccess(data));
 	};
