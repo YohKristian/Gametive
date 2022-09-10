@@ -1,4 +1,4 @@
-export default function EventRow(props) {
+export default function GameRow(props) {
 
     const handlerOnClickEdit = () => {
         console.log(props.game.id, "<<<< ID ITEM NIH")

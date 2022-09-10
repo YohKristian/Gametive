@@ -1,4 +1,30 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux"
+import { fetchUsers } from "../store/action/usersAction";
+import { errorPopup } from "../helpers";
+import UserRow from "../components/UserRow";
+
 export default function UserPage() {
+  const dispacth = useDispatch();
+
+  const user = useSelector((state) => {
+    return state.user.user;
+  })
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispacth(
+      fetchUsers((error, success) => {
+        if (error) {
+          return errorPopup(error);
+        }
+        console.log(success)
+        setLoading(false);
+      })
+    );
+  }, [])
+
   return (
     <div>
       <div style={{ textAlign: "center" }}>
@@ -45,24 +71,12 @@ export default function UserPage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>admin123</td>
-                <td>admin123@gmail.com</td>
-                <td>Admin</td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    style={{ marginRight: "10px" }}
-                  >
-                    Edit
-                  </button>
-                  <button type="button" className="btn btn-danger">
-                    Delete
-                  </button>
-                </td>
-              </tr>
+              {loading && <tr>
+                <td colSpan={5}>Loading</td>
+              </tr>}
+              {!loading && user.map((user, idx) => {
+                return <UserRow key={user.id} user={user} idx={idx} />
+              })}
             </tbody>
           </table>
         </div>
