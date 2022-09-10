@@ -46,6 +46,7 @@ module.exports = class usersController {
 	static async fetchAll(req, res, next) {
 		try {
 			// if (req.user.role !== "admin") throw { code: 5 }; //ONLY UNCOMMENT AFTER AUTHORIZATION & AUTHENTICATION DONE
+			await redis.del("store:users_fetchAll")
 			let storeFetchAll = await redis.get("store:users_fetchAll");
 			if (storeFetchAll) return res.status(200).json(JSON.parse(storeFetchAll));
 
@@ -104,9 +105,38 @@ module.exports = class usersController {
 			next(error);
 		}
 	}
+	static async updateAdmin(req, res, next) {
+		//update for admin, for user who forgot password
+		try {
+			const id = req.params.userId; //from authentication
+			const { newPassword } = req.body;
+			if (!newPassword) throw { code: 1 };
+
+			//if correct, proceed to update the newPassword into database
+			const newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true });
+
+			//check newData
+			if (!newData) throw { code: 8 };
+
+			await redis.del("store:users_fetchOne");
+			await redis.del("store:users_fetchAll");
+			res.status(200).json({ username: newData.username, message: "password has been changed" });
+		} catch (error) {
+			next(error);
+		}
+	}
 	static async delete(req, res, next) {
 		//soft delete (change status from active -> inactive)
 		try {
+			const id = req.params.userId; //from authentication
+
+			const findUser = await User.findByPk(id);
+
+			if (!findUser) throw { code: 9 };
+
+			const newData = await User.destroy({ where: { id }, returning: true });
+
+			res.status(200).json({ username: newData.username, message: "user has been deleted" });
 		} catch (error) {
 			next(error);
 		}

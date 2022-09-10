@@ -5,6 +5,7 @@
 @import "./main.css";
 @import "./imageCarousel.css";
 @import "./videoCarousel.css";
+@import "./loading.css";
 
 * {
   padding: 0;

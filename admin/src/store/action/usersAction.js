@@ -33,3 +33,36 @@ export const fetchUsers = (cb) =>
             cb(error);
         }
     }
+
+export const updateUsersPassword = (userId, payload, cb) =>
+    async () => {
+        try {
+            const { data } = await axios(baseURL + `/users/admin/${+userId}`, {
+                method: "PUT",
+                data: payload,
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            });
+
+            cb(null, data);
+        } catch (error) {
+            cb(error);
+        }
+    }
+
+export const deleteUser = (userId, cb) =>
+    async () => {
+        try {
+            const { data } = await axios(baseURL + `/users/${+userId}`, {
+                method: "DELETE",
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            });
+
+            cb(null, data);
+        } catch (error) {
+            cb(error);
+        }
+    }

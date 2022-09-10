@@ -5,9 +5,9 @@ const fetchSuccess = (payload) => ({ type: "events/fetchSuccess", payload });
 const fetchDetailSuccess = (payload) => ({ type: "eventDetail/fetchSuccess", payload });
 const addEventSuccess = (payload) => ({ type: "events/addSuccess", payload });
 
-export const fetchEvents = () => {
+export const fetchEvents = (keyword = "") => {
 	return async (dispatch) => {
-		return axios(baseUrl + `/events?page=1&size=4&search`).then((payload) => {
+		return axios(baseUrl + `/events?page=1&size=4&search=${keyword}`).then((payload) => {
 			dispatch(fetchSuccess(payload.data.items));
 		});
 	};

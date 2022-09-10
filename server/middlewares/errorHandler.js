@@ -13,6 +13,7 @@ module.exports = errorHandler = (error, req, res, next) => {
 		5: [403, "invalid authorization"],
 		6: [400, "invalid access_token"],
 		8: [400, "failed to change password"],
+		9: [404, "fail to delete, this user is not found"],
 		20: [404, "Event not found"],
 		21: [400, "only size 4/8/16 are available"],
 		22: [400, "failed to change bracket"],

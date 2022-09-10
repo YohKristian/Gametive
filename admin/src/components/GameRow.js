@@ -1,12 +1,25 @@
 import { useDispatch } from "react-redux"
-import { errorPopup } from "../helpers";
-import { deleteGame, fetchGames } from "../store/action/gamesAction";
+import { dateFormat, errorPopup } from "../helpers";
+import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
+import VerticalModalEditGame from "../components/VerticalModalEditGame";
+import Button from 'react-bootstrap/Button';
+import { useState } from "react";
 
 export default function GameRow(props) {
     const dispacth = useDispatch();
 
+    const [modalShow, setModalShow] = useState(false);
+
     const handlerOnClickEdit = () => {
-        console.log(props.game.id, "<<<< ID ITEM NIH")
+        dispacth(
+            fetchGameDetail(props.game.id, (error, success) => {
+                if (error) {
+                    return errorPopup(error);
+                }
+                // console.log(success)
+            })
+        );
+        setModalShow(true);
     }
 
     const handlerOnClickDelete = () => {
@@ -15,39 +28,10 @@ export default function GameRow(props) {
                 if (error) {
                     return errorPopup(error);
                 }
-                console.log(success)
+                // console.log(success)
                 dispacth(fetchGames());
             })
         );
-    }
-
-    const formatDate = (date) => {
-        const d = new Date(date);
-        const day = [
-            "Minggu",
-            "Senin",
-            "Selasa",
-            "Rabu",
-            "Kamis",
-            "Jumat",
-            "Sabtu",
-        ];
-        const month = [
-            "Januari",
-            "Februari",
-            "Maret",
-            "April",
-            "Mei",
-            "Juni",
-            "Juli",
-            "Agustus",
-            "September",
-            "Oktober",
-            "November",
-            "Desember",
-        ];
-        return `${day[d.getDay()]}, ${d.getDate()} ${month[d.getMonth()]
-            } ${d.getFullYear()}`;
     }
 
     return (
@@ -55,18 +39,22 @@ export default function GameRow(props) {
             <tr>
                 <th scope="row">{props.game.name}</th>
                 <td><img style={{ width: '100px', height: '100px' }} src={props.game.gameImg} alt={props.game.name} /></td>
-                <td>{formatDate(props.game.releaseDate)}</td>
+                <td>{dateFormat(props.game.releaseDate)}</td>
                 <td>{props.game.developer}</td>
                 <td>{props.game.genre}</td>
                 <td>
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        style={{ marginRight: '10px' }}
+                    <Button
+                        variant="secondary"
                         onClick={handlerOnClickEdit}
+                        style={{ marginRight: '10px' }}
                     >
                         <i className="bi bi-pencil-square"> Edit</i>
-                    </button>
+                    </Button>
+
+                    <VerticalModalEditGame
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                    />
                     <button
                         type="button"
                         className="btn btn-danger"
