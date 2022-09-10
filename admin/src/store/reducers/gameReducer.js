@@ -1,4 +1,4 @@
-import { FETCH_ALL_GAME, FETCH_DETAIL_GAME } from "../action/actionTypes"
+import { FETCH_ALL_GAME, FETCH_DETAIL_GAME } from "../action/actionType"
 
 let initialState = {
   game: [],
