@@ -1,14 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
-import { addGames } from '../store/action/gamesAction';
+import { submitEditGameDetail } from '../store/action/gamesAction';
 import { useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
 
-export default function VerticalModalAddGame(props) {
+export default function VerticalModalEditGame(props) {
     const dispacth = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        let populateDate = new Date(props.detail_game.releaseDate);
+        let newFormat = ``;
+
+        if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
+            newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-0${populateDate.getDate()}`
+        } else if ((populateDate.getDate()) < 10) {
+            newFormat = `${populateDate.getFullYear()}-${populateDate.getMonth() + 1}-0${populateDate.getDate()}`
+        } else if ((populateDate.getMonth()) < 10) {
+            newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-${populateDate.getDate()}`
+        }
+
+        setNewGame({
+            name: props.detail_game.name,
+            gameImg: props.detail_game.gameImg,
+            youtubeUrl: props.detail_game.youtubeUrl,
+            gameUrl: props.detail_game.gameUrl,
+            releaseDate: newFormat,
+            developer: props.detail_game.developer,
+            genre: props.detail_game.genre,
+        })
+    }, [props.detail_game])
 
     const [newGame, setNewGame] = useState({
         name: "",
@@ -33,7 +56,7 @@ export default function VerticalModalAddGame(props) {
         e.preventDefault();
 
         dispacth(
-            addGames(newGame, (error, success) => {
+            submitEditGameDetail(+props.detail_game.id, newGame, (error, success) => {
                 if (error) {
                     return errorPopup(error);
                 }
@@ -53,7 +76,7 @@ export default function VerticalModalAddGame(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Add New Game
+                        Edit Game
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
