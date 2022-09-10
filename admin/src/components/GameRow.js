@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { errorPopup } from "../helpers";
 import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
 import VerticalModalEditGame from "../components/VerticalModalEditGame";
@@ -9,10 +9,6 @@ export default function GameRow(props) {
     const dispacth = useDispatch();
 
     const [modalShow, setModalShow] = useState(false);
-
-    const detail_game = useSelector((state) => {
-        return state.game.detailGame;
-    })
 
     const handlerOnClickEdit = () => {
         dispacth(
@@ -87,7 +83,6 @@ export default function GameRow(props) {
                     <VerticalModalEditGame
                         show={modalShow}
                         onHide={() => setModalShow(false)}
-                        detail_game={detail_game}
                     />
                     <button
                         type="button"

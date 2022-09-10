@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { submitEditGameDetail } from '../store/action/gamesAction';
 import { useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
@@ -10,8 +10,22 @@ export default function VerticalModalEditGame(props) {
     const dispacth = useDispatch();
     const navigate = useNavigate();
 
+    const detail_game = useSelector((state) => {
+        return state.game.detailGame;
+    })
+
+    const [newGame, setNewGame] = useState({
+        name: "",
+        gameImg: "",
+        youtubeUrl: "",
+        gameUrl: "",
+        releaseDate: "",
+        developer: "",
+        genre: "",
+    });
+
     useEffect(() => {
-        let populateDate = new Date(props.detail_game.releaseDate);
+        let populateDate = new Date(detail_game.releaseDate);
         let newFormat = ``;
 
         if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
@@ -23,25 +37,15 @@ export default function VerticalModalEditGame(props) {
         }
 
         setNewGame({
-            name: props.detail_game.name,
-            gameImg: props.detail_game.gameImg,
-            youtubeUrl: props.detail_game.youtubeUrl,
-            gameUrl: props.detail_game.gameUrl,
+            name: detail_game.name,
+            gameImg: detail_game.gameImg,
+            youtubeUrl: detail_game.youtubeUrl,
+            gameUrl: detail_game.gameUrl,
             releaseDate: newFormat,
-            developer: props.detail_game.developer,
-            genre: props.detail_game.genre,
+            developer: detail_game.developer,
+            genre: detail_game.genre,
         })
-    }, [props.detail_game])
-
-    const [newGame, setNewGame] = useState({
-        name: "",
-        gameImg: "",
-        youtubeUrl: "",
-        gameUrl: "",
-        releaseDate: "",
-        developer: "",
-        genre: "",
-    });
+    }, [detail_game])
 
     const handleOnChangeForm = (e) => {
         const { value, name } = e.target;
@@ -56,7 +60,7 @@ export default function VerticalModalEditGame(props) {
         e.preventDefault();
 
         dispacth(
-            submitEditGameDetail(+props.detail_game.id, newGame, (error, success) => {
+            submitEditGameDetail(+detail_game.id, newGame, (error, success) => {
                 if (error) {
                     return errorPopup(error);
                 }
@@ -95,7 +99,7 @@ export default function VerticalModalEditGame(props) {
                                     name="name"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game name"
-                                    value={newGame.name}
+                                    defaultValue={newGame.name}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -110,7 +114,7 @@ export default function VerticalModalEditGame(props) {
                                     name="gameImg"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game image url"
-                                    value={newGame.gameImg}
+                                    defaultValue={newGame.gameImg}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -125,7 +129,7 @@ export default function VerticalModalEditGame(props) {
                                     name="youtubeUrl"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game image url"
-                                    value={newGame.youtubeUrl}
+                                    defaultValue={newGame.youtubeUrl}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -140,7 +144,7 @@ export default function VerticalModalEditGame(props) {
                                     name="gameUrl"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game image url"
-                                    value={newGame.gameUrl}
+                                    defaultValue={newGame.gameUrl}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -154,7 +158,7 @@ export default function VerticalModalEditGame(props) {
                                     id="releaseDate"
                                     name="releaseDate"
                                     className="form-control form-control-lg"
-                                    value={newGame.releaseDate}
+                                    defaultValue={newGame.releaseDate}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -169,7 +173,7 @@ export default function VerticalModalEditGame(props) {
                                     name="developer"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game developer"
-                                    value={newGame.developer}
+                                    defaultValue={newGame.developer}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
@@ -184,7 +188,7 @@ export default function VerticalModalEditGame(props) {
                                     name="genre"
                                     className="form-control form-control-lg"
                                     placeholder="Input your game genre"
-                                    value={newGame.genre}
+                                    defaultValue={newGame.genre}
                                     onChange={handleOnChangeForm}
                                 />
                             </div>
