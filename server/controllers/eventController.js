@@ -4,6 +4,48 @@ const { getPagination, getPagingData } = require("../helpers/pagination");
 const { Op } = require("sequelize");
 
 class Controller {
+
+	static async showAllEventForUser(req, res, next) {
+		try {
+			await redis.del("app:event");
+			await redis.del("app:event:page");
+			const { page, size, search } = req.query;
+			const lastPage = await redis.get("app:event:page");
+
+			if (lastPage !== page || search || !search) {
+				await redis.del("app:event");
+			}
+			const cache = await redis.get("app:event");
+			if (cache) {
+				const eventscache = JSON.parse(cache);
+				res.status(200).json(eventscache);
+			} else {
+				const { limit, offset } = getPagination(page, size);
+				let fetchEvent = await Event.findAndCountAll({
+					include: [{ model: User, attributes: { exclude: ['password'] } }, Game, Location],
+					where: {
+						name: {
+							[Op.iLike]: `%${search}%`,
+						},
+						 eventStatus: ['Active','Finished']
+					},
+					order: [["createdAt", "DESC"]],
+					limit: limit,
+					offset: offset,
+				});
+
+				const response = getPagingData(fetchEvent, page, limit);
+				await redis.set("app:event", JSON.stringify(response));
+				await redis.set("app:event:page", page);
+				// console.log(response);
+				res.status(200).json(response);
+			}
+		} catch (error) {
+			next(error);
+		}
+	}
+
+
 	static async showAllEvent(req, res, next) {
 		try {
 			await redis.del("app:event");
@@ -142,7 +184,7 @@ class Controller {
 		try {
 			const { id } = req.params;
 			const { eventStatus } = req.body;
-			let data = await Event.update({ eventStatus: "Inactive" }, { where: { id: id } });
+			let data = await Event.update({ eventStatus }, { where: { id: id } });
 			await redis.del("app:event");
 			res.status(200).json(data);
 		} catch (error) {

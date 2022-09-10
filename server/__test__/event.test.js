@@ -69,6 +69,23 @@ beforeAll(() => {
 					createdAt: new Date(),
 					updatedAt: new Date(),
 				},
+				{
+					name: "League of Legends: Wild Rift - Esport",
+					description: "Thank you to all the teams who competed during the season one global championship! We also want to give a huge shout out to all the fans who tuned in during Icons and made this event unforgettable. While this season has wrapped up, stay tuned for more Wild Rift esports announcements coming soon!",
+					price: 120000,
+					rules: "Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+					eventStatus: "Finished",
+					eventPoster: "https://th.bing.com/th/id/OIP.C_o9I8YHGohNXfbsCcS7rQHaEK?pid=ImgDet&rs=1",
+					eventDate: "2022-09-21",
+					eventType: "Offline",
+					UserId: 1,
+					GameId: 1,
+					LocationId: 1,
+					size: 8,
+					Bracket: JSON.stringify(require("../template/8slot.json")),
+					createdAt: new Date(),
+					updatedAt: new Date(),
+				}
 			]);
 		});
 });
@@ -108,6 +125,21 @@ describe("GET all event", () => {
 			expect(response.body).toHaveProperty("totalItems", expect.any(Number));
 			expect(response.body.items).toBeInstanceOf(Array);
 			expect(response.body.items[0]).toHaveProperty("id", expect.any(Number));
+		});
+	});
+});
+
+describe("GET all event active and finished", () => {
+	describe("success fetch", () => {
+		it("should return array", async () => {
+			const response = await request(app).get("/events?page=1&size=&search=");
+			console.log(response.body);
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("totalItems", expect.any(Number));
+			expect(response.body.items).toBeInstanceOf(Array);
+			expect(response.body.items[0]).toHaveProperty("id", expect.any(Number));
+			expect(response.body.items[0]).toHaveProperty("eventStatus", expect.any(String));
 		});
 	});
 });
