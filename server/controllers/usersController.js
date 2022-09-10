@@ -8,7 +8,6 @@ const { redis } = require("../config/redis");
 module.exports = class usersController {
 	static async login(req, res, next) {
 		try {
-			console.log(req.headers);
 			//able to accept username / email (since both of them are unique)
 			const { username, password } = req.body;
 			if (!username || !password) throw { code: 3 };

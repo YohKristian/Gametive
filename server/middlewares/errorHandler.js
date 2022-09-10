@@ -1,5 +1,5 @@
 module.exports = errorHandler = (error, req, res, next) => {
-	console.log(error);
+	// console.log(error);
 	// res.json({
 	// 	error
 	// })
