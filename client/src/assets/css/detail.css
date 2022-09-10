@@ -1,4 +1,8 @@
-.detail > div:nth-child(2) > * {
+.detail {
+  padding: 5% 10% 10% 10%;
+}
+
+.detail>div:nth-child(2)>* {
   margin: 15px 0;
 }
 
@@ -11,7 +15,7 @@
   box-shadow: 0 0 10px gray;
 }
 
-.detail-img > img {
+.detail-img>img {
   width: 100%;
 }
 

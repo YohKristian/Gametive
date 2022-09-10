@@ -6,6 +6,7 @@ const { queryInterface } = sequelize;
 
 // Token from login test
 let customer_token = "";
+let reqBracket = require("../template/4slot.json");
 
 beforeAll(() => {
   // Insert Dummy User
@@ -37,25 +38,41 @@ beforeAll(() => {
         "Teams",
         [
           {
-            name: "testingTeam",
-            CaptainName: "customer",
-            MemberName1: "member1",
-            MemberName2: "member2",
-            MemberName3: "member3",
-            MemberName4: "member4",
+            "name": "testingTeam",
+            "CaptainName": "customer",
+            "MemberName1": "member1",
+            "MemberName2": "member2",
+            "MemberName3": "member3",
+            "MemberName4": "member4",
+            "BenchMemberName1": "bench1",
+            "BenchMemberName2": "bench2",
             createdAt: new Date(),
             updatedAt: new Date(),
           },
           {
-            name: "testingTeam1",
-            CaptainName: "customer1",
-            MemberName1: "member",
-            MemberName2: "",
-            MemberName3: "",
-            MemberName4: "",
+            "name": "testingTeam2",
+            "CaptainName": "customer",
+            "MemberName1": "",
+            "MemberName2": "",
+            "MemberName3": "",
+            "MemberName4": "",
+            "BenchMemberName1": "bench1",
+            "BenchMemberName2": "",
             createdAt: new Date(),
             updatedAt: new Date(),
           },
+          {
+            "name": "testingTeam Cust1",
+            "CaptainName": "customer1",
+            "MemberName1": "member1",
+            "MemberName2": "member2",
+            "MemberName3": "member3",
+            "MemberName4": "member4",
+            "BenchMemberName1": "bench1",
+            "BenchMemberName2": "bench2",
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          }
         ],
         {}
       );
@@ -96,6 +113,7 @@ beforeAll(() => {
           price: 120000,
           rules:
             "Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+          size: "4",
           eventStatus: "Active",
           eventPoster:
             "https://th.bing.com/th/id/OIP.C_o9I8YHGohNXfbsCcS7rQHaEK?pid=ImgDet&rs=1",
@@ -104,6 +122,7 @@ beforeAll(() => {
           UserId: 1,
           GameId: 1,
           LocationId: 1,
+          Bracket: JSON.stringify(reqBracket),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -134,12 +153,47 @@ beforeAll(() => {
 });
 
 // Delete Dummy User After All Test
-afterAll(async () => {
-  await queryInterface.bulkDelete("Users", null, {
+afterAll(() => {
+  return queryInterface.bulkDelete("Users", null, {
     truncate: true,
     cascade: true,
     restartIdentity: true,
-  });
+  })
+    .then(() => {
+      return queryInterface.bulkDelete("Teams", null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true,
+      })
+    })
+    .then(() => {
+      return queryInterface.bulkDelete("Games", null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true,
+      })
+    })
+    .then(() => {
+      return queryInterface.bulkDelete("Locations", null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true,
+      })
+    })
+    .then(() => {
+      return queryInterface.bulkDelete("Events", null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true,
+      })
+    })
+    .then(() => {
+      return queryInterface.bulkDelete("Participants", null, {
+        truncate: true,
+        cascade: true,
+        restartIdentity: true,
+      })
+    })
 });
 
 describe("POST Customers Login", () => {

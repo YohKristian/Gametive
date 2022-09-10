@@ -1,0 +1,35 @@
+.image-carousel .carousel:nth-child(1) {
+  height: 80vh;
+}
+
+.image-carousel .carousel:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+
+.image-carousel .img-slide {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.image-carousel .img-slide>img {
+  transform: translateY(-90px);
+  filter: brightness(50%);
+}
+
+.image-carousel .img-slide>div {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  color: #e7e7e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-carousel .img-slide>div>h1 {
+  font-size: 5vw;
+}
