@@ -28,6 +28,7 @@ class Controller {
 							[Op.iLike]: `%${search}%`,
 						},
 					},
+					order: [["createdAt", "DESC"]],
 					limit: limit,
 					offset: offset,
 				});
