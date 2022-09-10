@@ -1,71 +1,63 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { fetchEvents } from '../store/actions/events';
 
 export default function SearchGames() {
   const navigate = useNavigate()
+  const { events } = useSelector((state) => state.eventsReducer)
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
 
   function clickImg() {
     navigate('/detail')
   }
 
+  useEffect(() => {
+    dispatch(fetchEvents())
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: err.message
+        })
+      })
+      .finally(() => setLoading(false))
+    console.log(events);
+  }, [])
+
+  useEffect(() => {
+    console.log(events);
+  }, [events])
+
   return (
     <div className="search-page">
       <div className="search-bar">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i className="fa-solid fa-magnifying-glass"></i>
         <input type="text" placeholder="Search here..." />
       </div>
       <div>
-        <div>
-          <div className="img">
-            <img
-              src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg"
-              alt=""
-              onClick={() => clickImg()}
-            />
-          </div>
+        {events.map((event, idx) => (
           <div>
-            <h1>Wildrift Competition for Noobs</h1>
-            <span className="status">OFFLINE</span>
+            <div className="img">
+              <img
+                src={event.eventPoster}
+                alt=""
+                onClick={() => clickImg()}
+              />
+            </div>
             <div>
-              <p>Lokasi: Jakarta Selatan</p>
-              <p>Mulai: Jumat, 15 September 2050</p>
-              <p>Regestration Fee: Rp. 150.000,00</p>
+              <h1>{event.name}</h1>
+              <span className="status">{event.eventType}</span>
+              <div>
+                <p>Lokasi: {event.Location.name}</p>
+                <p>Mulai: {event.eventDate}</p>
+                <p>Regestration Fee: {event.price}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <div className="img">
-            <img
-              src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <h1>Wildrift Competition for Noobs</h1>
-            <span className="status">OFFLINE</span>
-            <div>
-              <p>Lokasi: Jakarta Selatan</p>
-              <p>Mulai: Jumat, 15 September 2050</p>
-              <p>Regestration Fee: Rp. 150.000,00</p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="img">
-            <img
-              src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <h1>Wildrift Competition for Noobs</h1>
-            <span className="status">OFFLINE</span>
-            <div>
-              <p>Lokasi: Jakarta Selatan</p>
-              <p>Mulai: Jumat, 15 September 2050</p>
-              <p>Regestration Fee: Rp. 150.000,00</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

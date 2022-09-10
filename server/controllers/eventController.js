@@ -6,10 +6,12 @@ const { Op } = require("sequelize");
 class Controller {
 	static async showAllEvent(req, res, next) {
 		try {
+			await redis.del("app:event");
+			await redis.del("app:event:page");
 			const { page, size, search } = req.query;
 			const lastPage = await redis.get("app:event:page");
 
-			if (lastPage !== page || search) {
+			if (lastPage !== page || search || !search) {
 				await redis.del("app:event");
 			}
 
@@ -17,7 +19,6 @@ class Controller {
 			if (cache) {
 				const eventscache = JSON.parse(cache);
 				res.status(200).json(eventscache);
-				console.log(eventscache);
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				let fetchEvent = await Event.findAndCountAll({

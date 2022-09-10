@@ -12,6 +12,7 @@ module.exports = class gamesController {
 
             await redis.del('app:games')
             await redis.del('app:gameId')
+            await redis.del('app:games:page')
 
             res.status(201).json(created)
         } catch (error) {
@@ -25,11 +26,11 @@ module.exports = class gamesController {
 
             const { page, size, search } = req.query
 
+
             if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "game not found" });
 
             const pageLastPageCache = await redis.get('app:games:page')
-
-            if (pageLastPageCache !== page || search) {
+            if (pageLastPageCache !== page || search || !search) {
                 await redis.del('app:games')
             }
 
@@ -37,7 +38,6 @@ module.exports = class gamesController {
 
             if (gamesCache) {
                 const games = JSON.parse(gamesCache)
-
                 res.status(200).json(games || { message: "there is no data" })
             } else {
                 const { limit, offset } = getPagination(page, size)
@@ -52,7 +52,7 @@ module.exports = class gamesController {
                     offset: offset
                 })
                 const response = getPagingData(fetchResponse, page, limit)
-                const { count: totalItems, rows: products } = fetchResponse
+                const { count: totalItems, rows: items } = fetchResponse
 
                 await redis.set('app:games', JSON.stringify(response))
                 await redis.set('app:games:page', page)
@@ -112,6 +112,7 @@ module.exports = class gamesController {
 
             await redis.del('app:games')
             await redis.del('app:gameId')
+            await redis.del('app:games:page')
 
             res.status(200).json({
                 message: `Success update game ${fetchResponse.name}`
@@ -140,6 +141,7 @@ module.exports = class gamesController {
 
             await redis.del('app:games')
             await redis.del('app:gameId')
+            await redis.del('app:games:page')
 
             res.status(200).json({
                 message: `Success delete game ${fetchResponse.name}`

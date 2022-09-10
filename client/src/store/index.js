@@ -4,8 +4,8 @@ import {
   applyMiddleware,
 } from "redux";
 import thunk from "redux-thunk";
-import { baseUrl } from "./reducers";
+import { baseUrl, eventsReducer } from "./reducers";
 
-const store = createStore(combineReducers({ baseUrl }), applyMiddleware(thunk));
+const store = createStore(combineReducers({ baseUrl, eventsReducer }), applyMiddleware(thunk));
 
 export default store;

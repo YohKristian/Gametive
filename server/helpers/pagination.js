@@ -5,10 +5,10 @@ const getPagination = (page, size) => {
 }
 
 const getPagingData = (data, page, limit) => {
-    const { count: totalItems, rows: products } = data;
+    const { count: totalItems, rows: items } = data;
     const currentPage = page ? +page : 0
     const totalPages = Math.ceil(totalItems / limit)
-    return { totalItems, products, totalPages, currentPage }
+    return { totalItems, items, totalPages, currentPage }
 }
 
 module.exports = {
