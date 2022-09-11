@@ -30,6 +30,8 @@ export default function EventPage() {
       ...search,
       [name]: value,
     });
+
+    setPage(1)
   }
 
   const pageNumber = (page) => {

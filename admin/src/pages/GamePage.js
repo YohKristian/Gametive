@@ -31,6 +31,8 @@ export default function GamePage() {
       ...search,
       [name]: value,
     });
+
+    setPage(1)
   }
 
   const pageNumber = (page) => {
