@@ -112,8 +112,9 @@ module.exports = class usersController {
 		try {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
-			const { newPassword, oldPassword } = req.body;
-			if (!newPassword || !oldPassword) throw { code: 1 };
+
+			const { oldPassword, newPassword } = req.body;
+			if (!oldPassword || !newPassword) throw { code: 1 };
 
 			//check oldPass
 			const oldData = await User.findOne({ where: { id }, transaction: t });
@@ -124,11 +125,8 @@ module.exports = class usersController {
 			comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
 
 			//if correct, proceed to update the newPassword into database
-			if (dataCorrect)
-				newData = await User.update(
-					{ password: newPassword },
-					{ where: { id }, returning: true, individualHooks: true, transaction: t },
-				);
+
+			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
 
 			//check newData
 			if (!newData) throw { code: 8 };

@@ -8,12 +8,16 @@ export default function VerticalModalEditPasswordUser(props) {
     const dispacth = useDispatch();
 
     const [newPassword, setNewPassword] = useState({
+        oldPassword: "",
         newPassword: ""
     });
 
     const handleOnChangeForm = (e) => {
+        const { value, name } = e.target;
+
         setNewPassword({
-            newPassword: e.target.value
+            ...newPassword,
+            [name]: value,
         });
     };
 
@@ -52,6 +56,18 @@ export default function VerticalModalEditPasswordUser(props) {
                             style={{ paddingLeft: "5", paddingRight: "5" }}
                         >
                             <div className="form-outline mb-4">
+                                <label className="form-label" htmlFor="oldPassword">
+                                    Old Password
+                                </label>
+                                <input
+                                    type="password"
+                                    id="oldPassword"
+                                    name="oldPassword"
+                                    className="form-control form-control-lg"
+                                    placeholder="Input new password"
+                                    defaultValue={newPassword.oldPassword}
+                                    onChange={handleOnChangeForm}
+                                />
                                 <label className="form-label" htmlFor="newPassword">
                                     New Password
                                 </label>
