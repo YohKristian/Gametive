@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addGames, fetchGames } from '../store/action/gamesAction';
 import { errorPopup } from "../helpers";
 import { updateUsersPassword } from '../store/action/usersAction';
-import { editEvent, fetchDetailEvent } from '../store/action/eventsActions';
+import { editEvent, fetchDetailEvent, fetchEvents } from '../store/action/eventsActions';
 
 export default function VerticalModalEditEvent(props) {
     const dispatch = useDispatch();
     const {detailEvent}= useSelector((state)=> state.event)
     const {game}= useSelector((state)=> state.game)
-
+    const [page, setPage] = useState(1);
+    const [search, setSearch] = useState({
+        query: "",
+      });
     const [newEvent, setNewEvent] = useState({
         name: "",
         description: "",
@@ -25,31 +28,30 @@ export default function VerticalModalEditEvent(props) {
         ProvinceId:"",
         RegencyId: ""
     });
-
+// console.log(game)
     useEffect(()=>{
         dispatch(
-            fetchGames((error, success) => {
+            fetchGames(page,search,(error, success) => {
               if (error) {
                 return errorPopup(error);
               }
               // console.log(success)
             })
           )
-        let populateDate = new Date(detailEvent.eventDate).toLocaleDateString('en-CA');
         setNewEvent({
             name: detailEvent.name,
             description: detailEvent.description,
             price: detailEvent.price,
             rules: detailEvent.rules,
             eventPoster: detailEvent.eventPoster,
-            eventDate: populateDate,
+            eventDate: new Date(detailEvent.eventDate).toLocaleDateString('en-CA'),
             eventType: detailEvent.eventType,
             GameId: detailEvent.GameId,
             locationName: detailEvent?.Location?.name,
             ProvinceId:detailEvent.Location?.ProvinceId,
             RegencyId: detailEvent.Location?.RegencyId
         })
-        console.log(populateDate);
+        // console.log(populateDate);
     },[detailEvent])
 
     const inputEditEvent= (e)=>{
@@ -84,6 +86,7 @@ export default function VerticalModalEditEvent(props) {
                 RegencyId: ""
             })
         }))
+      
         
     }
 
