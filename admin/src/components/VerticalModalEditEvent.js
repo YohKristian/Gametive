@@ -9,228 +9,244 @@ import { editEvent } from "../store/action/eventsActions";
 import SelectLocation from "./SelectLocation";
 
 export default function VerticalModalEditEvent(props) {
-  const dispatch = useDispatch();
-  const { detailEvent } = useSelector((state) => state.event);
-  const { game } = useSelector((state) => state.game);
+	const dispatch = useDispatch();
+	const { detailEvent } = useSelector((state) => state.event);
+	const { game } = useSelector((state) => state.game);
 
-  const [newEvent, setNewEvent] = useState("");
+	const [newEvent, setNewEvent] = useState("");
 
-  const setLocation = (e) => {
-    setNewEvent({ ...newEvent });
-    console.log(newEvent);
-    console.log({ ...e });
-  };
+	const setLocation = (e) => {
+		// const { DistrictId, ProvinceId, RegencyId } = e;
+		setNewEvent({ ...newEvent, Location: { ...newEvent.Location, ...e } });
+		// console.log(newEvent);
+	};
 
-  useEffect(() => setNewEvent(""), [props.show]);
-  useEffect(() => {
-    dispatch(
-      fetchGamesEdit((error, success) => {
-        if (error) {
-          return errorPopup(error);
-        }
-        // console.log(success)
-      })
-    );
-    let populateDate = new Date(detailEvent.eventDate).toLocaleDateString(
-      "en-CA"
-    );
-    setNewEvent({ ...detailEvent });
-  }, [detailEvent]);
+	useEffect(() => setNewEvent(""), [props.show]);
+	useEffect(() => {
+		dispatch(
+			fetchGamesEdit((error, success) => {
+				if (error) {
+					return errorPopup(error);
+				}
+				// console.log(success)
+			}),
+		);
+		let populateDate = new Date(detailEvent.eventDate).toLocaleDateString("en-CA");
+		setNewEvent({ ...detailEvent });
+	}, [detailEvent]);
 
-  const inputEditEvent = (e) => {
-    const { name, value } = e.target;
-    setNewEvent({
-      ...newEvent,
-      [name]: value,
-    });
-  };
+	const inputEditEvent = (e) => {
+		const { name, value } = e.target;
+		setNewEvent({
+			...newEvent,
+			[name]: value,
+		});
+	};
 
-  const handleOnSubmitForm = (e) => {
-    e.preventDefault();
-    setNewEvent((prev) => ({ ...prev, ...detailEvent }));
-    console.log(newEvent);
-    dispatch(
-      editEvent(detailEvent.id, newEvent, (error, success) => {
-        if (error) {
-          return errorPopup(error);
-        }
-        props.onHide();
-        setNewEvent("");
-      })
-    );
-  };
+	const handleOnSubmitForm = (e) => {
+		e.preventDefault();
+		setNewEvent((prev) => ({ ...prev, ...detailEvent }));
+		let {
+			name: eventName,
+			eventPoster,
+			eventDate,
+			eventType,
+			description,
+			rules,
+			price,
+			size,
+			Game: { id: GameId },
+			Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
+		} = newEvent;
 
-  return newEvent ? (
-    <>
-      <Modal
-        {...props}
-        size="md"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Edit Event
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={handleOnSubmitForm}>
-            <div
-              className="card-body text-center"
-              style={{ paddingLeft: "5", paddingRight: "5" }}
-            >
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="name">
-                  Event Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game name"
-                  defaultValue={newEvent?.name}
-                  onChange={inputEditEvent}
-                />
-              </div>
+		let newInput = {
+			eventName,
+			eventPoster,
+			eventDate,
+			eventType,
+			description,
+			rules,
+			price,
+			size,
+			GameId,
+			ProvinceId,
+			locationName,
+			RegencyId,
+			DistrictId,
+		};
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="gameImg">
-                  Event Description
-                </label>
-                <textarea
-                  id="gameImg"
-                  name="description"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game image url"
-                  value={newEvent.description}
-                  onChange={inputEditEvent}
-                >
-                  {newEvent.description}
-                </textarea>
-              </div>
+		console.log(newInput.DistrictId, "newInput");
+		dispatch(
+			editEvent(detailEvent.id, newInput, (error, success) => {
+				if (error) {
+					return errorPopup(error);
+				}
+				console.log(success, "ini success");
+				props.onHide();
+				setNewEvent("");
+			}),
+		);
+	};
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="youtubeUrl">
-                  Event Price
-                </label>
-                <input
-                  type="text"
-                  id="youtubeUrl"
-                  name="price"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game image url"
-                  defaultValue={newEvent.price}
-                  onChange={inputEditEvent}
-                />
-              </div>
+	return newEvent ? (
+		<>
+			<Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+				<Modal.Header closeButton>
+					<Modal.Title id="contained-modal-title-vcenter">Edit Event</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<form onSubmit={handleOnSubmitForm}>
+						<div className="card-body text-center" style={{ paddingLeft: "5", paddingRight: "5" }}>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="name">
+									Event Name
+								</label>
+								<input
+									type="text"
+									id="name"
+									name="name"
+									className="form-control form-control-lg"
+									placeholder="Input your game name"
+									defaultValue={newEvent?.name}
+									onChange={inputEditEvent}
+								/>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="gameUrl">
-                  Event Rules
-                </label>
-                <textarea
-                  type="text"
-                  id="gameUrl"
-                  name="rules"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game image url"
-                  value={newEvent.rules}
-                  onChange={inputEditEvent}
-                >
-                  {newEvent.rules}
-                </textarea>
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="gameImg">
+									Event Description
+								</label>
+								<textarea
+									id="gameImg"
+									name="description"
+									className="form-control form-control-lg"
+									placeholder="Input your game image url"
+									value={newEvent.description}
+									onChange={inputEditEvent}
+								>
+									{newEvent.description}
+								</textarea>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="releaseDate">
-                  Event Poster
-                </label>
-                <input
-                  type="input"
-                  id="releaseDate"
-                  name="eventPoster"
-                  className="form-control form-control-lg"
-                  defaultValue={newEvent.eventPoster}
-                  onChange={inputEditEvent}
-                />
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="youtubeUrl">
+									Event Price
+								</label>
+								<input
+									type="text"
+									id="youtubeUrl"
+									name="price"
+									className="form-control form-control-lg"
+									placeholder="Input your game image url"
+									defaultValue={newEvent.price}
+									onChange={inputEditEvent}
+								/>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="developer">
-                  Event Date
-                </label>
-                <input
-                  type="date"
-                  id="developer"
-                  name="eventDate"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game developer"
-                  defaultValue={newEvent.eventDate}
-                  onChange={inputEditEvent}
-                />
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="gameUrl">
+									Event Rules
+								</label>
+								<textarea
+									type="text"
+									id="gameUrl"
+									name="rules"
+									className="form-control form-control-lg"
+									placeholder="Input your game image url"
+									value={newEvent.rules}
+									onChange={inputEditEvent}
+								>
+									{newEvent.rules}
+								</textarea>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="genre">
-                  Event Type
-                </label>
-                <input
-                  type="text"
-                  id="genre"
-                  name="eventType"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game genre"
-                  defaultValue={newEvent.eventType}
-                  onChange={inputEditEvent}
-                />
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="releaseDate">
+									Event Poster
+								</label>
+								<input
+									type="input"
+									id="releaseDate"
+									name="eventPoster"
+									className="form-control form-control-lg"
+									defaultValue={newEvent.eventPoster}
+									onChange={inputEditEvent}
+								/>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="genre">
-                  Game Name
-                </label>
-                <br></br>
-                <select
-                  name="GameId"
-                  onChange={inputEditEvent}
-                  defaultValue={newEvent.GameId}
-                  style={{ width: "465px", height: "40px", borderRadius: 12 }}
-                >
-                  {game?.items?.map((el) =>
-                    newEvent?.Game?.id == el.id ? (
-                      <option key={el.id} value={el.id}>
-                        {el.name}
-                      </option>
-                    ) : (
-                      <option key={el.id} value={el.id}>
-                        {el.name}
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="developer">
+									Event Date
+								</label>
+								<input
+									type="date"
+									id="developer"
+									name="eventDate"
+									className="form-control form-control-lg"
+									placeholder="Input your game developer"
+									defaultValue={newEvent.eventDate}
+									onChange={inputEditEvent}
+								/>
+							</div>
 
-              <div className="form-outline mb-4">
-                <label className="form-label" htmlFor="genre">
-                  Location Name
-                </label>
-                <input
-                  type="text"
-                  id="genre"
-                  name="locationName"
-                  className="form-control form-control-lg"
-                  placeholder="Input your game genre"
-                  defaultValue={newEvent.locationName}
-                  onChange={inputEditEvent}
-                />
-              </div>
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="genre">
+									Event Type
+								</label>
+								<input
+									type="text"
+									id="genre"
+									name="eventType"
+									className="form-control form-control-lg"
+									placeholder="Input your game genre"
+									defaultValue={newEvent.eventType}
+									onChange={inputEditEvent}
+								/>
+							</div>
 
-              <SelectLocation
-                state={{ setLocation, Location: newEvent.Location }}
-              />
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="genre">
+									Game Name
+								</label>
+								<br></br>
+								<select
+									name="GameId"
+									onChange={inputEditEvent}
+									defaultValue={newEvent.GameId}
+									style={{ width: "465px", height: "40px", borderRadius: 12 }}
+								>
+									{game?.items?.map((el) =>
+										newEvent?.Game?.id == el.id ? (
+											<option key={el.id} value={el.id}>
+												{el.name}
+											</option>
+										) : (
+											<option key={el.id} value={el.id}>
+												{el.name}
+											</option>
+										),
+									)}
+								</select>
+							</div>
 
-              {/* <div className="form-outline mb-4">
+							<div className="form-outline mb-4">
+								<label className="form-label" htmlFor="genre">
+									Location Name
+								</label>
+								<input
+									type="text"
+									id="genre"
+									name="locationName"
+									className="form-control form-control-lg"
+									placeholder="Input your game genre"
+									defaultValue={newEvent.locationName}
+									onChange={inputEditEvent}
+								/>
+							</div>
+
+							<SelectLocation state={{ setLocation, Location: newEvent.Location }} />
+
+							{/* <div className="form-outline mb-4">
                 <label className="form-label" htmlFor="genre">
                   Regency
                 </label>
@@ -260,22 +276,22 @@ export default function VerticalModalEditEvent(props) {
                 />
               </div> */}
 
-              <button
-                className="btn btn-primary btn-lg btn-block"
-                style={{ width: "420px", backgroundColor: "#FF7F3F" }}
-                type="submit"
-              >
-                Save
-              </button>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  ) : (
-    ""
-  );
+							<button
+								className="btn btn-primary btn-lg btn-block"
+								style={{ width: "420px", backgroundColor: "#FF7F3F" }}
+								type="submit"
+							>
+								Save
+							</button>
+						</div>
+					</form>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button onClick={props.onHide}>Close</Button>
+				</Modal.Footer>
+			</Modal>
+		</>
+	) : (
+		""
+	);
 }

@@ -75,7 +75,7 @@ export default function SelectLocation({ state }) {
 			}
 		}
 		setDataLocation((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
-		setLocation({...dataLocation});
+		setLocation({ ...dataLocation, DistrictId: value });
 	};
 
 	return (
