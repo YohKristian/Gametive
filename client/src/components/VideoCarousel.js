@@ -80,7 +80,7 @@ export default function VideoCarousel() {
   const customRenderThumb = (children) =>
     children.map((item) => {
       const videoId = getVideoId(item.props.url);
-      return <img src={getVideoThumb(videoId)} alt="" />;
+      return <img key={item} src={getVideoThumb(videoId)} alt="" />;
     });
   return (
     <div className="video-carousel">

@@ -25,7 +25,7 @@ module.exports = class usersController {
 			//!TODO : need to adjust the information what to send as the token
 			const token = createToken({ username: loginResponse.username, email: loginResponse.email, id: loginResponse.id, role: loginResponse.role });
 
-			res.status(200).json({ login: Boolean(loginResponse), access_token: token });
+			res.status(200).json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username });
 		} catch (error) {
 			next(error);
 		}
@@ -103,19 +103,19 @@ module.exports = class usersController {
 		try {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
-			const { oldPassword, newPassword } = req.body;
-			if (!oldPassword || !newPassword) throw { code: 1 };
+			const { newPassword } = req.body;
+			if (!newPassword) throw { code: 1 };
 
-			//check oldPass
-			const oldData = await User.findOne({ where: { id }, transaction: t });
-			let dataCorrect = false,
-				newData = null;
+			// //check oldPass
+			// const oldData = await User.findOne({ where: { id }, transaction: t });
+			// let dataCorrect = false,
+			// 	newData = null;
 
-			//compare oldPassword with the password on database
-			comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
+			// //compare oldPassword with the password on database
+			// comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
 
 			//if correct, proceed to update the newPassword into database
-			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
+			const newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true });
 
 			//check newData
 			if (!newData) throw { code: 8 };
