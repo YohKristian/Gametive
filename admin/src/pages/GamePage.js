@@ -22,6 +22,8 @@ export default function GamePage() {
     query: "",
   })
 
+  const [page, setPage] = useState(1)
+
   const onChangeSearch = (e) => {
     const { value, name } = e.target;
 
@@ -31,9 +33,28 @@ export default function GamePage() {
     });
   }
 
+  const pageNumber = (page) => {
+    let pagination = []
+    for (let i = 1; i <= page; i++) {
+      pagination.push(i)
+    }
+    return pagination
+  }
+
+  const handlePage = (page) => {
+    if (page >= game.totalPages) {
+      setPage(game.totalPages)
+    } else if (page < 1) {
+      setPage(1)
+    } else {
+      setPage(page)
+    }
+
+  }
+
   useEffect(() => {
     dispacth(
-      fetchGames(search, (error, success) => {
+      fetchGames(page, search, (error, success) => {
         if (error) {
           return errorPopup(error);
         }
@@ -41,7 +62,7 @@ export default function GamePage() {
         setLoading(false);
       })
     );
-  }, [search]);
+  }, [search, page]);
 
   return (
     <div>
@@ -116,6 +137,25 @@ export default function GamePage() {
             </div>
           </>
         )}
+        <nav>
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" onClick={() => handlePage(game.currentPage - 1)}>
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item pagination">
+              {pageNumber(game.totalPages).map((x) => {
+                return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+              })}
+            </li>
+            <li className="page-item">
+              <a className="page-link" onClick={() => handlePage(game.currentPage + 1)}>
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav >
       </div>
     </div>
   );

@@ -21,6 +21,8 @@ export default function EventPage() {
     query: "",
   })
 
+  const [page, setPage] = useState(1)
+
   const onChangeSearch = (e) => {
     const { value, name } = e.target;
 
@@ -39,20 +41,19 @@ export default function EventPage() {
   }
 
   const handlePage = (page) => {
-    dispacth(
-      fetchEvents(page, (error, success) => {
-        if (error) {
-          return errorPopup(error);
-        }
-        // console.log(success)
-        setLoading(false);
-      })
-    );
+    if (page >= event.totalPages) {
+      setPage(event.totalPages)
+    } else if (page < 1) {
+      setPage(1)
+    } else {
+      setPage(page)
+    }
+
   }
 
   useEffect(() => {
     dispacth(
-      fetchEvents(search, (error, success) => {
+      fetchEvents(page, search, (error, success) => {
         if (error) {
           return errorPopup(error);
         }
@@ -60,7 +61,7 @@ export default function EventPage() {
         setLoading(false);
       })
     );
-  }, [search]);
+  }, [search, page]);
 
 
   return (
@@ -135,19 +136,19 @@ export default function EventPage() {
           </>
         )}
         <nav>
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" onClick={() => handlePage(event.currentPage - 1)}>
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            {pageNumber(event.totalPages).forEach((x) =>
-              <li class="page-item">
-                <a class="page-link">{x}</a>
-              </li>
-            )}
-            <li class="page-item">
-              <a class="page-link">
+            <li className="page-item pagination">
+              {pageNumber(event.totalPages).map((x) => {
+                return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+              })}
+            </li>
+            <li className="page-item">
+              <a className="page-link" onClick={() => handlePage(event.currentPage + 1)}>
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
