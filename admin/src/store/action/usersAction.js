@@ -18,10 +18,10 @@ export const usersFetchSuccess = function (payload) {
     }
 }
 
-export const fetchUsers = (cb) =>
+export const fetchUsers = (page, search, cb) =>
     async (dispatch) => {
         try {
-            const { data } = await axios(baseURL + `/users`, {
+            const { data } = await axios(baseURL + `/users?page=${page}&size=8&search=${search.query}`, {
                 method: "GET",
                 headers: {
                     access_token: localStorage.access_token

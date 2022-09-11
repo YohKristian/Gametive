@@ -1,3 +1,5 @@
+@import "./assets/css/table.css";
+
 nav ul a {
   position: relative;
   color: aqua;
@@ -134,4 +136,9 @@ nav ul a.active::after {
 .pagination {
   display: flex;
   justify-content: center;
+}
+
+.page-link {
+  background-color: orange;
+  color: white;
 }

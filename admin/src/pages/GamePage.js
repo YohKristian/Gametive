@@ -51,17 +51,17 @@ export default function GamePage() {
     } else {
       setPage(page)
     }
-
   }
 
   useEffect(() => {
     dispacth(
       fetchGames(page, search, (error, success) => {
+        setLoading(false);
+
         if (error) {
           return errorPopup(error);
         }
         // console.log(success)
-        setLoading(false);
       })
     );
   }, [search, page]);
@@ -137,27 +137,27 @@ export default function GamePage() {
                 </tbody>
               </table>
             </div>
+            <nav>
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(game.currentPage - 1)}>
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li className="page-item pagination">
+                  {pageNumber(game.totalPages).map((x) => {
+                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+                  })}
+                </li>
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(game.currentPage + 1)}>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav >
           </>
         )}
-        <nav>
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" onClick={() => handlePage(game.currentPage - 1)}>
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item pagination">
-              {pageNumber(game.totalPages).map((x) => {
-                return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
-              })}
-            </li>
-            <li className="page-item">
-              <a className="page-link" onClick={() => handlePage(game.currentPage + 1)}>
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav >
       </div>
     </div>
   );

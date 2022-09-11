@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
 
 const getProv = async (cb) => {
 	try {
@@ -79,27 +78,32 @@ export default function SelectLocation({ state }) {
 		setDataLocation((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
 		setEventData((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
 	};
-	if (provData.length && Location) {
-		return (
-			<>
-				<Select
-					onChange={fetchKota}
-					defaultValue={provData.filter((x) => x.value == Location.ProvinceId)}
-					options={provData}
-					name="ProvinceId"
-				/>
 
-				<Select
-					isDisabled={isDisabled.isProv}
-					defaultValue={kotaData.length && kotaData.filter((x) => x.value == Location.RegencyId)}
-					onChange={fetchKec}
-					options={kotaData}
-					key={kotaData}
-					name="RegencyId"
-				/>
+	return (
+		<>
+			<Select
+				onChange={fetchKota}
+				defaultValue={provData.length && provData.filter((x) => x.value == Location.ProvinceId)}
+				options={provData}
+				name="ProvinceId"
+			/>
 
-				<Select isDisabled={isDisabled.isKota} options={kecData} name="DistrictId" onChange={setDistrict} />
-			</>
-		);
-	}
+			<Select
+				isDisabled={isDisabled.isProv}
+				defaultValue={kotaData.length && kotaData.filter((x) => x.value == Location.RegencyId)}
+				onChange={fetchKec}
+				options={kotaData}
+				key={kotaData}
+				name="RegencyId"
+			/>
+
+			<Select
+				isDisabled={isDisabled.isKota}
+				defaultValue={kecData.length && kecData.filter((x) => x.value == Location.RegencyId)}
+				options={kecData}
+				name="DistrictId"
+				onChange={setDistrict}
+			/>
+		</>
+	);
 }

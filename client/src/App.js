@@ -7,10 +7,12 @@ import DetailGame from "./components/DetailGame";
 import SearchGames from "./components/SearchGames";
 import SelectLocation from "./components/SelectLocation";
 import EventRegistration from "./components/EventRegistration";
+import MapsLocation from "./components/MapsLocation";
 import NotFoundPage from "./pages/NotFoundPage";
+import YourEvent from "./components/YourEvent";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 function Authenticated({ children }) {
 	const { access_token } = localStorage;
@@ -55,10 +57,12 @@ function App() {
 			>
 				<Route path="home" element={<HomePage />} />
 				<Route path="search" element={<SearchGames />} />
+				<Route path="event" element={<YourEvent />} />
 				<Route path="detail/:id" element={<DetailGame />} />
 				<Route path="select" element={<SelectLocation />} />
 				<Route path="event-registration" element={<EventRegistration />} />
 				<Route path="event-edit" element={<EventRegistration />} />
+				<Route path="maps" element={<MapsLocation />} />
 				<Route path="" element={<Navigate to={"/home"} />} />
 			</Route>
 			<Route path="*" element={<NotFoundPage />} />

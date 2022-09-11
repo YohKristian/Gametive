@@ -1,0 +1,19 @@
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 30px;
+}
+
+table tr {
+  box-shadow: 0 0 10px silver;
+  border-radius: 10px;
+  margin: 20px 0;
+  transition: all 0.3s;
+}
+
+table tbody tr:hover {
+  box-shadow: 0 0px 15px silver;
+}
+
+table img {
+  width: 150px;
+}

@@ -9,7 +9,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav style={{ backgroundColor: '#CFD2CF', width: 'screen', height: '50px' }}>
+        <nav style={{ backgroundColor: '#9E9E9E', width: 'screen', height: '50px' }}>
             <div className="d-flex justify-content-between" style={{}}>
                 <ul>
                     <img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" style={{ height: '40px', width: '150px' }} />
@@ -21,7 +21,7 @@ export default function NavBar() {
                     <button
                         type="button"
                         className="btn btn-danger"
-                        style={{ fontSize: '8pt', marginRight: '5px' }}
+                        style={{ fontSize: '8pt', marginRight: '5px', userSelect: "none" }}
                         onClick={handleLogout}
                     >
                         Log Out
