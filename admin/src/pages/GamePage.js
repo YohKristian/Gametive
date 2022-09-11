@@ -18,9 +18,22 @@ export default function GamePage() {
 
   const [modalShow, setModalShow] = useState(false);
 
+  const [search, setSearch] = useState({
+    query: "",
+  })
+
+  const onChangeSearch = (e) => {
+    const { value, name } = e.target;
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+  }
+
   useEffect(() => {
     dispacth(
-      fetchGames((error, success) => {
+      fetchGames(search, (error, success) => {
         if (error) {
           return errorPopup(error);
         }
@@ -28,7 +41,7 @@ export default function GamePage() {
         setLoading(false);
       })
     );
-  }, []);
+  }, [search]);
 
   return (
     <div>
@@ -53,6 +66,9 @@ export default function GamePage() {
             }}
             type="text"
             placeholder="Search Here..."
+            name="query"
+            value={search.query}
+            onChange={onChangeSearch}
           />
         </div>
         {loading ? (

@@ -17,9 +17,30 @@ export default function EventPage() {
 
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const [search, setSearch] = useState({
+    query: "",
+  })
+
+  const onChangeSearch = (e) => {
+    const { value, name } = e.target;
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+  }
+
+  const pageNumber = (page) => {
+    let pagination = []
+    for (let i = 1; i <= page; i++) {
+      pagination.push(i)
+    }
+    return pagination
+  }
+
+  const handlePage = (page) => {
     dispacth(
-      fetchEvents((error, success) => {
+      fetchEvents(page, (error, success) => {
         if (error) {
           return errorPopup(error);
         }
@@ -27,7 +48,20 @@ export default function EventPage() {
         setLoading(false);
       })
     );
-  }, []);
+  }
+
+  useEffect(() => {
+    dispacth(
+      fetchEvents(search, (error, success) => {
+        if (error) {
+          return errorPopup(error);
+        }
+        // console.log(success)
+        setLoading(false);
+      })
+    );
+  }, [search]);
+
 
   return (
     <div>
@@ -52,6 +86,9 @@ export default function EventPage() {
             }}
             type="text"
             placeholder="Search Here..."
+            name="query"
+            value={search.query}
+            onChange={onChangeSearch}
           />
         </div>
         {loading ? (
@@ -68,7 +105,7 @@ export default function EventPage() {
                 paddingRight: "50px",
               }}
             >
-               <VerticalModalEditEvent
+              <VerticalModalEditEvent
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
@@ -97,7 +134,26 @@ export default function EventPage() {
             </div>
           </>
         )}
-      </div>
-    </div>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {pageNumber(event.totalPages).forEach((x) =>
+              <li class="page-item">
+                <a class="page-link">{x}</a>
+              </li>
+            )}
+            <li class="page-item">
+              <a class="page-link">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav >
+      </div >
+    </div >
   );
 }

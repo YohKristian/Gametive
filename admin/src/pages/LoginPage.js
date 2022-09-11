@@ -53,7 +53,7 @@ export default function LoginPage() {
                 <img
                   src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png"
                   alt=""
-                  style={{ height: "90px", width: "350px" }}
+                  style={{ height: "90px", width: "350px", marginTop: "50px" }}
                 />
               </div>
               <form onSubmit={handleOnSubmitForm}>
@@ -65,7 +65,7 @@ export default function LoginPage() {
 
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="typeEmailX-2">
-                      Email / Username
+                      Username
                     </label>
                     <input
                       type="text"
@@ -95,7 +95,7 @@ export default function LoginPage() {
 
                   <button
                     className="btn btn-primary btn-lg btn-block"
-                    style={{ width: "420px", backgroundColor: "#FF7F3F" }}
+                    style={{ width: "420px", backgroundColor: "#FF7F3F", marginTop: "40px", marginBottom: "50px" }}
                     type="submit"
                   >
                     {loading ? <LoadingHorizontal /> : <span>Login</span>}

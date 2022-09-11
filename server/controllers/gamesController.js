@@ -58,8 +58,6 @@ module.exports = class gamesController {
 					offset: offset,
 				});
 				const response = getPagingData(fetchResponse, page, limit);
-				const { count: totalItems, rows: items } = fetchResponse;
-
 				await redis.set("app:games", JSON.stringify(response));
 				await redis.set("app:games:page", page);
 

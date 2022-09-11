@@ -14,6 +14,19 @@ export default function UserPage() {
 
   const [loading, setLoading] = useState(true);
 
+  const [search, setSearch] = useState({
+    query: "",
+  })
+
+  const onChangeSearch = (e) => {
+    const { value, name } = e.target;
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+  }
+
   useEffect(() => {
     dispacth(
       fetchUsers((error, success) => {
@@ -49,6 +62,9 @@ export default function UserPage() {
             }}
             type="text"
             placeholder="Search Here..."
+            name="query"
+            value={search.query}
+            onChange={onChangeSearch}
           />
         </div>
         {loading ? (
