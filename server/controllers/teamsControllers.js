@@ -52,6 +52,7 @@ class TeamController {
 
     static async createTeam(req, res, next) {
         try {
+            console.log(req.body);
             const newTeam = {
                 name: req.body.name,
                 CaptainName: req.user.username,
