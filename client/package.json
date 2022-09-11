@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reach/combobox": "^0.17.0",
+    "@react-google-maps/api": "^2.12.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,6 +13,8 @@
     "bootstrap-icons": "^1.9.1",
     "brackets-manager": "^1.4.4",
     "brackets-viewer": "^1.4.7",
+    "date-fns": "^2.29.2",
+    "dotenv": "^16.0.2",
     "nuka-carousel": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,6 +27,7 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sweetalert2": "^11.4.32",
+    "use-places-autocomplete": "^4.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
