@@ -16,11 +16,12 @@ export const fetchEvents = (keyword = "") => {
 export const fetchEventDetail = (id) => {
 	return async (dispatch, useState) => {
 		const { eventsReducer } = useState();
-		if (!eventsReducer.events.length) {
-			return axios.get(baseUrl + "/events/" + id).then(({ data }) => {
-				dispatch(fetchDetailSuccess(data));
-			});
-		}
+		// if (!eventsReducer.events.length) {
+		return axios.get(baseUrl + "/events/" + id).then(({ data }) => {
+			dispatch(fetchDetailSuccess(data));
+			return data;
+		});
+		// }
 		const data = eventsReducer.events.filter((el) => el.id === +id)[0];
 		dispatch(fetchDetailSuccess(data));
 	};
@@ -32,7 +33,7 @@ export const addEvent = (data) => {
 		return axios
 			.post(baseUrl + "/events/add", data, { headers: { access_token: localStorage.access_token } })
 			.then((res) => {
-				dispatch(addEvent(res));
+				dispatch(addEventSuccess(res));
 			})
 			.catch((error) => {
 				throw error;

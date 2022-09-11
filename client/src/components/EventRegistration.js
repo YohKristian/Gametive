@@ -6,12 +6,12 @@ import { addEvent } from "../store/actions";
 import SelectLocation from "./SelectLocation";
 import { fetchGames } from "../store/actions/games";
 import Select from "react-select";
+
 let initial = { eventName: "", eventPoster: "", eventDate: "", eventType: "", description: "", rules: "", price: "", size: "", locationName: "", ProvinceId: "", RegencyId: "", DistrictId: "" };
 
 export default function EventRegistration() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const { state } = useSelector((state) => state.gameReducer);
 	const [gameList, setGameList] = useState([]);
 
 	useEffect(() => {
