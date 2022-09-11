@@ -8,7 +8,9 @@ const addEventSuccess = (payload) => ({ type: "events/addSuccess", payload });
 
 export const fetchEvents = (keyword = "", page) => {
 	return async (dispatch) => {
-		return axios(baseUrl + `/events/admin?page=${page}&size=4&search=${keyword}`).then((payload) => {
+		return axios(baseUrl + `/events?page=${page}&size=4&search=${keyword}`, {
+			headers: { access_token: localStorage.access_token },
+		}).then((payload) => {
 			dispatch(fetchSuccess(payload.data));
 		});
 	};
