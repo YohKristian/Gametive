@@ -28,6 +28,9 @@ export const errorPopup = (error) => {
   if (error.response) {
     message = error.response.data?.message;
   }
+  if (Array.isArray(message)) {
+    message = message[0];
+  }
   Toast.fire({
     icon: "error",
     title: message,
