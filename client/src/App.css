@@ -12,6 +12,17 @@ button:hover {
 }
 
 .page-link {
+  font-weight: bold;
+  background-color: #F5F5F5;
+  color: black;
+}
+
+.page-link:hover {
+  cursor: pointer;
+}
+
+.page-link.active {
+  border: none;
   background-color: orange;
   color: white;
 }

@@ -70,12 +70,13 @@ export default function EventRegistration() {
 
 	const handleOnChangeForm = (e) => {
 		const { name, value } = e.target;
-		console.log(eventData);
 		setEventData({ ...eventData, [name]: value });
+		console.log(eventData);
 	};
 
-	const handleSelectOption = ({ value }) => {
-		setEventData({ ...eventData, GameId: value });
+	const handleSelectOption = (name, { value }) => {
+		setEventData({ ...eventData, [name]: value });
+		console.log(eventData);
 	};
 
 	const handleOnSubmitForm = (e) => {
@@ -150,10 +151,14 @@ export default function EventRegistration() {
 						</div>
 						<div>
 							<label htmlFor="eventType">Event type</label>
-							<select name="eventType" id="eventType" value={eventData.eventType} onChange={(e) => handleOnChangeForm(e)}>
-								<option value="Offline">Offline</option>
-								<option value="Online">Online</option>
-							</select>
+							<Select
+								name="eventType"
+								onChange={(e) => handleSelectOption("eventType", e)}
+								options={[
+									{ value: "Offline", label: "Offline" },
+									{ value: "Online", label: "Online" },
+								]}
+							/>
 
 							<label htmlFor="eventPrice">Registration Fee</label>
 							<input
@@ -166,16 +171,17 @@ export default function EventRegistration() {
 							/>
 
 							<label htmlFor="eventSize">Max Participants</label>
-							<select name="size" id="eventSize" onChange={(e) => handleOnChangeForm(e)}>
-								<option value="4" selected>
-									4 Teams
-								</option>
-								<option value="8">8 Teams</option>
-								<option value="16">16 Teams</option>
-							</select>
+							<Select
+								onChange={(e) => handleSelectOption("size", e)}
+								options={[
+									{ value: 4, label: "4 Teams" },
+									{ value: 8, label: "8 Teams" },
+									{ value: 16, label: "16 Teams" },
+								]}
+							/>
 
 							<label htmlFor="GamesId">Games</label>
-							<Select onChange={handleSelectOption} name="GamesId" options={gameList} />
+							<Select onChange={(e) => handleSelectOption("GameId", e)} options={gameList} />
 
 							<label htmlFor="eventRule">Address</label>
 							<textarea
@@ -188,7 +194,7 @@ export default function EventRegistration() {
 
 							<label htmlFor="eventRule">Location</label>
 
-							{defaultValue.Location ? (
+							{defaultValue.Location && eventData.eventType === "Offline" ? (
 								<SelectLocation state={{ setEventData, Location: defaultValue.Location }} />
 							) : (
 								<SelectLocation state={{ setEventData, Location: "" }} />
