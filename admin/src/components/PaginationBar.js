@@ -1,4 +1,10 @@
-export default function PaginationBar({ next, previous, totalPages, current }) {
+export default function PaginationBar({
+  next,
+  previous,
+  current,
+  totalPages,
+  toPage,
+}) {
   return (
     <nav>
       <ul className="pagination">
@@ -10,7 +16,11 @@ export default function PaginationBar({ next, previous, totalPages, current }) {
         <li className="page-item pagination">
           {totalPages.map((x, i) => {
             return (
-              <a key={i} className="page-link" onClick={() => current(x)}>
+              <a
+                key={i}
+                className={current === x ? "page-link active" : "page-link"}
+                onClick={() => toPage(x)}
+              >
                 {x}
               </a>
             );

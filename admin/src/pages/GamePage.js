@@ -56,7 +56,6 @@ export default function GamePage() {
   };
 
   useEffect(() => {
-    setLoading(true);
     dispacth(
       fetchGames(page, search, (error, success) => {
         setLoading(false);
@@ -119,7 +118,8 @@ export default function GamePage() {
             <PaginationBar
               next={() => handlePage(game.currentPage + 1)}
               previous={() => handlePage(game.currentPage - 1)}
-              current={handlePage}
+              current={game.currentPage}
+              toPage={handlePage}
               totalPages={pageNumber(game.totalPages)}
             />
           </>

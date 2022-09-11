@@ -52,7 +52,6 @@ export default function UserPage() {
   };
 
   useEffect(() => {
-    setLoading(true)
     dispacth(
       fetchUsers(page, search, (error, success) => {
         setLoading(false);
@@ -103,7 +102,8 @@ export default function UserPage() {
             <PaginationBar
               next={() => handlePage(user.currentPage + 1)}
               previous={() => handlePage(user.currentPage - 1)}
-              current={handlePage}
+              current={user.currentPage}
+              toPage={handlePage}
               totalPages={pageNumber(user.totalPages)}
             />
           </>

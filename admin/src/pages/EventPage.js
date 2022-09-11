@@ -66,7 +66,6 @@ export default function EventPage() {
   }
 
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchEvents(page, search))
       .catch((error) => errorPopup(error))
       .finally(() => setLoading(false));
@@ -120,7 +119,8 @@ export default function EventPage() {
             <PaginationBar
               next={() => handlePage(event.currentPage + 1)}
               previous={() => handlePage(event.currentPage - 1)}
-              current={handlePage}
+              current={event.currentPage}
+              toPage={handlePage}
               totalPages={pageNumber(event.totalPages)}
             />
           </>
