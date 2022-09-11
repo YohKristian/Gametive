@@ -103,19 +103,19 @@ module.exports = class usersController {
 		try {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
-			const { newPassword } = req.body;
-			if (!newPassword) throw { code: 1 };
+			const { oldPassword, newPassword } = req.body;
+			if (!oldPassword || !newPassword) throw { code: 1 };
 
-			// //check oldPass
-			// const oldData = await User.findOne({ where: { id }, transaction: t });
-			// let dataCorrect = false,
-			// 	newData = null;
+			//check oldPass
+			const oldData = await User.findOne({ where: { id }, transaction: t });
+			let dataCorrect = false,
+				newData = null;
 
-			// //compare oldPassword with the password on database
-			// comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
+			//compare oldPassword with the password on database
+			comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
 
 			//if correct, proceed to update the newPassword into database
-			const newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true });
+			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
 
 			//check newData
 			if (!newData) throw { code: 8 };
