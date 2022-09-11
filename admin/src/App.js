@@ -8,6 +8,7 @@ import ProtectedRouteNotLogin from "./protected/ProtectedRouteNotLogin";
 import ProtectedRouteAlreadyLogin from "./protected/ProtectedRouteAlreadyLogin";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

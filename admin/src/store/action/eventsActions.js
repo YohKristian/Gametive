@@ -8,10 +8,10 @@ export const eventsFetchSuccess = function (payload) {
     }
 }
 
-export const fetchEvents = (cb) =>
+export const fetchEvents = (page, search, cb) =>
     async (dispatch) => {
         try {
-            const { data } = await axios(baseURL + `/events?page=1&size=8&search`, {
+            const { data } = await axios(baseURL + `/events?page=${page}&size=8&search=${search.query}`, {
                 method: "GET"
             });
             dispatch(eventsFetchSuccess(data));
@@ -38,42 +38,41 @@ export const patchStatusEvents = (eventId, eventStatus, cb) =>
         }
     }
 
-    const fetchEventDetailSuccess= (payload)=>{
-        return{
-            type: FETCH_DETAIL_EVENT,
-            payload
-        }
+const fetchEventDetailSuccess = (payload) => {
+    return {
+        type: FETCH_DETAIL_EVENT,
+        payload
     }
+}
 
-    export const fetchDetailEvent= (id, cb) => async (dispatch)=>{
-       try {
+export const fetchDetailEvent = (id, cb) => async (dispatch) => {
+    try {
         const { data } = await axios(baseURL + `/events/${+id}`, {
             method: "get"
         });
         dispatch(fetchEventDetailSuccess(data));
         cb(null, data);
-       } catch (error) {
+    } catch (error) {
         cb(error);
-       }
     }
+}
 
-    export const editEvent=(id,input,cb)=>async(dispatch)=>{
-        try {
-            console.log(input);
-            const{data}= await axios(`${baseURL}/events/${id}`,{
-                method:'PUT',
-                data: input,
-                headers: {
-                    access_token: localStorage.access_token
-                }
-            })
-            dispatch(fetchEvents())
-            cb(null,data)
-        } catch (error) {
-            cb(error)
-            
-        }
+export const editEvent = (id, input, cb) => async (dispatch) => {
+    try {
+        console.log(input);
+        const { data } = await axios(`${baseURL}/events/${id}`, {
+            method: 'PUT',
+            data: input,
+            headers: {
+                access_token: localStorage.access_token
+            }
+        })
+        dispatch(fetchEvents())
+        cb(null, data)
+    } catch (error) {
+        cb(error)
+
     }
+}
 
 
-    
