@@ -1,8 +1,5 @@
 module.exports = errorHandler = (error, req, res, next) => {
-	// console.log(error);
-	// res.json({
-	// 	error
-	// })
+	console.log(error);
 	//human-made errors
 	const { code } = error;
 	const errList = {
