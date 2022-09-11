@@ -68,7 +68,7 @@ class Controller {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
-						eventStatus: req.user?.role == "Admin" ? ["Active", "Finished", "Pending"] : ["Active", "Finished"],
+						eventStatus: req.user?.role == "Admin" ? ["Active", "Finished", "Pending", "Archived"] : ["Active", "Finished"],
 					},
 					order: [["createdAt", "DESC"]],
 					limit: limit,
