@@ -27,7 +27,7 @@ export default function HeaderBar() {
         <NavLink to="/search">Event list</NavLink>
         <NavLink to="/event">Your Events</NavLink>
         <NavLink to="/event-registration">Event Registration</NavLink>
-        <NavLink to="/maps">Location</NavLink>
+        <NavLink to="/team-list">Team List</NavLink>
         {access_token ? (
           <>
             <NavLink onClick={handleLogout} to="/login">
