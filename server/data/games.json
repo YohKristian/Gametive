@@ -55,7 +55,34 @@
   },
   {
     "name": "PUBG Mobile",
-    "gameImg": "https://cdn.urbandigital.id/wp-content/uploads/2018/09/youtubegaming2560_1440-768x380.jpg",
+    "gameImg": "https://c4.wallpaperflare.com/wallpaper/320/205/156/pubg-mobile-wallpaper-preview.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
+    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
+    "releaseDate": "2018-03-19",
+    "developer": "Tencent Games",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "GAME TEST 1",
+    "gameImg": "https://c4.wallpaperflare.com/wallpaper/320/205/156/pubg-mobile-wallpaper-preview.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
+    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
+    "releaseDate": "2018-03-19",
+    "developer": "Tencent Games",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "GAME TEST 2",
+    "gameImg": "https://c4.wallpaperflare.com/wallpaper/320/205/156/pubg-mobile-wallpaper-preview.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
+    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
+    "releaseDate": "2018-03-19",
+    "developer": "Tencent Games",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "GAME TEST 3",
+    "gameImg": "https://c4.wallpaperflare.com/wallpaper/320/205/156/pubg-mobile-wallpaper-preview.jpg",
     "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
     "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
     "releaseDate": "2018-03-19",
