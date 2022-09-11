@@ -13,6 +13,8 @@ module.exports = class participantsController {
         defaults: { TeamId, EventId, paymentDate: new Date() },
       });
 
+      if (!created && createResponse.statusPay === "Paid") throw { code: 80 };
+
       await redis.del("app:participants");
       await redis.del("app:participantId");
 
@@ -116,10 +118,12 @@ module.exports = class participantsController {
 
       const findEvent = await Event.findOne({
         where: {
-          id: +teamId
+          id: +eventId
         },
         transaction: t
       })
+
+      console.log(findEvent);
 
       let oldBracket = JSON.parse(findEvent.Bracket);
 

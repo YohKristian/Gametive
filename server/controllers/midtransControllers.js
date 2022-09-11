@@ -13,10 +13,6 @@ class MidtransController {
                 serverKey: `${process.env.SECRET_Server_Key}`
             });
 
-            const findUser = await User.findByPk(req.user.id);
-
-            if (!findUser) throw { code: 100 };
-
             let parameter = {
                 "transaction_details": {
                     "order_id": `ORDERID-${Date.now()}`,
@@ -26,8 +22,9 @@ class MidtransController {
                     "secure": true
                 },
                 "customer_details": {
-                    "username": findUser.firstName,
-                    "email": findUser.email,
+                    "first_name": req.user.username,
+                    "last_name": "",
+                    "email": req.user.email,
                 }
             };
 
