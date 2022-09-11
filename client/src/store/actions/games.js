@@ -11,7 +11,7 @@ export const gamesFetchSuccess = function (payload) {
 
 export const fetchGames = (cb) => async (dispatch) => {
 	try {
-		const { data } = await axios(baseURL + `/games?page=1&size=8&search`, {
+		const { data } = await axios(baseURL + `/games?page=1&size=100&search=`, {
 			method: "GET",
 		});
 		dispatch(gamesFetchSuccess(data));
