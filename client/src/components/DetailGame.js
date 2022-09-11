@@ -42,6 +42,8 @@ export default function DetailGame() {
 				</div>
 				<BracketViewer state={JSON.parse(detail.Bracket)} />
 			</div>
+
+			{localStorage.access_token && <button>Register event!</button>}
 		</div>
 	) : (
 		<h1>Loading</h1>
