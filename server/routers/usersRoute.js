@@ -6,6 +6,7 @@ const Authorization = require("../middlewares/authorization");
 
 users.post("/login", usersController.login);
 users.post("/register", usersController.create);
+users.get("/history", authentication, Authorization.customer, usersController.fetchAllHistory);
 users.get("/:username", usersController.fetchOne);
 //AUTHENTICATION HERE
 users.use(authentication);

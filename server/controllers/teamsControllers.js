@@ -3,7 +3,7 @@ const { redis } = require("../config/redis");
 
 class TeamController {
     static async getAllTeam(req, res, next) {
-        try {console.log(req.user.username);
+        try {
             const teamsDataCache = JSON.parse(await redis.get("app:teams"));
 
             if (!teamsDataCache) {

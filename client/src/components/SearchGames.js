@@ -99,7 +99,11 @@ export default function SearchGames() {
 							</li>
 							<li className="page-item pagination">
 								{pageNumber(events.totalPages).map((x) => {
-									return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+									return <a 
+										className={events.currentPage === x ? "page-link active" : "page-link"} 
+										onClick={() => handlePage(x)}>
+										{x}
+									</a>
 								})}
 							</li>
 							<li className="page-item">

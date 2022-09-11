@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
+import { dateFormat, errorPopup, rupiahFormat, successPopup } from "../helpers";
 import { addParticipants, participantsPaymentToken, registerParticipantToBracket } from "../store/actions/participants";
+import { fetchTeams } from "../store/actions/teams";
 
 export default function ParticipantRegistration() {
     const dispatch = useDispatch();
@@ -12,6 +13,20 @@ export default function ParticipantRegistration() {
     const { eventId, eventName, eventPrice, eventDate } = state;
 
     const [teamId, setTeamId] = useState("");
+
+    const { teams } = useSelector((state) => state.teamsReducer);
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        dispatch(fetchTeams())
+            .catch((error) => {
+                errorPopup(error);
+            })
+            .finally(() => {
+                setLoading(true);
+            })
+    }, [])
 
     const handleOnSubmitForm = (e) => {
         e.preventDefault();
@@ -29,7 +44,7 @@ export default function ParticipantRegistration() {
                 window.snap.pay(token, {
                     onSuccess: function (result) {
                         /* You may add your own implementation here */
-                        errorPopup("payment success!"); console.log(result);
+                        successPopup("payment success!"); console.log(result);
                         dispatch(registerParticipantToBracket({ EventId: +eventId, TeamId: +teamId }))
                             .then(() => {
                                 navigate("/");
@@ -58,7 +73,7 @@ export default function ParticipantRegistration() {
         setTeamId(e.target.value);
     }
 
-    return (
+    return loading ? (
         <>
             <section className="ev-reg">
                 <div>
@@ -72,10 +87,9 @@ export default function ParticipantRegistration() {
                         <label htmlFor="teamName">Team Name</label>
                         <select id="teamName" value={teamId} onChange={handlerOnChangeForm}>
                             <option value="">-- Choose Your Team --</option>
-                            <option value="1">-- i --</option>
-                            <option value="2">-- a --</option>
-                            <option value="3">-- o --</option>
-                            <option value="5">JagoanMelon</option>
+                            {teams.map(team => {
+                                return <option value={team.id} key={team.id}>{team.name}</option>
+                            })}
                         </select>
 
                         <button type="submit" style={{ marginTop: 16 }}>Register to event</button>
@@ -83,5 +97,7 @@ export default function ParticipantRegistration() {
                 </div>
             </section>
         </>
-    )
+    ) : (
+        <h1>Loading</h1>
+    );
 }
