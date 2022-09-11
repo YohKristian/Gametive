@@ -63,7 +63,14 @@ export default function DetailGame() {
 
 	const handlerOnClick = () => {
 		if (localStorage.access_token) {
-			// navigate.push("/") ke form register
+			navigate("/participant-registration", {
+				state: {
+					eventId: id,
+					eventName: detail.name,
+					eventPrice: +detail.price,
+					eventDate: detail.eventDate,
+				}
+			})
 		} else {
 			navigate("/login")
 		}
@@ -76,7 +83,7 @@ export default function DetailGame() {
 			</div>
 
 			<div>
-				<h1>{detail.eventName}</h1>
+				<h1>{detail.name}</h1>
 				<span className='status'>{detail.eventStatus}</span>
 				<h2>Description</h2>
 				<p>{detail.description}</p>

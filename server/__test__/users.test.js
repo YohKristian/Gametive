@@ -9,8 +9,22 @@ const { queryInterface } = sequelize;
 
 beforeAll(() => {
 	return queryInterface.bulkInsert("Users", [
-		{ username: "customer01", email: "customer01@gmail.com", password: hashPassword("password"), role: "Customer", createdAt: new Date(), updatedAt: new Date() },
-		{ username: "administrator", email: "administrator@gmail.com", password: hashPassword("password"), role: "Admin", createdAt: new Date(), updatedAt: new Date() },
+		{
+			username: "customer01",
+			email: "customer01@gmail.com",
+			password: hashPassword("password"),
+			role: "Customer",
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+		{
+			username: "administrator",
+			email: "administrator@gmail.com",
+			password: hashPassword("password"),
+			role: "Admin",
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
 	]);
 });
 
@@ -144,17 +158,17 @@ describe("GET All users account - FOR ADMIN ACCOUNT", () => {
 			let response = await request(app).post("/users/login").send(body);
 			access_token = response.body.access_token;
 
-			response = await request(app).get("/users/").set("access_token", access_token);
+			response = await request(app).get("/users?page=1&size=10&search=").set("access_token", access_token);
 
 			expect(response.status).toBe(200);
 			//ASSUME THERE IS ALWAYS AT LEAST ONE ACCOUNT
 			expect(response.body).toBeInstanceOf(Object);
-			expect(response.body[0]).toHaveProperty("id", expect.any(Number));
-			expect(response.body[0]).toHaveProperty("username", expect.any(String));
-			expect(response.body[0]).toHaveProperty("email", expect.any(String));
-			expect(response.body[0]).toHaveProperty("role", expect.any(String));
-			expect(response.body[0]).toHaveProperty("createdAt", expect.any(String));
-			expect(response.body[0]).toHaveProperty("updatedAt", expect.any(String));
+			expect(response.body.items[0]).toHaveProperty("id", expect.any(Number));
+			expect(response.body.items[0]).toHaveProperty("username", expect.any(String));
+			expect(response.body.items[0]).toHaveProperty("email", expect.any(String));
+			expect(response.body.items[0]).toHaveProperty("role", expect.any(String));
+			expect(response.body.items[0]).toHaveProperty("createdAt", expect.any(String));
+			expect(response.body.items[0]).toHaveProperty("updatedAt", expect.any(String));
 		});
 	});
 
@@ -249,6 +263,73 @@ describe("PUT Account Password", () => {
 			expect(passwordResponse.body).toBeInstanceOf(Object);
 			expect(passwordResponse.body).toHaveProperty("code", 8);
 			expect(passwordResponse.body).toHaveProperty("message", "failed to change password");
+		});
+	});
+});
+
+describe("PUT Admin Change Password User", () => {
+	let access_token = null;
+	describe("Success change account password from Admin", () => {
+		it("should return object with username and message", async () => {
+			const body = { username: "administrator", password: "password" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			let passwordChange = { newPassword: "passwordNew" };
+			let passwordResponse = await request(app).put("/users/admin/1").send(passwordChange).set("access_token", access_token);
+
+			expect(passwordResponse.status).toBe(200);
+			expect(passwordResponse.body).toBeInstanceOf(Object);
+			expect(passwordResponse.body).toHaveProperty("username", expect.any(String));
+			expect(passwordResponse.body).toHaveProperty("message", "password has been changed");
+		});
+	});
+
+	describe("Failed change account password from Admin", () => {
+		it("should return object with code and message", async () => {
+			const body = { username: "administrator", password: "password" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			let passwordChange = { newPassword: "" };
+			let passwordResponse = await request(app).put("/users/admin/1").send(passwordChange).set("access_token", access_token);
+
+			expect(passwordResponse.status).toBe(400);
+			expect(passwordResponse.body).toBeInstanceOf(Object);
+			expect(passwordResponse.body).toHaveProperty("code", 1);
+			expect(passwordResponse.body).toHaveProperty("message", "invalid form data, please check your input");
+		});
+	});
+});
+
+describe("DESTROY Account - FOR ADMIN ONLY", () => {
+	let access_token = null;
+	describe("Success delete user", () => {
+		it("should return object with username and message", async () => {
+			const body = { username: "administrator", password: "password" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			response = await request(app).delete("/users/1").set("access_token", access_token);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("id", expect.any(Number));
+			expect(response.body).toHaveProperty("message", "user has been deleted");
+		});
+	});
+	describe("Failed delete user - user id not found", () => {
+		it("should return object with code and message", async () => {
+			const body = { username: "administrator", password: "password" };
+			let response = await request(app).post("/users/login").send(body);
+			access_token = response.body.access_token;
+			//
+			response = await request(app).delete("/users/1000").set("access_token", access_token);
+
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 9);
+			expect(response.body).toHaveProperty("message", "fail to delete, this user is not found");
 		});
 	});
 });

@@ -31,6 +31,9 @@ export const errorPopup = (error) => {
   if (Array.isArray(message)) {
     message = message[0];
   }
+  if (typeof error === "string") {
+    message = error;
+  }
   Toast.fire({
     icon: "error",
     title: message,
