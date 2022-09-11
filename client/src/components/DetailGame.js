@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchEventDetail } from "../store/actions";
 import { dateFormat, rupiahFormat } from "../helpers";
 import BracketViewer from "./BracketViewer";
@@ -60,6 +60,14 @@ export default function DetailGame() {
       console.log(error);
     }
   };
+  
+  const handlerOnClick = () => {
+		if (localStorage.access_token) {
+			// navigate.push("/") ke form register
+		} else {
+			navigate("/login")
+		}
+	}
 
   return detail ? (
     <div className='detail'>
@@ -93,7 +101,12 @@ export default function DetailGame() {
             </a>
           </p>
         </div>
+        
         <BracketViewer state={JSON.parse(detail.Bracket)} />
+        
+        <button onClick={handlerOnClick}>
+				  Register event!
+			  </button>
       </div>
     </div>
   ) : (

@@ -10,6 +10,7 @@ import EventRegistration from "./components/EventRegistration";
 import MapsLocation from "./components/MapsLocation";
 import NotFoundPage from "./pages/NotFoundPage";
 import YourEvent from "./components/YourEvent";
+import TeamList from "./components/TeamList";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -60,6 +61,7 @@ function App() {
 				<Route path="event" element={<YourEvent />} />
 				<Route path="select" element={<SelectLocation />} />
 				<Route path="event-registration" element={<EventRegistration />} />
+				<Route path="team-list" element={<TeamList />} />
 				<Route path="event-edit" element={<EventRegistration />} />
 				<Route path="maps" element={<MapsLocation />} />
 				<Route path="" element={<Navigate to={"/home"} />} />
