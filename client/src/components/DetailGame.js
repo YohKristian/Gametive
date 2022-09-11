@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchEventDetail } from "../store/actions";
 import { dateFormat, rupiahFormat } from "../helpers";
 import BracketViewer from "./BracketViewer";
@@ -8,6 +8,7 @@ import BracketViewer from "./BracketViewer";
 export default function DetailGame() {
 	const { id } = useParams();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { eventDetailReducer } = useSelector((state) => state);
 	const [detail, setDetail] = useState();
 
@@ -21,6 +22,14 @@ export default function DetailGame() {
 	// useEffect(() => {
 	// 	setDetail(eventDetailReducer);
 	// }, [eventDetailReducer]);
+
+	const handlerOnClick = () => {
+		if (localStorage.access_token) {
+			// navigate.push("/") ke form register
+		} else {
+			navigate("/login")
+		}
+	}
 
 	return detail ? (
 		<div className="detail">
@@ -43,7 +52,9 @@ export default function DetailGame() {
 				<BracketViewer state={JSON.parse(detail.Bracket)} />
 			</div>
 
-			{localStorage.access_token && <button>Register event!</button>}
+			<button onClick={handlerOnClick}>
+				Register event!
+			</button>
 		</div>
 	) : (
 		<h1>Loading</h1>
