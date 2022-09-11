@@ -23,7 +23,12 @@ module.exports = class usersController {
 			if (!loginResponse || !comparePassword(password, loginResponse.password)) throw { code: 4 };
 
 			//!TODO : need to adjust the information what to send as the token
-			const token = createToken({ username: loginResponse.username, email: loginResponse.email, id: loginResponse.id, role: loginResponse.role });
+			const token = createToken({
+				username: loginResponse.username,
+				email: loginResponse.email,
+				id: loginResponse.id,
+				role: loginResponse.role,
+			});
 
 			res.status(200).json({ login: Boolean(loginResponse), access_token: token });
 		} catch (error) {
@@ -36,7 +41,10 @@ module.exports = class usersController {
 
 			if (!username || !email || !password) throw { code: 1 };
 
-			const [createResponse, created] = await User.findOrCreate({ where: { username, email }, defaults: { username, email, password } });
+			const [createResponse, created] = await User.findOrCreate({
+				where: { username, email },
+				defaults: { username, email, password },
+			});
 			if (!created) throw { code: 2 };
 
 			res.status(201).json(created);
@@ -74,6 +82,7 @@ module.exports = class usersController {
 				offset: offset,
 			});
 			const response = getPagingData(fetchResponse, page, limit);
+			console.log(response);
 			await redis.set("store:users_fetchAll", JSON.stringify(response));
 			await redis.set("app:users:page", page);
 
@@ -115,7 +124,11 @@ module.exports = class usersController {
 			comparePassword(oldPassword, oldData.password) ? (dataCorrect = true) : (dataCorrect = false);
 
 			//if correct, proceed to update the newPassword into database
-			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
+			if (dataCorrect)
+				newData = await User.update(
+					{ password: newPassword },
+					{ where: { id }, returning: true, individualHooks: true, transaction: t },
+				);
 
 			//check newData
 			if (!newData) throw { code: 8 };
@@ -131,21 +144,32 @@ module.exports = class usersController {
 	}
 	static async updateAdmin(req, res, next) {
 		//update for admin, for user who forgot password
+		const t = await sequelize.transaction();
 		try {
 			const id = req.params.userId; //from authentication
 			const { newPassword } = req.body;
 			if (!newPassword) throw { code: 1 };
 
+			const oldData = await User.findOne({ where: { id }, transaction: t });
+			let newData;
+
 			//if correct, proceed to update the newPassword into database
-			const newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true });
+			if (oldData) {
+				const [affectedColumn, responseData] = await User.update(
+					{ password: newPassword },
+					{ where: { id }, returning: true, individualHooks: true, transaction: t },
+				);
+				newData = responseData;
+			}
 
 			//check newData
 			if (!newData) throw { code: 8 };
-
+			await t.commit();
 			await redis.del("store:users_fetchOne");
 			await redis.del("store:users_fetchAll");
-			res.status(200).json({ username: newData.username, message: "password has been changed" });
+			res.status(200).json({ username: newData[0].username, message: "password has been changed" });
 		} catch (error) {
+			await t.rollback();
 			next(error);
 		}
 	}
@@ -153,14 +177,10 @@ module.exports = class usersController {
 		//soft delete (change status from active -> inactive)
 		try {
 			const id = req.params.userId; //from authentication
-
 			const findUser = await User.findByPk(id);
-
 			if (!findUser) throw { code: 9 };
-
-			const newData = await User.destroy({ where: { id }, returning: true });
-
-			res.status(200).json({ username: newData.username, message: "user has been deleted" });
+			await User.destroy({ where: { id } });
+			res.status(200).json({ id: +id, message: "user has been deleted" });
 		} catch (error) {
 			next(error);
 		}
