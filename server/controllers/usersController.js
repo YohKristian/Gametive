@@ -1,4 +1,4 @@
-const { User, sequelize } = require("../models");
+const { User, Team, Participant, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
@@ -179,6 +179,29 @@ module.exports = class usersController {
 			if (!findUser) throw { code: 9 };
 			await User.destroy({ where: { id } });
 			res.status(200).json({ id: +id, message: "user has been deleted" });
+		} catch (error) {
+			next(error);
+		}
+	}
+	static async fetchAllHistory(req, res, next) {
+		try {
+			const fetchResponse = await User.findOne({
+				attributes: { exclude: ["password"] },
+				include: {
+					model: Team,
+					include: {
+						model: Participant,
+						where: {
+							statusPay: "Paid"
+						}
+					}
+				},
+				where: {
+					id: req.user.id
+				}
+			});
+
+			res.status(200).json(fetchResponse);
 		} catch (error) {
 			next(error);
 		}
