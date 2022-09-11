@@ -7,9 +7,10 @@ import LoadingAnimation from "../components/LoadingAnimation";
 import VerticalModalEditEvent from "../components/VerticalModalEditEvent";
 import SearchBar from "../components/SearchBar";
 import PaginationBar from "../components/PaginationBar";
+import { fetchDetailEvent } from "../store/action/eventsActions";
 
 export default function EventPage() {
-  const dispacth = useDispatch();
+  const dispatch = useDispatch();
 
   const event = useSelector((state) => {
     return state.event.event;
@@ -54,17 +55,21 @@ export default function EventPage() {
     }
   };
 
+  const handlerOnClickEdit = (id) => {
+    setModalShow(true)
+      dispatch(fetchDetailEvent(id, (error, success) => {
+          if (error) {
+              return errorPopup(error);
+          }
+          setModalShow(true);
+      }))
+  }
+
   useEffect(() => {
-    setLoading(true)
-    dispacth(
-      fetchEvents(page, search, (error, success) => {
-        setLoading(false);
-        if (error) {
-          return errorPopup(error);
-        }
-        // console.log(success)
-      })
-    );
+    setLoading(true);
+    dispatch(fetchEvents(page, search))
+      .catch((error) => errorPopup(error))
+      .finally(() => setLoading(false));
   }, [search, page]);
 
   return (
@@ -107,7 +112,7 @@ export default function EventPage() {
                 <tbody>
                   {!loading &&
                     event.items.map((item) => {
-                      return <EventRow key={item.id} item={item} />;
+                      return <EventRow key={item.id} item={item} handlerOnClickEdit={() => handlerOnClickEdit(item.id)} />;
                     })}
                 </tbody>
               </table>

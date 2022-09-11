@@ -181,6 +181,7 @@ class Controller {
 				GameId,
 				ProvinceId,
 				RegencyId,
+				DistrictId,
 			} = req.body;
 			const events = await Event.findOne({ where: { id: id } });
 			const lokasi = await Location.findOne({ where: { id: events.LocationId } });
@@ -198,7 +199,7 @@ class Controller {
 				},
 				{ where: { id: id } },
 			);
-			await Location.update({ name: locationName, ProvinceId, RegencyId }, { where: { id: lokasi.id } });
+			await Location.update({ name: locationName, ProvinceId, RegencyId, DistrictId }, { where: { id: lokasi.id } });
 			await redis.del("app:event");
 			res.status(200).json({ message: "Success edit event" });
 		} catch (error) {
