@@ -5,6 +5,7 @@
 .video-carousel .carousel:nth-child(2) {
   display: flex;
   justify-content: center;
+  background-color: black;
 }
 
 .video-carousel .vid-slide {

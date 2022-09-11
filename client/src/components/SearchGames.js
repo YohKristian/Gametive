@@ -11,9 +11,28 @@ export default function SearchGames() {
 	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
 	const [keyword, setKeyword] = useState();
+	const [page, setPage] = useState(1)
+
+	const pageNumber = (page) => {
+		let pagination = []
+		for (let i = 1; i <= page; i++) {
+			pagination.push(i)
+		}
+		return pagination
+	}
+
+	const handlePage = (page) => {
+		if (page >= events.totalPages) {
+			setPage(events.totalPages)
+		} else if (page < 1) {
+			setPage(1)
+		} else {
+			setPage(page)
+		}
+	}
 
 	const fetchData = () => {
-		dispatch(fetchEvents(keyword))
+		dispatch(fetchEvents(keyword, page))
 			.catch((err) => {
 				console.log(err);
 				errorPopup(err);
@@ -24,6 +43,7 @@ export default function SearchGames() {
 	const handleKeyword = (e) => {
 		const { value } = e.target;
 		setKeyword(value);
+		setPage(1)
 	};
 
 	const handleSearch = () => {
@@ -42,7 +62,7 @@ export default function SearchGames() {
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [page]);
 
 	return (
 		<div className="search-page">
@@ -51,24 +71,45 @@ export default function SearchGames() {
 				<input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
 			</div>
 			{!loading ? (
-				<div>
-					{events.map((event, idx) => (
-						<div className="search-item" key={idx} onClick={toDetail(event.id)}>
-							<div className="img">
-								<img src={event.eventPoster} alt="" />
-							</div>
-							<div>
-								<h1>{event.name}</h1>
-								<span className="status">{event.eventType}</span>
+				<>
+					<div>
+						{events.items.map((event, idx) => (
+							<div className="search-item" key={idx} onClick={toDetail(event.id)}>
+								<div className="img">
+									<img src={event.eventPoster} alt="" />
+								</div>
 								<div>
-									<p>Lokasi: {event.Location.name}</p>
-									<p>Mulai: {dateFormat(event.eventDate)}</p>
-									<p>Regestration Fee: {rupiahFormat(event.price)}</p>
+									<h1>{event.name}</h1>
+									<span className="status">{event.eventType}</span>
+									<div>
+										<p>Lokasi: {event.Location.name}</p>
+										<p>Mulai: {dateFormat(event.eventDate)}</p>
+										<p>Regestration Fee: {rupiahFormat(event.price)}</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
-				</div>
+						))}
+					</div>
+					<nav>
+						<ul className="pagination">
+							<li className="page-item">
+								<a className="page-link" onClick={() => handlePage(events.currentPage - 1)}>
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li className="page-item pagination">
+								{pageNumber(events.totalPages).map((x) => {
+									return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+								})}
+							</li>
+							<li className="page-item">
+								<a className="page-link" onClick={() => handlePage(events.currentPage + 1)}>
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav >
+				</>
 			) : (
 				<LoadingAnimation />
 			)}
