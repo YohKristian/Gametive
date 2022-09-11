@@ -137,3 +137,8 @@ nav ul a.active::after {
   display: flex;
   justify-content: center;
 }
+
+.page-link {
+  background-color: orange;
+  color: white;
+}

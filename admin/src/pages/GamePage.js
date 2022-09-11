@@ -51,7 +51,6 @@ export default function GamePage() {
     } else {
       setPage(page)
     }
-
   }
 
   useEffect(() => {

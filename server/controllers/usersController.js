@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
 const { redis } = require("../config/redis");
+const { getPagination, getPagingData } = require("../helpers/pagination");
 // 			await redis.del("store:users_fetchAll");
 
 module.exports = class usersController {
@@ -45,15 +46,38 @@ module.exports = class usersController {
 	}
 	static async fetchAll(req, res, next) {
 		try {
+			const reg = new RegExp("^[0-9]*$");
+
+			const { page, size, search } = req.query;
+
+			if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "user not found" });
+
+			const pageLastPageCache = await redis.get("store:users:page");
+			if (pageLastPageCache !== page || search || !search || size !== 8) {
+				await redis.del("store:users_fetchAll");
+			}
+
 			// if (req.user.role !== "admin") throw { code: 5 }; //ONLY UNCOMMENT AFTER AUTHORIZATION & AUTHENTICATION DONE
-			await redis.del("store:users_fetchAll")
 			let storeFetchAll = await redis.get("store:users_fetchAll");
 			if (storeFetchAll) return res.status(200).json(JSON.parse(storeFetchAll));
 
-			const fetchResponse = await User.findAll({ attributes: { exclude: ["password"] } });
+			const { limit, offset } = getPagination(page, size);
+			const fetchResponse = await User.findAndCountAll({
+				attributes: { exclude: ["password"] },
+				order: [["id", "desc"]],
+				where: {
+					username: {
+						[Op.iLike]: `%${search}%`,
+					},
+				},
+				limit: limit,
+				offset: offset,
+			});
+			const response = getPagingData(fetchResponse, page, limit);
+			await redis.set("store:users_fetchAll", JSON.stringify(response));
+			await redis.set("app:users:page", page);
 
-			await redis.set("store:users_fetchAll", JSON.stringify(fetchResponse));
-			res.status(200).json(fetchResponse || { message: "there is no data" });
+			res.status(200).json(response || { message: "there is no data" });
 		} catch (error) {
 			next(error);
 		}
