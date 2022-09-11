@@ -92,7 +92,6 @@ export default function DetailGame() {
               {location.district ? `- ${location.district}` : ""}
             </a>
           </p>
-          <p>{JSON.stringify(detail)}</p>
         </div>
         <BracketViewer state={JSON.parse(detail.Bracket)} />
       </div>

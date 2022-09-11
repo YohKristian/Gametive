@@ -22,7 +22,7 @@ function Authenticated({ children }) {
 
 function RequireAuth({ children }) {
 	const { pathname } = useLocation();
-	if (pathname === "/" || pathname === "/home") return children;
+	if (pathname === "/" || pathname === "/home" || pathname === "/search") return children;
 	const { access_token } = localStorage;
 	if (!access_token) return <Navigate to={"/login"} />;
 	return children;
@@ -58,12 +58,19 @@ function App() {
 				<Route path="home" element={<HomePage />} />
 				<Route path="search" element={<SearchGames />} />
 				<Route path="event" element={<YourEvent />} />
-				<Route path="detail/:id" element={<DetailGame />} />
 				<Route path="select" element={<SelectLocation />} />
 				<Route path="event-registration" element={<EventRegistration />} />
 				<Route path="event-edit" element={<EventRegistration />} />
 				<Route path="maps" element={<MapsLocation />} />
 				<Route path="" element={<Navigate to={"/home"} />} />
+			</Route>
+			<Route
+				path="/"
+				element={
+					<MainPage />
+				}
+			>
+				<Route path="/detail/:id" element={<DetailGame />} />
 			</Route>
 			<Route path="*" element={<NotFoundPage />} />
 		</Routes>
