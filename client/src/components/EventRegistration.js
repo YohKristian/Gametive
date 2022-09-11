@@ -167,7 +167,9 @@ export default function EventRegistration() {
 
 							<label htmlFor="eventSize">Max Participants</label>
 							<select name="size" id="eventSize" onChange={(e) => handleOnChangeForm(e)}>
-								<option value="4">4 Teams</option>
+								<option value="4" selected>
+									4 Teams
+								</option>
 								<option value="8">8 Teams</option>
 								<option value="16">16 Teams</option>
 							</select>
