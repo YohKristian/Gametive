@@ -2,13 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 204, 110);
+  background-color: #ffcc6e;
   height: 100vh;
 }
 
 .login-page > div {
   width: 500px;
-  background-color: white;
+  background-color: #F5F5F5;
   padding: 50px;
   border-radius: 10px;
 }
@@ -43,7 +43,7 @@
 .login-page form > input {
   position: relative;
   margin: 0;
-  border: 1px solid gainsboro;
+  border: none;
   outline: none;
   border-radius: 5px;
   padding: 12px;
@@ -53,7 +53,7 @@
 .login-page form > button {
   padding: 12px;
   font-weight: bold;
-  color: white;
+  color: #F5F5F5;
   background-color: orange;
   border: none;
   border-radius: 5px;

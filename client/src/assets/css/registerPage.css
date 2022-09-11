@@ -2,13 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(255, 204, 110);
+  background-color: #ffcc6e;
   height: 100vh;
 }
 
 .register-page > div {
   width: 500px;
-  background-color: white;
+  background-color: #f5f5f5;
   padding: 50px;
   border-radius: 10px;
 }
@@ -42,7 +42,7 @@
 
 .register-page form > input {
   margin: 0;
-  border: 1px solid gainsboro;
+  border: none;
   outline: none;
   border-radius: 5px;
   padding: 12px;
@@ -52,7 +52,7 @@
 .register-page form > button {
   padding: 12px;
   font-weight: bold;
-  color: white;
+  color: #f5f5f5;
   background-color: orange;
   border: none;
   border-radius: 5px;
