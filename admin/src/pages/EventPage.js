@@ -56,11 +56,11 @@ export default function EventPage() {
   useEffect(() => {
     dispacth(
       fetchEvents(page, search, (error, success) => {
+        setLoading(false);
         if (error) {
           return errorPopup(error);
         }
         // console.log(success)
-        setLoading(false);
       })
     );
   }, [search, page]);

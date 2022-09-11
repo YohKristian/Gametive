@@ -30,11 +30,12 @@ export default function UserPage() {
   useEffect(() => {
     dispacth(
       fetchUsers((error, success) => {
+        setLoading(false);
+
         if (error) {
           return errorPopup(error);
         }
         console.log(success);
-        setLoading(false);
       })
     );
   }, []);
