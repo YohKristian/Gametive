@@ -4,7 +4,6 @@ const { getPagination, getPagingData } = require("../helpers/pagination");
 const { Op } = require("sequelize");
 
 class Controller {
-
 	static async showAllEventForUser(req, res, next) {
 		try {
 			await redis.del("app:event");
@@ -22,13 +21,13 @@ class Controller {
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				let fetchEvent = await Event.findAndCountAll({
-					include: [{ model: User, attributes: { exclude: ['password'] } }, Game, Location],
+					include: [{ model: User, attributes: { exclude: ["password"] } }, Game, Location],
 					where: {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
-						eventStatus: ['Active', 'Finished'],
-						UserId: +req.user.id
+						// eventStatus: ["Active", "Finished"],
+						UserId: +req.user.id,
 					},
 					order: [["createdAt", "DESC"]],
 					limit: limit,
@@ -45,7 +44,6 @@ class Controller {
 			next(error);
 		}
 	}
-
 
 	static async showAllEvent(req, res, next) {
 		try {
@@ -65,11 +63,12 @@ class Controller {
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				let fetchEvent = await Event.findAndCountAll({
-					include: [{ model: User, attributes: { exclude: ['password'] } }, Game, Location],
+					include: [{ model: User, attributes: { exclude: ["password"] } }, Game, Location],
 					where: {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
+						eventStatus: req.user?.role == "Admin" ? ["Active", "Finished", "Pending", "Archived"] : ["Active", "Finished"],
 					},
 					order: [["createdAt", "DESC"]],
 					limit: limit,
@@ -90,9 +89,23 @@ class Controller {
 	static async addEvent(req, res, next) {
 		let t = await sequelize.transaction();
 		try {
-			const { eventName, description, price, rules, eventStatus, eventPoster, eventDate, eventType, UserId, GameId, locationName, LocationId, ProvinceId, RegencyId, size } = req.body;
+			const {
+				eventName,
+				description,
+				price,
+				rules,
+				eventPoster,
+				eventDate,
+				eventType,
+				GameId,
+				locationName,
+				ProvinceId,
+				RegencyId,
+				DistrictId,
+				size,
+			} = req.body;
 
-			let locationCreate = await Location.create({ name: locationName, ProvinceId, RegencyId }, { transaction: t });
+			let locationCreate = await Location.create({ name: locationName, ProvinceId, RegencyId, DistrictId }, { transaction: t });
 			let Bracket;
 
 			/* CREATE TEMPLATE BRACKET */
@@ -156,7 +169,19 @@ class Controller {
 	static async editEvent(req, res, next) {
 		try {
 			const { id } = req.params;
-			const { eventName, locationName, description, price, rules, eventPoster, eventDate, eventType, GameId, ProvinceId, RegencyId } = req.body;
+			const {
+				eventName,
+				locationName,
+				description,
+				price,
+				rules,
+				eventPoster,
+				eventDate,
+				eventType,
+				GameId,
+				ProvinceId,
+				RegencyId,
+			} = req.body;
 			const events = await Event.findOne({ where: { id: id } });
 			const lokasi = await Location.findOne({ where: { id: events.LocationId } });
 			const data = await Event.update(
@@ -211,7 +236,10 @@ class Controller {
 			dataBracket = { ...dataBracket.dataValues, Bracket: JSON.parse(dataBracket.Bracket) };
 			let newBracket = { ...dataBracket.Bracket, participant: newParticipant, stage: newStage, match: newMatch };
 
-			const updateCheck = await Event.update({ Bracket: JSON.stringify(newBracket) }, { where: { id }, transaction: t, returning: true });
+			const updateCheck = await Event.update(
+				{ Bracket: JSON.stringify(newBracket) },
+				{ where: { id }, transaction: t, returning: true },
+			);
 			if (!updateCheck) throw { code: 22 };
 
 			await t.commit();
