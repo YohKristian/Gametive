@@ -5,6 +5,8 @@ import { errorPopup } from "../helpers";
 import EventRow from "../components/EventRow";
 import LoadingAnimation from "../components/LoadingAnimation";
 import VerticalModalEditEvent from "../components/VerticalModalEditEvent";
+import SearchBar from "../components/SearchBar";
+import PaginationBar from "../components/PaginationBar";
 
 export default function EventPage() {
   const dispacth = useDispatch();
@@ -19,9 +21,9 @@ export default function EventPage() {
 
   const [search, setSearch] = useState({
     query: "",
-  })
+  });
 
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
 
   const onChangeSearch = (e) => {
     const { value, name } = e.target;
@@ -31,29 +33,29 @@ export default function EventPage() {
       [name]: value,
     });
 
-    setPage(1)
-  }
+    setPage(1);
+  };
 
   const pageNumber = (page) => {
-    let pagination = []
+    let pagination = [];
     for (let i = 1; i <= page; i++) {
-      pagination.push(i)
+      pagination.push(i);
     }
-    return pagination
-  }
+    return pagination;
+  };
 
   const handlePage = (page) => {
     if (page >= event.totalPages) {
-      setPage(event.totalPages)
+      setPage(event.totalPages);
     } else if (page < 1) {
-      setPage(1)
+      setPage(1);
     } else {
-      setPage(page)
+      setPage(page);
     }
-
-  }
+  };
 
   useEffect(() => {
+    setLoading(true)
     dispacth(
       fetchEvents(page, search, (error, success) => {
         setLoading(false);
@@ -65,35 +67,10 @@ export default function EventPage() {
     );
   }, [search, page]);
 
-
   return (
     <div>
       <div style={{ textAlign: "center" }}>
-        <div style={{ paddingTop: "50px" }}>
-          <i
-            className="fa-solid fa-magnifying-glass"
-            style={{
-              color: "#FF7F3F",
-              position: "absolute",
-              paddingTop: "6px",
-              paddingLeft: "5px",
-              fontSize: "25px",
-            }}
-          ></i>
-          <input
-            style={{
-              width: "800px",
-              height: "40px",
-              paddingLeft: "40px",
-              paddingBottom: "5px",
-            }}
-            type="text"
-            placeholder="Search Here..."
-            name="query"
-            value={search.query}
-            onChange={onChangeSearch}
-          />
-        </div>
+        <SearchBar value={search.query} onChange={onChangeSearch} />
         {loading ? (
           <LoadingAnimation />
         ) : (
@@ -135,28 +112,15 @@ export default function EventPage() {
                 </tbody>
               </table>
             </div>
-            <nav>
-              <ul className="pagination">
-                <li className="page-item">
-                  <a className="page-link" onClick={() => handlePage(event.currentPage - 1)}>
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li className="page-item pagination">
-                  {pageNumber(event.totalPages).map((x) => {
-                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
-                  })}
-                </li>
-                <li className="page-item">
-                  <a className="page-link" onClick={() => handlePage(event.currentPage + 1)}>
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav >
+            <PaginationBar
+              next={() => handlePage(event.currentPage + 1)}
+              previous={() => handlePage(event.currentPage - 1)}
+              current={handlePage}
+              totalPages={pageNumber(event.totalPages)}
+            />
           </>
         )}
-      </div >
-    </div >
+      </div>
+    </div>
   );
 }

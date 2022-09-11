@@ -6,6 +6,8 @@ import GameRow from "../components/GameRow";
 import VerticalModalAddGame from "../components/VerticalModalAddGame";
 import Button from "react-bootstrap/Button";
 import LoadingAnimation from "../components/LoadingAnimation";
+import SearchBar from "../components/SearchBar";
+import PaginationBar from "../components/PaginationBar";
 
 export default function GamePage() {
   const dispacth = useDispatch();
@@ -20,9 +22,9 @@ export default function GamePage() {
 
   const [search, setSearch] = useState({
     query: "",
-  })
+  });
 
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1);
 
   const onChangeSearch = (e) => {
     const { value, name } = e.target;
@@ -32,28 +34,29 @@ export default function GamePage() {
       [name]: value,
     });
 
-    setPage(1)
-  }
+    setPage(1);
+  };
 
   const pageNumber = (page) => {
-    let pagination = []
+    let pagination = [];
     for (let i = 1; i <= page; i++) {
-      pagination.push(i)
+      pagination.push(i);
     }
-    return pagination
-  }
+    return pagination;
+  };
 
   const handlePage = (page) => {
     if (page >= game.totalPages) {
-      setPage(game.totalPages)
+      setPage(game.totalPages);
     } else if (page < 1) {
-      setPage(1)
+      setPage(1);
     } else {
-      setPage(page)
+      setPage(page);
     }
-  }
+  };
 
   useEffect(() => {
+    setLoading(true);
     dispacth(
       fetchGames(page, search, (error, success) => {
         setLoading(false);
@@ -69,31 +72,7 @@ export default function GamePage() {
   return (
     <div>
       <div style={{ textAlign: "center" }}>
-        <div style={{ paddingTop: "50px" }}>
-          <i
-            className="fa-solid fa-magnifying-glass"
-            style={{
-              color: "#FF7F3F",
-              position: "absolute",
-              paddingTop: "6px",
-              paddingLeft: "5px",
-              fontSize: "25px",
-            }}
-          ></i>
-          <input
-            style={{
-              width: "800px",
-              height: "40px",
-              paddingLeft: "40px",
-              paddingBottom: "5px",
-            }}
-            type="text"
-            placeholder="Search Here..."
-            name="query"
-            value={search.query}
-            onChange={onChangeSearch}
-          />
-        </div>
+        <SearchBar value={search.query} onChange={onChangeSearch} />
         {loading ? (
           <LoadingAnimation />
         ) : (
@@ -137,25 +116,12 @@ export default function GamePage() {
                 </tbody>
               </table>
             </div>
-            <nav>
-              <ul className="pagination">
-                <li className="page-item">
-                  <a className="page-link" onClick={() => handlePage(game.currentPage - 1)}>
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li className="page-item pagination">
-                  {pageNumber(game.totalPages).map((x) => {
-                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
-                  })}
-                </li>
-                <li className="page-item">
-                  <a className="page-link" onClick={() => handlePage(game.currentPage + 1)}>
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav >
+            <PaginationBar
+              next={() => handlePage(game.currentPage + 1)}
+              previous={() => handlePage(game.currentPage - 1)}
+              current={handlePage}
+              totalPages={pageNumber(game.totalPages)}
+            />
           </>
         )}
       </div>
