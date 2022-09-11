@@ -13,10 +13,10 @@
 	--border-hover-color: #b6b5b5;
 
 	/* Sizes */
-	--text-size: 12px;
-	--round-margin: 40px;
+	--text-size: 15px;
+	--round-margin: 100px;
 	--match-width: 150px;
-	--match-horizontal-padding: 8px;
+	--match-horizontal-padding: 10px;
 	--match-vertical-padding: 6px;
 	--connector-border-width: 2px;
 	--match-border-width: 1px;
@@ -32,8 +32,8 @@
 	text-align: left;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	overflow: auto;
+	align-items: center;
+	overflow: hidden;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;

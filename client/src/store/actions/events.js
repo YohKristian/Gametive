@@ -33,7 +33,7 @@ export const addEvent = (data) => {
 		return axios
 			.post(baseUrl + "/events/add", data, { headers: { access_token: localStorage.access_token } })
 			.then((res) => {
-				dispatch(addEvent(res));
+				dispatch(addEventSuccess(res));
 			})
 			.catch((error) => {
 				throw error;

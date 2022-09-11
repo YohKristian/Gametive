@@ -27,9 +27,15 @@ export default function BracketViewer({ state }) {
 		}
 	}
 
+	async function matchInfo(match) {
+		window.bracketsViewer.onMatchClicked = (match) => {
+			console.log(match);
+		};
+	}
+
 	useEffect(() => {
 		render();
 	}, []);
 
-	return state ? <div id="example" className="brackets-viewer"></div> : <div>Loading...</div>;
+	return state ? <div id="example" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div> : <div>Loading...</div>;
 }
