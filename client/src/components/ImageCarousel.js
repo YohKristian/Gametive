@@ -42,7 +42,7 @@ const slideImage = [
     legend: "CS:GO",
   },
   {
-    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlcFoZMx0aw1lrf_heuPS_Pf__TOCQPIxTEdPZRlwbXNh6s4IgfxGF8DrwP3x4Vy05eiCo5rT1Cv8X1Zo9c5EpcFw_xVV-QTXsTWRgrUaK2MCkcT3mpt91_j2t84RMY545YSF_0q83QhXvoIU3iryKehH0CDfeNVd2yFbNT2QSxwcWOCkzWWxDD0Wl/s3072/free-fire-wallpapers%20(58).webp",
+    img: "https://www.xtrafondos.com/en/descargar.php?id=6224&resolucion=1920x1080",
     legend: "Free Fire",
   },
   {

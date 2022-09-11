@@ -18,17 +18,53 @@ export default function GamePage() {
 
   const [modalShow, setModalShow] = useState(false);
 
+  const [search, setSearch] = useState({
+    query: "",
+  })
+
+  const [page, setPage] = useState(1)
+
+  const onChangeSearch = (e) => {
+    const { value, name } = e.target;
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+
+    setPage(1)
+  }
+
+  const pageNumber = (page) => {
+    let pagination = []
+    for (let i = 1; i <= page; i++) {
+      pagination.push(i)
+    }
+    return pagination
+  }
+
+  const handlePage = (page) => {
+    if (page >= game.totalPages) {
+      setPage(game.totalPages)
+    } else if (page < 1) {
+      setPage(1)
+    } else {
+      setPage(page)
+    }
+  }
+
   useEffect(() => {
     dispacth(
-      fetchGames((error, success) => {
+      fetchGames(page, search, (error, success) => {
+        setLoading(false);
+
         if (error) {
           return errorPopup(error);
         }
         // console.log(success)
-        setLoading(false);
       })
     );
-  }, []);
+  }, [search, page]);
 
   return (
     <div>
@@ -53,6 +89,9 @@ export default function GamePage() {
             }}
             type="text"
             placeholder="Search Here..."
+            name="query"
+            value={search.query}
+            onChange={onChangeSearch}
           />
         </div>
         {loading ? (
@@ -98,6 +137,25 @@ export default function GamePage() {
                 </tbody>
               </table>
             </div>
+            <nav>
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(game.currentPage - 1)}>
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li className="page-item pagination">
+                  {pageNumber(game.totalPages).map((x) => {
+                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+                  })}
+                </li>
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(game.currentPage + 1)}>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav >
           </>
         )}
       </div>

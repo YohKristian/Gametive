@@ -37,7 +37,7 @@ module.exports = class gamesController {
 			if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "game not found" });
 
 			const pageLastPageCache = await redis.get("app:games:page");
-			if (pageLastPageCache !== page || search || !search) {
+			if (pageLastPageCache !== page || search || !search || size !== 8) {
 				await redis.del("app:games");
 			}
 			const gamesCache = await redis.get("app:games");
@@ -58,8 +58,6 @@ module.exports = class gamesController {
 					offset: offset,
 				});
 				const response = getPagingData(fetchResponse, page, limit);
-				const { count: totalItems, rows: items } = fetchResponse;
-
 				await redis.set("app:games", JSON.stringify(response));
 				await redis.set("app:games:page", page);
 

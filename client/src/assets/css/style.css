@@ -6,6 +6,8 @@
 @import "./imageCarousel.css";
 @import "./videoCarousel.css";
 @import "./loading.css";
+@import "./bracket.css";
+@import "./eventRegestration.css";
 
 * {
   padding: 0;

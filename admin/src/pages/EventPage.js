@@ -17,17 +17,54 @@ export default function EventPage() {
 
   const [loading, setLoading] = useState(true);
 
+  const [search, setSearch] = useState({
+    query: "",
+  })
+
+  const [page, setPage] = useState(1)
+
+  const onChangeSearch = (e) => {
+    const { value, name } = e.target;
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+
+    setPage(1)
+  }
+
+  const pageNumber = (page) => {
+    let pagination = []
+    for (let i = 1; i <= page; i++) {
+      pagination.push(i)
+    }
+    return pagination
+  }
+
+  const handlePage = (page) => {
+    if (page >= event.totalPages) {
+      setPage(event.totalPages)
+    } else if (page < 1) {
+      setPage(1)
+    } else {
+      setPage(page)
+    }
+
+  }
+
   useEffect(() => {
     dispacth(
-      fetchEvents((error, success) => {
+      fetchEvents(page, search, (error, success) => {
+        setLoading(false);
         if (error) {
           return errorPopup(error);
         }
         // console.log(success)
-        setLoading(false);
       })
     );
-  }, []);
+  }, [search, page]);
+
 
   return (
     <div>
@@ -52,6 +89,9 @@ export default function EventPage() {
             }}
             type="text"
             placeholder="Search Here..."
+            name="query"
+            value={search.query}
+            onChange={onChangeSearch}
           />
         </div>
         {loading ? (
@@ -68,7 +108,7 @@ export default function EventPage() {
                 paddingRight: "50px",
               }}
             >
-               <VerticalModalEditEvent
+              <VerticalModalEditEvent
                 show={modalShow}
                 onHide={() => setModalShow(false)}
               />
@@ -95,9 +135,28 @@ export default function EventPage() {
                 </tbody>
               </table>
             </div>
+            <nav>
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(event.currentPage - 1)}>
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li className="page-item pagination">
+                  {pageNumber(event.totalPages).map((x) => {
+                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+                  })}
+                </li>
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(event.currentPage + 1)}>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav >
           </>
         )}
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

@@ -15,10 +15,10 @@ export const gameFetchSuccess = function (payload) {
     }
 }
 
-export const fetchGames = (cb) =>
+export const fetchGames = (page, search, cb) =>
     async (dispatch) => {
         try {
-            const { data } = await axios(baseURL + `/games?page=1&size=8&search`, {
+            const { data } = await axios(baseURL + `/games?page=${page}&size=8&search=${search.query}`, {
                 method: "GET"
             });
             dispatch(gamesFetchSuccess(data));

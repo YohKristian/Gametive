@@ -22,7 +22,9 @@ export default function HeaderBar() {
       <div>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/search">Event list</NavLink>
+        <NavLink to="/event">Your Events</NavLink>
         <NavLink to="/event-registration">Event Registration</NavLink>
+        <NavLink to="/maps">Location</NavLink>
         {access_token ? (
           <NavLink onClick={handleLogout} to="/login">
             Logout

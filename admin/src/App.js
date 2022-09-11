@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import EventPage from "./pages/EventPage";
@@ -8,6 +9,7 @@ import ProtectedRouteNotLogin from "./protected/ProtectedRouteNotLogin";
 import ProtectedRouteAlreadyLogin from "./protected/ProtectedRouteAlreadyLogin";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css"
+
 
 function App() {
   return (

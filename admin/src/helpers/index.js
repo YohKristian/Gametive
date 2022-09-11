@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 const Toast = Swal.mixin({
   toast: true,
-  position: "top-end",
+  position: "bottom-end",
   color: "white",
   background: "black",
   showConfirmButton: false,
@@ -23,7 +23,6 @@ export const successPopup = (success) => {
 };
 
 export const errorPopup = (error) => {
-  console.log(error);
   let message;
   if (error.response) {
     message = error.response.data?.message;

@@ -1,7 +1,7 @@
 import { FETCH_ALL_USER, FETCH_DETAIL_USER } from "../action/actionType"
 
 let initialState = {
-    user: [],
+    user: {},
     detailUser: []
 }
 

@@ -5,3 +5,20 @@ button:hover {
   opacity: 0.9;
   transition: 0.3s;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-link {
+  background-color: orange;
+  color: white;
+}
+
+.dont-have {
+  margin-top: 15%;
+  margin-bottom: 20%;
+  font-weight: bolder;
+  color: orange;
+}

@@ -27,7 +27,8 @@ class Controller {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
-						 eventStatus: ['Active','Finished']
+						eventStatus: ['Active', 'Finished'],
+						UserId: +req.user.id
 					},
 					order: [["createdAt", "DESC"]],
 					limit: limit,
@@ -53,7 +54,7 @@ class Controller {
 			const { page, size, search } = req.query;
 			const lastPage = await redis.get("app:event:page");
 
-			if (lastPage !== page || search || !search) {
+			if (lastPage !== page || search || !search || size !== 8) {
 				await redis.del("app:event");
 			}
 
