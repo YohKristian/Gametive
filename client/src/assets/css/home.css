@@ -6,3 +6,65 @@
     text-align: center;
     margin: 0;
 }
+
+.about-us {
+    display: flex;
+    background-color: orange;
+    padding: 130px;
+}
+
+.text-us {
+    margin: auto;
+    margin-right: 70px;
+    margin-top: 11%;
+}
+
+.text-us h1 {
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+}
+
+.text-us p {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.line-us {
+    border: none;
+    height: 1px;
+    background-color: rgb(255, 255, 255);
+    opacity: 100%;
+}
+
+.about-us2 {
+    display: flex;
+    background-color: rgb(0, 0, 0);
+    padding: 130px;
+}
+
+.text-us2 {
+    margin: auto;
+    margin-right: 70px;
+    margin-top: 8.5%;
+}
+
+.text-us2 h1 {
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+}
+
+.text-us2 p {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.line-us2 {
+    border: none;
+    height: 1px;
+    background-color: rgb(255, 255, 255);
+    opacity: 100%;
+}
