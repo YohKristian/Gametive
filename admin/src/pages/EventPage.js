@@ -135,27 +135,27 @@ export default function EventPage() {
                 </tbody>
               </table>
             </div>
+            <nav>
+              <ul className="pagination">
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(event.currentPage - 1)}>
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li className="page-item pagination">
+                  {pageNumber(event.totalPages).map((x) => {
+                    return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+                  })}
+                </li>
+                <li className="page-item">
+                  <a className="page-link" onClick={() => handlePage(event.currentPage + 1)}>
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav >
           </>
         )}
-        <nav>
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" onClick={() => handlePage(event.currentPage - 1)}>
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item pagination">
-              {pageNumber(event.totalPages).map((x) => {
-                return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
-              })}
-            </li>
-            <li className="page-item">
-              <a className="page-link" onClick={() => handlePage(event.currentPage + 1)}>
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav >
       </div >
     </div >
   );

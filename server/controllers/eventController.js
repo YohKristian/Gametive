@@ -27,7 +27,8 @@ class Controller {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
-						eventStatus: ['Active', 'Finished']
+						eventStatus: ['Active', 'Finished'],
+						UserId: +req.user.id
 					},
 					order: [["createdAt", "DESC"]],
 					limit: limit,

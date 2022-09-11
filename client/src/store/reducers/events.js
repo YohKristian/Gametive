@@ -1,5 +1,6 @@
 const initialState = {
 	events: [],
+	yourEvents: [],
 };
 
 export function eventsReducer(state = initialState, action) {
@@ -8,6 +9,11 @@ export function eventsReducer(state = initialState, action) {
 			return {
 				...state,
 				events: action.payload,
+			};
+		case "eventsUser/fetchSuccess":
+			return {
+				...state,
+				yourEvents: action.payload,
 			};
 		case "events/addSuccess":
 			return true;
