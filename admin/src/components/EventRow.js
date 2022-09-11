@@ -1,22 +1,25 @@
 import { dateFormat } from "../helpers";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchDetailEvent, patchStatusEvents } from "../store/action/eventsActions";
+import {
+  fetchDetailEvent,
+  patchStatusEvents,
+} from "../store/action/eventsActions";
 import { errorPopup } from "../helpers";
 import VerticalModalEditEvent from "./VerticalModalEditEvent";
 
-export default function EventRow(props) {
+export default function EventRow({ item, handlerOnClickEdit }) {
   const dispatch = useDispatch();
 
   const [statusEvent, setStatusEvent] = useState("Pending");
 
   useEffect(() => {
-    setStatusEvent(props.item.eventStatus);
+    setStatusEvent(item.eventStatus);
   }, []);
-    const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const onChangeStatusEvent = (e) => {
-    const eventId = +props.item.id;
+    const eventId = +item.id;
     setStatusEvent(e.target.value);
 
     dispatch(
@@ -28,17 +31,6 @@ export default function EventRow(props) {
       })
     );
   };
-
-    const handlerOnClickEdit = () => {
-        
-        dispatch(fetchDetailEvent(props.item.id, (error, success) => {
-            if (error) {
-                return errorPopup(error);
-            }
-            // console.log(success)
-        }))
-        setModalShow(true);
-    }
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("id-ID", {
@@ -60,21 +52,17 @@ export default function EventRow(props) {
 
   return (
     <>
-        <VerticalModalEditEvent
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
       <tr>
-        <th scope="row">{props.item.name}</th>
-        <td>{formatPrice(props.item.price)}</td>
+        <th scope="row">{item.name}</th>
+        <td>{formatPrice(item.price)}</td>
         <td>
-          <img src={props.item.eventPoster} alt={props.item.name} />
+          <img src={item.eventPoster} alt={item.name} />
         </td>
-        <td>{props.item.eventType}</td>
-        <td>{dateFormat(props.item.eventDate)}</td>
-        <td>{props.item.Location.name}</td>
-        <td>{props.item.User.username}</td>
-        <td>{props.item.Game.name}</td>
+        <td>{item.eventType}</td>
+        <td>{dateFormat(item.eventDate)}</td>
+        <td>{item.Location.name}</td>
+        <td>{item.User.username}</td>
+        <td>{item.Game.name}</td>
         <td>
           <select
             value={statusEvent}
