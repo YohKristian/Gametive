@@ -2,7 +2,7 @@
   padding: 5% 10% 10% 10%;
 }
 
-.detail>div:nth-child(2)>* {
+.detail > div:nth-child(2) > * {
   margin: 15px 0;
 }
 
@@ -15,7 +15,7 @@
   box-shadow: 0 0 10px gray;
 }
 
-.detail-img>img {
+.detail-img > img {
   width: 100%;
 }
 
@@ -30,4 +30,12 @@
 
 .detail h2 {
   font-weight: lighter;
+}
+
+.detail button {
+  background-color: orange;
+  border: none;
+  color: #F5F5F5;
+  padding: 5px 10px;
+  border-radius: 10px;
 }

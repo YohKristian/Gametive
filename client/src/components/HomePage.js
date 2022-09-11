@@ -21,14 +21,14 @@ export default function HomePage() {
         </div>
       </div>
       <div className="about-us2">
+        <div className="img-us2">
+          <img src={about2} />
+        </div>
         <div className="text-us2">
           <h1>KAMI TERBUKA UNTUK SEMUA</h1>
           <h1>EVENT ESPORT!</h1>
           <hr className="line-us2" />
           <p>Ayo daftarkan event anda, jangan khawatir kami juga menerima event kompetitif yang tidak memungut biaya apapun! Tunggu apa lagi? Segera daftarkan event anda dan temui player player pro yang ada di sekitar anda dan buat tim menuju liga dunia!</p>
-        </div>
-        <div className="img-us2">
-          <img src={about2} />
         </div>
       </div>
     </>

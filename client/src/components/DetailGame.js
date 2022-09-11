@@ -110,12 +110,11 @@ export default function DetailGame() {
 						</a>
 					</p>
 				</div>
-
-				<BracketViewer state={JSON.parse(detail.Bracket)} />
-
 				<button onClick={handlerOnClick}>
 					Register event!
 				</button>
+
+				<BracketViewer state={JSON.parse(detail.Bracket)} />
 			</div>
 		</div>
 	) : (
