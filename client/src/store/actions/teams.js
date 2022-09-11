@@ -9,26 +9,29 @@ const createTeamSuccess = (payload) => ({
 
 export const fetchTeams = () => {
   return async (dispatch) => {
-    return axios.get(`${baseUrl}/teams/all-teams`, {
-      headers: { access_token: localStorage.access_token },
-    }).then((payload) => {
-      dispatch(fetchSuccess(payload.data));
-    });
+    return axios
+      .get(`${baseUrl}/teams/all-teams`, {
+        headers: { access_token: localStorage.access_token },
+      })
+      .then((payload) => {
+        dispatch(fetchSuccess(payload.data));
+      });
   };
 };
 
 export const createTeam = (payload) => {
   return async (dispatch) => {
-    return axios.post(`${baseUrl}/teams/create`, payload, {
-      headers: {
-        access_token: localStorage.access_token,
-      }
-        .then((result) => {
-          dispatch(createTeamSuccess(result));
-        })
-        .catch((error) => {
-          throw error;
-        }),
-    });
+    return axios
+      .post(`${baseUrl}/teams/create`, payload, {
+        headers: {
+          access_token: localStorage.access_token,
+        },
+      })
+      .then((result) => {
+        dispatch(createTeamSuccess(result));
+      })
+      .catch((error) => {
+        throw error;
+      });
   };
 };
