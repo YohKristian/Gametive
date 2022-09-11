@@ -26,6 +26,7 @@ export default function LoginPage() {
     dispatch(login(loginData))
       .then(({ data }) => {
         localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("username", data.username)
         navigate("/");
       })
       .catch((error) => errorPopup(error))

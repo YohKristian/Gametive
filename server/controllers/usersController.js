@@ -30,7 +30,7 @@ module.exports = class usersController {
 				role: loginResponse.role,
 			});
 
-			res.status(200).json({ login: Boolean(loginResponse), access_token: token });
+			res.status(200).json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username });
 		} catch (error) {
 			next(error);
 		}
@@ -112,8 +112,8 @@ module.exports = class usersController {
 		try {
 			// const {id} = req.user //from authentication
 			const { id, username } = req.user;
-			const { oldPassword, newPassword } = req.body;
-			if (!oldPassword || !newPassword) throw { code: 1 };
+			const { newPassword, oldPassword } = req.body;
+			if (!newPassword || !oldPassword) throw { code: 1 };
 
 			//check oldPass
 			const oldData = await User.findOne({ where: { id }, transaction: t });
