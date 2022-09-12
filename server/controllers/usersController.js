@@ -52,6 +52,23 @@ module.exports = class usersController {
 			next(error);
 		}
 	}
+	static async createAdmin(req, res, next) {
+		try {
+			const { username, email, password } = req.body;
+
+			if (!username || !email || !password) throw { code: 1 };
+
+			const [createResponse, created] = await User.findOrCreate({
+				where: { username, email },
+				defaults: { username, email, password, role: "Admin" },
+			});
+			if (!created) throw { code: 2 };
+
+			res.status(201).json(created);
+		} catch (error) {
+			next(error);
+		}
+	}
 	static async fetchAll(req, res, next) {
 		try {
 			const reg = new RegExp("^[0-9]*$");

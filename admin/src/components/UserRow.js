@@ -17,7 +17,13 @@ export default function UserRow(props) {
                     return errorPopup(error);
                 }
                 // console.log(success)
-                dispatch(fetchUsers());
+
+                dispatch(fetchUsers(1, { query: "" }, (error, success) => {
+                    if (error) {
+                        return errorPopup(error);
+                    }
+                    // console.log(success);
+                }));
             })
         )
     }
@@ -35,7 +41,7 @@ export default function UserRow(props) {
                         onClick={() => { setModalShow(true); }}
                         style={{ marginRight: '10px' }}
                     >
-                        <i className="bi bi-pencil-square"> Edit</i>
+                        <i className="bi bi-pencil-square"> Set Password</i>
                     </Button>
 
                     <VerticalModalEditPasswordUser
