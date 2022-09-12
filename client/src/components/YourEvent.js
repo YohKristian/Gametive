@@ -83,9 +83,10 @@ export default function SearchGames() {
                                     <h1>{event.name}</h1>
                                     <span className="status">{event.eventType}</span>
                                     <div>
-                                        <p>Lokasi: {event.Location.name}</p>
-                                        <p>Mulai: {dateFormat(event.eventDate)}</p>
-                                        <p>Regestration Fee: {rupiahFormat(event.price)}</p>
+                                        <p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
+                                        <p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
+                                        <p><i className="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
+                                        <p><i className="fa-solid fa-gamepad"></i> {event.Game.name} <i className="fa-solid fa-slash"></i> {event.Game.genre}</p>
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +101,8 @@ export default function SearchGames() {
                                     </a>
                                 </li>
                                 <li className="page-item pagination">
-                                    {pageNumber(yourEvents.totalPages).map((x) => {
-                                        return <a className="page-link" onClick={() => handlePage(x)}>{x}</a>
+                                    {pageNumber(yourEvents.totalPages).map((x, idx) => {
+                                        return <a key={idx} className="page-link" onClick={() => handlePage(x)}>{x}</a>
                                     })}
                                 </li>
                                 <li className="page-item">

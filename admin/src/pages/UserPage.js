@@ -6,6 +6,8 @@ import UserRow from "../components/UserRow";
 import LoadingAnimation from "../components/LoadingAnimation";
 import SearchBar from "../components/SearchBar";
 import PaginationBar from "../components/PaginationBar";
+import VerticalModalAddAdmin from "../components/VerticalModalAddAdmin";
+import Button from "react-bootstrap/Button";
 
 export default function UserPage() {
   const dispacth = useDispatch();
@@ -15,6 +17,8 @@ export default function UserPage() {
   });
 
   const [loading, setLoading] = useState(true);
+
+  const [modalShow, setModalShow] = useState(false);
 
   const [search, setSearch] = useState({
     query: "",
@@ -74,6 +78,16 @@ export default function UserPage() {
             <div style={{ paddingTop: "20px" }}>
               <h2>User</h2>
             </div>
+            <div style={{ marginLeft: "75vh", paddingTop: "20px" }}>
+              <Button variant="success" onClick={() => setModalShow(true)}>
+                <i className="bi bi-person-plus"> Add New Admin</i>
+              </Button>
+
+              <VerticalModalAddAdmin
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+              />
+            </div>
             <div
               style={{
                 paddingTop: "30px",
@@ -93,8 +107,8 @@ export default function UserPage() {
                 </thead>
                 <tbody>
                   {!loading &&
-                    user.items.map((user, idx) => {
-                      return <UserRow key={user.id} user={user} idx={idx} />;
+                    user.items.map((user) => {
+                      return <UserRow key={user.id} user={user} />;
                     })}
                 </tbody>
               </table>

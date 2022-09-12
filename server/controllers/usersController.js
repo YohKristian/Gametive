@@ -1,4 +1,4 @@
-const { User, Team, Participant, sequelize } = require("../models");
+const { User, Team, Participant, Event, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
@@ -52,6 +52,23 @@ module.exports = class usersController {
 			next(error);
 		}
 	}
+	static async createAdmin(req, res, next) {
+		try {
+			const { username, email, password } = req.body;
+
+			if (!username || !email || !password) throw { code: 1 };
+
+			const [createResponse, created] = await User.findOrCreate({
+				where: { username, email },
+				defaults: { username, email, password, role: "Admin" },
+			});
+			if (!created) throw { code: 2 };
+
+			res.status(201).json(created);
+		} catch (error) {
+			next(error);
+		}
+	}
 	static async fetchAll(req, res, next) {
 		try {
 			const reg = new RegExp("^[0-9]*$");
@@ -84,7 +101,7 @@ module.exports = class usersController {
 			const response = getPagingData(fetchResponse, page, limit);
 			console.log(response);
 			await redis.set("store:users_fetchAll", JSON.stringify(response));
-			await redis.set("app:users:page", page);
+			await redis.set("store:users:page", page);
 
 			res.status(200).json(response || { message: "there is no data" });
 		} catch (error) {
@@ -186,15 +203,21 @@ module.exports = class usersController {
 	static async fetchAllHistory(req, res, next) {
 		try {
 			const fetchResponse = await User.findOne({
-				attributes: { exclude: ["password"] },
+				attributes: { exclude: ["password", "createdAt", "updatedAt"] },
 				include: {
 					model: Team,
+					attributes: { exclude: ["createdAt", "updatedAt"] },
 					include: {
 						model: Participant,
+						attributes: { exclude: ["createdAt", "updatedAt"] },
 						where: {
 							statusPay: "Paid"
+						},
+						include: {
+							model: Event,
+							attributes: ["name", "eventDate"]
 						}
-					}
+					},
 				},
 				where: {
 					id: req.user.id

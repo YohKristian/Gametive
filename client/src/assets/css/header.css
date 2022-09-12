@@ -11,20 +11,20 @@ header {
   background-color: #00000070;
 }
 
-header > .img {
+header>.img {
   width: 250px;
 }
 
-header > .img > img {
+header>.img>img {
   width: 100%;
 }
 
-header > div:nth-child(2) {
+header>div:nth-child(2) {
   display: flex;
   flex-direction: row;
 }
 
-header > div > a {
+header>div>a {
   position: relative;
   margin: 0 10px;
   color: white;
@@ -33,12 +33,12 @@ header > div > a {
   padding: 8px 0;
 }
 
-header > div > a:hover {
+header>div>a:hover {
   color: white;
   cursor: pointer;
 }
 
-header > div > a::after {
+header>div>a::after {
   content: "";
   left: 0;
   bottom: 0;
@@ -50,6 +50,18 @@ header > div > a::after {
   transition: 0.5s;
 }
 
-header > div > a.active::after {
+header>div>a.active::after {
   width: 100%;
+}
+
+.fa-user {
+  color: orange;
+  position: relative;
+  top: 11px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.fa-user:hover {
+  color: rgb(190, 123, 0);
 }

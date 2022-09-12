@@ -10,3 +10,5 @@ Game - genre allow empty allow null
 Participant - statusPay default values 'Unpaid'
 Team - MemberName1-4 allow empty allow null
 Team - BenchMemberName1-2 allow empty allow null
+Team - statusTeam allow empty allow null default values 'Active'
+Location - DistrictId default values 0

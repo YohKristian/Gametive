@@ -66,3 +66,14 @@
 .register-page form > p > a {
   font-weight: bold;
 }
+
+.bi-exclamation-triangle-fill {
+  color: #eb2f06;
+  position: relative;
+  top: 11px;
+  cursor: pointer;
+}
+
+.bi-exclamation-triangle-fill:hover {
+  color: #e55039;
+}

@@ -1,4 +1,4 @@
-# API Spec Events
+# API Spec Games
 
 ## Authentication
 
@@ -25,10 +25,10 @@ Request :
 Response :
 - 200 OK
 ```json
-[
-    {
-        "totalItems": "integer",
-        "products" : [
+
+{
+    "totalItems": "integer",
+    "products" : [
             {
                 "id": "integer",
                 "name": "string",
@@ -42,11 +42,10 @@ Response :
                 "updatedAt": "date"
             }
         ],
-        "totalPages": "integer",
-        "currentPage": "integer",
-    },
-    ...
-]
+    "totalPages": "integer",
+    "currentPage": "integer",
+},
+
 ```
 
 - 400 Not Found

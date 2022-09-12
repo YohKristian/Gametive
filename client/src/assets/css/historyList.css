@@ -1,0 +1,27 @@
+.history-list {
+  padding: 0 80px;
+}
+
+.history-list h1 {
+  font-weight: bold;
+}
+
+.history-list table {
+  border-collapse: separate !important;
+  border-spacing: 0 10px;
+}
+
+.history-list table tr {
+  box-shadow: 0 0 10px silver;
+  border-radius: 10px;
+  margin: 20px 0;
+  transition: all 0.3s;
+}
+
+.history-list table tbody tr:hover {
+  box-shadow: 0 0px 15px silver;
+}
+
+.history-list table img {
+  width: 150px;
+}

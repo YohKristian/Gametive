@@ -106,21 +106,21 @@ export default function VerticalModalEditEvent(props) {
 									id="name"
 									name="name"
 									className="form-control form-control-lg"
-									placeholder="Input your game name"
+									placeholder="Input your event name"
 									defaultValue={newEvent?.name}
 									onChange={inputEditEvent}
 								/>
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="gameImg">
+								<label className="form-label" htmlFor="description">
 									Event Description
 								</label>
 								<textarea
-									id="gameImg"
+									id="description"
 									name="description"
 									className="form-control form-control-lg"
-									placeholder="Input your game image url"
+									placeholder="Input your event description"
 									value={newEvent.description}
 									onChange={inputEditEvent}
 								>
@@ -129,30 +129,30 @@ export default function VerticalModalEditEvent(props) {
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="youtubeUrl">
+								<label className="form-label" htmlFor="price">
 									Event Price
 								</label>
 								<input
-									type="text"
-									id="youtubeUrl"
+									type="number"
+									id="price"
 									name="price"
 									className="form-control form-control-lg"
-									placeholder="Input your game image url"
+									placeholder="Input your event price"
 									defaultValue={newEvent.price}
 									onChange={inputEditEvent}
 								/>
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="gameUrl">
+								<label className="form-label" htmlFor="rules">
 									Event Rules
 								</label>
 								<textarea
 									type="text"
-									id="gameUrl"
+									id="rules"
 									name="rules"
 									className="form-control form-control-lg"
-									placeholder="Input your game image url"
+									placeholder="Input your event rules"
 									value={newEvent.rules}
 									onChange={inputEditEvent}
 								>
@@ -161,55 +161,58 @@ export default function VerticalModalEditEvent(props) {
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="releaseDate">
+								<label className="form-label" htmlFor="eventPoster">
 									Event Poster
 								</label>
 								<input
 									type="input"
-									id="releaseDate"
+									id="eventPoster"
 									name="eventPoster"
 									className="form-control form-control-lg"
+									placeholder="Input your event poster url"
 									defaultValue={newEvent.eventPoster}
 									onChange={inputEditEvent}
 								/>
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="developer">
+								<label className="form-label" htmlFor="eventDate">
 									Event Date
 								</label>
 								<input
-									type="date"
-									id="developer"
+									type="datetime-local"
+									id="eventDate"
 									name="eventDate"
 									className="form-control form-control-lg"
-									placeholder="Input your game developer"
 									defaultValue={newEvent.eventDate}
 									onChange={inputEditEvent}
 								/>
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="genre">
+								<label className="form-label" htmlFor="eventType">
 									Event Type
 								</label>
-								<input
-									type="text"
-									id="genre"
+								<select
+									id="eventType"
 									name="eventType"
 									className="form-control form-control-lg"
-									placeholder="Input your game genre"
 									defaultValue={newEvent.eventType}
 									onChange={inputEditEvent}
-								/>
+								>
+									<option value="" >-- Select Type --</option>
+									<option value="Online" >Online</option>
+									<option value="Offline" >Offline</option>
+								</select>
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="genre">
+								<label className="form-label" htmlFor="GameId">
 									Game Name
 								</label>
 								<br></br>
 								<select
+									id="GameId"
 									name="GameId"
 									onChange={inputEditEvent}
 									defaultValue={newEvent.GameId}
@@ -230,18 +233,20 @@ export default function VerticalModalEditEvent(props) {
 							</div>
 
 							<div className="form-outline mb-4">
-								<label className="form-label" htmlFor="genre">
+								<label className="form-label" htmlFor="locationName">
 									Location Name
 								</label>
-								<input
+								<textarea
 									type="text"
-									id="genre"
+									id="locationName"
 									name="locationName"
 									className="form-control form-control-lg"
-									placeholder="Input your game genre"
-									defaultValue={newEvent.locationName}
+									placeholder="Input your address"
+									value={newEvent.locationName}
 									onChange={inputEditEvent}
-								/>
+								>
+									{newEvent.locationName}
+								</textarea>
 							</div>
 
 							<SelectLocation state={{ setLocation, Location: newEvent.Location }} />
@@ -275,10 +280,10 @@ export default function VerticalModalEditEvent(props) {
                   onChange={inputEditEvent}
                 />
               </div> */}
-
+							<br></br>
 							<button
-								className="btn btn-primary btn-lg btn-block"
-								style={{ width: "420px", backgroundColor: "#FF7F3F" }}
+								className="btn btn-lg btn-block"
+								style={{ width: "420px", backgroundColor: "#FF7F3F", color: "white" }}
 								type="submit"
 							>
 								Save
@@ -287,7 +292,7 @@ export default function VerticalModalEditEvent(props) {
 					</form>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={props.onHide}>Close</Button>
+					<button className="btn" style={{ backgroundColor: "#FF7F3F", color: "white" }} onClick={props.onHide}>Close</button>
 				</Modal.Footer>
 			</Modal>
 		</>

@@ -12,25 +12,23 @@ export default function HomePage() {
 
       <div className="about-us1">
         <div className="text-us">
-          <h1>KOMPETISI</h1>
-          <h1>DENGAN TEMAN!</h1>
+          <h1>KOMPETISI DENGAN TEMAN!</h1>
           <hr className="line-us" />
           <p>Ayo daftarkan diri dengan teman - temanmu untuk meningkatkan dan mengetahui seberapa pro anda dalam liga kompetitif, atau jika anda tidak punya teman main, adakan kompetisi di sekitar daerah anda untuk mendapatkan keseruan kompetitif lokal </p>
         </div>
-        <div className="img-us">
-          <img src={about} alt=""/>
+        <div>
+          <img className="img-us" src={about} alt="" />
         </div>
       </div>
 
       <div className="about-us2">
         <div className="text-us">
-          <h1>KAMI TERBUKA UNTUK SEMUA</h1>
-          <h1>EVENT ESPORT!</h1>
+          <h1>TERBUKA UNTUK SEMUA EVENT ESPORT!</h1>
           <hr className="line-us" />
           <p>Ayo daftarkan event anda, jangan khawatir kami juga menerima event kompetitif yang tidak memungut biaya apapun! Tunggu apa lagi? Segera daftarkan event anda dan temui player player pro yang ada di sekitar anda dan buat tim menuju liga dunia!</p>
         </div>
-        <div className="img-us">
-          <img src={about2} alt="" />
+        <div>
+          <img className="img-us" src={about2} alt="" />
         </div>
       </div>
     </>

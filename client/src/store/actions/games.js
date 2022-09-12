@@ -21,6 +21,12 @@ export const fetchGames = (cb) => async (dispatch) => {
 	}
 };
 
+export const fetchGamesDetail = (id) => () => {
+		return axios(baseURL + `/games/${id}`, {
+			method: "GET",
+		});
+};
+
 export const addGames = (payload, cb) => async () => {
 	try {
 		const { data } = await axios(baseURL + `/games`, {
