@@ -38,7 +38,7 @@ const slideImage = [
     legend: "Valorant",
   },
   {
-    img: "https://wallpaperboat.com/wp-content/uploads/2021/04/26/77161/csgo-15.jpg",
+    img: "https://cdn1.dotesports.com/wp-content/uploads/2021/02/23172633/csgo.jpg",
     legend: "CS:GO",
   },
   {
