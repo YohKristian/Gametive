@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
-import { addEvent } from "../store/actions";
+import { addEvent, editEvent } from "../store/actions";
 import SelectLocation from "./SelectLocation";
 import { fetchGames } from "../store/actions/games";
 import { fetchEventDetail } from "../store/actions";
@@ -17,79 +17,66 @@ let initial = {
 	rules: "",
 	price: "",
 	size: "",
-	locationName: "",
-	ProvinceId: "",
-	RegencyId: "",
-	DistrictId: "",
 	GameId: "",
+	locationName: "",
+	ProvinceId: 0,
+	RegencyId: 0,
+	DistrictId: 0,
 };
 let defaultValue = {};
-
+const size = [
+		{ value: 4, label: "4 Teams" },
+		{ value: 8, label: "8 Teams" },
+		{ value: 16, label: "16 Teams" },
+	],
+	type = [
+		{ value: "Offline", label: "Offline" },
+		{ value: "Online", label: "Online" },
+	];
 export default function EventRegistration() {
 	let { pathname } = useLocation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [gameList, setGameList] = useState([]);
+	const [valueSelect, setValueSelect] = useState({ value: "", label: "" });
+	const [loading, setLoading] = useState(true);
 	const [eventData, setEventData] = useState({ ...initial });
 
 	useEffect(() => {
 		dispatch(fetchGames((_, { items }) => setGameList(items.map((el) => ({ value: el.id, label: el.name })))));
-		if (pathname === "/event-edit") {
-			dispatch(fetchEventDetail(7)).then((data) => {
-				const {
-					name: eventName,
-					eventPoster,
-					eventDate,
-					eventType,
-					description,
-					rules,
-					price,
-					size,
-					Game: { id: GameId, name: GameName },
-					Location: { name: locationName, ProvinceId, RegencyId },
-				} = data;
-				defaultValue = { Game: { value: GameId, label: GameName }, Location: { ProvinceId, RegencyId } };
-				setEventData({
-					eventName,
-					eventPoster,
-					eventDate,
-					eventType,
-					description,
-					rules,
-					price,
-					size,
-					locationName,
-					ProvinceId,
-					RegencyId,
-					GameId,
-					locationName,
-				});
-			});
-		}
 	}, []);
 
 	const handleOnChangeForm = (e) => {
 		const { name, value } = e.target;
 		setEventData({ ...eventData, [name]: value });
-		console.log(eventData);
+		// console.log(eventData);
 	};
 
 	const handleSelectOption = (name, { value }) => {
 		setEventData({ ...eventData, [name]: value });
-		console.log(eventData);
+		// console.log(eventData);
 	};
 
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 		setEventData((prev) => ({ ...prev, ...eventData }));
-
-		dispatch(addEvent(eventData))
-			.then(() => {
-				navigate("/search");
-			})
-			.catch((err) => {
-				errorPopup(err);
-			});
+		if (pathname === "/event-edit") {
+			dispatch(editEvent(eventData.id, eventData))
+				// .then(() => {
+				// 	navigate("/search");
+				// })
+				.catch((err) => {
+					errorPopup(err);
+				});
+		} else {
+			dispatch(addEvent(eventData))
+				// .then(() => {
+				// 	navigate("/search");
+				// })
+				.catch((err) => {
+					errorPopup(err);
+				});
+		}
 	};
 
 	return (
@@ -151,14 +138,8 @@ export default function EventRegistration() {
 						</div>
 						<div>
 							<label htmlFor="eventType">Event type</label>
-							<Select
-								name="eventType"
-								onChange={(e) => handleSelectOption("eventType", e)}
-								options={[
-									{ value: "Offline", label: "Offline" },
-									{ value: "Online", label: "Online" },
-								]}
-							/>
+
+							<Select name="eventType" onChange={(e) => handleSelectOption("eventType", e)} options={type} />
 
 							<label htmlFor="eventPrice">Registration Fee</label>
 							<input
@@ -171,14 +152,7 @@ export default function EventRegistration() {
 							/>
 
 							<label htmlFor="eventSize">Max Participants</label>
-							<Select
-								onChange={(e) => handleSelectOption("size", e)}
-								options={[
-									{ value: 4, label: "4 Teams" },
-									{ value: 8, label: "8 Teams" },
-									{ value: 16, label: "16 Teams" },
-								]}
-							/>
+							<Select onChange={(e) => handleSelectOption("size", e)} options={size} />
 
 							<label htmlFor="GamesId">Games</label>
 							<Select onChange={(e) => handleSelectOption("GameId", e)} options={gameList} />
@@ -192,12 +166,11 @@ export default function EventRegistration() {
 								onChange={(e) => handleOnChangeForm(e)}
 							/>
 
-							<label htmlFor="eventRule">Location</label>
-
-							{defaultValue.Location && eventData.eventType === "Offline" ? (
-								<SelectLocation state={{ setEventData, Location: defaultValue.Location }} />
-							) : (
-								<SelectLocation state={{ setEventData, Location: "" }} />
+							{(defaultValue.Location || eventData.eventType === "Offline") && (
+								<>
+									<label htmlFor="eventRule">Location</label>
+									<SelectLocation state={{ setEventData }} />
+								</>
 							)}
 						</div>
 					</div>
