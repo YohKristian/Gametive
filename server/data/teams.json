@@ -7,7 +7,8 @@
     "MemberName3": "member3",
     "MemberName4": "member4",
     "BenchMemberName1": "bench1",
-    "BenchMemberName2": "bench2"
+    "BenchMemberName2": "bench2",
+    "statusTeam": "123"
   },
   {
     "name": "testingTeam2",
@@ -17,7 +18,8 @@
     "MemberName3": "",
     "MemberName4": "",
     "BenchMemberName1": "bench1",
-    "BenchMemberName2": ""
+    "BenchMemberName2": "",
+    "statusTeam": "123"
   },
   {
     "name": "testingTeam Cust1",
@@ -27,6 +29,7 @@
     "MemberName3": "member3",
     "MemberName4": "member4",
     "BenchMemberName1": "bench1",
-    "BenchMemberName2": "bench2"
+    "BenchMemberName2": "bench2",
+    "statusTeam": "123"
   }
 ]
