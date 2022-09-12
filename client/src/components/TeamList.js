@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { deleteTeam } from "../store/actions/teams";
 import { errorPopup } from "../helpers";
 import { fetchTeams, createTeam } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
@@ -25,6 +26,18 @@ export default function TeamList() {
     fetchTeamsOnLoad();
     // setTeamList(...teams);
   }, []);
+
+  const onDeleteClickHandler = (teamId) => {
+    dispatch(deleteTeam(teamId))
+      .then(({ data }) => {
+        console.log(data);
+        dispatch(fetchTeams())
+      })
+      .catch((error) => {
+        console.log(error);
+        errorPopup(error);
+      })
+  }
 
   return (
     <>
@@ -52,7 +65,27 @@ export default function TeamList() {
                 {teams.map((team, idx) => (
                   <div className="col-4" key={idx}>
                     <div className="card text-white mb-3" style={{ maxWidth: '18rem', backgroundColor: '#FFB562' }}>
-                      <div className="card-header ">{team.name}</div>
+                      <div className="card-header ">
+                        <div className="row text-center">
+                          <div className="col-6">
+                            {team.name}
+                          </div>
+                          <div className="col-3">
+                            <i
+                              className="bi bi-pencil-square"
+                              style={{ cursor: "pointer", color: "black" }}
+                              onClick={() => { console.log(`Edit ${team.id}`) }}
+                            ></i>
+                          </div>
+                          <div className="col-3">
+                            <i
+                              className="bi bi-x-square"
+                              style={{ cursor: "pointer", color: "red" }}
+                              onClick={() => { onDeleteClickHandler(team.id) }}
+                            ></i>
+                          </div>
+                        </div>
+                      </div>
                       <div className="card-body ">
                         <h5 className="card-title">Captain: {team.CaptainName}</h5>
                         <p className="card-text">Team Member :</p>
@@ -78,7 +111,8 @@ export default function TeamList() {
         </>
       ) : (
         <LoadingAnimation />
-      )}
+      )
+      }
     </>
   );
 }
