@@ -93,9 +93,9 @@ export default function SearchGames() {
 									<h1 className="fw-bold">{event.name}</h1>
 									<span className="status" style={{ ...statusColor(event.eventStatus) }}>{event.eventStatus}</span>
 									<div>
-										<p><i classNameName="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
-										<p><i classNameName="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
-										<p><i classNameName="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
+										<p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
+										<p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
+										<p><i className="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
 									</div>
 								</div>
 							</div>
@@ -110,9 +110,9 @@ export default function SearchGames() {
 							</li>
 							<li className="page-item pagination">
 								{pageNumber(events.totalPages).map((x) => {
-									return <a 
+									return <a
 										key={x}
-										className={events.currentPage === x ? "page-link active" : "page-link"} 
+										className={events.currentPage === x ? "page-link active" : "page-link"}
 										onClick={() => handlePage(x)}>
 										{x}
 									</a>
