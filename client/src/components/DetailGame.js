@@ -32,7 +32,7 @@ export default function DetailGame() {
     return { backgroundColor, color };
   };
 
-	const formatDate = (date) => new Date(date).toLocaleDateString("id-ID")
+  const formatDate = (date) => new Date(date).toLocaleDateString("id-ID")
 
   useEffect(() => {
     dispatch(fetchEventDetail(id)).then((data) => {
@@ -145,7 +145,7 @@ export default function DetailGame() {
             </p>
           </div>
           <div className="button">
-            <button onClick={handlerOnClick}>Register event!</button>
+            {eventTime > currentTime && (<button onClick={handlerOnClick}>Register event!</button>)}
             <button onClick={() => navigate(-1)}>Back</button>
           </div>
           {eventTime <= currentTime && (
@@ -153,7 +153,7 @@ export default function DetailGame() {
           )}
         </div>
       </div>
-      <div onClick={() => {window.open(game.gameUrl, '_blank')}} className="game">
+      <div onClick={() => { window.open(game.gameUrl, '_blank') }} className="game">
         <div className="game-img">
           <img src={game.gameImg} alt="" />
         </div>
