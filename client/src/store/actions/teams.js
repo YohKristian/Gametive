@@ -1,4 +1,5 @@
 import axios from "axios";
+import { FETCH_DETAIL_TEAM } from "./actionType";
 import baseUrl from "./baseUrl";
 
 const fetchSuccess = (payload) => ({ type: "teams/fetchSuccess", payload });
@@ -43,5 +44,29 @@ export const deleteTeam = (teamId) =>
       headers: {
         access_token: localStorage.access_token
       }
+    })
+  }
+
+export const getDetailTeamSuccess=(payload)=>{
+  return{
+    type: FETCH_DETAIL_TEAM,
+    payload
+  }
+}
+
+  export const fetchDetailTeam= (id) =>async (dispatch)=>{
+    
+    return axios(`${baseUrl}/teams/${id}`,{
+      method: 'get',
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
+
+    .then((data)=>{
+      dispatch(getDetailTeamSuccess(data))
+    })
+    .catch((error)=>{
+      console.log(error);
     })
   }
