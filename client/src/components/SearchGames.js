@@ -13,6 +13,17 @@ export default function SearchGames() {
 	const [keyword, setKeyword] = useState();
 	const [page, setPage] = useState(1)
 
+	const statusColor = (value) => {
+    const styleObj = {
+      Pending: ["#FFF9C4", "#F9A825"],
+      Active: ["#C8E6C9", "#1B5E20"],
+      Finished: ["#FFCCBC", "#BF360C"],
+      Archived: ["#C5CAE9", "#1A237E"],
+    };
+    const [backgroundColor, color] = styleObj[value];
+    return { backgroundColor, color };
+  };
+
 	const pageNumber = (page) => {
 		let pagination = []
 		for (let i = 1; i <= page; i++) {
@@ -79,12 +90,12 @@ export default function SearchGames() {
 									<img src={event.eventPoster} alt="" />
 								</div>
 								<div>
-									<h1>{event.name}</h1>
-									<span className="status">{event.eventType}</span>
+									<h1 className="fw-bold">{event.name}</h1>
+									<span className="status" style={{...statusColor(event.eventStatus)}}>{event.eventStatus}</span>
 									<div>
-										<p>Lokasi: {event.Location.name}</p>
-										<p>Mulai: {dateFormat(event.eventDate)}</p>
-										<p>Regestration Fee: {rupiahFormat(event.price)}</p>
+										<p><i class="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
+										<p><i class="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
+										<p><i class="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
 									</div>
 								</div>
 							</div>
