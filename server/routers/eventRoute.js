@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Controller = require("../controllers/eventController");
 const authentication = require("../middlewares/authentication");
-const Authorization = require("../middlewares/authorization");
 
 router.get("/", Controller.showAllEvent);
 router.get("/admin", authentication, Controller.showAllEvent);

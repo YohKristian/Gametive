@@ -9,8 +9,9 @@ export const eventsFetchSuccess = function (payload) {
 };
 
 export const fetchEvents = (page, search) => async (dispatch) => {
-	return axios(baseURL + `/events?page=${page || 1}&size=8&search=${search?.query || ""}`, {
+	return axios(baseURL + `/events/admin?page=${page || 1}&size=8&search=${search?.query || ""}`, {
 		method: "GET",
+		headers: { access_token: localStorage.access_token },
 	}).then(({ data }) => dispatch(eventsFetchSuccess(data)));
 };
 
