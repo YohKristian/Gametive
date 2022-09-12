@@ -17,7 +17,13 @@ export default function UserRow(props) {
                     return errorPopup(error);
                 }
                 // console.log(success)
-                dispatch(fetchUsers());
+
+                dispatch(fetchUsers(1, { query: "" }, (error, success) => {
+                    if (error) {
+                        return errorPopup(error);
+                    }
+                    // console.log(success);
+                }));
             })
         )
     }
