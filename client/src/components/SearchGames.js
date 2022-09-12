@@ -87,7 +87,7 @@ export default function SearchGames() {
 						{events.items.map((event, idx) => (
 							<div className="search-item" key={idx} onClick={toDetail(event.id)}>
 								<div className="img">
-									<img src={event.eventPoster} alt="" />
+									<img src={event.eventPoster} alt="" className="search-img" />
 								</div>
 								<div>
 									<h1 className="fw-bold">{event.name}</h1>
@@ -96,6 +96,7 @@ export default function SearchGames() {
 										<p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
 										<p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
 										<p><i className="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
+										<p><i className="fa-solid fa-gamepad"></i> {event.Game.name} <i class="fa-solid fa-slash"></i> {event.Game.genre}</p>
 									</div>
 								</div>
 							</div>

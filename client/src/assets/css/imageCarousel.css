@@ -34,3 +34,7 @@
   font-weight: bold;
   user-select: none;
 }
+
+.img-slide-img {
+  height: 110vh;
+}

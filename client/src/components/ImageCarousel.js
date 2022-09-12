@@ -57,7 +57,7 @@ export default function ImageCarousel() {
       <Carousel {...getConfigurableProps()} width={"100%"}>
         {slideImage.map((el, idx) => (
           <div className="img-slide" key={idx}>
-            <img key={el} src={el.img} alt="" />
+            <img key={el} src={el.img} alt="" className="img-slide-img" />
             <div>
               <h1>{el.legend}</h1>
             </div>
