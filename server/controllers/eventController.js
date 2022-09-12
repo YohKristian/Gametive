@@ -37,7 +37,7 @@ class Controller {
 				const response = getPagingData(fetchEvent, page, limit);
 				await redis.set("app:event", JSON.stringify(response));
 				await redis.set("app:event:page", page);
-				// console.log(response);
+
 				res.status(200).json(response);
 			}
 		} catch (error) {
@@ -160,6 +160,7 @@ class Controller {
 			if (!data) {
 				throw { code: 20 };
 			}
+			console.log(data.dataValues.Location);
 			res.status(200).json(data);
 		} catch (error) {
 			next(error);
@@ -211,7 +212,13 @@ class Controller {
 		try {
 			const { id } = req.params;
 			const { eventStatus } = req.body;
-			let data = await Event.update({ eventStatus }, { where: { id: id } });
+
+			if (!eventStatus) throw { code: 23 };
+
+			let [data] = await Event.update({ eventStatus }, { where: { id: id } });
+
+			if (data == 0) throw { code: 404 };
+
 			await redis.del("app:event");
 			res.status(200).json(data);
 		} catch (error) {
@@ -234,14 +241,16 @@ class Controller {
 			let { participant: newParticipant, stage: newStage, match: newMatch } = JSON.parse(bracket);
 
 			let dataBracket = await Event.findByPk(id, { transaction: t });
+
+			if (!dataBracket) throw { code: 404 };
+
 			dataBracket = { ...dataBracket.dataValues, Bracket: JSON.parse(dataBracket.Bracket) };
 			let newBracket = { ...dataBracket.Bracket, participant: newParticipant, stage: newStage, match: newMatch };
 
-			const updateCheck = await Event.update(
+			const [updateCheck, _] = await Event.update(
 				{ Bracket: JSON.stringify(newBracket) },
 				{ where: { id }, transaction: t, returning: true },
 			);
-			if (!updateCheck) throw { code: 22 };
 
 			await t.commit();
 			await redis.del("app:event");

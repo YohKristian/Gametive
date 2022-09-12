@@ -302,6 +302,71 @@ describe("PUT Admin Change Password User", () => {
 	});
 });
 
+describe("POST Create admin account", () => {
+	describe("Success create admin account", () => {
+		it("Should return true", async () => {
+			let admin_login = await request(app).post("/users/login").send({ username: "administrator", password: "password" });
+			let access_token = admin_login.body.access_token;
+
+			let credentials = { username: "administrator1", password: hashPassword("password"), email: "administrator1@email.com" };
+
+			let response = await request(app).post("/users/registerAdmin").send(credentials).set("access_token", access_token);
+
+			expect(response.status).toBe(201);
+			expect(response.body).toBe(true);
+		});
+	});
+
+	describe("Failed create admin account - invalid form input", () => {
+		it("Should return object with code and message", async () => {
+			let admin_login = await request(app).post("/users/login").send({ username: "administrator", password: "password" });
+			let access_token = admin_login.body.access_token;
+
+			let credentials = { username: "", password: hashPassword("password"), email: "administrator1@email.com" };
+
+			let response = await request(app).post("/users/registerAdmin").send(credentials).set("access_token", access_token);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 1);
+			expect(response.body).toHaveProperty("message", "invalid form data, please check your input");
+		});
+	});
+
+	describe("Failed create admin account - username/email is not available", () => {
+		it("Should return object with code and message", async () => {
+			let admin_login = await request(app).post("/users/login").send({ username: "administrator", password: "password" });
+			let access_token = admin_login.body.access_token;
+
+			let credentials = { username: "administrator", password: hashPassword("password"), email: "administrator@gmail.com" };
+
+			let response = await request(app).post("/users/registerAdmin").send(credentials).set("access_token", access_token);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 2);
+			expect(response.body).toHaveProperty("message", "username / email is not available");
+		});
+	});
+});
+
+/**
+ * ! NEED TO ADD SAMPLE DATA FIRST
+ * ! TODO FOR AFTERNOON
+ */
+
+// describe("GET All User history", () => {
+// 	let access_token;
+// 	describe("Success fetch all user history", () => {
+// 		it("Should return object with data history", async () => {
+// 			let admin_login = await request(app).post("/users/login").send({ username: "customer01", password: "password" });
+// 			access_token = admin_login.body.access_token;
+
+// 			let response = await request;
+// 		});
+// 	});
+// });
+
 describe("DESTROY Account - FOR ADMIN ONLY", () => {
 	let access_token = null;
 	describe("Success delete user", () => {
