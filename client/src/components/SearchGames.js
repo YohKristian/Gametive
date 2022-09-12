@@ -14,15 +14,15 @@ export default function SearchGames() {
 	const [page, setPage] = useState(1)
 
 	const statusColor = (value) => {
-    const styleObj = {
-      Pending: ["#FFF9C4", "#F9A825"],
-      Active: ["#C8E6C9", "#1B5E20"],
-      Finished: ["#FFCCBC", "#BF360C"],
-      Archived: ["#C5CAE9", "#1A237E"],
-    };
-    const [backgroundColor, color] = styleObj[value];
-    return { backgroundColor, color };
-  };
+		const styleObj = {
+			Pending: ["#FFF9C4", "#F9A825"],
+			Active: ["#C8E6C9", "#1B5E20"],
+			Finished: ["#FFCCBC", "#BF360C"],
+			Archived: ["#C5CAE9", "#1A237E"],
+		};
+		const [backgroundColor, color] = styleObj[value];
+		return { backgroundColor, color };
+	};
 
 	const pageNumber = (page) => {
 		let pagination = []
@@ -91,11 +91,11 @@ export default function SearchGames() {
 								</div>
 								<div>
 									<h1 className="fw-bold">{event.name}</h1>
-									<span className="status" style={{...statusColor(event.eventStatus)}}>{event.eventStatus}</span>
+									<span className="status" style={{ ...statusColor(event.eventStatus) }}>{event.eventStatus}</span>
 									<div>
-										<p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
-										<p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
-										<p><i className="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
+										<p><i classNameName="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
+										<p><i classNameName="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
+										<p><i classNameName="bi bi-cash"></i> {rupiahFormat(event.price)}</p>
 									</div>
 								</div>
 							</div>
