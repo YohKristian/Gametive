@@ -57,7 +57,7 @@ export default function SelectLocation({ state }) {
 		const { value } = e;
 		getKota(value, (kota) => setKotaData(kota));
 		setDataLocation({ ...dataLocation, ProvinceId: value });
-		setIsDisabled({ ...isDisabled, isProv: false });
+		setIsDisabled({ ...isDisabled, isProv: false, isKota: true });
 	};
 
 	const fetchKec = (e) => {
@@ -93,7 +93,6 @@ export default function SelectLocation({ state }) {
 				defaultValue={kotaData.length && kotaData.filter((x) => x.value == Location.RegencyId)}
 				onChange={fetchKec}
 				options={kotaData}
-				key={kotaData}
 				name="RegencyId"
 			/>
 
