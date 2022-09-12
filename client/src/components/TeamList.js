@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteTeam } from "../store/actions/teams";
+import { deleteTeam, fetchDetailTeam } from "../store/actions/teams";
 import { errorPopup } from "../helpers";
-import { fetchTeams, createTeam } from "../store/actions";
+import { fetchTeams, createTeam, fetchGamesDetail } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
+import ModalEditTeam from "./ModalEditTeam";
 
 export default function TeamList() {
   const [teamList, setTeamList] = useState([]);
   const { teams } = useSelector((state) => state.teamsReducer);
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(true);
+  const[ modal, setModalShow]= useState(false)
+
 
   const fetchTeamsOnLoad = () => {
     dispatch(fetchTeams())
@@ -39,6 +42,12 @@ export default function TeamList() {
       })
   }
 
+  const editModalTeam= (e,ids)=>{
+    e.preventDefault()
+    setModalShow(true)
+    dispatch(fetchDetailTeam(ids))
+  }
+
   return (
     <>
       <br />
@@ -52,13 +61,15 @@ export default function TeamList() {
 
           {/* <a href="#formCreateTeam">Create Form</a> */}
           <hr></hr>
-
+          <ModalEditTeam
+          show={modal}
+          onHide={() => setModalShow(false)}
+          />
           {teams.length === 0 && (
             <div>
               <h1>💀 So sad YOU have no team! 💀</h1>
             </div>
           )}
-
           {teams.length !== 0 && (
             <div className='container'>
               <div className='row' >
@@ -74,7 +85,7 @@ export default function TeamList() {
                             <i
                               className="bi bi-pencil-square"
                               style={{ cursor: "pointer", color: "black" }}
-                              onClick={() => { console.log(`Edit ${team.id}`) }}
+                              onClick={(e) => editModalTeam(e,team.id)}
                             ></i>
                           </div>
                           <div className="col-3">
