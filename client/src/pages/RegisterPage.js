@@ -5,6 +5,7 @@ import logo from "../logo.png";
 import { register } from "../store/actions";
 import { errorPopup, successPopup } from "../helpers";
 import LoadingHorizontal from "../components/LoadingHorizontal";
+import VerticalModalTnC from "../components/VerticalModalTnC";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export default function RegisterPage() {
     // address: "",
   });
   const [loading, setLoading] = useState(false);
+
+  const [modalShow, setModalShow] = useState(true);
 
   const handleInput = (e) => {
     const { value, name } = e.target;
@@ -86,6 +89,11 @@ export default function RegisterPage() {
             Already have an account? click here to{" "}
             <Link to={"/login"}>Log in</Link>
           </p>
+          <p className="bi bi-exclamation-triangle-fill" onClick={() => { setModalShow(true); }}> Terms & Condition</p>
+          <VerticalModalTnC
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
         </form>
       </div>
     </section>
