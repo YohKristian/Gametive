@@ -31,7 +31,7 @@ export default function HeaderBar() {
         {access_token && <NavLink to="/history-list">History Event</NavLink>}
         {access_token ? (
           <>
-            <i class="fa-solid fa-user" onClick={() => { setModalShow(true); }}></i>
+            <i className="fa-solid fa-user" onClick={() => { setModalShow(true); }}></i>
             <VerticalModalEditPasswordUser
               show={modalShow}
               onHide={() => setModalShow(false)}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
 import { fetchTeams, createTeam } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
@@ -40,35 +40,38 @@ export default function TeamList() {
           {/* <a href="#formCreateTeam">Create Form</a> */}
           <hr></hr>
 
-          {teams.length !== 0 ? (
-            teams.map((team, idx) => (
-              <div className='container'>
-              <div key={idx} className='row' >
-                <div className="col-4">
-                <div className="card text-white mb-3" style={{maxWidth: '18rem', backgroundColor: '#FFB562'}}>
-  <div className="card-header ">{team.name}</div>
-  <div className="card-body ">
-    <h5 className="card-title">Captain: {team.CaptainName}</h5>
-    <p className="card-text">Team Member :</p>
-    <p className="card-text">1. {team.MemberName1 && team.MemberName1}</p>
-    <p className="card-text">2. {team.MemberName2 && team.MemberName2}</p>
-    <p className="card-text">3. {team.MemberName3 && team.MemberName3}</p>
-    <p className="card-text">4. {team.MemberName4 && team.MemberName4}</p>
-    <p className="card-text">5. {team.MemberName5 && team.MemberName5}</p>
-    <h6 className="card-title">Benches:</h6>
-    <p className="card-text">1. {team.BenchMemberName1 && team.BenchMemberName1}</p>
-    <p className="card-text">2. {team.BenchMemberName2 && team.BenchMemberName2}</p>
-  </div>
-</div>
-</div>
-              </div>
-              </div>
-            ))
-          ) : (
+          {teams.length === 0 && (
             <div>
               <h1>💀 So sad YOU have no team! 💀</h1>
             </div>
           )}
+
+          {teams.length !== 0 && (
+            <div className='container'>
+              <div className='row' >
+                {teams.map((team, idx) => (
+                  <div className="col-4" key={idx}>
+                    <div className="card text-white mb-3" style={{ maxWidth: '18rem', backgroundColor: '#FFB562' }}>
+                      <div className="card-header ">{team.name}</div>
+                      <div className="card-body ">
+                        <h5 className="card-title">Captain: {team.CaptainName}</h5>
+                        <p className="card-text">Team Member :</p>
+                        <p className="card-text">1. {team.MemberName1 && team.MemberName1}</p>
+                        <p className="card-text">2. {team.MemberName2 && team.MemberName2}</p>
+                        <p className="card-text">3. {team.MemberName3 && team.MemberName3}</p>
+                        <p className="card-text">4. {team.MemberName4 && team.MemberName4}</p>
+                        <p className="card-text">5. {team.MemberName5 && team.MemberName5}</p>
+                        <h6 className="card-title">Benches:</h6>
+                        <p className="card-text">1. {team.BenchMemberName1 && team.BenchMemberName1}</p>
+                        <p className="card-text">2. {team.BenchMemberName2 && team.BenchMemberName2}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div id='down'>
             <FormTeam />
           </div>
