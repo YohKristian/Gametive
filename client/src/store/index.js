@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import { eventsReducer, eventDetailReducer } from "./reducers/events";
 import { gameReducer } from "./reducers/games";
 import { teamsReducer } from "./reducers/teams";
+import { usersReducer } from "./reducers/users";
 
 const store = createStore(
   combineReducers({
@@ -14,6 +15,7 @@ const store = createStore(
     eventDetailReducer,
     gameReducer,
     teamsReducer,
+    usersReducer,
   }),
   applyMiddleware(thunk)
 );

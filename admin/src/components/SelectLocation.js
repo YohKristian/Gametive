@@ -86,6 +86,7 @@ export default function SelectLocation({ state }) {
 				options={provData}
 				name="ProvinceId"
 			/>
+			<br></br>
 
 			<Select
 				isDisabled={isDisabled.isProv}
@@ -95,7 +96,7 @@ export default function SelectLocation({ state }) {
 				key={kotaData}
 				name="RegencyId"
 			/>
-
+			<br></br>
 			<Select
 				isDisabled={isDisabled.isKota}
 				defaultValue={kecData.length && kecData.filter((x) => x.value == Location.RegencyId)}

@@ -34,6 +34,23 @@ export const fetchUsers = (page, search, cb) =>
         }
     }
 
+export const addNewAdmin = (payload, cb) =>
+    async () => {
+        try {
+            const { data } = await axios(baseURL + `/users/registerAdmin`, {
+                method: "POST",
+                data: payload,
+                headers: {
+                    access_token: localStorage.access_token
+                }
+            });
+
+            cb(null, data);
+        } catch (error) {
+            cb(error);
+        }
+    }
+
 export const updateUsersPassword = (userId, payload, cb) =>
     async () => {
         try {

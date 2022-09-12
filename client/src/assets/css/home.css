@@ -80,10 +80,11 @@
 
 .text-us {
   padding: 0 20px;
+  margin-top: 40px
 }
 
 .text-us h1 {
-  font-size: 70px;
+  font-size: 60px;
   font-weight: bold;
 }
 

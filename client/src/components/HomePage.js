@@ -18,7 +18,7 @@ export default function HomePage() {
           <p>Ayo daftarkan diri dengan teman - temanmu untuk meningkatkan dan mengetahui seberapa pro anda dalam liga kompetitif, atau jika anda tidak punya teman main, adakan kompetisi di sekitar daerah anda untuk mendapatkan keseruan kompetitif lokal </p>
         </div>
         <div className="img-us">
-          <img src={about} alt=""/>
+          <img src={about} alt="" />
         </div>
       </div>
 

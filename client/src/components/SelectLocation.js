@@ -125,7 +125,7 @@ export default function SelectLocation({ state }) {
 		const { value } = e;
 		getKota(value).then((kota) => setKotaData(kota));
 		setDataLocation({ ...dataLocation, ProvinceId: value });
-		setIsDisabled({ ...isDisabled, isProv: false });
+		setIsDisabled({ ...isDisabled, isProv: false, isKota: true });
 	};
 
 	const fetchKec = (e) => {
@@ -155,6 +155,7 @@ export default function SelectLocation({ state }) {
 			<>
 				<Select defaultValue={valueSelect.prov_} options={provData} key={provData} name="ProvinceId" onChange={fetchKota} />
 
+
 				<Select
 					isDisabled={isDisabled.isProv}
 					defaultValue={valueSelect.kota_}
@@ -175,4 +176,5 @@ export default function SelectLocation({ state }) {
 			</>
 		);
 	}
+
 }
