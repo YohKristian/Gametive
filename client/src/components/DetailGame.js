@@ -5,7 +5,8 @@ import { fetchEventDetail } from "../store/actions";
 import { dateFormat, rupiahFormat } from "../helpers";
 import BracketViewer from "./BracketViewer";
 import axios from "axios";
-
+const currentTime = new Date();
+let eventTime = null;
 export default function DetailGame() {
 	const { id } = useParams();
 	const dispatch = useDispatch();
@@ -31,6 +32,7 @@ export default function DetailGame() {
 
 	useEffect(() => {
 		dispatch(fetchEventDetail(id)).then((data) => {
+			eventTime = new Date(data.eventDate);
 			return setDetail(data);
 		});
 	}, []);
@@ -41,26 +43,18 @@ export default function DetailGame() {
 
 	const getFullLocation = async () => {
 		try {
-			const { data: provinces } = await axios.get(
-				"https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json"
-			);
-			const province = provinces.filter(
-				(province) => province.id == detail.Location.ProvinceId
-			)[0];
+			const { data: provinces } = await axios.get("https://www.emsifa.com/api-wilayah-indonesia/api/provinces.json");
+			const province = provinces.filter((province) => province.id == detail.Location.ProvinceId)[0];
 
 			const { data: regencies } = await axios.get(
-				`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${province.id}.json`
+				`https://www.emsifa.com/api-wilayah-indonesia/api/regencies/${province.id}.json`,
 			);
-			const regency = regencies.filter(
-				(regency) => regency.id == detail.Location.RegencyId
-			)[0];
+			const regency = regencies.filter((regency) => regency.id == detail.Location.RegencyId)[0];
 
 			const { data: districts } = await axios.get(
-				`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regency.id}.json`
+				`https://www.emsifa.com/api-wilayah-indonesia/api/districts/${regency.id}.json`,
 			);
-			const district = districts.filter(
-				(district) => district.id == detail.Location.DistrictId
-			)[0];
+			const district = districts.filter((district) => district.id == detail.Location.DistrictId)[0];
 
 			setLocation({
 				province: province.name,
@@ -80,30 +74,40 @@ export default function DetailGame() {
 					eventName: detail.name,
 					eventPrice: +detail.price,
 					eventDate: detail.eventDate,
-				}
-			})
+				},
+			});
 		} else {
-			navigate("/login")
+			navigate("/login");
 		}
-	}
+	};
 
 	return detail ? (
-		<div className='detail'>
-			<div className='detail-img'>
-				<img src={detail.eventPoster} alt='' />
+		<div className="detail">
+			<div className="detail-img">
+				<img src={detail.eventPoster} alt="" />
 			</div>
 
 			<div>
 				<h1 className="fw-bold">{detail.name}</h1>
-				<span className='status' style={{ ...statusColor(detail.eventStatus) }}>{detail.eventStatus}</span>
+				<span className="status" style={{ ...statusColor(detail.eventStatus) }}>
+					{detail.eventStatus}
+				</span>
 				<h2>Description</h2>
 				<p>{detail.description}</p>
 				<h2>Rules</h2>
 				<p>{detail.rules}</p>
 				<div>
-					<p><i className="bi bi-geo-alt-fill"></i>Jakarta Selatan</p>
-					<p><i className="bi bi-flag-fill"></i>{dateFormat(detail.eventDate)}</p>
-					<p><i className="bi bi-cash"></i>{rupiahFormat(detail.price)}</p>
+					<p>
+						<i className="bi bi-geo-alt-fill"></i>Jakarta Selatan
+					</p>
+					<p>
+						<i className="bi bi-flag-fill"></i>
+						{dateFormat(detail.eventDate)}
+					</p>
+					<p>
+						<i className="bi bi-cash"></i>
+						{rupiahFormat(detail.price)}
+					</p>
 					<p>
 						<i className="fa-solid fa-map"></i>
 						<a
@@ -111,26 +115,18 @@ export default function DetailGame() {
 							target="_blank"
 							onClick={(event) => {
 								event.preventDefault();
-								showInMapClicked(
-									`${location.province} ${location.regency} ${location.district}`
-								);
+								showInMapClicked(`${location.province} ${location.regency} ${location.district}`);
 							}}
 						>
-							{location.province} - {location.regency}{" "}
-							{location.district ? `- ${location.district}` : ""}
+							{location.province} - {location.regency} {location.district ? `- ${location.district}` : ""}
 						</a>
 					</p>
 				</div>
 				<div className="button">
-					<button onClick={handlerOnClick}>
-						Register event!
-					</button>
-					<button onClick={() => navigate(-1)}>
-						Back
-					</button>
+					<button onClick={handlerOnClick}>Register event!</button>
+					<button onClick={() => navigate(-1)}>Back</button>
 				</div>
-
-				<BracketViewer state={JSON.parse(detail.Bracket)} />
+				{eventTime <= currentTime && <BracketViewer state={JSON.parse(detail.Bracket)} />}
 			</div>
 		</div>
 	) : (
