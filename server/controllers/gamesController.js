@@ -34,7 +34,7 @@ module.exports = class gamesController {
 
 			const { page, size, search } = req.query;
 
-			if (reg.test(page) == false || page <= 0) return res.status(404).json({ message: "game not found" });
+			if (reg.test(page) == false || page <= 0) throw { code: 404 };
 
 			const pageLastPageCache = await redis.get("app:games:page");
 			if (pageLastPageCache !== page || search || !search || size !== 8) {
@@ -74,12 +74,12 @@ module.exports = class gamesController {
 			const gamesId = req.params.gamesId;
 			const lastIdCache = await redis.get("app:gameId");
 
-			if (reg.test(gamesId) == false) return res.status(404).json({ message: "game not found" });
+			if (reg.test(gamesId) == false) throw { code: 404 };
 
 			if (gamesId !== lastIdCache) {
 				const fetchResponse = await Game.findByPk(+gamesId);
 
-				if (!fetchResponse) return res.status(404).json({ message: "game not found" });
+				if (!fetchResponse) throw { code: 404 };
 
 				await redis.set("app:gameDetailId", gamesId);
 
@@ -138,7 +138,7 @@ module.exports = class gamesController {
 
 			const fetchResponse = await Game.findByPk(+gamesId);
 
-			if (!fetchResponse) return res.status(404).json({ message: "game not found" });
+			if (!fetchResponse) throw { code: 404 };
 
 			await Game.destroy({
 				where: {
