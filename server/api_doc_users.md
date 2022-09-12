@@ -17,7 +17,38 @@ Response :
 }
 ```
 
-## 1. Register
+## 1. Login
+
+Request: 
+- Method : POST
+- Endpoint: `/users/login`
+- Body :
+```json
+{
+  "username": "string, unique",
+  "password": "string"
+}
+```
+
+Response :
+
+- 200 OK
+```json
+{
+  "login": true,
+  "access_token": "string"
+}
+```
+- 400 Bad Request
+```json
+{
+  "code": 4,
+  "message": "username / password invalid"
+}
+```
+
+
+## 2. Register
 
 Request: 
 - Method : POST
@@ -53,37 +84,7 @@ true
 }
 ```
 
-## 2. Login
-
-Request: 
-- Method : POST
-- Endpoint: `/users/login`
-- Body :
-```json
-{
-  "username": "string, unique",
-  "password": "string"
-}
-```
-
-Response :
-
-- 200 OK
-```json
-{
-  "login": true,
-  "access_token": "string"
-}
-```
-- 400 Bad Request
-```json
-{
-  "code": 4,
-  "message": "username / password invalid"
-}
-```
-
-## 3. Fetch All Users
+## 3. Fetch All History
 Request :
 - Method : GET
 - Endpoint : `/users`
@@ -93,17 +94,13 @@ Request :
 Response :
 - 200 OK
 ```json
-[
-    {
-        "id": "number",
-        "username": "string",
-        "email": "string",
-        "role": "string",
-        "createdAt": "date",
-        "updatedAt": "date"
-    },
-    ...
-]
+{
+    "id": 2,
+    "username": "string",
+    "email": "string",
+    "role": "string",
+    "Teams": [Array]
+}
 ```
 
 ## 4. Fetch One User
@@ -136,7 +133,118 @@ Response :
 }
 ```
 
-## 5. Update Password
+
+## 5. Fetch All Users
+Request :
+- Method : GET
+- Endpoint : `/users`
+- Header :
+    - acces_token : "your secret access token"
+
+Response :
+- 200 OK
+```json
+[
+    {
+        "id": "number",
+        "username": "string",
+        "email": "string",
+        "role": "string",
+        "createdAt": "date",
+        "updatedAt": "date"
+    },
+    ...
+]
+```
+
+## 5. Update Password (customer)
+Request :
+- Method : PUT
+- Endpoint : `/users/{username}`
+- Header :
+    - acces_token : "your secret access token"
+- Body :
+
+```json
+{
+  "oldPassword" : "string",
+  "newPassword" : "string"
+}
+```
+
+Response :
+- 200 OK
+```json
+{
+    "username": "string",
+    "message": "password has been changed"
+}
+```
+- 500 Internal Server Error
+```json
+{
+    "message": {
+        "code": 8
+    }
+}
+```
+
+## 6. Update Password (admin)
+Request :
+- Method : PUT
+- Endpoint : `/users/{username}`
+- Header :
+    - acces_token : "your secret access token"
+- Body :
+
+```json
+{
+  "newPassword" : "string"
+}
+```
+
+Response :
+- 200 OK
+```json
+{
+    "username": "string",
+    "message": "password has been changed"
+}
+```
+- 500 Internal Server Error
+```json
+{
+    "message": {
+        "code": 8
+    }
+}
+```
+
+## 7. Delete User (admin)
+Request :
+- Method : PUT
+- Endpoint : `/users/{userId}`
+- Header :
+    - acces_token : "your secret access token"
+
+Response :
+- 200 OK
+```json
+{
+    "id": "integer",
+    "message": "user has been deleted"
+}
+```
+- 500 Internal Server Error
+```json
+{
+    "message": {
+        "code": 8
+    }
+}
+```
+
+## 8. Delete User (customer)
 Request :
 - Method : PUT
 - Endpoint : `/users/{username}`
@@ -147,8 +255,8 @@ Response :
 - 200 OK
 ```json
 {
-    "username": "{username}",
-    "message": "password has been changed"
+    "id": "integer",
+    "message": "user has been deleted"
 }
 ```
 - 500 Internal Server Error
