@@ -84,7 +84,7 @@ module.exports = class usersController {
 			const response = getPagingData(fetchResponse, page, limit);
 			console.log(response);
 			await redis.set("store:users_fetchAll", JSON.stringify(response));
-			await redis.set("app:users:page", page);
+			await redis.set("store:users:page", page);
 
 			res.status(200).json(response || { message: "there is no data" });
 		} catch (error) {
@@ -193,8 +193,8 @@ module.exports = class usersController {
 						model: Participant,
 						where: {
 							statusPay: "Paid"
-						}
-					}
+						},
+					},
 				},
 				where: {
 					id: req.user.id
