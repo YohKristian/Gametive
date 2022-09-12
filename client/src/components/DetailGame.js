@@ -19,15 +19,15 @@ export default function DetailGame() {
 	});
 
 	const statusColor = (value) => {
-    const styleObj = {
-      Pending: ["#FFF9C4", "#F9A825"],
-      Active: ["#C8E6C9", "#1B5E20"],
-      Finished: ["#FFCCBC", "#BF360C"],
-      Archived: ["#C5CAE9", "#1A237E"],
-    };
-    const [backgroundColor, color] = styleObj[value];
-    return { backgroundColor, color };
-  };
+		const styleObj = {
+			Pending: ["#FFF9C4", "#F9A825"],
+			Active: ["#C8E6C9", "#1B5E20"],
+			Finished: ["#FFCCBC", "#BF360C"],
+			Archived: ["#C5CAE9", "#1A237E"],
+		};
+		const [backgroundColor, color] = styleObj[value];
+		return { backgroundColor, color };
+	};
 
 	useEffect(() => {
 		dispatch(fetchEventDetail(id)).then((data) => {
@@ -95,17 +95,17 @@ export default function DetailGame() {
 
 			<div>
 				<h1 className="fw-bold">{detail.name}</h1>
-				<span className='status' style={{...statusColor(detail.eventStatus)}}>{detail.eventStatus}</span>
+				<span className='status' style={{ ...statusColor(detail.eventStatus) }}>{detail.eventStatus}</span>
 				<h2>Description</h2>
 				<p>{detail.description}</p>
 				<h2>Rules</h2>
 				<p>{detail.rules}</p>
 				<div>
-					<p><i class="bi bi-geo-alt-fill"></i> Jakarta Selatan</p>
-					<p><i class="bi bi-flag-fill"></i> {dateFormat(detail.eventDate)}</p>
-					<p><i class="bi bi-cash"></i> {rupiahFormat(detail.price)}</p>
+					<p><i className="bi bi-geo-alt-fill"></i>Jakarta Selatan</p>
+					<p><i className="bi bi-flag-fill"></i>{dateFormat(detail.eventDate)}</p>
+					<p><i className="bi bi-cash"></i>{rupiahFormat(detail.price)}</p>
 					<p>
-						Maps :{" "}
+						<i className="fa-solid fa-map"></i>
 						<a
 							href="#"
 							target="_blank"
@@ -122,12 +122,12 @@ export default function DetailGame() {
 					</p>
 				</div>
 				<div className="button">
-				<button onClick={handlerOnClick}>
-					Register event!
-				</button>
-				<button onClick={() => navigate(-1)}>
-					Back
-				</button>
+					<button onClick={handlerOnClick}>
+						Register event!
+					</button>
+					<button onClick={() => navigate(-1)}>
+						Back
+					</button>
 				</div>
 
 				<BracketViewer state={JSON.parse(detail.Bracket)} />

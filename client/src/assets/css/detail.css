@@ -2,7 +2,7 @@
   padding: 5% 10% 10% 10%;
 }
 
-.detail > div:nth-child(2) > * {
+.detail>div:nth-child(2)>* {
   margin: 15px 0;
 }
 
@@ -15,7 +15,7 @@
   box-shadow: 0 0 10px gray;
 }
 
-.detail-img > img {
+.detail-img>img {
   width: 100%;
 }
 
@@ -32,6 +32,10 @@
   font-weight: lighter;
 }
 
+.detail button {
+  margin-top: 30px;
+}
+
 .detail button:nth-child(1) {
   background-color: orange;
   border: none;
@@ -42,9 +46,17 @@
 }
 
 .detail button:nth-child(2) {
-  background-color: red;
+  background-color: gray;
   border: none;
   color: #F5F5F5;
   padding: 5px 10px;
   border-radius: 10px;
+  width: 100px
+}
+
+.bi-geo-alt-fill,
+.bi-flag-fill,
+.bi-cash,
+.fa-map {
+  margin-right: 15px;
 }

@@ -202,8 +202,8 @@ export default function VerticalModalEditGame(props) {
                             </div>
 
                             <button
-                                className="btn btn-primary btn-lg btn-block"
-                                style={{ width: "420px", backgroundColor: "#FF7F3F" }}
+                                className="btn btn-lg btn-block"
+                                style={{ width: "420px", backgroundColor: "#FF7F3F", color: "white" }}
                                 type="submit"
                             >
                                 Save
@@ -212,7 +212,7 @@ export default function VerticalModalEditGame(props) {
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide}>Close</Button>
+                    <button className="btn" style={{ backgroundColor: "#FF7F3F", color: "white" }} onClick={props.onHide}>Close</button >
                 </Modal.Footer>
             </Modal>
         </>
