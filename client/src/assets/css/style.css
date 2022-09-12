@@ -8,6 +8,7 @@
 @import "./loading.css";
 @import "./bracket.css";
 @import "./eventRegestration.css";
+@import "./historyList.css";
 
 * {
   padding: 0;

@@ -1,7 +1,7 @@
 export default function HistoryList() {
     return (
         <>
-            <div style={{ marginTop: "10vh" }} className="text-center">
+            <div style={{ marginTop: "10vh" }} className="history-list text-center">
                 <h1>History List</h1>
                 <table className="table table-striped">
                     <thead>
