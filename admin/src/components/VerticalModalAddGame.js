@@ -36,7 +36,14 @@ export default function VerticalModalAddGame(props) {
                     return errorPopup(error);
                 }
                 // console.log(success);
-                dispacth(fetchGames());
+
+                dispacth(fetchGames(1, { query: "" }, (error, success) => {
+                    if (error) {
+                        return errorPopup(error);
+                    }
+                    // console.log(success);
+                }));
+
                 props.onHide();
                 setNewGame({
                     name: "",
