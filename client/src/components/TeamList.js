@@ -42,24 +42,26 @@ export default function TeamList() {
 
           {teams.length !== 0 ? (
             teams.map((team, idx) => (
-              <div key={idx} style={{ background: "lightgray" }}>
-                <div>
-                  <h1>Captain : </h1>
-                  <h2>
-                    <strong>{team.CaptainName}</strong>
-                  </h2>
-                  <h1>{team.name}</h1>
-                  <h4>Team Member :</h4>
-                  <p>1. {team.MemberName1 && team.MemberName1}</p>
-                  <p>2. {team.MemberName2 && team.MemberName2}</p>
-                  <p>3. {team.MemberName3 && team.MemberName3}</p>
-                  <p>4. {team.MemberName4 && team.MemberName4}</p>
-                  <p>5. {team.MemberName5 && team.MemberName5}</p>
-                  <h4>Benches</h4>
-                  <p>1. {team.BenchMemberName1 && team.BenchMemberName1}</p>
-                  <p>2. {team.BenchMemberName2 && team.BenchMemberName2}</p>
-                </div>
-                <hr></hr>
+              <div className='container'>
+              <div key={idx} className='row' >
+                <div className="col-4">
+                <div className="card text-white mb-3" style={{maxWidth: '18rem', backgroundColor: '#FFB562'}}>
+  <div className="card-header ">{team.name}</div>
+  <div className="card-body ">
+    <h5 className="card-title">Captain: {team.CaptainName}</h5>
+    <p className="card-text">Team Member :</p>
+    <p className="card-text">1. {team.MemberName1 && team.MemberName1}</p>
+    <p className="card-text">2. {team.MemberName2 && team.MemberName2}</p>
+    <p className="card-text">3. {team.MemberName3 && team.MemberName3}</p>
+    <p className="card-text">4. {team.MemberName4 && team.MemberName4}</p>
+    <p className="card-text">5. {team.MemberName5 && team.MemberName5}</p>
+    <h6 className="card-title">Benches:</h6>
+    <p className="card-text">1. {team.BenchMemberName1 && team.BenchMemberName1}</p>
+    <p className="card-text">2. {team.BenchMemberName2 && team.BenchMemberName2}</p>
+  </div>
+</div>
+</div>
+              </div>
               </div>
             ))
           ) : (
