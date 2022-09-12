@@ -30,7 +30,7 @@ export default function TeamList() {
   const onDeleteClickHandler = (teamId) => {
     dispatch(deleteTeam(teamId))
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         dispatch(fetchTeams())
       })
       .catch((error) => {
