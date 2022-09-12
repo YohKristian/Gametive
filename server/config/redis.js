@@ -1,3 +1,15 @@
 const Redis = require("ioredis");
-const redis = new Redis({ port: 18899, host: "redis-18899.c294.ap-northeast-1-2.ec2.cloud.redislabs.com", username: "default", password: "duydeHLZs9IqsQPDwl3UkszCxhbv77CK" }); //REDISLAB
+
+const REDIS_PORT = process.env.REDIS_PORT;
+const REDIS_HOST = process.env.REDIS_HOST;
+const REDIS_USERNAME = process.env.REDIS_USERNAME;
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+
+const redis = new Redis({
+  port: REDIS_PORT,
+  host: REDIS_HOST,
+  username: REDIS_USERNAME,
+  password: REDIS_PASSWORD,
+}); //REDISLAB
+
 module.exports = { redis };
