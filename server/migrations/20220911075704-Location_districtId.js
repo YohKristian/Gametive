@@ -13,7 +13,6 @@ module.exports = {
 			defaultValue: 0,
 			allowNull: false,
 		});
-		console.log("ini?");
 	},
 
 	async down(queryInterface, Sequelize) {
