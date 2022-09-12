@@ -6,7 +6,6 @@ const { queryInterface } = sequelize;
 
 // Token from login test
 let customer_token = "";
-let reqBracket = require("../template/4slot.json");
 
 beforeAll(() => {
 	// Insert Dummy User
@@ -46,6 +45,7 @@ beforeAll(() => {
 						MemberName4: "member4",
 						BenchMemberName1: "bench1",
 						BenchMemberName2: "bench2",
+						statusTeam: "Active",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
@@ -58,6 +58,7 @@ beforeAll(() => {
 						MemberName4: "",
 						BenchMemberName1: "bench1",
 						BenchMemberName2: "",
+						statusTeam: "Inactive",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
@@ -70,6 +71,7 @@ beforeAll(() => {
 						MemberName4: "member4",
 						BenchMemberName1: "bench1",
 						BenchMemberName2: "bench2",
+						statusTeam: "Active",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
@@ -81,7 +83,8 @@ beforeAll(() => {
 			return queryInterface.bulkInsert("Games", [
 				{
 					name: "League of Legends: Wild Rift",
-					gameImg: "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+					gameImg:
+						"https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
 					youtubeUrl: "https://www.youtube.com/watch?v=TFzkbos0oeo",
 					gameUrl: "https://wildrift.leagueoflegends.com/en-gb/",
 					releaseDate: "2020-10-27",
@@ -97,7 +100,8 @@ beforeAll(() => {
 				{
 					name: "Jl. Jakarta",
 					ProvinceId: 31,
-					RegencyId: 3171,
+					RegencyId: 3101,
+					DistrictId: 3101010,
 					createdAt: new Date(),
 					updatedAt: new Date(),
 				},
@@ -107,9 +111,11 @@ beforeAll(() => {
 			return queryInterface.bulkInsert("Events", [
 				{
 					name: "League of Legends: Wild Rift - Esport",
-					description: "Thank you to all the teams who competed during the season one global championship! We also want to give a huge shout out to all the fans who tuned in during Icons and made this event unforgettable. While this season has wrapped up, stay tuned for more Wild Rift esports announcements coming soon!",
+					description:
+						"Thank you to all the teams who competed during the season one global championship! We also want to give a huge shout out to all the fans who tuned in during Icons and made this event unforgettable. While this season has wrapped up, stay tuned for more Wild Rift esports announcements coming soon!",
 					price: 120000,
-					rules: "Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+					rules:
+						"Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
 					size: "4",
 					eventStatus: "Active",
 					eventPoster: "https://th.bing.com/th/id/OIP.C_o9I8YHGohNXfbsCcS7rQHaEK?pid=ImgDet&rs=1",
@@ -118,7 +124,8 @@ beforeAll(() => {
 					UserId: 1,
 					GameId: 1,
 					LocationId: 1,
-					Bracket: JSON.stringify(reqBracket),
+					size: 8,
+					Bracket: JSON.stringify(require("../template/8slot.json")),
 					createdAt: new Date(),
 					updatedAt: new Date(),
 				},
@@ -129,15 +136,9 @@ beforeAll(() => {
 				"Participants",
 				[
 					{
-						TeamId: 1,
-						EventId: 1,
-						paymentDate: new Date(),
-						createdAt: new Date(),
-						updatedAt: new Date(),
-					},
-					{
 						TeamId: 2,
 						EventId: 1,
+						statusPay: "Paid",
 						paymentDate: new Date(),
 						createdAt: new Date(),
 						updatedAt: new Date(),
@@ -317,6 +318,108 @@ describe("GET All Participants", () => {
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", expect.any(Number));
 			expect(response.body).toHaveProperty("message", expect.any(String));
+		});
+	});
+});
+
+describe("POST create participant", () => {
+	describe("Success create participant", () => {
+		it("should return created response", async () => {
+			const body = { TeamId: 1, EventId: 1 };
+			const response = await request(app).post("/participants").send(body).set("access_token", customer_token);
+
+			expect(response.status).toBe(201);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("statusPay", "Unpaid");
+		});
+	});
+
+	describe("failed create participant - invalid form", () => {
+		it("should return object with code and message", async () => {
+			const body = {};
+			const response = await request(app).post("/participants").send(body).set("access_token", customer_token);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 1);
+			expect(response.body).toHaveProperty("message", "invalid form data, please check your input");
+		});
+	});
+
+	describe("failed create participant - participant already paid", () => {
+		it("should return object with code and message", async () => {
+			const body = { TeamId: 2, EventId: 1 };
+			const response = await request(app).post("/participants").send(body).set("access_token", customer_token);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 80);
+			expect(response.body).toHaveProperty("message", "team already registered!");
+		});
+	});
+});
+
+describe("PUT update payment", () => {
+	describe("Success change status payment", () => {
+		it("Should return said participant with changed status", async () => {
+			let response = await request(app).put("/participants/1/1").set("access_token", customer_token);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toHaveProperty("statusPay", "Paid");
+		});
+	});
+
+	describe("failed change status payment - participant not found", () => {
+		it("Should return object with code and message", async () => {
+			let response = await request(app).put("/participants/999/999").set("access_token", customer_token);
+
+			expect(response.status).toBe(404);
+			expect(response.body).toHaveProperty("code", 404);
+			expect(response.body).toHaveProperty("message", "data not found");
+		});
+	});
+});
+
+describe("GET All Participants on specific event", () => {
+	describe("Success fetch all participants on certain event id", () => {
+		it("should return array of object of said event's participants", async () => {
+			let response = await request(app).get("/participants/1").set("access_token", customer_token);
+
+			console.log(response.body);
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+		});
+	});
+
+	describe("failed fetch all participants on certain event id - event id not found", () => {
+		it("should return array of object of said event's participants", async () => {
+			let response = await request(app).get("/participants/999").set("access_token", customer_token);
+
+			console.log(response.body);
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+		});
+	});
+});
+
+describe("DELETE participants by event id & team id", () => {
+	describe("Success delete participants by event id & team id", () => {
+		it("should return object of said participant", async () => {
+			let response = await request(app).delete("/participants/1/2").set("access_token", customer_token);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+		});
+	});
+
+	describe("failed delete participants by event id & team id", () => {
+		it("should return object with code and message", async () => {
+			let response = await request(app).delete("/participants/99/99").set("access_token", customer_token);
+
+			expect(response.status).toBe(404);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 404);
+			expect(response.body).toHaveProperty("message", "data not found");
 		});
 	});
 });
