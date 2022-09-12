@@ -1,4 +1,4 @@
-const { User, Team, Participant, sequelize } = require("../models");
+const { User, Team, Participant, Event, sequelize } = require("../models");
 const { Op } = require("sequelize");
 const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
@@ -186,14 +186,20 @@ module.exports = class usersController {
 	static async fetchAllHistory(req, res, next) {
 		try {
 			const fetchResponse = await User.findOne({
-				attributes: { exclude: ["password"] },
+				attributes: { exclude: ["password", "createdAt", "updatedAt"] },
 				include: {
 					model: Team,
+					attributes: { exclude: ["createdAt", "updatedAt"] },
 					include: {
 						model: Participant,
+						attributes: { exclude: ["createdAt", "updatedAt"] },
 						where: {
 							statusPay: "Paid"
 						},
+						include: {
+							model: Event,
+							attributes: ["name"]
+						}
 					},
 				},
 				where: {

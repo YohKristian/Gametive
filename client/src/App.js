@@ -11,6 +11,7 @@ import MapsLocation from "./components/MapsLocation";
 import NotFoundPage from "./pages/NotFoundPage";
 import YourEvent from "./components/YourEvent";
 import TeamList from "./components/TeamList";
+import HistoryList from "./components/HistoryList";
 import ParticipantRegistration from "./components/ParticipantRegistration";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -64,6 +65,7 @@ function App() {
 				<Route path="event-registration" element={<EventRegistration />} />
 				<Route path="participant-registration" element={<ParticipantRegistration />} />
 				<Route path="team-list" element={<TeamList />} />
+				<Route path="history-list" element={<HistoryList />} />
 				<Route path="event-edit" element={<EventRegistration />} />
 				<Route path="maps" element={<MapsLocation />} />
 				<Route path="" element={<Navigate to={"/home"} />} />
