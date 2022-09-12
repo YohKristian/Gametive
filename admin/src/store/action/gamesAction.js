@@ -21,9 +21,11 @@ export const fetchGames = (page, search, cb) =>
             const { data } = await axios(baseURL + `/games?page=${page}&size=8&search=${search.query}`, {
                 method: "GET"
             });
+
             dispatch(gamesFetchSuccess(data));
             cb(null, data);
         } catch (error) {
+            console.log(error);
             cb(error);
         }
     }
@@ -34,6 +36,7 @@ export const fetchGamesEdit = (cb) =>
             const { data } = await axios(baseURL + `/games?page=1&size=99&search=`, {
                 method: "GET"
             });
+
             dispatch(gamesFetchSuccess(data));
             cb(null, data);
         } catch (error) {
@@ -99,7 +102,6 @@ export const submitEditGameDetail = (gameId, updatedGame, cb) =>
                 }
             });
 
-            dispatch(fetchGames());
             cb(null, data);
         } catch (error) {
             cb(error);
