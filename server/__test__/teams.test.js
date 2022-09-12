@@ -243,7 +243,7 @@ describe('PUT Edit Teams', () => {
     });
 });
 
-describe('DELETE Delete Teams', () => {
+describe('PATCH Delete Teams', () => {
     // Reset DB
     afterAll(() => {
         return queryInterface.bulkDelete("Users", null, { truncate: true, cascade: true, restartIdentity: true })
@@ -252,10 +252,10 @@ describe('DELETE Delete Teams', () => {
             });
     })
 
-    describe('Success DELETE Delete Teams - token customer', () => {
+    describe('Success PATCH Delete Teams - token customer', () => {
         it('should return object of message', async () => {
             const response = await request(app)
-                .delete('/teams/delete/4')
+                .patch('/teams/delete/4')
                 .set('access_token', customer_token)
 
             expect(response.status).toBe(200);
@@ -264,7 +264,7 @@ describe('DELETE Delete Teams', () => {
         });
     });
 
-    describe('Fail DELETE Delete Teams - wrong teamId 999', () => {
+    describe('Fail PATCH Delete Teams - wrong teamId 999', () => {
         it('should return of object', async () => {
             const response = await request(app)
                 .get('/teams/delete/999')
@@ -275,7 +275,7 @@ describe('DELETE Delete Teams', () => {
         });
     });
 
-    describe('Fail DELETE Delete Team - no token', () => {
+    describe('Fail PATCH Delete Team - no token', () => {
         it('should return object', async () => {
             const response = await request(app)
                 .delete('/teams/1')
