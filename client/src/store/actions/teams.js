@@ -39,7 +39,7 @@ export const createTeam = (payload) => {
 export const deleteTeam = (teamId) =>
   () => {
     return axios(`${baseUrl}/teams/delete/${+teamId}`, {
-      method: "DELETE",
+      method: "PATCH",
       headers: {
         access_token: localStorage.access_token
       }
