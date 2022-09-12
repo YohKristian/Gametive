@@ -180,7 +180,7 @@ export default function VerticalModalEditEvent(props) {
 									Event Date
 								</label>
 								<input
-									type="date"
+									type="datetime-local"
 									id="eventDate"
 									name="eventDate"
 									className="form-control form-control-lg"

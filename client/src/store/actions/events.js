@@ -53,3 +53,18 @@ export const addEvent = (data) => {
 			});
 	};
 };
+
+export const editEvent = (id, data) => {
+	return async (dispatch) => {
+		return axios
+			.put(baseUrl + "/events/" + id, data, {
+				headers: {
+					access_token: localStorage.access_token,
+				},
+			})
+			.then((res) => res)
+			.catch((error) => {
+				throw error;
+			});
+	};
+};
