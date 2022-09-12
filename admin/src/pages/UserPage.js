@@ -93,8 +93,8 @@ export default function UserPage() {
                 </thead>
                 <tbody>
                   {!loading &&
-                    user.items.map((user, idx) => {
-                      return <UserRow key={user.id} user={user} idx={idx} />;
+                    user.items.map((user) => {
+                      return <UserRow key={user.id} user={user} />;
                     })}
                 </tbody>
               </table>
