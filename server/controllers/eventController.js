@@ -160,6 +160,7 @@ class Controller {
 			if (!data) {
 				throw { code: 20 };
 			}
+			console.log(data.dataValues.Location);
 			res.status(200).json(data);
 		} catch (error) {
 			next(error);
