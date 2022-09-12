@@ -63,6 +63,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         type: DataTypes.STRING,
       },
+      statusTeam: {
+        allowNull: true,
+        defaultValue: "Active",
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

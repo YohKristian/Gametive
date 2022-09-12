@@ -9,7 +9,8 @@ class TeamController {
             if (!teamsDataCache) {
                 const data = await Team.findAll({
                     where: {
-                        CaptainName: req.user.username
+                        CaptainName: req.user.username,
+                        statusTeam: "Active"
                     }
                 })
                 console.log(data);
@@ -121,7 +122,7 @@ class TeamController {
 
             if (findTeam.CaptainName !== req.user.username) throw { code: 44 };
 
-            await Team.destroy({
+            await Team.update({ statusTeam: "Deleted" }, {
                 where: {
                     id: teamId
                 }
