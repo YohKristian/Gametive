@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { errorPopup } from "../helpers";
+import { dateFormat, errorPopup } from "../helpers";
 import { getHistoryUser } from "../store/actions";
 
 export default function HistoryList() {
@@ -20,8 +20,6 @@ export default function HistoryList() {
             })
     }, [])
 
-    let teamName = "";
-
     return loading ? (
         <>
             <div style={{ marginTop: "10vh" }} className="text-center">
@@ -31,18 +29,23 @@ export default function HistoryList() {
                         <tr style={{ backgroundColor: "#EAE3D2" }}>
                             <th scope="col">Team Name</th>
                             <th scope="col">Event Name</th>
+                            <th scope="col">Event Date</th>
                             <th scope="col">Status Pay</th>
                             <th scope="col">Payment Date</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {history.Teams.length === 0 && <tr>
+                            <td colSpan={5}>No History Yet</td>
+                        </tr>}
                         {history.Teams.map(team => {
                             return team.Participants.map((participant, idx) => {
                                 return <tr key={idx}>
                                     <th scope="row">{team.name}</th>
                                     <td>{participant.Event.name}</td>
+                                    <td>{dateFormat(participant.Event.eventDate)}</td>
                                     <td>{participant.statusPay}</td>
-                                    <td>{participant.paymentDate}</td>
+                                    <td>{dateFormat(participant.paymentDate)}</td>
                                 </tr>
                             })
                         })}
