@@ -15,7 +15,7 @@ export default function BracketViewer({ state }) {
 					participants: participant,
 				},
 				{
-					selector: "#example",
+					selector: "#bracket",
 					participantOriginPlacement: "before",
 					separatedChildCountLabel: true,
 					showSlotsOrigin: true,
@@ -37,5 +37,9 @@ export default function BracketViewer({ state }) {
 		render();
 	}, []);
 
-	return state ? <div id="example" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div> : <div>Loading...</div>;
+	return state ? (
+		<div id="bracket" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div>
+	) : (
+		<div>Loading...</div>
+	);
 }
