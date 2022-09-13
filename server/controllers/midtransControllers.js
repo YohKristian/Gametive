@@ -118,13 +118,7 @@ class MidtransController {
             await redis.del("app:participantId");
 
             res.status(200).json({
-                id: fetchResponse.id,
-                TeamId: fetchResponse.TeamId,
-                EventId: fetchResponse.EventId,
-                statusPay: payload.paidStatus,
-                paymentDate: payload.currentDate,
-                createdAt: fetchResponse.createdAt,
-                updatedAt: fetchResponse.updatedAt,
+                message: "Success payment"
             });
         } catch (error) {
             await t.rollback();
