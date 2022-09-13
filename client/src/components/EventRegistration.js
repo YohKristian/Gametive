@@ -25,10 +25,10 @@ let initial = {
 };
 let defaultValue = {};
 const size = [
-		{ value: 4, label: "4 Teams" },
-		{ value: 8, label: "8 Teams" },
-		{ value: 16, label: "16 Teams" },
-	],
+	{ value: 4, label: "4 Teams" },
+	{ value: 8, label: "8 Teams" },
+	{ value: 16, label: "16 Teams" },
+],
 	type = [
 		{ value: "Offline", label: "Offline" },
 		{ value: "Online", label: "Online" },
@@ -141,7 +141,7 @@ export default function EventRegistration() {
 
 							<Select name="eventType" onChange={(e) => handleSelectOption("eventType", e)} options={type} />
 
-							<label htmlFor="eventPrice">Registration Fee</label>
+							<label htmlFor="eventPrice">Registration Fee<span style={{ color: "red" }}>*</span><span style={{ fontSize: "0.6rem", color: "red" }}> untuk event gratis masukan angka 0</span></label>
 							<input
 								type="number"
 								id="eventPrice"
