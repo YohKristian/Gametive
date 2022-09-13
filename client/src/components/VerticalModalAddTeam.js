@@ -82,7 +82,7 @@ export default function VerticalModalAddTeam(props) {
                             style={{ paddingLeft: "5", paddingRight: "5" }}
                         >
                             <div className="form-outline mb-4">
-                                <label htmlFor='teamName'>Team Name</label>
+                                <label htmlFor='teamName' className="form-label">Team Name</label>
                                 <input
                                     type='text'
                                     id='teamName'
@@ -90,16 +90,20 @@ export default function VerticalModalAddTeam(props) {
                                     name='teamName'
                                     value={formTeam.teamName}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='captainName'>Captain Name</label>
+                                <br></br>
+                                <label htmlFor='captainName' className="form-label">Captain Name</label>
                                 <input
                                     type='text'
                                     id="captainName"
                                     value={"You are the captain team!"}
                                     readOnly
                                     style={{ "fontWeight": "bold" }}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='memberOne'>Team Member 1</label>
+                                <br></br>
+                                <label htmlFor='memberOne' className="form-label">Team Member 1</label>
                                 <input
                                     type='text'
                                     id='memberOne'
@@ -107,8 +111,10 @@ export default function VerticalModalAddTeam(props) {
                                     name='memberOne'
                                     value={formTeam.memberOne}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='memberTwo'>Team Member 2</label>
+                                <br></br>
+                                <label htmlFor='memberTwo' className="form-label">Team Member 2</label>
                                 <input
                                     type='text'
                                     id='memberTwo'
@@ -116,8 +122,10 @@ export default function VerticalModalAddTeam(props) {
                                     name='memberTwo'
                                     value={formTeam.memberTwo}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='memberThree'>Team Member 3</label>
+                                <br></br>
+                                <label htmlFor='memberThree' className="form-label">Team Member 3</label>
                                 <input
                                     type='text'
                                     id='memberThree'
@@ -125,8 +133,10 @@ export default function VerticalModalAddTeam(props) {
                                     name='memberThree'
                                     value={formTeam.memberThree}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='memberFour'>Team Member 4</label>
+                                <br></br>
+                                <label htmlFor='memberFour' className="form-label">Team Member 4</label>
                                 <input
                                     type='text'
                                     id='memberFour'
@@ -134,8 +144,10 @@ export default function VerticalModalAddTeam(props) {
                                     name='memberFour'
                                     value={formTeam.memberFour}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-                                <label htmlFor='benchOne'>Team Member Bench 1</label>
+                                <br></br>
+                                <label htmlFor='benchOne' className="form-label">Team Member Bench 1</label>
                                 <input
                                     type='text'
                                     id='benchOne'
@@ -143,9 +155,10 @@ export default function VerticalModalAddTeam(props) {
                                     name='benchOne'
                                     value={formTeam.benchOne}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
-
-                                <label htmlFor='benchTwo'>Team Member Bench 2</label>
+                                <br></br>
+                                <label htmlFor='benchTwo' className="form-label">Team Member Bench 2</label>
                                 <input
                                     type='text'
                                     id='benchTwo'
@@ -153,11 +166,12 @@ export default function VerticalModalAddTeam(props) {
                                     name='benchTwo'
                                     value={formTeam.benchTwo}
                                     onChange={(event) => handleOnChangeForm(event)}
+                                    className="form-control form-control-lg"
                                 />
                             </div>
-
+                            <br></br>
                             <button
-                                className="btn"
+                                className="btn btn-lg"
                                 style={{ width: "420px", backgroundColor: "orange", color: "white" }}
                                 type="submit"
                             >
