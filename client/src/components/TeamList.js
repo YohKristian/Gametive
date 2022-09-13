@@ -8,12 +8,11 @@ import LoadingAnimation from "./LoadingAnimation";
 import ModalEditTeam from "./ModalEditTeam";
 
 export default function TeamList() {
-  const [teamList, setTeamList] = useState([]);
+  // const [teamList, setTeamList] = useState([]);
   const { teams } = useSelector((state) => state.teamsReducer);
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(true);
-  const[ modal, setModalShow]= useState(false)
-
+  const [modal, setModalShow] = useState(false);
 
   const fetchTeamsOnLoad = () => {
     dispatch(fetchTeams())
@@ -27,93 +26,168 @@ export default function TeamList() {
 
   useEffect(() => {
     fetchTeamsOnLoad();
-    // setTeamList(...teams);
   }, []);
 
   const onDeleteClickHandler = (teamId) => {
     dispatch(deleteTeam(teamId))
       .then(({ data }) => {
         // console.log(data);
-        dispatch(fetchTeams())
+        dispatch(fetchTeams());
       })
       .catch((error) => {
         console.log(error);
         errorPopup(error);
-      })
-  }
+      });
+  };
 
-  const editModalTeam= (e,ids)=>{
-    e.preventDefault()
-    setModalShow(true)
-    dispatch(fetchDetailTeam(ids))
-  }
+  const editModalTeam = (e, ids) => {
+    e.preventDefault();
+    setModalShow(true);
+    dispatch(fetchDetailTeam(ids));
+  };
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
       <div id='top'></div>
       {!isLoading && teams ? (
         <>
-          <a href='#down'>Create Team!</a>
+          {/* <a href='#down'>Create Team!</a> */}
 
-          {/* <a href="#formCreateTeam">Create Form</a> */}
-          <hr></hr>
-          <ModalEditTeam
-          show={modal}
-          onHide={() => setModalShow(false)}
-          />
+          <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
           {teams.length === 0 && (
-            <div>
-              <h1>💀 So sad YOU have no team! 💀</h1>
-            </div>
+            <div>{/* <h1>💀 So sad YOU have no team! 💀</h1> */}</div>
           )}
           {teams.length !== 0 && (
-            <div className='container'>
-              <div className='row' >
-                {teams.map((team, idx) => (
-                  <div className="col-4" key={idx}>
-                    <div className="card text-white mb-3" style={{ maxWidth: '18rem', backgroundColor: '#FFB562' }}>
-                      <div className="card-header ">
-                        <div className="row text-center">
-                          <div className="col-6">
-                            {team.name}
+            <>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <h3 className='text-center'>
+                <b>List of your Team</b>
+              </h3>
+              <hr></hr>
+              <br></br>
+              <div className='container'>
+                <div className='row'>
+                  {teams.map((team, idx) => (
+                    <div className='col-3' key={idx}>
+                      <div
+                        className='card text-white mb-3'
+                        style={{ maxWidth: "18rem" }}
+                      >
+                        <div
+                          className='card-header'
+                          style={{ backgroundColor: "#FFB562" }}
+                        >
+                          <div className='row text-center'>
+                            <div className='col-2'>
+                              <img
+                                src={require("../assets/image/GAMETIVE_LOGO_BAR.png")}
+                                width='50px'
+                                alt='TeamLogo'
+                              />
+                            </div>
+                            <div className='col-6 text-center'>
+                              <span
+                                style={{
+                                  fontSize: "1.1rem",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {team.name}
+                              </span>
+                            </div>
+                            <div className='col-2'>
+                              <i
+                                className='bi bi-pencil-square'
+                                style={{ cursor: "pointer", color: "black" }}
+                                onClick={(e) => editModalTeam(e, team.id)}
+                              ></i>
+                            </div>
+                            <div className='col-2'>
+                              <i
+                                className='bi bi-x-square'
+                                style={{ cursor: "pointer", color: "red" }}
+                                onClick={() => {
+                                  onDeleteClickHandler(team.id);
+                                }}
+                              ></i>
+                            </div>
                           </div>
-                          <div className="col-3">
-                            <i
-                              className="bi bi-pencil-square"
-                              style={{ cursor: "pointer", color: "black" }}
-                              onClick={(e) => editModalTeam(e,team.id)}
-                            ></i>
-                          </div>
-                          <div className="col-3">
-                            <i
-                              className="bi bi-x-square"
-                              style={{ cursor: "pointer", color: "red" }}
-                              onClick={() => { onDeleteClickHandler(team.id) }}
-                            ></i>
+                        </div>
+                        <div
+                          className='card-body'
+                          style={{ backgroundColor: "#FF8C00" }}
+                        >
+                          <h5 className='text-center'>Player Roster</h5>
+                          <hr></hr>
+                          <div className='row'>
+                            <div className='col-8'>
+                              <p className='text-center'>
+                                <b>Name</b>
+                              </p>
+                              <h5 className='card-title'>{team.CaptainName}</h5>
+                              <p className='card-text'>
+                                {team.MemberName1 && team.MemberName1}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName2 && team.MemberName2}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName3 && team.MemberName3}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName4 && team.MemberName4}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName5 && team.MemberName5}
+                              </p>
+                              <p className='text-center'>
+                                <b>Benches</b>
+                              </p>
+                              <p className='card-text'>
+                                {team.BenchMemberName1 && team.BenchMemberName1}
+                              </p>
+                              <p className='card-text'>
+                                {team.BenchMemberName2 && team.BenchMemberName2}
+                              </p>
+                            </div>
+                            <div className='col-4 text-center'>
+                              <p className=''>
+                                <b>Pos.</b>
+                              </p>
+                              <p className='card-text'>
+                                {team.CaptainName && "1"}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName1 && "2"}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName2 && "3"}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName3 && "4"}
+                              </p>
+                              <p className='card-text'>
+                                {team.MemberName4 && "5"}
+                              </p>
+                              <h6 className='card-title'>-----</h6>
+                              <p className='card-text'>
+                                {team.BenchMemberName1 && "1"}
+                              </p>
+                              <p className='card-text'>
+                                {team.BenchMemberName2 && "2"}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="card-body ">
-                        <h5 className="card-title">Captain: {team.CaptainName}</h5>
-                        <p className="card-text">Team Member :</p>
-                        <p className="card-text">1. {team.MemberName1 && team.MemberName1}</p>
-                        <p className="card-text">2. {team.MemberName2 && team.MemberName2}</p>
-                        <p className="card-text">3. {team.MemberName3 && team.MemberName3}</p>
-                        <p className="card-text">4. {team.MemberName4 && team.MemberName4}</p>
-                        <p className="card-text">5. {team.MemberName5 && team.MemberName5}</p>
-                        <h6 className="card-title">Benches:</h6>
-                        <p className="card-text">1. {team.BenchMemberName1 && team.BenchMemberName1}</p>
-                        <p className="card-text">2. {team.BenchMemberName2 && team.BenchMemberName2}</p>
-                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </>
           )}
 
           <div id='down'>
@@ -122,8 +196,7 @@ export default function TeamList() {
         </>
       ) : (
         <LoadingAnimation />
-      )
-      }
+      )}
     </>
   );
 }
@@ -182,13 +255,18 @@ function FormTeam() {
 
   return (
     <>
-      <h1>Create Team!</h1>
+      <br></br>
+      <br></br>
+      <br></br>
       <section className='ev-reg'>
         <div>
           <div className='img'>
             <img src='https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png' alt='' />
           </div>
-          <h3 className='fw-bold mt-2'>Create your team!</h3>
+          <br></br>
+          <h3 className='fw-bold mt-2' style={{ color: "gray" }}>
+            Create your own team!
+          </h3>
           <form onSubmit={handleOnSubmitForm}>
             <div>
               <div>
@@ -207,6 +285,7 @@ function FormTeam() {
                   name=''
                   value={"You are the captain team!"}
                   readOnly
+                  style={{ "font-weight": "bold" }}
                 />
                 <label>Team Member 1</label>
                 <input
