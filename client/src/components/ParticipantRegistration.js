@@ -95,7 +95,8 @@ export default function ParticipantRegistration() {
                         <img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
                     </div>
                     <h3 className="fw-bold mt-2">Participate to Event {eventName}</h3>
-                    <h3 className="fw-bold mt-2">Registration Fee : {rupiahFormat(eventPrice)}</h3>
+                    <h3 className="fw-bold mt-2">Registration Fee : {eventPrice === 0 ? "Free" : rupiahFormat(eventPrice)}</h3>
+                    {eventPrice !== 0 && <h3 className="fw-bold mt-2">Service Fee : {rupiahFormat(5000)}</h3>}
                     <h3 className="fw-bold mt-2">Event Date Start : {dateFormat(eventDate)}</h3>
                     <form onSubmit={handleOnSubmitForm}>
                         <label htmlFor="teamName">Team Name</label>

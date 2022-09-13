@@ -24,6 +24,7 @@ export default function HistoryList() {
         <>
             <div style={{ marginTop: "10vh" }} className="history-list text-center">
                 <h1>History List</h1>
+                <p style={{ color: "red" }}>* Event Fee sudah termasuk Service Fee seharga Rp 5.000,00</p>
                 <table className="table table-striped">
                     <thead>
                         <tr style={{ backgroundColor: "orange" }}>
@@ -45,7 +46,7 @@ export default function HistoryList() {
                                     <th scope="row">{team.name}</th>
                                     <td>{participant.Event.name}</td>
                                     <td>{dateFormat(participant.Event.eventDate)}</td>
-                                    <td>{rupiahFormat(participant.Event.price)}</td>
+                                    <td>{participant.Event.price === 0 ? "Free" : rupiahFormat(participant.Event.price + 5000)}</td>
                                     <td>{participant.statusPay}</td>
                                     <td>{dateFormat(participant.paymentDate)}</td>
                                 </tr>

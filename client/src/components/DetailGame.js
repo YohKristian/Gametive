@@ -125,7 +125,7 @@ export default function DetailGame() {
             </p>
             <p>
               <i className="bi bi-cash"></i>
-              {rupiahFormat(detail.price)}
+              {detail.price === 0 ? "Free" : rupiahFormat(detail.price)}
             </p>
             <p>
               <i className="fa-solid fa-map"></i>
