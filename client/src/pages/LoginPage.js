@@ -60,7 +60,7 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="login-page">
+    <section className="login-page font-link">
       <div>
         <form onSubmit={handleSubmit}>
           <div className="img">

@@ -33,3 +33,7 @@ button:hover {
   font-weight: bolder;
   color: orange;
 }
+
+.font-link {
+  font-family: 'Montserrat', sans-serif;
+}

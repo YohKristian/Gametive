@@ -39,7 +39,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <section className="register-page">
+    <section className="register-page font-link">
       <div>
         <form onSubmit={handleSubmit}>
           <div className="img">
