@@ -9,6 +9,7 @@ const getConfigurableProps = () => ({
   useKeyboardArrows: true,
   stopOnHover: true,
   dynamicHeight: true,
+  swipeable: false,
   emulateTouch: true,
   autoFocus: false,
   thumbWidth: 100,
@@ -27,7 +28,7 @@ const YoutubeSlide = ({ url, isSelected, legend }) => (
       loop={true}
       muted={true}
       controls={false}
-      height={"80vh"}
+      height={"50vw"}
     />
     <div>
       <h1>{legend}</h1>

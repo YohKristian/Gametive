@@ -24,7 +24,7 @@
 }
 
 .text-us h1 {
-  font-size: 40px;
+  font-size: 43px;
   font-weight: bold;
 }
 
@@ -56,6 +56,20 @@
 @media only screen and (max-width: 1100px) {
   .about-us1,
   .about-us2 {
+    padding: 0;
     flex-direction: column-reverse;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .about-us1 .img-us,
+  .about-us2 .img-us {
+    width: 100%;
+    max-width: 720;
+  }
+
+  .text-us {
+    padding: 20px;
+    margin: 0;
   }
 }

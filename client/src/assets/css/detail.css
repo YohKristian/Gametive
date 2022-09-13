@@ -63,6 +63,7 @@
 
 .detail>.event>div:nth-child(2)>* {
   margin: 15px 0;
+  word-wrap: break-word
 }
 
 .detail .game:hover {

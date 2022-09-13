@@ -67,8 +67,10 @@ export default function SearchGames() {
     return (
         <div className="search-page">
             <div className="search-bar">
-                <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
-                <input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
+                <div>
+                    <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
+                    <input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
+                </div>
             </div>
             {!loading ? (
                 <>

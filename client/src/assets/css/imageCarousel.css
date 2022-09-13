@@ -1,5 +1,5 @@
 .image-carousel .carousel:nth-child(1) {
-  height: 80vh;
+  aspect-ratio: 6/2;
 }
 
 .image-carousel .carousel:nth-child(2) {
@@ -8,12 +8,14 @@
 
 .image-carousel .img-slide {
   position: relative;
-  height: 80vh;
   overflow: hidden;
+  aspect-ratio: 6/2;
+  display: flex;
+  align-items: center;
 }
 
 .image-carousel .img-slide>img {
-  transform: translateY(-90px);
+  /* transform: translateY(-90px); */
   filter: brightness(50%);
 }
 
@@ -36,5 +38,15 @@
 }
 
 .img-slide-img {
-  height: 110vh;
+  width: 100%;
+  aspect-ratio: 6/4;
+}
+
+@media only screen and (max-width: 720px) {
+  .image-carousel .carousel:nth-child(1) {
+    aspect-ratio: 6/3;
+  }
+  .image-carousel .img-slide {
+    aspect-ratio: 6/3;
+  }
 }

@@ -25,3 +25,9 @@
 .history-list table img {
   width: 150px;
 }
+
+@media only screen and (max-width: 720px) {
+  .history-list {
+    padding: 0 10px;
+  }
+}
