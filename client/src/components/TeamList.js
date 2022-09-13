@@ -41,13 +41,14 @@ export default function TeamList() {
   };
 
   const editModalTeam = (ids) => {
-    setModalShow(true);
-
     dispatch(fetchDetailTeam(ids))
       .catch((error) => {
         console.log(error);
         errorPopup(error);
-      });
+      })
+      .finally(() => {
+        setModalShow(true);
+      })
   };
 
   return (
@@ -105,7 +106,9 @@ export default function TeamList() {
                               <i
                                 className='bi bi-pencil-square'
                                 style={{ cursor: "pointer", color: "black" }}
-                                onClick={(e) => editModalTeam(team.id)}
+                                onClick={() => {
+                                  editModalTeam(team.id)
+                                }}
                               ></i>
 
                               <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
