@@ -4,14 +4,15 @@
   margin: 100px
 }
 
-.detail > .game {
+.detail>.game {
   align-self: flex-start;
   position: -webkit-sticky;
   position: sticky;
   top: 80px;
+  margin-left: 50px;
 }
 
-.detail > * {
+.detail>* {
   width: 100%;
   max-width: 600px;
   margin: 0 10px;
@@ -123,7 +124,8 @@
     flex-direction: column;
     align-items: center;
   }
-  .detail > .game {
+
+  .detail>.game {
     position: unset;
     align-self: unset;
   }
