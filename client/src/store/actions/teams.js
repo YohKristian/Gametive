@@ -3,10 +3,6 @@ import { FETCH_DETAIL_TEAM } from "./actionType";
 import baseUrl from "./baseUrl";
 
 const fetchSuccess = (payload) => ({ type: "teams/fetchSuccess", payload });
-const createTeamSuccess = (payload) => ({
-  type: "teams/createSuccess",
-  payload,
-});
 
 export const fetchTeams = () => {
   return async (dispatch) => {
@@ -27,9 +23,6 @@ export const createTeam = (payload) => {
         headers: {
           access_token: localStorage.access_token,
         },
-      })
-      .then((result) => {
-        dispatch(createTeamSuccess(result));
       })
       .catch((error) => {
         throw error;
@@ -68,4 +61,15 @@ export const fetchDetailTeam = (id) =>
       .catch((error) => {
         console.log(error);
       })
+  }
+
+export const submitEditDetailTeam = (teamId, updatedTeam) =>
+  (dispatch) => {
+    return axios(baseUrl + `/teams/edit/${+teamId}`, {
+      method: "PUT",
+      data: updatedTeam,
+      headers: {
+        access_token: localStorage.access_token
+      }
+    })
   }

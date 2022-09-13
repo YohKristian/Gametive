@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteTeam, fetchDetailTeam } from "../store/actions/teams";
-import { errorPopup } from "../helpers";
+import { errorPopup, successPopup } from "../helpers";
 import { fetchTeams, createTeam } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
 import ModalEditTeam from "./ModalEditTeam";
@@ -33,6 +33,7 @@ export default function TeamList() {
       .then(({ data }) => {
         // console.log(data);
         dispatch(fetchTeams());
+        successPopup("Success Delete Team!");
       })
       .catch((error) => {
         console.log(error);
@@ -70,6 +71,7 @@ export default function TeamList() {
               <h3 className='text-center'>
                 <b>List of your Team</b>
               </h3>
+              <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
               <hr></hr>
               <br></br>
               <div className='container'>
@@ -110,8 +112,6 @@ export default function TeamList() {
                                   editModalTeam(team.id)
                                 }}
                               ></i>
-
-                              <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
                             </div>
                             <div className='col-2'>
                               <i
@@ -357,7 +357,7 @@ function FormTeam() {
                 />
               </div>
             </div>
-            <button type='submit'>Create</button>
+            <button type="submit">Create</button>
           </form>
         </div>
       </section>

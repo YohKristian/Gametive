@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react"
 import Modal from 'react-bootstrap/Modal';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { errorPopup, successPopup } from "../helpers";
+import { fetchTeams, submitEditDetailTeam } from "../store/actions";
 export default function ModalEditTeam(props) {
+    const dispatch = useDispatch();
+
     const [newTeam, setNewTeam] = useState({
         name: "",
         MemberName1: "",
@@ -23,20 +27,49 @@ export default function ModalEditTeam(props) {
     }
 
     useEffect(() => {
-        setNewTeam({
-            name: detailTeam.name,
-            MemberName1: detailTeam.MemberName1,
-            MemberName2: detailTeam.MemberName2,
-            MemberName3: detailTeam.MemberName3,
-            MemberName4: detailTeam.MemberName4,
-            BenchMemberName1: detailTeam.BenchMemberName1,
-            BenchMemberName2: detailTeam.BenchMemberName2,
-        })
+        console.log(detailTeam);
+        if (detailTeam) {
+            setNewTeam({
+                name: detailTeam.name,
+                MemberName1: detailTeam.MemberName1,
+                MemberName2: detailTeam.MemberName2,
+                MemberName3: detailTeam.MemberName3,
+                MemberName4: detailTeam.MemberName4,
+                BenchMemberName1: detailTeam.BenchMemberName1,
+                BenchMemberName2: detailTeam.BenchMemberName2,
+            })
+        }
     }, [detailTeam])
 
-    const handleOnSubmitForm = (e) => {
+    const handleOnSubmitFormModal = (e) => {
         e.preventDefault();
 
+        dispatch(submitEditDetailTeam(+detailTeam.id, newTeam))
+            .then(({ data }) => {
+                // console.log(data);
+                successPopup("Success Edit Team!");
+            })
+            .then(() => {
+                return dispatch(fetchTeams())
+                    .catch((error) => {
+                        errorPopup(error);
+                    })
+            })
+            .then(() => {
+                props.onHide();
+                setNewTeam({
+                    name: "",
+                    MemberName1: "",
+                    MemberName2: "",
+                    MemberName3: "",
+                    MemberName4: "",
+                    BenchMemberName1: "",
+                    BenchMemberName2: ""
+                });
+            })
+            .catch((error) => {
+                errorPopup(error);
+            })
     }
 
     return (
@@ -53,7 +86,7 @@ export default function ModalEditTeam(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={handleOnSubmitForm}>
+                    <form onSubmit={handleOnSubmitFormModal}>
                         <div
                             className="card-body text-center"
                             style={{ paddingLeft: "5", paddingRight: "5" }}
@@ -82,7 +115,8 @@ export default function ModalEditTeam(props) {
                                     id="captainName"
                                     readOnly
                                     className="form-control form-control-lg"
-                                    placeholder="You are the captain team!"
+                                    value="You are the captain team!"
+                                    style={{ "fontWeight": "bold" }}
                                 />
                             </div>
 
@@ -155,7 +189,7 @@ export default function ModalEditTeam(props) {
                                     id="BenchMemberName1"
                                     name="BenchMemberName1"
                                     className="form-control form-control-lg"
-                                    placeholder="Input BenchMemberName 1"
+                                    placeholder="Input Bench Member Name 1"
                                     defaultValue={newTeam.BenchMemberName1}
                                     onChange={handleOnChangeForm}
                                 />
@@ -171,7 +205,7 @@ export default function ModalEditTeam(props) {
                                     id="BenchMemberName2"
                                     name="BenchMemberName2"
                                     className="form-control form-control-lg"
-                                    placeholder="Input BenchMemberName 2"
+                                    placeholder="Input Bench Member Name 2"
                                     defaultValue={newTeam.BenchMemberName2}
                                     onChange={handleOnChangeForm}
                                 />
