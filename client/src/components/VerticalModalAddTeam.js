@@ -147,22 +147,22 @@ export default function VerticalModalAddTeam(props) {
                                     className="form-control form-control-lg"
                                 />
                                 <br></br>
-                                <label htmlFor='benchOne' className="form-label">Team Member Bench 1</label>
+                                <label htmlFor='benchOne' className="form-label">Reserve 1</label>
                                 <input
                                     type='text'
                                     id='benchOne'
-                                    placeholder='Bench Member 1'
+                                    placeholder='Reserve 1'
                                     name='benchOne'
                                     value={formTeam.benchOne}
                                     onChange={(event) => handleOnChangeForm(event)}
                                     className="form-control form-control-lg"
                                 />
                                 <br></br>
-                                <label htmlFor='benchTwo' className="form-label">Team Member Bench 2</label>
+                                <label htmlFor='benchTwo' className="form-label">Reserve 2</label>
                                 <input
                                     type='text'
                                     id='benchTwo'
-                                    placeholder='Bench Member 2'
+                                    placeholder='Reserve 2'
                                     name='benchTwo'
                                     value={formTeam.benchTwo}
                                     onChange={(event) => handleOnChangeForm(event)}

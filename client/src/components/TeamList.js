@@ -185,7 +185,7 @@ export default function TeamList() {
                               <p className='card-text'>
                                 {team.MemberName4 && "5"}
                               </p>
-                              <h6 className='card-title'>-----</h6>
+                              <h6 className='card-title'>{""}</h6>
                               <p className='card-text'>
                                 {team.BenchMemberName1 && "1"}
                               </p>

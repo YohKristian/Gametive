@@ -182,14 +182,14 @@ export default function ModalEditTeam(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="BenchMemberName1">
-                                    BenchMemberName 1
+                                    Reserve 1
                                 </label>
                                 <input
                                     type="text"
                                     id="BenchMemberName1"
                                     name="BenchMemberName1"
                                     className="form-control form-control-lg"
-                                    placeholder="Input Bench Member Name 1"
+                                    placeholder="Input Reserve 1"
                                     defaultValue={newTeam.BenchMemberName1}
                                     onChange={handleOnChangeForm}
                                 />
@@ -198,14 +198,14 @@ export default function ModalEditTeam(props) {
 
                             <div className="form-outline mb-4">
                                 <label className="form-label" htmlFor="BenchMemberName2">
-                                    BenchMemberName 2
+                                    Reserve 2
                                 </label>
                                 <input
                                     type="text"
                                     id="BenchMemberName2"
                                     name="BenchMemberName2"
                                     className="form-control form-control-lg"
-                                    placeholder="Input Bench Member Name 2"
+                                    placeholder="Input Reserve 2"
                                     defaultValue={newTeam.BenchMemberName2}
                                     onChange={handleOnChangeForm}
                                 />
