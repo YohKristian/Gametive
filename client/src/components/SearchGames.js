@@ -126,6 +126,7 @@ export default function SearchGames() {
 							</li>
 						</ul>
 					</nav >
+					<br></br>
 				</>
 			) : (
 				<LoadingAnimation />

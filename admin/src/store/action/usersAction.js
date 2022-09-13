@@ -9,7 +9,6 @@ export const loginUser = (payload, cb) =>
             cb(null, data);
 
         } catch (error) {
-            console.log(error);
             cb(error);
         }
     }
