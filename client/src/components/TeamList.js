@@ -89,7 +89,7 @@ export default function TeamList() {
                 </div>
                 <div className='row'>
                   {teams.map((team, idx) => (
-                    <div className='col-3' key={idx}>
+                    <div className='col-12 col-md-4' key={idx}>
                       <div
                         className='card text-white mb-3'
                         style={{ maxWidth: "18rem", height: "550px" }}
@@ -136,7 +136,7 @@ export default function TeamList() {
                           <h5 className='text-center'>Player Roster</h5>
                           <hr></hr>
                           <div className='row'>
-                            <div className='col-8'>
+                            <div className='col-8 my-auto'>
                               <p className='text-center'>
                                 <b>Name</b>
                               </p>
@@ -166,7 +166,7 @@ export default function TeamList() {
                                 {team.BenchMemberName2 && team.BenchMemberName2}
                               </p>
                             </div>
-                            <div className='col-4 text-center'>
+                            <div className='col-4 text-center my-auto'>
                               <p className=''>
                                 <b>Pos.</b>
                               </p>
@@ -185,7 +185,7 @@ export default function TeamList() {
                               <p className='card-text'>
                                 {team.MemberName4 && "5"}
                               </p>
-                              <h6 className='card-title'>{""}</h6>
+                              <h6 className='card-title'>No</h6>
                               <p className='card-text'>
                                 {team.BenchMemberName1 && "1"}
                               </p>
@@ -207,7 +207,8 @@ export default function TeamList() {
         </>
       ) : (
         <LoadingAnimation />
-      )}
+      )
+      }
     </>
   );
 }
