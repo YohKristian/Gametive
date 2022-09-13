@@ -1,4 +1,4 @@
-const { Participant, Team, Event, sequelize } = require("../models");
+const { User, Participant, Team, Event, sequelize } = require("../models");
 const { redis } = require("../config/redis");
 
 module.exports = class participantsController {
@@ -6,6 +6,15 @@ module.exports = class participantsController {
 		try {
 			const { TeamId, EventId } = req.body;
 			if (!TeamId || !EventId) throw { code: 1 };
+
+			const findEvent = await Event.findOne({
+				include: { model: User, attributes: ["username"] },
+				where: {
+					id: +EventId
+				}
+			})
+
+			if (req.user.username === findEvent.User.username) throw { code: 81 };
 
 			const [createResponse, created] = await Participant.findOrCreate({
 				where: { TeamId, EventId },

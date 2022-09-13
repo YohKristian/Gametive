@@ -20,6 +20,7 @@ export default function VerticalModalTnC(props) {
                         <hr class="my-4"></hr>
                         <ol>
                             <li>User bertanggung jawab atas informasi yang di berikan / yang di daftarkan sebagai event yang akan kami promosikan di website kami, jika user melakukan pelanggaran peraturan ini beberapa kali maka, dari pihak Gametive kami berhak untuk menghentikan layanan penggunaan user dengan cara menghapus user dari layanan kami.</li>
+                            <li>Jika User sebagai pembuat / penyelenggara event, maka kami dari pihak Gametive berhak untuk tidak mengijinkan penyelenggara untuk mendaftarkan timnya sendiri, untuk menghindari kecurangan dari pihak pembuat / penyelenggara dalam berlangsungnya acara.</li>
                             <li>User dalam hal mengadakan sebuah event yang berbayar, kami dari pihak Gametive berhak untuk mengambil Rp 5.000,00 untuk setiap event yang di adakan yang menggunakan melalui layanan kami.</li>
                             <li>Jika dalam suatu kasus User dalam hal mengadakan sebuah event yang gratis, kami dari pihak Gametive tidak akan mengambil biaya apapun untuk setiap event yang di adakan yang menggunakan melalui layanan kami.</li>
                             <li>User bertanggung jawab atas informasi yang di berikan / yang di daftarkan saat mengisi informasi, user bertanggung jawab atas informasi yang sudah di masukan seperti username, email, dan password. User harus menjaga kerahasiaan password masing - masing.</li>
