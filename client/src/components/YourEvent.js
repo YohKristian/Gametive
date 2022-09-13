@@ -96,6 +96,7 @@ export default function SearchGames() {
                                             <VerticalModalEditEvent
                                                 show={modal}
                                                 onHide={() => setModal(false)}
+                                                event_id={event.id}
                                             />
                                         </div>
                                     </div>

@@ -154,7 +154,7 @@ export default function SelectLocation({ state }) {
 		return (
 			<>
 				<Select defaultValue={valueSelect.prov_} options={provData} key={provData} name="ProvinceId" onChange={fetchKota} />
-
+				<br></br>
 
 				<Select
 					isDisabled={isDisabled.isProv}
@@ -164,6 +164,7 @@ export default function SelectLocation({ state }) {
 					name="RegencyId"
 					onChange={fetchKec}
 				/>
+				<br></br>
 
 				<Select
 					isDisabled={isDisabled.isKota}

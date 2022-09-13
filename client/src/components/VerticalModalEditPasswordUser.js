@@ -86,6 +86,7 @@ export default function VerticalModalEditPasswordUser(props) {
                                 className="btn"
                                 style={{ width: "420px", backgroundColor: "orange", color: "white" }}
                                 type="submit"
+                                onClick={props.onHide}
                             >
                                 Save
                             </button>

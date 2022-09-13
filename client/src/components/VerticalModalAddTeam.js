@@ -174,6 +174,7 @@ export default function VerticalModalAddTeam(props) {
                                 className="btn btn-lg"
                                 style={{ width: "420px", backgroundColor: "orange", color: "white" }}
                                 type="submit"
+                                onClick={props.onHide}
                             >
                                 Create
                             </button>

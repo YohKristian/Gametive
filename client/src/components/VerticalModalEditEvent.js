@@ -45,7 +45,7 @@ export default function VerticalModalEditEvent(props) {
 
     useEffect(() => {
         dispatch(fetchGames((_, { items }) => setGameList(items.map((el) => ({ value: el.id, label: el.name })))));
-        dispatch(fetchEventDetail(19))
+        dispatch(fetchEventDetail(props.event_id))
             .then((data) => {
                 const {
                     id,
@@ -69,6 +69,7 @@ export default function VerticalModalEditEvent(props) {
                 });
 
                 setEventData({
+                    id,
                     eventName,
                     eventPoster,
                     eventDate,
@@ -101,9 +102,6 @@ export default function VerticalModalEditEvent(props) {
         e.preventDefault();
         setEventData((prev) => ({ ...prev, ...eventData }));
         dispatch(editEvent(eventData.id, eventData))
-            .then(() => {
-                navigate("/search");
-            })
             .catch((err) => {
                 errorPopup(err);
             });
@@ -129,108 +127,113 @@ export default function VerticalModalEditEvent(props) {
                                 className="card-body text-center"
                                 style={{ paddingLeft: "5", paddingRight: "5" }}
                             >
-                                <div className="form-outline mb-4">
-                                    <label htmlFor="eventName" className="form-label">Event Name</label>
-                                    <input
-                                        type="text"
-                                        id="eventName"
-                                        placeholder="Input your Event name here"
-                                        name="eventName"
-                                        value={eventData.eventName}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
+                                <div className='row'>
+                                    <div className="form-outline mb-4 col-6">
+                                        <label htmlFor="eventName" className="form-label">Event Name</label>
+                                        <input
+                                            type="text"
+                                            id="eventName"
+                                            placeholder="Input your Event name here"
+                                            name="eventName"
+                                            value={eventData.eventName}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventPoster" className="form-label">Event Poster</label>
+                                        <input
+                                            type="text"
+                                            id="eventPoster"
+                                            placeholder="input image url here"
+                                            name="eventPoster"
+                                            value={eventData.eventPoster}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventDate" className="form-label">Event date</label>
+                                        <input
+                                            type="datetime-local"
+                                            id="eventDate"
+                                            name="eventDate"
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            value={eventData.eventDate}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventDescription" className="form-label">Description</label>
+                                        <textarea
+                                            id="eventDescription"
+                                            placeholder="Detail of the events"
+                                            name="description"
+                                            value={eventData.description}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventRule" className="form-label">Rule</label>
+                                        <textarea
+                                            id="eventRule"
+                                            placeholder="Rule for the event"
+                                            name="rules"
+                                            value={eventData.rules}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventType" className="form-label">Event type</label>
+                                        <Select
+                                            name="eventType"
+                                            defaultValue={valueSelect.type}
+                                            onChange={(e) => handleSelectOption("eventType", e)}
+                                            options={typeDefault}
+                                        />
+                                    </div>
+                                    <div className="form-outline mb-4 col-6">
+                                        <label htmlFor="eventPrice" className="form-label">Registration Fee</label>
+                                        <input
+                                            type="number"
+                                            id="eventPrice"
+                                            placeholder="Rp 100.000"
+                                            name="price"
+                                            value={eventData.price}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        <label htmlFor="eventSize" className="form-label">Max Participants</label>
+                                        <Select defaultValue={valueSelect.size} onChange={(e) => handleSelectOption("size", e)} options={sizeDefault} />
+                                        <br></br>
+                                        <label htmlFor="GamesId">Games</label>
+                                        <Select defaultValue={valueSelect.game} onChange={(e) => handleSelectOption("GameId", e)} options={gameList} />
+                                        <br></br>
+                                        <label htmlFor="eventRule" className="form-label">Address</label>
+                                        <textarea
+                                            id="eventRule"
+                                            placeholder="Alamat Detail"
+                                            name="locationName"
+                                            value={eventData.locationName}
+                                            onChange={(e) => handleOnChangeForm(e)}
+                                            className="form-control"
+                                        />
+                                        <br></br>
+                                        {(valueSelect.Location || eventData.eventType === "Offline") && (
+                                            <>
+                                                <label htmlFor="eventRule" className="form-label">Location</label>
+                                                <SelectLocation state={{ setEventData, Location: valueSelect.location || null }} />
+                                            </>
+                                        )}
+                                    </div>
                                     <br></br>
-                                    <label htmlFor="eventPoster" className="form-label">Event Poster</label>
-                                    <input
-                                        type="text"
-                                        id="eventPoster"
-                                        placeholder="input image url here"
-                                        name="eventPoster"
-                                        value={eventData.eventPoster}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventDate" className="form-label">Event date</label>
-                                    <input
-                                        type="datetime-local"
-                                        id="eventDate"
-                                        name="eventDate"
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        value={eventData.eventDate}
-                                        className="form-control"
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventDescription" className="form-label">Description</label>
-                                    <textarea
-                                        id="eventDescription"
-                                        placeholder="Detail of the events"
-                                        name="description"
-                                        value={eventData.description}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventRule" className="form-label">Rule</label>
-                                    <textarea
-                                        id="eventRule"
-                                        placeholder="Rule for the event"
-                                        name="rules"
-                                        value={eventData.rules}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventType" className="form-label">Event type</label>
-                                    <Select
-                                        name="eventType"
-                                        defaultValue={valueSelect.type}
-                                        onChange={(e) => handleSelectOption("eventType", e)}
-                                        options={typeDefault}
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventPrice" className="form-label">Registration Fee</label>
-                                    <input
-                                        type="number"
-                                        id="eventPrice"
-                                        placeholder="Rp 100.000"
-                                        name="price"
-                                        value={eventData.price}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
-                                    <br></br>
-                                    <label htmlFor="eventSize" className="form-label">Max Participants</label>
-                                    <Select defaultValue={valueSelect.size} onChange={(e) => handleSelectOption("size", e)} options={sizeDefault} />
-                                    <br></br>
-                                    <label htmlFor="GamesId">Games</label>
-                                    <Select defaultValue={valueSelect.game} onChange={(e) => handleSelectOption("GameId", e)} options={gameList} />
-                                    <br></br>
-                                    <label htmlFor="eventRule" className="form-label">Address</label>
-                                    <textarea
-                                        id="eventRule"
-                                        placeholder="Alamat Detail"
-                                        name="locationName"
-                                        value={eventData.locationName}
-                                        onChange={(e) => handleOnChangeForm(e)}
-                                        className="form-control"
-                                    />
-                                    {(valueSelect.Location || eventData.eventType === "Offline") && (
-                                        <>
-                                            <label htmlFor="eventRule" className="form-label">Location</label>
-                                            <SelectLocation state={{ setEventData, Location: valueSelect.location || null }} />
-                                        </>
-                                    )}
+                                    <button
+                                        className="btn btn-lg"
+                                        style={{ width: "100%", backgroundColor: "orange", color: "white", margin: "auto" }}
+                                        type="submit"
+                                        onClick={props.onHide}
+                                    >
+                                        Update
+                                    </button>
                                 </div>
-                                <br></br>
-                                <button
-                                    className="btn btn-lg"
-                                    style={{ width: "100%", backgroundColor: "orange", color: "white", margin: "auto" }}
-                                    type="submit"
-                                >
-                                    Update
-                                </button>
                             </div>
                         </form>
 
