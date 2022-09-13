@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import logo from "../logo.png";
-import { login } from "../store/actions";
+import { googleLogin, login } from "../store/actions";
 import { errorPopup } from "../helpers";
 import LoadingHorizontal from "../components/LoadingHorizontal";
 
@@ -19,6 +19,32 @@ export default function LoginPage() {
     const { value, name } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
+
+  const handleCredentialResponse = (response) => {
+    setLoading(true);
+    dispatch(googleLogin(response))
+      .then(({ data }) => {
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("username", data.username)
+        navigate("/");
+      })
+      .catch((error) => errorPopup(error))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    const callback = handleCredentialResponse
+
+    google.accounts.id.initialize({
+      client_id: "859738134038-o13q0rhpmhqjemomlmjjevkc2tuh6qc2.apps.googleusercontent.com",
+      callback
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("google-button-login"),
+      { theme: "outline", size: "large" }
+    );
+  })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +85,9 @@ export default function LoginPage() {
           <button>
             {loading ? <LoadingHorizontal /> : <span>Login</span>}
           </button>
-          <div className="g-sign-in"></div>
+          <div className="d-flex justify-content-center align-items-center"
+            id="google-button-login">
+          </div>
           <p>
             Dont have an account? click here to{" "}
             <Link to={"/register"}>Create</Link>
