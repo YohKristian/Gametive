@@ -238,6 +238,7 @@ class Controller {
 		try {
 			const { id } = req.params;
 			let { bracket } = req.body; //MAKE SURE IT IS STRINGIFIED WHEN RECEIVED
+		
 			let { participant: newParticipant, stage: newStage, match: newMatch } = JSON.parse(bracket);
 
 			let dataBracket = await Event.findByPk(id, { transaction: t });

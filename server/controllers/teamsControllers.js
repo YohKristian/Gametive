@@ -10,7 +10,7 @@ class TeamController {
             const data = await Team.findAll({
                 where: {
                     CaptainName: req.user.username,
-                    statusTeam: "Active"
+					statusTeam: "Active",
                 },
                 order: [["id", "desc"]],
             })
