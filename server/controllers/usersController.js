@@ -30,7 +30,7 @@ module.exports = class usersController {
 				role: loginResponse.role,
 			});
 
-			res.status(200).json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username });
+			res.status(200).json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username, role: loginResponse.role });
 		} catch (error) {
 			next(error);
 		}
