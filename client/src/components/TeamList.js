@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteTeam, fetchDetailTeam } from "../store/actions/teams";
 import { errorPopup } from "../helpers";
-import { fetchTeams, createTeam, fetchGamesDetail } from "../store/actions";
+import { fetchTeams, createTeam } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
 import ModalEditTeam from "./ModalEditTeam";
 
@@ -40,10 +40,14 @@ export default function TeamList() {
       });
   };
 
-  const editModalTeam = (e, ids) => {
-    e.preventDefault();
+  const editModalTeam = (ids) => {
     setModalShow(true);
-    dispatch(fetchDetailTeam(ids));
+
+    dispatch(fetchDetailTeam(ids))
+      .catch((error) => {
+        console.log(error);
+        errorPopup(error);
+      });
   };
 
   return (
@@ -53,7 +57,6 @@ export default function TeamList() {
         <>
           {/* <a href='#down'>Create Team!</a> */}
 
-          <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
           {teams.length === 0 && (
             <div>{/* <h1>💀 So sad YOU have no team! 💀</h1> */}</div>
           )}
@@ -102,8 +105,10 @@ export default function TeamList() {
                               <i
                                 className='bi bi-pencil-square'
                                 style={{ cursor: "pointer", color: "black" }}
-                                onClick={(e) => editModalTeam(e, team.id)}
+                                onClick={(e) => editModalTeam(team.id)}
                               ></i>
+
+                              <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
                             </div>
                             <div className='col-2'>
                               <i
@@ -207,7 +212,6 @@ function FormTeam() {
 
   const objFormTeam = {
     teamName: "",
-    captainName: "",
     memberOne: "",
     memberTwo: "",
     memberThree: "",
@@ -244,7 +248,13 @@ function FormTeam() {
       })
     )
       .then(() => {
-        dispatch(fetchTeams());
+
+        dispatch(fetchTeams())
+          .catch((error) => {
+            console.log(error);
+            errorPopup(error);
+          });
+
         window.scrollTo(0, 0);
       })
       .catch((error) => {
@@ -270,73 +280,73 @@ function FormTeam() {
           <form onSubmit={handleOnSubmitForm}>
             <div>
               <div>
-                <label>Team Name</label>
+                <label htmlFor='teamName'>Team Name</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='teamName'
                   placeholder='Natus Vincere'
                   name='teamName'
                   value={formTeam.teamName}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
-                <label>Captain Name</label>
+                <label htmlFor='captainName'>Captain Name</label>
                 <input
                   type='text'
-                  name=''
+                  id="captainName"
                   value={"You are the captain team!"}
                   readOnly
-                  style={{ "font-weight": "bold" }}
+                  style={{ "fontWeight": "bold" }}
                 />
-                <label>Team Member 1</label>
+                <label htmlFor='memberOne'>Team Member 1</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='memberOne'
                   placeholder='Member 1'
                   name='memberOne'
                   value={formTeam.memberOne}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
-                <label>Team Member 2</label>
+                <label htmlFor='memberTwo'>Team Member 2</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='memberTwo'
                   placeholder='Member 2'
                   name='memberTwo'
                   value={formTeam.memberTwo}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
-                <label>Team Member 3</label>
+                <label htmlFor='memberThree'>Team Member 3</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='memberThree'
                   placeholder='Member 3'
                   name='memberThree'
                   value={formTeam.memberThree}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
-                <label>Team Member 4</label>
+                <label htmlFor='memberFour'>Team Member 4</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='memberFour'
                   placeholder='Member 4'
                   name='memberFour'
                   value={formTeam.memberFour}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
-                <label>Team Member Bench 1</label>
+                <label htmlFor='benchOne'>Team Member Bench 1</label>
                 <input
                   type='text'
-                  id='eventName'
+                  id='benchOne'
                   placeholder='Bench Member 1'
                   name='benchOne'
                   value={formTeam.benchOne}
                   onChange={(event) => handleOnChangeForm(event)}
                 />
 
-                <label htmlFor='eventPoster'>Team Member Bench 2</label>
+                <label htmlFor='benchTwo'>Team Member Bench 2</label>
                 <input
                   type='text'
-                  id='eventPoster'
+                  id='benchTwo'
                   placeholder='Bench Member 2'
                   name='benchTwo'
                   value={formTeam.benchTwo}

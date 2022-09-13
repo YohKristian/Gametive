@@ -2,7 +2,7 @@ import { FETCH_DETAIL_TEAM } from "../actions/actionType";
 
 const initialState = {
   teams: [],
-  detailTeam: []
+  detailTeam: {}
 };
 
 export function teamsReducer(state = initialState, action) {
@@ -15,7 +15,7 @@ export function teamsReducer(state = initialState, action) {
     case "teams/createSuccess":
       return true;
     case FETCH_DETAIL_TEAM:
-      return{
+      return {
         ...state,
         detailTeam: action.payload
       };
