@@ -1,17 +1,20 @@
 .detail {
   display: flex;
-  margin: 80px 350px;
+  justify-content: center;
+  margin: 100px
 }
 
-.detail>.game {
+.detail > .game {
   align-self: flex-start;
-  position: relative;
-  left: 130px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
 }
 
-.detail>.game,
-.detail>.event {
-  width: 600px;
+.detail > * {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 10px;
 }
 
 .game-img,
@@ -113,4 +116,15 @@
 .bi-cash,
 .fa-map {
   margin-right: 15px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .detail {
+    flex-direction: column;
+    align-items: center;
+  }
+  .detail > .game {
+    position: unset;
+    align-self: unset;
+  }
 }

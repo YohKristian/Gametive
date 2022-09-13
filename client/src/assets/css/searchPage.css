@@ -57,13 +57,14 @@
   justify-content: center;
   align-items: center;
   width: 500px;
+  aspect-ratio: 6/4;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 0 20px gray;
 }
 
 .search-page>div:nth-child(2)>.search-item>.img>img {
-  width: 600px;
+  width: 700px;
 }
 
 .search-page>div:nth-child(2)>.search-item>div:nth-child(2) {

@@ -52,3 +52,10 @@
 .img-us {
   width: 45rem;
 }
+
+@media only screen and (max-width: 1100px) {
+  .about-us1,
+  .about-us2 {
+    flex-direction: column-reverse;
+  }
+}
