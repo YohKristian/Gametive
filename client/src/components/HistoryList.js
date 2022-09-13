@@ -26,7 +26,7 @@ export default function HistoryList() {
                 <h1>History List</h1>
                 <table className="table table-striped">
                     <thead>
-                        <tr style={{ backgroundColor: "#EAE3D2" }}>
+                        <tr style={{ backgroundColor: "orange" }}>
                             <th scope="col">Team Name</th>
                             <th scope="col">Event Name</th>
                             <th scope="col">Event Date</th>

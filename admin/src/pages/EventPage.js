@@ -57,12 +57,12 @@ export default function EventPage() {
 
   const handlerOnClickEdit = (id) => {
     setModalShow(true)
-      dispatch(fetchDetailEvent(id, (error, success) => {
-          if (error) {
-              return errorPopup(error);
-          }
-          setModalShow(true);
-      }))
+    dispatch(fetchDetailEvent(id, (error, success) => {
+      if (error) {
+        return errorPopup(error);
+      }
+      setModalShow(true);
+    }))
   }
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export default function EventPage() {
               />
               <table className="table table-striped">
                 <thead>
-                  <tr style={{ backgroundColor: "#EAE3D2" }}>
+                  <tr style={{ backgroundColor: "orange" }}>
                     <th scope="col">Name</th>
                     <th scope="col">Price</th>
                     <th scope="col">Event Poster</th>
