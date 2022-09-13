@@ -23,6 +23,7 @@ module.exports = errorHandler = (error, req, res, next) => {
 		44: [403, "fail to delete, this team is not your item"],
 		80: [400, "team already registered!"],
 		100: [404, "user not found"],
+		101: [400, "payment failed"],
 		404: [404, "data not found"],
 	};
 
