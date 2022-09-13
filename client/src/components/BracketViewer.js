@@ -57,13 +57,15 @@ export default function BracketViewer({ set_detail, state: { detail } }) {
 		}
 	}, [singleMatch]);
 
+	console.log(detail, "ini detail");
+
 	return detail ? (
 		<div>
 			<pre>{JSON.stringify(detail.participant, null, 2)}</pre>
 			<ModalBracket
 				show={modalShow}
 				onHide={() => setModalShow(false)}
-				state={{ dataMatch, setSingleMatch, participant: detail.participant }}
+				state={{ dataMatch, setSingleMatch, participant: detail?.participant }}
 			/>
 			<div id="bracket" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div>
 		</div>

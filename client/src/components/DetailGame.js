@@ -14,6 +14,7 @@ export default function DetailGame() {
 	const navigate = useNavigate();
 	const { eventDetailReducer } = useSelector((state) => state);
 	const [detail, setDetail] = useState({});
+	const [loading, setLoading] = useState(true);
 	const [newDetail, setNewDetail] = useState({});
 	const [location, setLocation] = useState({
 		province: "",
@@ -41,6 +42,7 @@ export default function DetailGame() {
 			setDetail(data);
 			dispatch(fetchGamesDetail(data.GameId)).then(({ data }) => {
 				setGame(data);
+				setLoading(false);
 			});
 		});
 	}, []);
@@ -100,8 +102,8 @@ export default function DetailGame() {
 			navigate("/login");
 		}
 	};
-
-	return detail && game ? (
+	// console.log(detail);
+	return !loading ? (
 		<div className="detail">
 			<div className="event">
 				<div className="event-img">
@@ -153,7 +155,12 @@ export default function DetailGame() {
 							Back
 						</button>
 					</div>
-					{eventTime <= currentTime && <BracketViewer state={JSON.parse(detail.Bracket)} />}
+					<div>
+						{/* {JSON.stringify(detail)} */}
+						{eventTime <= currentTime && (
+							<BracketViewer state={{ detail: JSON.parse(detail.Bracket) }} set_detail={setNewDetail} />
+						)}
+					</div>
 				</div>
 			</div>
 			<div

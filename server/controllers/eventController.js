@@ -157,10 +157,8 @@ class Controller {
 		try {
 			const { id } = req.params;
 			const data = await Event.findOne({ where: { id: id }, include: [Game, Location] });
-			if (!data) {
-				throw { code: 20 };
-			}
-			console.log(data.dataValues.Location);
+			console.log(data.dataValues);
+			if (!data) throw { code: 20 };
 			res.status(200).json(data);
 		} catch (error) {
 			next(error);
