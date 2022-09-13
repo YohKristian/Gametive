@@ -255,7 +255,7 @@ module.exports = class usersController {
 						},
 						include: {
 							model: Event,
-							attributes: ["name", "eventDate"]
+							attributes: ["name", "eventDate", "price"]
 						}
 					},
 				},

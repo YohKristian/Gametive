@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { dateFormat, errorPopup } from "../helpers";
+import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
 import { getHistoryUser } from "../store/actions";
 
 export default function HistoryList() {
@@ -30,6 +30,7 @@ export default function HistoryList() {
                             <th scope="col">Team Name</th>
                             <th scope="col">Event Name</th>
                             <th scope="col">Event Date</th>
+                            <th scope="col">Event Fee</th>
                             <th scope="col">Status Pay</th>
                             <th scope="col">Payment Date</th>
                         </tr>
@@ -44,6 +45,7 @@ export default function HistoryList() {
                                     <th scope="row">{team.name}</th>
                                     <td>{participant.Event.name}</td>
                                     <td>{dateFormat(participant.Event.eventDate)}</td>
+                                    <td>{rupiahFormat(participant.Event.price)}</td>
                                     <td>{participant.statusPay}</td>
                                     <td>{dateFormat(participant.paymentDate)}</td>
                                 </tr>

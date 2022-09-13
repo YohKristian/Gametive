@@ -269,6 +269,27 @@ describe("GET All Participants", () => {
 		});
 	});
 
+	describe("Success PUT Update Status Pay By Event Id and Team Id - token customer", () => {
+		it("should return an object of participants", async () => {
+			const EventId = 1;
+			const TeamId = 1;
+			const response = await request(app).put(`/participants/${EventId}/${TeamId}`).set("access_token", customer_token);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("id", expect.any(Number));
+			expect(response.body).toHaveProperty("EventId", expect.any(Number));
+			expect(response.body).toHaveProperty("EventId", EventId);
+			expect(response.body).toHaveProperty("TeamId", expect.any(Number));
+			expect(response.body).toHaveProperty("TeamId", TeamId);
+			expect(response.body).toHaveProperty("statusPay", expect.any(String));
+			expect(response.body).toHaveProperty("statusPay", "Paid");
+			expect(response.body).toHaveProperty("paymentDate", expect.any(String));
+			expect(response.body).toHaveProperty("createdAt", expect.any(String));
+			expect(response.body).toHaveProperty("updatedAt", expect.any(String));
+		});
+	});
+
 	describe("Success DELETE Participants By Event Id and Team Id - token customer", () => {
 		it("should return an object of participant", async () => {
 			const EventId = 1;
@@ -334,6 +355,27 @@ describe("POST create participant", () => {
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", 80);
 			expect(response.body).toHaveProperty("message", "team already registered!");
+		});
+	});
+});
+
+describe("PUT update payment", () => {
+	describe("Success change status payment", () => {
+		it("Should return said participant with changed status", async () => {
+			let response = await request(app).put("/participants/1/1").set("access_token", customer_token);
+
+			expect(response.status).toBe(200);
+			expect(response.body).toHaveProperty("statusPay", "Paid");
+		});
+	});
+
+	describe("failed change status payment - participant not found", () => {
+		it("Should return object with code and message", async () => {
+			let response = await request(app).put("/participants/999/999").set("access_token", customer_token);
+
+			expect(response.status).toBe(404);
+			expect(response.body).toHaveProperty("code", 404);
+			expect(response.body).toHaveProperty("message", "data not found");
 		});
 	});
 });
