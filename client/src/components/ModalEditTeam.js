@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 export default function ModalEditTeam(props) {
     const [newTeam, setNewTeam] = useState({
         name: "",
-        CaptainName: "",
         MemberName1: "",
         MemberName2: "",
         MemberName3: "",
@@ -23,17 +22,17 @@ export default function ModalEditTeam(props) {
         })
     }
 
-    // useEffect(() => {
-    //     setNewTeam({
-    //         name: detailTeam.name,
-    //         MemberName1: detailTeam.MemberName1,
-    //         MemberName2: detailTeam.MemberName2,
-    //         MemberName3: detailTeam.MemberName3,
-    //         MemberName4: detailTeam.MemberName4,
-    //         BenchMemberName1: detailTeam.BenchMemberName1,
-    //         BenchMemberName2: detailTeam.BenchMemberName2,
-    //     })
-    // }, [detailTeam])
+    useEffect(() => {
+        setNewTeam({
+            name: detailTeam.name,
+            MemberName1: detailTeam.MemberName1,
+            MemberName2: detailTeam.MemberName2,
+            MemberName3: detailTeam.MemberName3,
+            MemberName4: detailTeam.MemberName4,
+            BenchMemberName1: detailTeam.BenchMemberName1,
+            BenchMemberName2: detailTeam.BenchMemberName2,
+        })
+    }, [detailTeam])
 
     const handleOnSubmitForm = (e) => {
         e.preventDefault();
@@ -75,12 +74,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="gameImg">
+                                <label className="form-label" htmlFor="captainName">
                                     Captain Name
                                 </label>
                                 <input
                                     type="text"
-                                    id="gameImg"
+                                    id="captainName"
                                     readOnly
                                     className="form-control form-control-lg"
                                     placeholder="You are the captain team!"
@@ -88,12 +87,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="youtubeUrl">
+                                <label className="form-label" htmlFor="MemberName1">
                                     Member 1
                                 </label>
                                 <input
                                     type="text"
-                                    id="youtubeUrl"
+                                    id="MemberName1"
                                     name="MemberName1"
                                     className="form-control form-control-lg"
                                     placeholder="Input Member 1"
@@ -103,12 +102,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="youtubeUrl">
+                                <label className="form-label" htmlFor="MemberName2">
                                     Member 2
                                 </label>
                                 <input
                                     type="text"
-                                    id="youtubeUrl"
+                                    id="MemberName2"
                                     name="MemberName2"
                                     className="form-control form-control-lg"
                                     placeholder="Input Member 2"
@@ -118,12 +117,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="youtubeUrl">
+                                <label className="form-label" htmlFor="MemberName3">
                                     Member 3
                                 </label>
                                 <input
                                     type="text"
-                                    id="youtubeUrl"
+                                    id="MemberName3"
                                     name="MemberName3"
                                     className="form-control form-control-lg"
                                     placeholder="Input Member 3"
@@ -133,12 +132,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="youtubeUrl">
+                                <label className="form-label" htmlFor="MemberName4">
                                     Member 4
                                 </label>
                                 <input
                                     type="text"
-                                    id="youtubeUrl"
+                                    id="MemberName4"
                                     name="MemberName4"
                                     className="form-control form-control-lg"
                                     placeholder="Input Member 4"
@@ -148,12 +147,12 @@ export default function ModalEditTeam(props) {
                             </div>
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="gameUrl">
+                                <label className="form-label" htmlFor="BenchMemberName1">
                                     BenchMemberName 1
                                 </label>
                                 <input
                                     type="text"
-                                    id="gameUrl"
+                                    id="BenchMemberName1"
                                     name="BenchMemberName1"
                                     className="form-control form-control-lg"
                                     placeholder="Input BenchMemberName 1"
@@ -164,12 +163,12 @@ export default function ModalEditTeam(props) {
 
 
                             <div className="form-outline mb-4">
-                                <label className="form-label" htmlFor="gameUrl">
+                                <label className="form-label" htmlFor="BenchMemberName2">
                                     BenchMemberName 2
                                 </label>
                                 <input
                                     type="text"
-                                    id="gameUrl"
+                                    id="BenchMemberName2"
                                     name="BenchMemberName2"
                                     className="form-control form-control-lg"
                                     placeholder="Input BenchMemberName 2"

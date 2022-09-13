@@ -54,19 +54,18 @@ export const getDetailTeamSuccess = (payload) => {
   }
 }
 
-export const fetchDetailTeam = (id) => async (dispatch) => {
-
-  return axios(`${baseUrl}/teams/${id}`, {
-    method: 'get',
-    headers: {
-      access_token: localStorage.access_token
-    }
-  })
-
-    .then((data) => {
-      dispatch(getDetailTeamSuccess(data))
+export const fetchDetailTeam = (id) =>
+  (dispatch) => {
+    return axios(`${baseUrl}/teams/${id}`, {
+      method: 'get',
+      headers: {
+        access_token: localStorage.access_token
+      }
     })
-    .catch((error) => {
-      console.log(error);
-    })
-}
+      .then(({ data }) => {
+        dispatch(getDetailTeamSuccess(data))
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
