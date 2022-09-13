@@ -5,7 +5,7 @@ const { redis } = require("../config/redis");
 class MidtransController {
     static async generateSnapToken(req, res, next) {
         try {
-            const totalCostNeedToPay = req.body.totalCostNeedToPay;
+            const totalCostNeedToPay = 5000 + (req.body.totalCostNeedToPay);
             const TeamId = req.body.TeamId;
             const EventId = req.body.EventId;
 
