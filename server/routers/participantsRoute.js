@@ -6,7 +6,6 @@ participants.use(authentication);
 participants.get("/", participantsController.fetchAll);
 participants.get("/:eventId", participantsController.fetchOneParticipantByEventId);
 participants.post("/", participantsController.create);
-participants.put("/:eventId/:teamId", participantsController.updateByTeamId);
 participants.delete("/:eventId/:teamId", participantsController.deleteParticipantById);
 
 module.exports = participants;

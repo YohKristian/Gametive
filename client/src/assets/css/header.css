@@ -6,7 +6,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 8px 50px;
+  padding: 8px 80px;
   align-items: center;
   background-color: #00000070;
 }
@@ -16,6 +16,7 @@ header > .img {
 }
 
 header > .img > img {
+  cursor: pointer;
   width: 100%;
 }
 

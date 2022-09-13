@@ -32,7 +32,7 @@ export default function ParticipantRegistration() {
         e.preventDefault();
         let token = "";
 
-        dispatch(participantsPaymentToken({ totalCostNeedToPay: +eventPrice }))
+        dispatch(participantsPaymentToken({ totalCostNeedToPay: +eventPrice, EventId: +eventId, TeamId: +teamId }))
             .then(({ data }) => {
                 token = data;
                 return dispatch(addParticipants({ EventId: +eventId, TeamId: +teamId }))
@@ -44,11 +44,8 @@ export default function ParticipantRegistration() {
                 window.snap.pay(token, {
                     onSuccess: function (result) {
                         /* You may add your own implementation here */
+                        navigate("/");
                         successPopup("payment success!"); console.log(result);
-                        dispatch(registerParticipantToBracket({ EventId: +eventId, TeamId: +teamId }))
-                            .then(() => {
-                                navigate("/");
-                            })
                     },
                     onPending: function (result) {
                         /* You may add your own implementation here */

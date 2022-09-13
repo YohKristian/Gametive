@@ -21,12 +21,3 @@ export const addParticipants = (payload) => () => {
         },
     });
 };
-
-export const registerParticipantToBracket = (payload) => () => {
-    return axios(baseURL + `/participants/${payload.EventId}/${payload.TeamId}`, {
-        method: "PUT",
-        headers: {
-            access_token: localStorage.access_token,
-        },
-    });
-};

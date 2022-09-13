@@ -1,11 +1,10 @@
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation, useParams } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MainPage from "./pages/MainPage";
 import HomePage from "./components/HomePage";
 import DetailGame from "./components/DetailGame";
 import SearchGames from "./components/SearchGames";
-import SelectLocation from "./components/SelectLocation";
 import EventRegistration from "./components/EventRegistration";
 import MapsLocation from "./components/MapsLocation";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -26,7 +25,14 @@ function Authenticated({ children }) {
 
 function RequireAuth({ children }) {
 	const { pathname } = useLocation();
-	if (pathname === "/" || pathname === "/home" || pathname === "/search") return children;
+	const params = useParams()
+	if (
+			pathname === "/" || 
+			pathname === "/home" || 
+			pathname === "/search" || 
+			pathname === "/detail/" + params.id
+		) 
+			return children;
 	const { access_token } = localStorage;
 	if (!access_token) return <Navigate to={"/login"} />;
 	return children;
@@ -61,21 +67,15 @@ function App() {
 			>
 				<Route path="home" element={<HomePage />} />
 				<Route path="search" element={<SearchGames />} />
+				<Route path="detail/:id" element={<DetailGame />} />
 				<Route path="event" element={<YourEvent />} />
-				<Route path="select" element={<SelectLocation />} />
 				<Route path="event-registration" element={<EventRegistration />} />
 				<Route path="participant-registration" element={<ParticipantRegistration />} />
 				<Route path="team-list" element={<TeamList />} />
-
 				<Route path="event-edit" element={<EventEdit />} />
-
 				<Route path="history-list" element={<HistoryList />} />
-
 				<Route path="maps" element={<MapsLocation />} />
 				<Route path="" element={<Navigate to={"/home"} />} />
-			</Route>
-			<Route path="/" element={<MainPage />}>
-				<Route path="/detail/:id" element={<DetailGame />} />
 			</Route>
 			<Route path="*" element={<NotFoundPage />} />
 		</Routes>
