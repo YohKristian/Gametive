@@ -59,7 +59,6 @@ export default function BracketViewer({ set_detail, state: { detail } }) {
 
 	return detail ? (
 		<div>
-			{" "}
 			<pre>{JSON.stringify(detail.participant, null, 2)}</pre>
 			<ModalBracket
 				show={modalShow}
