@@ -12,10 +12,11 @@ import YourEvent from "./components/YourEvent";
 import TeamList from "./components/TeamList";
 import HistoryList from "./components/HistoryList";
 import ParticipantRegistration from "./components/ParticipantRegistration";
+import EventEdit from "./components/EventEdit";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import EventEdit from "./components/EventEdit";
+
 
 function Authenticated({ children }) {
 	const { access_token } = localStorage;
@@ -27,12 +28,12 @@ function RequireAuth({ children }) {
 	const { pathname } = useLocation();
 	const params = useParams()
 	if (
-			pathname === "/" || 
-			pathname === "/home" || 
-			pathname === "/search" || 
-			pathname === "/detail/" + params.id
-		) 
-			return children;
+		pathname === "/" ||
+		pathname === "/home" ||
+		pathname === "/search" ||
+		pathname === "/detail/" + params.id
+	)
+		return children;
 	const { access_token } = localStorage;
 	if (!access_token) return <Navigate to={"/login"} />;
 	return children;
