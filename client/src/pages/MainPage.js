@@ -6,7 +6,7 @@ export default function MainPage() {
   return (
     <>
       <HeaderBar />
-      <main>
+      <main className="font-link">
         <Outlet />
       </main>
       <FooterBar />

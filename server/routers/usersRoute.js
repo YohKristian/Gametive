@@ -1,10 +1,10 @@
 const users = require("express").Router();
 const authentication = require("../middlewares/authentication");
-
 const usersController = require("../controllers/usersController");
 const Authorization = require("../middlewares/authorization");
 
 users.post("/login", usersController.login);
+users.post("/google", usersController.googleSignIn)
 users.post("/register", usersController.create);
 users.post("/registerAdmin", usersController.createAdmin);
 users.get("/history", authentication, Authorization.customer, usersController.fetchAllHistory);

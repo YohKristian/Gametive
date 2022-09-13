@@ -79,7 +79,7 @@ export default function UserPage() {
               <h2>User</h2>
             </div>
             <div style={{ marginLeft: "75vh", paddingTop: "20px" }}>
-              <Button variant="success" onClick={() => setModalShow(true)}>
+              <Button variant="success" className="addbtn" onClick={() => setModalShow(true)}>
                 <i className="bi bi-person-plus"> Add New Admin</i>
               </Button>
 

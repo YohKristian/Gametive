@@ -1,5 +1,4 @@
-const { Participant, Team, Event, sequelize } = require("../models");
-const { Op } = require("sequelize");
+const { Participant, Team, Event } = require("../models");
 const { redis } = require("../config/redis");
 
 module.exports = class participantsController {
@@ -12,7 +11,6 @@ module.exports = class participantsController {
 				where: { TeamId, EventId },
 				defaults: { TeamId, EventId, paymentDate: new Date() },
 			});
-			console.log(createResponse, created);
 
 			if (!created && createResponse.statusPay === "Paid") throw { code: 80 };
 
@@ -64,95 +62,6 @@ module.exports = class participantsController {
 				res.status(200).json(participantDetail);
 			}
 		} catch (error) {
-			next(error);
-		}
-	}
-	static async updateByTeamId(req, res, next) {
-		let t = await sequelize.transaction();
-		try {
-			const { eventId, teamId } = req.params;
-
-			const fetchResponse = await Participant.findOne({
-				where: {
-					EventId: +eventId,
-					TeamId: +teamId,
-				},
-				transaction: t,
-			});
-
-			if (!fetchResponse) throw { code: 404 };
-
-			const payload = {
-				paidStatus: "Paid",
-				currentDate: new Date(),
-			};
-
-			await Participant.update(
-				{
-					statusPay: payload.paidStatus,
-					paymentDate: payload.currentDate,
-				},
-				{
-					where: {
-						EventId: +eventId,
-						TeamId: +teamId,
-					},
-					transaction: t,
-				},
-			);
-
-			const fetchAllBracket = await Participant.findAll({
-				include: Team,
-				where: {
-					EventId: +eventId,
-					statusPay: "Paid",
-				},
-				order: [["paymentDate", "DESC"]],
-				transaction: t,
-			});
-
-			const findEvent = await Event.findOne({
-				where: {
-					id: +eventId,
-				},
-				transaction: t,
-			});
-
-			// console.log(findEvent);
-
-			let oldBracket = JSON.parse(findEvent.Bracket);
-
-			oldBracket.stage[0].name = findEvent.name;
-
-			fetchAllBracket.forEach((Bracket, idx) => {
-				oldBracket.participant[idx].name = Bracket.Team.name;
-			});
-
-			await Event.update(
-				{ Bracket: JSON.stringify(oldBracket) },
-				{
-					where: {
-						id: +eventId,
-					},
-					transaction: t,
-				},
-			);
-
-			await t.commit();
-			await redis.del("app:participants");
-			await redis.del("app:participantId");
-
-			res.status(200).json({
-				id: fetchResponse.id,
-				TeamId: fetchResponse.TeamId,
-				EventId: fetchResponse.EventId,
-				statusPay: payload.paidStatus,
-				paymentDate: payload.currentDate,
-				createdAt: fetchResponse.createdAt,
-				updatedAt: fetchResponse.updatedAt,
-			});
-		} catch (error) {
-			await t.rollback();
 			next(error);
 		}
 	}

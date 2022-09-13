@@ -8,6 +8,15 @@ export const login = (payload) => async () => {
   return await axios.post(baseUrl + "/users/login", payload);
 };
 
+export const googleLogin = (response) => async () => {
+  return await axios(baseUrl + "/users/google", {
+    method: "POST",
+    headers: {
+      token_google: response.credential
+    }
+  });
+};
+
 export const register = (payload) => async () => {
   return await axios.post(baseUrl + "/users/register", payload);
 };

@@ -117,6 +117,7 @@ export default function SearchGames() {
             ) : (
                 <LoadingAnimation />
             )}
+            <br></br>
         </div>
     );
 }

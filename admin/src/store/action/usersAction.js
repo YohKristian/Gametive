@@ -5,7 +5,9 @@ export const loginUser = (payload, cb) =>
     async () => {
         try {
             const { data } = await axios.post(baseURL + "/users/login", payload);
+            if (data.role !== "Admin") throw { response: { data: { message: "Please login with admin account" } } }
             cb(null, data);
+
         } catch (error) {
             cb(error);
         }

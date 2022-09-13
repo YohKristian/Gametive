@@ -8,7 +8,7 @@
     "MemberName4": "member4",
     "BenchMemberName1": "bench1",
     "BenchMemberName2": "bench2",
-    "statusTeam": "123"
+    "statusTeam": "Active"
   },
   {
     "name": "testingTeam2",
@@ -19,7 +19,7 @@
     "MemberName4": "",
     "BenchMemberName1": "bench1",
     "BenchMemberName2": "",
-    "statusTeam": "123"
+    "statusTeam": "Active"
   },
   {
     "name": "testingTeam Cust1",
@@ -30,6 +30,6 @@
     "MemberName4": "member4",
     "BenchMemberName1": "bench1",
     "BenchMemberName2": "bench2",
-    "statusTeam": "123"
+    "statusTeam": "Active"
   }
 ]

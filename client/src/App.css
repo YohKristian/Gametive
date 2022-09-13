@@ -33,3 +33,23 @@ button:hover {
   font-weight: bolder;
   color: orange;
 }
+
+.font-link {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dont-have-team {
+  margin-top: 20%;
+  font-weight: bolder;
+  color: orange;
+  text-align: center;
+}
+
+.list-team {
+  margin-top: 7%;
+}
+
+.add-team {
+  text-align: center;
+  margin-bottom: 40px;
+}

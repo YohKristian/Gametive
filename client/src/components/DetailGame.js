@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEventDetail, fetchGamesDetail } from "../store/actions";
+import { editBracket, fetchEventDetail, fetchGamesDetail } from "../store/actions";
 import { dateFormat, rupiahFormat } from "../helpers";
 import BracketViewer from "./BracketViewer";
 import axios from "axios";
@@ -13,7 +13,8 @@ export default function DetailGame() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { eventDetailReducer } = useSelector((state) => state);
-	const [detail, setDetail] = useState();
+	const [detail, setDetail] = useState({});
+	const [newDetail, setNewDetail] = useState({});
 	const [location, setLocation] = useState({
 		province: "",
 		regency: "",
@@ -47,6 +48,18 @@ export default function DetailGame() {
 	useEffect(() => {
 		getFullLocation();
 	}, [detail, location.province, location.regency]);
+
+	useEffect(() => {
+		console.log(newDetail, "ini new detail");
+		if (newDetail) {
+			dispatch(editBracket(id, JSON.stringify(newDetail)))
+				.then(() => {
+					this.setState({});
+				})
+				.catch(console.log);
+		}
+		// 	//dispatch -> then -> navigate to this page again / reload -> window.location.reload()
+	}, [newDetail]);
 
 	const getFullLocation = async () => {
 		try {
@@ -158,7 +171,10 @@ export default function DetailGame() {
 				</div>
 			</div>
 			<div className="d-flex flex-row">
-				<div>{eventTime <= currentTime && <BracketViewer state={JSON.parse(detail.Bracket)} />}</div>
+				<div>
+					{/* {JSON.stringify(detail)} */}
+					{eventTime <= currentTime && <BracketViewer state={{ detail: JSON.parse(detail.Bracket) }} set_detail={setNewDetail} />}
+				</div>
 			</div>
 		</>
 	) : (
