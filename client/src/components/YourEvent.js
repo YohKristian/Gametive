@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchYourEvents } from "../store/actions";
 import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
 import LoadingAnimation from "./LoadingAnimation";
+import VerticalModalEditEvent from "./VerticalModalEditEvent";
 
 export default function SearchGames() {
     const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function SearchGames() {
     const [loading, setLoading] = useState(true);
     const [keyword, setKeyword] = useState();
     const [page, setPage] = useState(1)
+    const [modal, setModal] = useState(false);
 
     const pageNumber = (page) => {
         let pagination = []
@@ -77,9 +79,9 @@ export default function SearchGames() {
                     <div>
                         {yourEvents.items.length == 0 && <h1 className="dont-have">You don't have any events!</h1>}
                         {yourEvents.items.map((event, idx) => (
-                            <div className="search-item" key={idx} onClick={toDetail(event.id)}>
+                            <div className="search-item" key={idx}>
                                 <div className="img">
-                                    <img src={event.eventPoster} alt="" />
+                                    <img src={event.eventPoster} alt="" onClick={toDetail(event.id)} />
                                 </div>
                                 <div>
                                     <h1>{event.name}</h1>
@@ -89,6 +91,13 @@ export default function SearchGames() {
                                         <p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
                                         <p><i className="bi bi-cash"></i> {event.price === 0 ? "Free" : rupiahFormat(event.price)}</p>
                                         <p><i className="fa-solid fa-gamepad"></i> {event.Game.name} <i className="fa-solid fa-slash"></i> {event.Game.genre}</p>
+                                        <div className="edit-event">
+                                            <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={() => { setModal(true); }}> Edit Event</button>
+                                            <VerticalModalEditEvent
+                                                show={modal}
+                                                onHide={() => setModal(false)}
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -100,13 +100,12 @@ export default function ParticipantRegistration() {
                     <h3 className="fw-bold mt-2">Event Date Start : {dateFormat(eventDate)}</h3>
                     <form onSubmit={handleOnSubmitForm}>
                         <label htmlFor="teamName">Team Name</label>
-                        <select id="teamName" value={teamId} onChange={handlerOnChangeForm}>
+                        <select id="teamName" className="btn btn-warning select-team" value={teamId} onChange={handlerOnChangeForm}>
                             <option value="">-- Choose Your Team --</option>
                             {teams.map(team => {
                                 return <option value={team.id} key={team.id}>{team.name}</option>
                             })}
                         </select>
-
                         <button type="submit" style={{ marginTop: 16 }}>Register to event</button>
                     </form>
                 </div>

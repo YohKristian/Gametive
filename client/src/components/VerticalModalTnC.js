@@ -17,7 +17,7 @@ export default function VerticalModalTnC(props) {
                 <Modal.Body>
                     <div className='TnC'>
                         <h3 className='text-center'>Berikut ketentuan penggunaan website kami : </h3>
-                        <hr class="my-4"></hr>
+                        <hr className="my-4"></hr>
                         <ol>
                             <li>User bertanggung jawab atas informasi yang di berikan / yang di daftarkan sebagai event yang akan kami promosikan di website kami, jika user melakukan pelanggaran peraturan ini beberapa kali maka, dari pihak Gametive kami berhak untuk menghentikan layanan penggunaan user dengan cara menghapus user dari layanan kami.</li>
                             <li>Jika User sebagai pembuat / penyelenggara event, maka kami dari pihak Gametive berhak untuk tidak mengijinkan penyelenggara untuk mendaftarkan timnya sendiri, untuk menghindari kecurangan dari pihak pembuat / penyelenggara dalam berlangsungnya acara.</li>
