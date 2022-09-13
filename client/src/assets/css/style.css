@@ -1,6 +1,7 @@
 @import "./loginPage.css";
 @import "./registerPage.css";
 @import "./header.css";
+@import "./footer.css";
 @import "./home.css";
 @import "./main.css";
 @import "./imageCarousel.css";
@@ -19,4 +20,23 @@
 
 body {
   font-family: sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: black; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: orange; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 166, 0, 0.89); 
 }

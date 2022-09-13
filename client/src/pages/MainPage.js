@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import HeaderBar from "../components/HeaderBar";
+import FooterBar from "../components/FooterBar";
 
 export default function MainPage() {
   return (
@@ -8,6 +9,7 @@ export default function MainPage() {
       <main>
         <Outlet />
       </main>
+      <FooterBar />
     </>
   );
 }

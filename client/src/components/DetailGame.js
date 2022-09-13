@@ -146,7 +146,7 @@ export default function DetailGame() {
           </div>
           <div className="button">
             {eventTime > currentTime && (<button onClick={handlerOnClick}>Register event!</button>)}
-            <button onClick={() => navigate(-1)}>Back</button>
+            <button className="back" onClick={() => navigate(-1)}>Back</button>
           </div>
           {eventTime <= currentTime && (
             <BracketViewer state={JSON.parse(detail.Bracket)} />
@@ -156,14 +156,14 @@ export default function DetailGame() {
       <div onClick={() => { window.open(game.gameUrl, '_blank') }} className="game">
         <div className="game-img">
           <img src={game.gameImg} alt="" />
+          <div>
+            <h1 className="fw-bold">{game.name}</h1>
+            <p>Release date: {formatDate(game.releaseDate)}</p>
+            <p>Developer: {game.developer}</p>
+            <p>Genre: {game.genre}</p>
+          </div>
         </div>
 
-        <div>
-          <h1 className="fw-bold">{game.name}</h1>
-          <p>Release date: {formatDate(game.releaseDate)}</p>
-          <p>Developer: {game.developer}</p>
-          <p>Genre: {game.genre}</p>
-        </div>
 
         <div>
         </div>
