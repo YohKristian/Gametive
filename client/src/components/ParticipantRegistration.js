@@ -32,38 +32,55 @@ export default function ParticipantRegistration() {
         e.preventDefault();
         let token = "";
 
-        dispatch(participantsPaymentToken({ totalCostNeedToPay: +eventPrice, EventId: +eventId, TeamId: +teamId }))
-            .then(({ data }) => {
-                token = data;
-                return dispatch(addParticipants({ EventId: +eventId, TeamId: +teamId }))
-            })
-            .then(({ data }) => {
-                console.log(data);
-            })
-            .then(() => {
-                window.snap.pay(token, {
-                    onSuccess: function (result) {
-                        /* You may add your own implementation here */
-                        navigate("/");
-                        successPopup("payment success!"); console.log(result);
-                    },
-                    onPending: function (result) {
-                        /* You may add your own implementation here */
-                        errorPopup("wating your payment!"); console.log(result);
-                    },
-                    onError: function (result) {
-                        /* You may add your own implementation here */
-                        errorPopup("payment failed!"); console.log(result);
-                    },
-                    onClose: function () {
-                        /* You may add your own implementation here */
-                        errorPopup('you closed the popup without finishing the payment');
-                    }
+        if (eventPrice === 0) {
+            dispatch(addParticipants({ EventId: +eventId, TeamId: +teamId }))
+                .then(({ data }) => {
+                    // console.log(data);
                 })
-            })
-            .catch((err) => {
-                errorPopup(err);
-            });
+                .then(() => {
+                    return dispatch(registerParticipantToBracket({ EventId: +eventId, TeamId: +teamId }));
+                })
+                .then(() => {
+                    navigate("/");
+                    successPopup("Success Register!");
+                })
+                .catch((err) => {
+                    errorPopup(err);
+                });
+        } else {
+            dispatch(participantsPaymentToken({ totalCostNeedToPay: +eventPrice, EventId: +eventId, TeamId: +teamId }))
+                .then(({ data }) => {
+                    token = data;
+                    return dispatch(addParticipants({ EventId: +eventId, TeamId: +teamId }))
+                })
+                .then(({ data }) => {
+                    console.log(data);
+                })
+                .then(() => {
+                    window.snap.pay(token, {
+                        onSuccess: function (result) {
+                            /* You may add your own implementation here */
+                            navigate("/");
+                            successPopup("payment success!"); console.log(result);
+                        },
+                        onPending: function (result) {
+                            /* You may add your own implementation here */
+                            errorPopup("wating your payment!"); console.log(result);
+                        },
+                        onError: function (result) {
+                            /* You may add your own implementation here */
+                            errorPopup("payment failed!"); console.log(result);
+                        },
+                        onClose: function () {
+                            /* You may add your own implementation here */
+                            errorPopup('you closed the popup without finishing the payment');
+                        }
+                    })
+                })
+                .catch((err) => {
+                    errorPopup(err);
+                });
+        }
     };
 
     const handlerOnChangeForm = (e) => {
