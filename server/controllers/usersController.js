@@ -4,6 +4,7 @@ const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
 const { redis } = require("../config/redis");
 const { getPagination, getPagingData } = require("../helpers/pagination");
+const { OAuth2Client } = require('google-auth-library')
 // 			await redis.del("store:users_fetchAll");
 
 module.exports = class usersController {
@@ -35,6 +36,44 @@ module.exports = class usersController {
 			next(error);
 		}
 	}
+
+	static async googleSignIn(req, res, next) {
+		try {
+			const { token_google } = req.headers
+
+			const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+			const ticket = await client.verifyIdToken({
+				idToken: token_google,
+				audience: process.env.GOOGLE_CLIENT_ID
+			})
+			const payload = ticket.getPayload()
+			const [user, created] = await User.findOrCreate({
+				where: {
+					email: payload.email,
+					username: payload.email.split("@")[0],
+				},
+				defaults: {
+					username: payload.email.split("@")[0],
+					email: payload.email,
+					password: "password_google",
+				},
+				hooks: false,
+			})
+
+			const token = createToken({
+				username: user.username,
+				email: user.email,
+				id: user.id,
+				role: user.role,
+			})
+			res.status(200).json({
+				login: Boolean(user), access_token: token, username: user.username, role: user.role
+			})
+		} catch (error) {
+			next(error)
+		}
+	}
+
 	static async create(req, res, next) {
 		try {
 			const { username, email, password } = req.body;
@@ -52,6 +91,7 @@ module.exports = class usersController {
 			next(error);
 		}
 	}
+
 	static async createAdmin(req, res, next) {
 		try {
 			const { username, email, password } = req.body;
