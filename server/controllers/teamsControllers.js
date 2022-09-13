@@ -4,22 +4,22 @@ const { redis } = require("../config/redis");
 class TeamController {
     static async getAllTeam(req, res, next) {
         try {
-            const teamsDataCache = JSON.parse(await redis.get("app:teams"));
+            // const teamsDataCache = JSON.parse(await redis.get("app:teams"));
 
-            if (!teamsDataCache) {
-                const data = await Team.findAll({
-                    where: {
-                        CaptainName: req.user.username,
-                        statusTeam: "Active"
-                    },
-                    order: [["id", "desc"]],
-                })
-                await redis.set("app:teams", JSON.stringify(data));
+            // if (!teamsDataCache) {
+            const data = await Team.findAll({
+                where: {
+                    CaptainName: req.user.username,
+                    statusTeam: "Active"
+                },
+                order: [["id", "desc"]],
+            })
+            // await redis.set("app:teams", JSON.stringify(data));
 
-                res.status(200).json(data)
-            } else {
-                res.status(200).json(teamsDataCache)
-            }
+            res.status(200).json(data)
+            // } else {
+            //     res.status(200).json(teamsDataCache)
+            // }
         } catch (error) {
             next(error);
         }
