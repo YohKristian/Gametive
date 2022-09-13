@@ -153,3 +153,7 @@ nav ul a.active::after {
   background-color: orange;
   color: white;
 }
+
+.addbtn {
+  margin-left: 80%;
+}

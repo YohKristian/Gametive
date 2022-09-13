@@ -80,7 +80,7 @@ export default function GamePage() {
               <h2>Game</h2>
             </div>
             <div style={{ marginLeft: "75vh", paddingTop: "20px" }}>
-              <Button variant="success" onClick={() => setModalShow(true)}>
+              <Button variant="success" className="addbtn" onClick={() => setModalShow(true)}>
                 <i className="bi bi-clipboard2-plus"> Add New Game</i>
               </Button>
 
