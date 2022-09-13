@@ -68,3 +68,14 @@ export const editEvent = (id, data) => {
 			});
 	};
 };
+
+export const editBracket = (id, data) => {
+	return async (dispatch) => {
+		return axios
+			.put(baseUrl + "/events/" + id + "/bracket", { bracket: data }, { headers: { access_token: localStorage.access_token } })
+			.then((res) => res)
+			.catch((error) => {
+				throw error;
+			});
+	};
+};
