@@ -5,7 +5,7 @@ class TeamController {
     static async getAllTeam(req, res, next) {
         try {
             const teamsDataCache = JSON.parse(await redis.get("app:teams"));
-
+            
             if (!teamsDataCache) {
                 const data = await Team.findAll({
                     where: {
@@ -13,7 +13,6 @@ class TeamController {
                         statusTeam: "Active"
                     }
                 })
-                console.log(data);
                 await redis.set("app:teams", JSON.stringify(data));
 
                 res.status(200).json(data)
@@ -133,7 +132,7 @@ class TeamController {
 
             res.status(200).json({
                 message: "Success Delete Team"
-            })
+            })  
         } catch (error) {
             next(error)
         }
