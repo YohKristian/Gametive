@@ -6,7 +6,7 @@ import { errorPopup, successPopup } from "../helpers";
 import { fetchTeams, createTeam } from "../store/actions";
 import LoadingAnimation from "./LoadingAnimation";
 import ModalEditTeam from "./ModalEditTeam";
-import VerticalModalAddTeam from "../components/VerticalModalAddTeam"
+import VerticalModalAddTeam from "../components/VerticalModalAddTeam";
 
 export default function TeamList() {
   // const [teamList, setTeamList] = useState([]);
@@ -51,19 +51,27 @@ export default function TeamList() {
       })
       .finally(() => {
         setModalShow(true);
-      })
+      });
   };
 
   return (
     <>
-      <div id='top'></div>
       {!isLoading && teams ? (
         <>
           {teams.length === 0 && (
             <div>
               <h1 className="dont-have-team">You don't have any team!</h1>
               <div className="add-team">
-                <button className="btn" style={{ backgroundColor: "orange", color: "white" }} onClick={() => { setModalTeam(true); }}> Create Team</button>
+                <button
+                  className="btn"
+                  style={{ backgroundColor: "orange", color: "white" }}
+                  onClick={() => {
+                    setModalTeam(true);
+                  }}
+                >
+                  {" "}
+                  Create Team
+                </button>
                 <VerticalModalAddTeam
                   show={modalTeam}
                   onHide={() => setModalTeam(false)}
@@ -73,33 +81,46 @@ export default function TeamList() {
           )}
           {teams.length !== 0 && (
             <>
-              <h3 className='text-center list-team'>
+              <h3 className="text-center list-team">
                 <b>List of your Team</b>
               </h3>
               <ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
-              <hr></hr>
-              <br></br>
-              <div className='container'>
+              <div className="container">
                 <div className="add-team">
-                  <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={() => { setModalTeam(true); }}> Create Team</button>
+                  <button
+                    className="btn"
+                    style={{ backgroundColor: "#FF8C00", color: "white" }}
+                    onClick={() => {
+                      setModalTeam(true);
+                    }}
+                  >
+                    {" "}
+                    Create Team
+                  </button>
                   <VerticalModalAddTeam
                     show={modalTeam}
                     onHide={() => setModalTeam(false)}
                   />
                 </div>
-                <div className='row'>
+                <div className="row">
                   {teams.map((team, idx) => (
-                    <div className='col-12 col-md-4' key={idx}>
+                    <div className="col-12 col-md-4" key={idx}>
                       <div
-                        className='card text-white mb-3'
+                        className="card rounded shadow text-white mb-3"
                         style={{ maxWidth: "18rem", height: "550px" }}
                       >
                         <div
-                          className='card-header'
-                          style={{ backgroundColor: "#FFB562" }}
+                          className="card-header"
+                          style={{ backgroundColor: "orange" }}
                         >
-                          <div className='row'>
-                            <div className='col-6'>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div>
                               <span
                                 style={{
                                   fontSize: "1.1rem",
@@ -109,95 +130,68 @@ export default function TeamList() {
                                 {team.name}
                               </span>
                             </div>
-                            <div className='col-2'>
-                              <i
-                                className='bi bi-pencil-square'
-                                style={{ cursor: "pointer", color: "black" }}
-                                onClick={() => {
-                                  editModalTeam(team.id)
-                                }}
-                              ></i>
-                            </div>
-                            <div className='col-2'>
-                              <i
-                                className='bi bi-x-square'
-                                style={{ cursor: "pointer", color: "red" }}
-                                onClick={() => {
-                                  onDeleteClickHandler(team.id);
-                                }}
-                              ></i>
+                            <div
+                              style={{ display: "flex", fontWeight: "bold" }}
+                            >
+                              <div>
+                                <i
+                                  className="bi bi-pencil-square"
+                                  style={{ cursor: "pointer", color: "black" }}
+                                  onClick={() => {
+                                    editModalTeam(team.id);
+                                  }}
+                                ></i>
+                              </div>
+                              <div style={{ marginLeft: 10 }}>
+                                <span
+                                  style={{ cursor: "pointer", color: "red" }}
+                                  onClick={() => {
+                                    onDeleteClickHandler(team.id);
+                                  }}
+                                >
+                                  &#88;
+                                </span>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div
-                          className='card-body'
-                          style={{ backgroundColor: "#FF8C00" }}
+                          className="card-body"
+                          style={{
+                            backgroundColor: "#F5F5F5",
+                            color: "#263238",
+                            textAlign: "center",
+                          }}
                         >
-                          <h5 className='text-center'>Player Roster</h5>
+                          <h5 className="text-center">Player Roster</h5>
                           <hr></hr>
-                          <div className='row'>
-                            <div className='col-8 my-auto'>
-                              <p className='text-center'>
-                                <b>Name</b>
-                              </p>
-                              <h5 className='card-title'>{team.CaptainName}</h5>
-                              <p className='card-text'>
-                                {team.MemberName1 && team.MemberName1}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName2 && team.MemberName2}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName3 && team.MemberName3}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName4 && team.MemberName4}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName5 && team.MemberName5}
-                              </p>
-                              <p className='text-center'>
-                                <b>Benches</b>
-                              </p>
-                              <p className='card-text'>
-                                {team.BenchMemberName1 && team.BenchMemberName1}
-                              </p>
-                              <p className='card-text'>
-                                {team.BenchMemberName2 && team.BenchMemberName2}
-                              </p>
+                          <div style={{display: "flex", justifyContent: "space-around"}}>
+                            <div style={{display: "flex", flexDirection: "column"}}>
+                              <b>Name</b>
+                              <div>{team.CaptainName}<b>{" ( C )"}</b></div>
+                              <div>{team.MemberName1 && team.MemberName1}</div>
+                              <div>{team.MemberName2 && team.MemberName2}</div>
+                              <div>{team.MemberName3 && team.MemberName3}</div>
+                              <div>{team.MemberName4 && team.MemberName4}</div>
+                              <div>{team.MemberName5 && team.MemberName5}</div>
+                              <b>Benches</b>
+                              <div>{team.BenchMemberName1 && team.BenchMemberName1}</div>
+                              <div>{team.BenchMemberName2 && team.BenchMemberName2}</div>
                             </div>
-                            <div className='col-4 text-center my-auto'>
-                              <p className=''>
-                                <b>Pos.</b>
-                              </p>
-                              <p className='card-text'>
-                                {team.CaptainName && "1"}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName1 && "2"}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName2 && "3"}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName3 && "4"}
-                              </p>
-                              <p className='card-text'>
-                                {team.MemberName4 && "5"}
-                              </p>
-                              <h6 className='card-title'>No</h6>
-                              <p className='card-text'>
-                                {team.BenchMemberName1 && "1"}
-                              </p>
-                              <p className='card-text'>
-                                {team.BenchMemberName2 && "2"}
-                              </p>
+                            <div style={{display: "flex", flexDirection: "column"}}>
+                              <b>Pos.</b>
+                              <div>{team.CaptainName && "1"}</div>
+                              <div>{team.MemberName1 && "2"}</div>
+                              <div>{team.MemberName2 && "3"}</div>
+                              <div>{team.MemberName3 && "4"}</div>
+                              <div>{team.MemberName4 && "5"}</div>
+                              <b>No</b>
+                              <div>{team.BenchMemberName1 && "1"}</div>
+                              <div>{team.BenchMemberName2 && "2"}</div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <br></br>
-                      <br></br>
                     </div>
                   ))}
                 </div>
@@ -207,8 +201,7 @@ export default function TeamList() {
         </>
       ) : (
         <LoadingAnimation />
-      )
-      }
+      )}
     </>
   );
 }

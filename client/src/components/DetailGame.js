@@ -145,7 +145,7 @@ export default function DetailGame() {
             </p>
           </div>
           <div className="button">
-            {eventTime > currentTime && (<button onClick={handlerOnClick}>Register event!</button>)}
+            {eventTime > currentTime && (<button className="regis" onClick={handlerOnClick}>Register event!</button>)}
             <button className="back" onClick={() => navigate(-1)}>Back</button>
           </div>
           {eventTime <= currentTime && (

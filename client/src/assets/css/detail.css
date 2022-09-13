@@ -1,7 +1,7 @@
 .detail {
   display: flex;
   justify-content: center;
-  margin: 100px
+  margin: 100px 0 20px;
 }
 
 .detail>.game {
@@ -9,13 +9,13 @@
   position: -webkit-sticky;
   position: sticky;
   top: 80px;
-  margin-left: 50px;
 }
 
 .detail>* {
   width: 100%;
   max-width: 600px;
   margin: 0 10px;
+  flex: 1;
 }
 
 .game-img,
@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px;
+  aspect-ratio: 6/4;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -44,7 +44,7 @@
 
 .game-img>img,
 .event-img>img {
-  width: 800px;
+  width: 120%;
 }
 
 .detail>.game>.game-img>div {
@@ -94,7 +94,7 @@
   margin-top: 30px;
 }
 
-.detail>.event .button button:nth-child(1) {
+.detail>.event .button .regis {
   background-color: orange;
   font-weight: bold;
   border: none;
@@ -129,5 +129,15 @@
   .detail>.game {
     position: unset;
     align-self: unset;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .detail {
+    margin: 80px 10px;
+  }
+  .detail>.game {
+    margin-left: 0;
   }
 }
