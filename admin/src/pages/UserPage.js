@@ -97,7 +97,7 @@ export default function UserPage() {
             >
               <table className="table table-striped">
                 <thead>
-                  <tr style={{ backgroundColor: "#EAE3D2" }}>
+                  <tr style={{ backgroundColor: "orange" }}>
                     <th scope="col">ID</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>

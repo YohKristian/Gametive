@@ -3,6 +3,10 @@ table {
   border-spacing: 0 20px;
 }
 
+table th {
+  background-color: orange;
+}
+
 table tr {
   box-shadow: 0 0 10px silver;
   border-radius: 10px;

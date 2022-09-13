@@ -98,7 +98,7 @@ export default function GamePage() {
             >
               <table className="table table-striped">
                 <thead>
-                  <tr style={{ backgroundColor: "#EAE3D2" }}>
+                  <tr style={{ backgroundColor: "orange" }}>
                     <th scope="col">Name</th>
                     <th scope="col">Game Poster</th>
                     <th scope="col">Release Date</th>
