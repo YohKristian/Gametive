@@ -31,8 +31,23 @@ export default function VerticalModalEditEvent(props) {
 				// console.log(success)
 			}),
 		);
-		let populateDate = new Date(detailEvent.eventDate).toLocaleDateString("en-CA");
-		setNewEvent({ ...detailEvent });
+
+		// Eksperimental
+		let populateDate = new Date(detailEvent.eventDate);
+		let newFormat = ``;
+
+		if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
+			newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+		} else if ((populateDate.getDate()) < 10) {
+			newFormat = `${populateDate.getFullYear()}-${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+		} else if ((populateDate.getMonth()) < 10) {
+			newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+		}
+
+		setNewEvent({
+			...detailEvent,
+			eventDate: newFormat,
+		});
 	}, [detailEvent]);
 
 	const inputEditEvent = (e) => {
@@ -45,6 +60,7 @@ export default function VerticalModalEditEvent(props) {
 
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
+
 		setNewEvent((prev) => ({ ...prev, ...detailEvent }));
 		let {
 			name: eventName,
@@ -62,7 +78,7 @@ export default function VerticalModalEditEvent(props) {
 		let newInput = {
 			eventName,
 			eventPoster,
-			eventDate,
+			eventDate: new Date(eventDate),
 			eventType,
 			description,
 			rules,

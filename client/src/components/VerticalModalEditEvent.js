@@ -61,6 +61,18 @@ export default function VerticalModalEditEvent(props) {
                     Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
                 } = data;
 
+                // Eksperimental
+                // let populateDate = new Date(eventDate);
+                // let newFormat = ``;
+
+                // if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
+                //     newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+                // } else if ((populateDate.getDate()) < 10) {
+                //     newFormat = `${populateDate.getFullYear()}-${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+                // } else if ((populateDate.getMonth()) < 10) {
+                //     newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+                // }
+
                 setValueSelect({
                     size: sizeDefault.filter((x) => x.value === data.size),
                     type: typeDefault.filter((x) => x.value === data.eventType),
@@ -73,6 +85,7 @@ export default function VerticalModalEditEvent(props) {
                     eventName,
                     eventPoster,
                     eventDate,
+                    // eventDate: newFormat,
                     eventType,
                     description,
                     rules,
