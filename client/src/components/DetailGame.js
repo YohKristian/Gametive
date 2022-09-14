@@ -96,6 +96,7 @@ export default function DetailGame() {
 					eventName: detail.name,
 					eventPrice: +detail.price,
 					eventDate: detail.eventDate,
+					eventPoster: detail.eventPoster,
 				},
 			});
 		} else {
