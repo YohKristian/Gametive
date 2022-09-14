@@ -73,6 +73,7 @@ class TeamController {
 
 			await redis.del("app:teams");
 			await redis.del("app:teamId");
+			await redis.del("app:captain");
 
 			res.status(201).json(data);
 		} catch (error) {
@@ -109,6 +110,7 @@ class TeamController {
 
 			await redis.del("app:teams");
 			await redis.del("app:teamId");
+			await redis.del("app:captain");
 
 			res.status(200).json(data);
 		} catch (error) {
@@ -137,6 +139,7 @@ class TeamController {
 
 			await redis.del("app:teams");
 			await redis.del("app:teamId");
+			await redis.del("app:captain");
 
 			res.status(200).json({
 				message: "Success Delete Team",
