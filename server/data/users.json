@@ -1,73 +1,61 @@
 [
   {
-    "username": "admin",
-    "email": "admin@gmail.com",
+    "username": "fajar",
+    "email": "fajar@gmail.com",
     "password": "12345",
     "role": "Admin"
   },
   {
-    "username": "customer",
-    "email": "customer@gmail.com",
+    "username": "joshua",
+    "email": "joshua@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "rama",
+    "email": "rama@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "rizki",
+    "email": "rizki@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "steven",
+    "email": "steven@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "yohanes",
+    "email": "yohanes@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "Andi",
+    "email": "andi@gmail.com",
     "password": "12345",
     "role": "Customer"
   },
   {
-    "username": "customer1",
-    "email": "customer1@gmail.com",
+    "username": "Budi",
+    "email": "budi@gmail.com",
     "password": "12345",
     "role": "Customer"
   },
   {
-    "username": "customer2",
-    "email": "customer2@gmail.com",
+    "username": "Coki",
+    "email": "coki@gmail.com",
     "password": "12345",
     "role": "Customer"
   },
   {
-    "username": "customer3",
-    "email": "customer3@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer4",
-    "email": "customer4@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer5",
-    "email": "customer5@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer6",
-    "email": "customer6@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer7",
-    "email": "customer7@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer8",
-    "email": "customer8@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer9",
-    "email": "customer9@gmail.com",
-    "password": "12345",
-    "role": "Customer"
-  },
-  {
-    "username": "customer10",
-    "email": "customer10@gmail.com",
+    "username": "Dendi",
+    "email": "dendi@gmail.com",
     "password": "12345",
     "role": "Customer"
   }
