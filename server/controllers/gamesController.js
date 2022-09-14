@@ -30,6 +30,8 @@ module.exports = class gamesController {
 
 	static async fetchAll(req, res, next) {
 		try {
+			// await redis.del("app:games:page");
+			// await redis.del("app:games");
 			const reg = new RegExp("^[0-9]*$");
 
 			const { page, size, search } = req.query;
@@ -45,7 +47,7 @@ module.exports = class gamesController {
 			if (gamesCache) {
 				console.log("cached");
 				const games = JSON.parse(gamesCache);
-				res.status(200).json({ ...games, cached: true } || { message: "there is no data" });
+				res.status(200).json(games || { message: "there is no data" });
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				const fetchResponse = await Game.findAndCountAll({
@@ -83,7 +85,6 @@ module.exports = class gamesController {
 				if (!fetchResponse) throw { code: 404 };
 
 				await redis.set("app:gameDetailId", gamesId);
-
 				await redis.set("app:game", JSON.stringify(fetchResponse));
 
 				res.status(200).json(fetchResponse);
