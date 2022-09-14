@@ -188,39 +188,42 @@ export default function SearchGames() {
               ))}
             </div>
             {yourEvents.items.length > 0 && (
-              <nav>
-                <ul className="pagination">
-                  <li className="page-item">
-                    <a
-                      className="page-link"
-                      onClick={() => handlePage(yourEvents.currentPage - 1)}
-                    >
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li className="page-item pagination">
-                    {pageNumber(yourEvents.totalPages).map((x, idx) => {
-                      return (
-                        <a
-                          key={idx}
-                          className="page-link"
-                          onClick={() => handlePage(x)}
-                        >
-                          {x}
-                        </a>
-                      );
-                    })}
-                  </li>
-                  <li className="page-item">
-                    <a
-                      className="page-link"
-                      onClick={() => handlePage(yourEvents.currentPage + 1)}
-                    >
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <>
+                <nav>
+                  <ul className="pagination">
+                    <li className="page-item">
+                      <a
+                        className="page-link"
+                        onClick={() => handlePage(yourEvents.currentPage - 1)}
+                      >
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li className="page-item pagination">
+                      {pageNumber(yourEvents.totalPages).map((x, idx) => {
+                        return (
+                          <a
+                            key={idx}
+                            className={yourEvents.currentPage === x ? "page-link active" : "page-link"}
+                            onClick={() => handlePage(x)}
+                          >
+                            {x}
+                          </a>
+                        );
+                      })}
+                    </li>
+                    <li className="page-item">
+                      <a
+                        className="page-link"
+                        onClick={() => handlePage(yourEvents.currentPage + 1)}
+                      >
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                <br></br>
+              </>
             )}
           </>
         ) : (
