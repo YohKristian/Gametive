@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
 import { getHistoryUser } from "../store/actions";
+import LoadingAnimation from "./LoadingAnimation";
 
 export default function HistoryList() {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export default function HistoryList() {
     }, [])
 
     return loading ? (
-        <>
+        <div className="main-page">
             <h1 className="event-title">History List</h1>
             <hr className="my-4"></hr>
             <div style={{ marginTop: "50px" }} className="history-list text-center">
@@ -39,7 +40,7 @@ export default function HistoryList() {
                     </thead>
                     <tbody>
                         {history.Teams.length === 0 && <tr>
-                            <td colSpan={5}>No History Yet</td>
+                            <td colSpan={6}>No History Yet</td>
                         </tr>}
                         {history.Teams.map(team => {
                             return team.Participants.map((participant, idx) => {
@@ -56,8 +57,8 @@ export default function HistoryList() {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     ) : (
-        <h1 style={{ marginTop: "10vh" }}>Loading</h1>
+        <LoadingAnimation />
     )
 }

@@ -76,19 +76,20 @@ export default function SearchGames() {
 	}, [page]);
 
 	return (
-		<>
+		<div className="main-page">
 			<h1 className="event-title">All Events</h1>
 			<hr className="my-4"></hr>
 			<div className="search-page">
-				<div className="search-bar">
-					<div>
-						<i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
-						<input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
-					</div>
-				</div>
 				{!loading ? (
 					<>
+						<div className="search-bar">
+							<div>
+								<i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
+								<input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
+							</div>
+						</div>
 						<div>
+							<br></br>
 							{events.items.map((event, idx) => (
 								<div className="search-item" key={idx} onClick={toDetail(event.id)}>
 									<div className="img">
@@ -137,6 +138,6 @@ export default function SearchGames() {
 					<LoadingAnimation />
 				)}
 			</div>
-		</>
+		</div>
 	);
 }

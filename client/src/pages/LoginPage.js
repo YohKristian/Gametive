@@ -38,7 +38,7 @@ export default function LoginPage() {
 	useEffect(() => {
 		const callback = handleCredentialResponse;
 		const google = window.google;
-    
+
 		google.accounts.id.initialize({
 			client_id: "859738134038-o13q0rhpmhqjemomlmjjevkc2tuh6qc2.apps.googleusercontent.com",
 			callback,
@@ -75,12 +75,14 @@ export default function LoginPage() {
 					<br></br>
 					<button>{loading ? <LoadingHorizontal /> : <span>Login</span>}</button>
 					<div className="d-flex justify-content-center align-items-center" id="google-button-login"></div>
-					<p>
+					<hr className="my-4"></hr>
+					<a>
 						Dont have an account? click here to <Link to={"/register"}>Create</Link>
 						<br></br>
 						or back to <Link to={"/"}>Home</Link>
-					</p>
-					<p
+					</a>
+					<hr className="my-4"></hr>
+					<a
 						className="bi bi-exclamation-triangle-fill"
 						onClick={() => {
 							setModalShow(true);
@@ -88,7 +90,7 @@ export default function LoginPage() {
 					>
 						{" "}
 						Terms & Condition
-					</p>
+					</a>
 					<VerticalModalTnC show={modalShow} onHide={() => setModalShow(false)} />
 				</form>
 			</div>

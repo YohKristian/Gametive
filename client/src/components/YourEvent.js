@@ -67,19 +67,22 @@ export default function SearchGames() {
     }, [page]);
 
     return (
-        <>
+        <div className="main-page">
             <h1 className="event-title">Your Events</h1>
             <hr className="my-4"></hr>
             <div className="search-page">
-                <div className="search-bar">
-                    <div>
-                        <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
-                        <input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
-                    </div>
-                </div>
                 {!loading ? (
                     <>
+                        <div className="search-bar">
+                            {yourEvents.items.length !== 0 &&
+                                <div>
+                                    <i onClick={handleSearch} className="fa-solid fa-magnifying-glass"></i>
+                                    <input onKeyPress={handleEnter} onChange={handleKeyword} type="text" placeholder="Search here..." />
+                                </div>
+                            }
+                        </div>
                         <div>
+                            <br></br>
                             {yourEvents.items.length == 0 && <h1 className="dont-have">You don't have any events!</h1>}
                             {yourEvents.items.map((event, idx) => (
                                 <div className="search-item" key={idx}>
@@ -94,9 +97,10 @@ export default function SearchGames() {
                                             <p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
                                             <p><i className="bi bi-cash"></i> {event.price === 0 ? "Free" : rupiahFormat(event.price)}</p>
                                             <p><i className="fa-solid fa-gamepad"></i> {event.Game.name} <i className="fa-solid fa-slash"></i> {event.Game.genre}</p>
+                                            <br></br>
                                             {event.eventStatus === "Pending" &&
                                                 < div className="edit-event">
-                                                    <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={() => { setModal(true); }}> Edit Event</button>
+                                                    <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white", width: "15%" }} onClick={() => { setModal(true); }}> Edit Event</button>
                                                     <VerticalModalEditEvent
                                                         show={modal}
                                                         onHide={() => setModal(false)}
@@ -104,10 +108,11 @@ export default function SearchGames() {
                                                     />
                                                 </div>
                                             }
+
                                             <br></br>
                                             {(event.eventStatus === "Pending" || event.eventStatus === "Active") &&
                                                 < div className="edit-event">
-                                                    <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={toDetail(event.id)}> Edit Bracket</button>
+                                                    <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white", width: "15%" }} onClick={toDetail(event.id)}> Edit Bracket</button>
                                                 </div>
                                             }
                                         </div>
@@ -142,6 +147,6 @@ export default function SearchGames() {
                 )}
                 <br></br>
             </div>
-        </>
+        </div>
     );
 }

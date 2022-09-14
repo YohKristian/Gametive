@@ -85,7 +85,9 @@ export default function EventRegistration() {
 				<div className="img">
 					<img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
 				</div>
+				<br></br>
 				<h3 className="fw-bold mt-2">Event</h3>
+				<br></br>
 				<form onSubmit={handleOnSubmitForm}>
 					<div>
 						<div>

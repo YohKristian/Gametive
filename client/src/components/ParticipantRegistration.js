@@ -94,21 +94,29 @@ export default function ParticipantRegistration() {
                     <div className="img">
                         <img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
                     </div>
+                    <br></br>
                     <div className="event-img">
                         <img src={eventPoster} alt={eventName} />
                     </div>
-                    <h3 className="mt-2">Participate to Event <b>{eventName}</b></h3>
-                    <h3 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <b>{rupiahFormat(eventPrice)}</b>}</h3>
-                    {eventPrice !== 0 && <h3 className="mt-2">Service Fee : <b>{rupiahFormat(5000)}</b></h3>}
-                    <h3 className="mt-2">Event Date Start : <b>{dateFormat(eventDate)}</b></h3>
+                    <br></br>
+                    <h3 className="mt-2"><b>{eventName}</b></h3>
+                    <hr className="my-4"></hr>
+                    <h5 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <>{rupiahFormat(eventPrice)}</>}</h5>
+                    {eventPrice !== 0 && <h5 className="mt-2">Service Fee : {rupiahFormat(5000)}</h5>}
+                    <h5 className="mt-2">Event Date Start : {dateFormat(eventDate)}</h5>
+                    <br></br>
                     <form onSubmit={handleOnSubmitForm}>
                         <label htmlFor="teamName">Team Name</label>
-                        <select id="teamName" value={teamId} onChange={handlerOnChangeForm} style={{ padding: 8, outline: "none", border: "none", borderRadius: 5 }}>
+                        <select id="teamName" value={teamId} onChange={handlerOnChangeForm} style={{
+                            padding: 8, outline: "none", border: "none", borderRadius: 5, width: "100%",
+                            maxWidth: "400px"
+                        }}>
                             <option value="" disabled hidden>-- Choose Your Team --</option>
                             {teams.map(team => {
                                 return <option value={team.id} key={team.id} style={{ padding: 8 }}>{team.name}</option>
                             })}
                         </select>
+                        <br></br>
                         <button type="submit" style={{ marginTop: 16 }}>Register to event</button>
                     </form>
                 </div>

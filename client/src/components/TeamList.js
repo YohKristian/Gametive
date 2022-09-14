@@ -55,7 +55,7 @@ export default function TeamList() {
 	};
 
 	return (
-		<>
+		<div className="main-page">
 			{!isLoading && teams ? (
 				<>
 					{teams.length === 0 && (
@@ -194,7 +194,7 @@ export default function TeamList() {
 			) : (
 				<LoadingAnimation />
 			)}
-		</>
+		</div>
 	);
 }
 

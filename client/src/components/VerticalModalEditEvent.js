@@ -122,13 +122,11 @@ export default function VerticalModalEditEvent(props) {
 			<>
 				<Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
 					<Modal.Header closeButton>
-						<Modal.Title id="contained-modal-title-vcenter">Update your event {props.event_id}</Modal.Title>
+						<Modal.Title id="contained-modal-title-vcenter">Update your event</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<form onSubmit={handleOnSubmitForm}>
 							<div className="card-body text-center" style={{ paddingLeft: "5", paddingRight: "5" }}>
-								{" "}
-								<pre>{JSON.stringify(eventData, null, 2)}</pre>
 								<div className="row">
 									<div className="form-outline mb-4 col-6">
 										<label htmlFor="eventName" className="form-label">
@@ -257,7 +255,7 @@ export default function VerticalModalEditEvent(props) {
 									<br></br>
 									<button
 										className="btn btn-lg"
-										style={{ width: "100%", backgroundColor: "orange", color: "white", margin: "auto" }}
+										style={{ width: "96%", backgroundColor: "orange", color: "white", margin: "auto" }}
 										type="submit"
 										onClick={props.onHide}
 									>

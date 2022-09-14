@@ -85,11 +85,13 @@ export default function RegisterPage() {
           <button>
             {loading ? <LoadingHorizontal /> : <span>Register</span>}
           </button>
-          <p>
+          <hr className="my-4"></hr>
+          <a>
             Already have an account? click here to{" "}
             <Link to={"/login"}>Log in</Link>
-          </p>
-          <p className="bi bi-exclamation-triangle-fill" onClick={() => { setModalShow(true); }}> Terms & Condition</p>
+          </a>
+          <hr className="my-4"></hr>
+          <a className="bi bi-exclamation-triangle-fill" onClick={() => { setModalShow(true); }}> Terms & Condition</a>
           <VerticalModalTnC
             show={modalShow}
             onHide={() => setModalShow(false)}
