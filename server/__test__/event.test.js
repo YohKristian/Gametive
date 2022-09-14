@@ -934,6 +934,8 @@ describe("PUT Bracket for specific events", () => {
 
 			const response = await request(app).put("/events/10/bracket").send(body).set("access_token", customer_token);
 
+			console.log(response.body);
+
 			expect(response.status).toBe(404);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("code", 404);
