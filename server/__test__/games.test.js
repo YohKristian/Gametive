@@ -362,7 +362,7 @@ describe("PUT /games/:gamesId", () => {
 describe("DEL /games/:gamesId", () => {
 	describe("DEL /games/:gamesId - success test", () => {
 		it("should be return an object of game data", async () => {
-			const response = await await request(app).del("/games/1").set("access_token", admin_token);
+			const response = await await request(app).patch("/games/1").set("access_token", admin_token);
 			expect(response.status).toBe(200);
 			expect(response.body).toBeInstanceOf(Object);
 		});
@@ -370,7 +370,7 @@ describe("DEL /games/:gamesId", () => {
 
 	describe("DEL /games/:gamesId - error", () => {
 		it("should be return an object with message", async () => {
-			const response = await request(app).del("/games/a").set("access_token", "");
+			const response = await request(app).patch("/games/a").set("access_token", "");
 			expect(response.status).toBe(400);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("message");
@@ -380,7 +380,7 @@ describe("DEL /games/:gamesId", () => {
 
 	describe("DEL /games/:gamesId - error", () => {
 		it("should be return an object with message", async () => {
-			const response = await request(app).del("/games/a").set("access_token", admin_token);
+			const response = await request(app).patch("/games/a").set("access_token", admin_token);
 			expect(response.status).toBe(404);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("message");
@@ -390,7 +390,7 @@ describe("DEL /games/:gamesId", () => {
 
 	describe("DEL /games/:gamesId - error no game found", () => {
 		it("should be return an object with message", async () => {
-			const response = await request(app).del("/games/1000").set("access_token", admin_token);
+			const response = await request(app).patch("/games/1000").set("access_token", admin_token);
 			expect(response.status).toBe(404);
 			expect(response.body).toBeInstanceOf(Object);
 			expect(response.body).toHaveProperty("message");
