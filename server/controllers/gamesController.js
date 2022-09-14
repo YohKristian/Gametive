@@ -30,8 +30,9 @@ module.exports = class gamesController {
 
 	static async fetchAll(req, res, next) {
 		try {
-			// await redis.del("app:games:page");
 			// await redis.del("app:games");
+			// await redis.del("app:gameId");
+			// await redis.del("app:games:page");
 			const reg = new RegExp("^[0-9]*$");
 
 			const { page, size, search } = req.query;
@@ -56,6 +57,7 @@ module.exports = class gamesController {
 						name: {
 							[Op.iLike]: `%${search}%`,
 						},
+						status: "Active"
 					},
 					limit: limit,
 					offset: offset,

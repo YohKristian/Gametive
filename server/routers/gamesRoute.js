@@ -6,6 +6,6 @@ games.post("/", authentication, gamesController.create)
 games.get("/", gamesController.fetchAll)
 games.get("/:gamesId", gamesController.fetchOne)
 games.put("/:gamesId", authentication, gamesController.update)
-games.delete("/:gamesId", authentication, gamesController.delete)
+games.patch("/:gamesId", authentication, gamesController.delete)
 
 module.exports = games;
