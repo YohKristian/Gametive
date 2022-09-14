@@ -47,7 +47,7 @@ export default function BracketViewer({ state: { detail, id } }) {
 
 	return detail ? (
 		<div>
-			<pre>singleMatch:{JSON.stringify(singleMatch, null, 2)}</pre>
+			{/* <pre>singleMatch:{JSON.stringify(singleMatch, null, 2)}</pre> */}
 			<ModalBracket
 				show={modalShow}
 				onHide={() => setModalShow(false)}

@@ -163,7 +163,7 @@ export default function DetailGame() {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div className={"mb-3"}>
 				{/* {JSON.stringify(detail)} */}
 				{eventTime <= currentTime && <BracketViewer state={{ detail: JSON.parse(detail.Bracket), id }} />}
 			</div>

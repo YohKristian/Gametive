@@ -34,7 +34,6 @@ const sizeDefault = [
 	];
 
 export default function EventEdit(props) {
-	console.log(props);
 	let { pathname } = useLocation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();

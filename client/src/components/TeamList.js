@@ -61,6 +61,7 @@ export default function TeamList() {
 					{teams.length === 0 && (
 						<div>
 							<h1 className="dont-have-team">You don't have any team!</h1>
+							<br></br>
 							<div className="add-team">
 								<button
 									className="btn"
@@ -78,15 +79,15 @@ export default function TeamList() {
 					)}
 					{teams.length !== 0 && (
 						<>
-							<h3 className="text-center list-team">
-								<b>List of your Team</b>
-							</h3>
+							<h1 className="event-title">List of Your Teams</h1>
+							<hr className="my-4"></hr>
 							<ModalEditTeam show={modal} onHide={() => setModalShow(false)} />
 							<div className="container">
 								<div className="add-team">
+									<br></br>
 									<button
 										className="btn"
-										style={{ backgroundColor: "#FF8C00", color: "white" }}
+										style={{ backgroundColor: "orange", color: "white" }}
 										onClick={() => {
 											setModalTeam(true);
 										}}
@@ -96,7 +97,7 @@ export default function TeamList() {
 									</button>
 									<VerticalModalAddTeam show={modalTeam} onHide={() => setModalTeam(false)} />
 								</div>
-								<div className="row">
+								<div className="row" style={{ marginLeft: "6.5%" }}>
 									{teams.map((team, idx) => (
 										<div className="col-12 col-md-4" key={idx}>
 											<div className="card rounded shadow text-white mb-3" style={{ maxWidth: "18rem", height: "550px" }}>
@@ -181,10 +182,12 @@ export default function TeamList() {
 													</div>
 												</div>
 											</div>
+											<br></br>
 										</div>
 									))}
 								</div>
 							</div>
+							<br></br>
 						</>
 					)}
 				</>
