@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { editBracket } from "../store/actions";
 import ModalBracket from "./ModalBracket";
 
-export default function BracketViewer({ state: { detail, id } }) {
+export default function BracketViewer({ state: { detail, id, username } }) {
 	const [modalShow, setModalShow] = useState(false);
 	const [singleMatch, setSingleMatch] = useState({});
 	const [dataMatch, setDataMatch] = useState({});
@@ -35,10 +35,12 @@ export default function BracketViewer({ state: { detail, id } }) {
 	}
 
 	async function matchInfo(match) {
-		window.bracketsViewer.onMatchClicked = (match) => {
-			setDataMatch(match);
-			setModalShow(true);
-		};
+		if (localStorage.username === username) {
+			window.bracketsViewer.onMatchClicked = (match) => {
+				setDataMatch(match);
+				setModalShow(true);
+			};
+		}
 	}
 
 	useEffect(() => {
