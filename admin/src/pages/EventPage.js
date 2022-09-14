@@ -72,16 +72,16 @@ export default function EventPage() {
   }, [search, page]);
 
   return (
-    <div>
+    <div className="main-page">
+      <h2 style={{ textAlign: "center" }}>Event List</h2>
+      <hr className="my-4"></hr>
       <div style={{ textAlign: "center" }}>
         <SearchBar value={search.query} onChange={onChangeSearch} />
+        <br></br>
         {loading ? (
           <LoadingAnimation />
         ) : (
           <>
-            <div style={{ paddingTop: "20px" }}>
-              <h2>Event</h2>
-            </div>
             <div
               style={{
                 paddingTop: "30px",

@@ -69,16 +69,15 @@ export default function GamePage() {
   }, [search, page]);
 
   return (
-    <div>
+    <div className="main-page">
+      <h2 style={{ textAlign: "center" }}>Game List</h2>
+      <hr className="my-4"></hr>
       <div style={{ textAlign: "center" }}>
         <SearchBar value={search.query} onChange={onChangeSearch} />
         {loading ? (
           <LoadingAnimation />
         ) : (
           <>
-            <div style={{ paddingTop: "20px" }}>
-              <h2>Game</h2>
-            </div>
             <div style={{ marginLeft: "75vh", paddingTop: "20px" }}>
               <Button variant="success" className="addbtn" onClick={() => setModalShow(true)}>
                 <i className="bi bi-clipboard2-plus"> Add New Game</i>

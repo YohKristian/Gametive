@@ -157,3 +157,7 @@ nav ul a.active::after {
 .addbtn {
   margin-left: 80%;
 }
+
+.main-page {
+  padding: 50px;
+}
