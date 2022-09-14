@@ -159,6 +159,7 @@ export default function SearchGames() {
                               style={{
                                 backgroundColor: "#FF8C00",
                                 color: "white",
+                                marginRight: 5
                               }}
                               onClick={() => onClickEdit(event.id)}
                             >
@@ -174,7 +175,6 @@ export default function SearchGames() {
                               style={{
                                 backgroundColor: "#FF8C00",
                                 color: "white",
-                                marginLeft: 5,
                               }}
                               onClick={toDetail(event.id)}
                             >

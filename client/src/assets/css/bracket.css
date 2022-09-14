@@ -23,15 +23,12 @@
   --match-border-radius: 0.3em;
 }
 
-.bracket-bg {
-  /* background-color: #F5F5F5; */
-}
-
 .elimination {
   background-color: #F5F5F5;
   box-shadow: 0 0 10px silver;
   padding: 0 40px 10px;
   border-radius: 10px;
+  margin: 0 auto;
 }
 
 .elimination > h1 {
@@ -58,16 +55,13 @@
   background: transparent;
   color: var(--font-color);
   font-size: var(--text-size);
-  text-align: left;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
+  overflow-x: auto;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
   margin: 0 auto;
-  padding: 10px 50px;
+  padding: 0 !important;
 }
 
 .brackets-viewer:empty {

@@ -108,6 +108,21 @@ header .dropdown:active .submenu {
   padding: 10px;
 }
 
+.blur-bg {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100vh;
+  position: absolute;
+  background-color: #00000060;
+  z-index: 3;
+  transition: all 0.05s;
+}
+
+.blur-bg.active {
+  width: 100%;
+}
+
 .side-bar {
   display: flex;
   flex-direction: column;

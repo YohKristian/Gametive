@@ -8,6 +8,12 @@ export default function HeaderBar() {
   const navigate = useNavigate();
   const { access_token, username } = localStorage;
   const [modalShow, setModalShow] = useState(false);
+  const [showBlurBg, setShowBlurBg] = useState(false);
+
+  function toggleBlurBg() {
+    if (showBlurBg) setShowBlurBg(false);
+    else setShowBlurBg(true);
+  }
 
   function handleLogout() {
     localStorage.clear();
@@ -16,7 +22,7 @@ export default function HeaderBar() {
   return (
     <header>
       <div className="hamburger">
-        <div>☰</div>
+        <div onClick={toggleBlurBg}>☰</div>
         <div className="side-bar">
           <NavLink to="/search">Event list</NavLink>
           {access_token && <NavLink to="/event">Your Events</NavLink>}
@@ -83,6 +89,10 @@ export default function HeaderBar() {
           <NavLink to="/login">Sign In</NavLink>
         )}
       </div>
+      <div
+        className={showBlurBg ? "blur-bg active" : "blur-bg"}
+        onClick={toggleBlurBg}
+      ></div>
     </header>
   );
 }
