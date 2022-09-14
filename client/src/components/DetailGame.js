@@ -119,7 +119,7 @@ export default function DetailGame() {
 								<i className="bi bi-cash"></i>
 								{detail.price === 0 ? "Free" : rupiahFormat(detail.price)}
 							</p>
-							<p>
+							{location.province && <p>
 								<i className="fa-solid fa-map"></i>
 								<a
 									href="#"
@@ -131,10 +131,10 @@ export default function DetailGame() {
 								>
 									{location.province} - {location.regency} {location.district ? `- ${location.district}` : ""}
 								</a>
-							</p>
+							</p>}
 						</div>
 						<div className="button">
-							{eventTime > currentTime && (
+							{(eventTime > currentTime && detail.eventStatus === "Active") && (
 								<button className="regis" onClick={handlerOnClick}>
 									Register event!
 								</button>

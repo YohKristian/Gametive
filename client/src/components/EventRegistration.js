@@ -60,23 +60,14 @@ export default function EventRegistration() {
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 		setEventData((prev) => ({ ...prev, ...eventData }));
-		if (pathname === "/event-edit") {
-			dispatch(editEvent(eventData.id, eventData))
-				// .then(() => {
-				// 	navigate("/search");
-				// })
-				.catch((err) => {
-					errorPopup(err);
-				});
-		} else {
-			dispatch(addEvent(eventData))
-				// .then(() => {
-				// 	navigate("/search");
-				// })
-				.catch((err) => {
-					errorPopup(err);
-				});
-		}
+
+		dispatch(addEvent(eventData))
+			.then(() => {
+				navigate("/event");
+			})
+			.catch((err) => {
+				errorPopup(err);
+			});
 	};
 
 	return (
