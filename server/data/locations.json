@@ -3,5 +3,10 @@
     "name": "Jl. Jakarta",
     "ProvinceId": 31,
     "RegencyId": 3171
+  },
+  {
+    "name": "Jl. Surabaya",
+    "ProvinceId": 35,
+    "RegencyId": 3578
   }
 ]
