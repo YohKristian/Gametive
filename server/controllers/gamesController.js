@@ -142,11 +142,19 @@ module.exports = class gamesController {
 
 			if (!fetchResponse) throw { code: 404 };
 
-			await Game.destroy({
+			await Game.update({
+				status: "Deleted"
+			}, {
 				where: {
-					id: gamesId,
-				},
-			});
+					id: +gamesId
+				}
+			})
+
+			// await Game.destroy({
+			// 	where: {
+			// 		id: gamesId,
+			// 	},
+			// });
 
 			await redis.del("app:games");
 			await redis.del("app:gameId");
