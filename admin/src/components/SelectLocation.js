@@ -66,17 +66,17 @@ async function getKec(kotaId) {
 export default function SelectLocation({ state }) {
 	/**
 	 *
-	 * @state : { setEventData, Location }
-	 * @setEventData => normal/void/useState function
+	 * @state : { setLocation, Location }
+	 * @setLocation => normal/void/useState function
 	 * @Location : object -> { ProvinceId, RegencyId, DistrictId }
 	 *
 	 * how to use it as component
 	 *
-	 * <SelectLocation state={setEventData, Location} >
+	 * <SelectLocation state={setLocation, Location} >
 	 *
 	 */
 
-	let { setEventData, Location } = state;
+	let { setLocation, Location } = state;
 
 	const [loading, setLoading] = useState(true);
 	const [provData, setProvData] = useState({});
@@ -143,12 +143,18 @@ export default function SelectLocation({ state }) {
 			}
 		}
 		setDataLocation((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
-		setEventData((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
+		setLocation((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
 		console.log(dataLocation);
 	};
 	// console.log(provData?.filter((x) => x.value == Location.ProvinceId));
 
 	// console.log(valueSelect);
+
+	useEffect(() => {
+		if (dataLocation.DistrictId) {
+			setLocation(dataLocation);
+		}
+	}, [dataLocation])
 
 	if (!loading) {
 		return (
