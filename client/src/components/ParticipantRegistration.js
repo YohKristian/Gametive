@@ -94,11 +94,9 @@ export default function ParticipantRegistration() {
                     <div className="img">
                         <img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
                     </div>
-                    <br></br>
                     <div className="event-img">
                         <img src={eventPoster} alt={eventName} />
                     </div>
-                    <br></br>
                     <h3 className="mt-2"><b>{eventName}</b></h3>
                     <hr className="my-4" style={{ width: "100%" }}></hr>
                     <h5 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <>{rupiahFormat(eventPrice)}</>}</h5>

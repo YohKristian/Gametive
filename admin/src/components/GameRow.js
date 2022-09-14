@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux"
 import { dateFormat, errorPopup } from "../helpers";
 import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
 import VerticalModalEditGame from "../components/VerticalModalEditGame";
-import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
 export default function GameRow(props) {
@@ -50,26 +49,28 @@ export default function GameRow(props) {
                 <td>{dateFormat(props.game.releaseDate)}</td>
                 <td>{props.game.developer}</td>
                 <td>{props.game.genre}</td>
-                <td>
-                    <Button
-                        variant="secondary"
-                        onClick={handlerOnClickEdit}
-                        style={{ marginRight: '10px' }}
-                    >
-                        <i className="bi bi-pencil-square"> Edit</i>
-                    </Button>
-
-                    <VerticalModalEditGame
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                    />
-                    <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={handlerOnClickDelete}
-                    >
-                        <i className="bi bi-trash3-fill"> Delete</i>
-                    </button>
+                <td className="action">
+                    <div>
+                        <button
+                            className="btn btn-secondary"
+                            onClick={handlerOnClickEdit}
+                        >
+                            <i className="bi bi-pencil-square"></i>
+                            <span>Edit</span>
+                        </button>
+                        <VerticalModalEditGame
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                        />
+                        <button
+                            type="button"
+                            className="btn btn-danger"
+                            onClick={handlerOnClickDelete}
+                        >
+                            <i className="bi bi-trash3-fill"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </>

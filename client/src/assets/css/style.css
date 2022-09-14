@@ -30,11 +30,13 @@ body {
 /* Track */
 ::-webkit-scrollbar-track {
   background: black; 
+  border-radius: 5px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: orange; 
+  border-radius: 5px;
 }
 
 /* Handle on hover */
