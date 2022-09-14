@@ -5,8 +5,8 @@
     "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
     "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
     "releaseDate": "2020-10-27",
-    "developer": "RIOT GAMES",
-    "genre": "Multiplayer online battle arena"
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
   },
   {
     "name": "Mobile Legends: Bang Bang",
@@ -15,7 +15,7 @@
     "gameUrl": "https://m.mobilelegends.com/en",
     "releaseDate": "2016-07-14",
     "developer": "Moonton",
-    "genre": "Multiplayer online battle arena"
+    "genre": "Multiplayer Online Battle Arena"
   },
   {
     "name": "Arena Of Valor",
@@ -23,8 +23,17 @@
     "youtubeUrl": "https://www.youtube.com/watch?v=JM_UdSUW1ao",
     "gameUrl": "https://www.arenaofvalor.com/",
     "releaseDate": "2016-10-13",
-    "developer": "Tencet Games",
-    "genre": "Multiplayer online battle arena"
+    "developer": "Tencent Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "DOTA 2",
+    "gameImg": "https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg?t=1662588548",
+    "youtubeUrl": "https://www.youtube.com/watch?v=SmnqsdeHFT0",
+    "gameUrl": "https://www.dota2.com",
+    "releaseDate": "2013-07-09",
+    "developer": "Valve Corporation",
+    "genre": "Multiplayer Online Battle Arena"
   },
   {
     "name": "VALORANT",
@@ -32,8 +41,8 @@
     "youtubeUrl": "https://www.youtube.com/watch?v=IhhjcB2ZjIM",
     "gameUrl": "https://playvalorant.com/id-id/",
     "releaseDate": "2020-06-02",
-    "developer": "RIOT GAMES",
-    "genre": "FPS"
+    "developer": "Riot Games",
+    "genre": "First Person Shooter"
   },
   {
     "name": "CS:GO",
@@ -42,7 +51,7 @@
     "gameUrl": "https://blog.counter-strike.net/",
     "releaseDate": "2012-08-21",
     "developer": "Valve Corporation",
-    "genre": "FPS"
+    "genre": "First Person Shooter"
   },
   {
     "name": "Garena Free Fire",
@@ -61,41 +70,5 @@
     "releaseDate": "2018-03-19",
     "developer": "Tencent Games",
     "genre": "Battle royale"
-  },
-  {
-    "name": "DOTA 2",
-    "gameImg": "https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg?t=1662588548",
-    "youtubeUrl": "https://www.youtube.com/watch?v=SmnqsdeHFT0",
-    "gameUrl": "https://www.dota2.com",
-    "releaseDate": "2013-07-09",
-    "developer": "Valve Corporation",
-    "genre": "Multiplayer online battle arena, Entertainment, Fantasy, Action role-playing game, Speculative fiction, Societal"
-  },
-  {
-    "name": "FIFA 23",
-    "gameImg": "https://assets.promediateknologi.com/crop/0x0:0x0/x/photo/2022/07/20/3788213003.jpg",
-    "youtubeUrl": "https://www.youtube.com/watch?v=o3V-GvvzjE4",
-    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
-    "releaseDate": "2022-09-30",
-    "developer": "EA Vancouver, EA Canada & EA Romania",
-    "genre": "Sports Video Game, Simulation Game, Simulation, Sports"
-  },
-  {
-    "name": "TEKKEN 7",
-    "gameImg": "https://image.api.playstation.com/vulcan/img/rnd/202111/1200/u36iCgbHmBSZoHOIm3GeKmii.jpg?w=940&thumb=false",
-    "youtubeUrl": "https://www.youtube.com/watch?v=1V-_q3SKh5w",
-    "gameUrl": "https://tk7.tekken.com",
-    "releaseDate": "2015-02-18",
-    "developer": "BNE Entertainment, BANDAI NAMCO Studios",
-    "genre": "Fighting game, Sports Video Game, Beat 'em up, Simulation Game"
-  },
-  {
-    "name": "NBA 2K23",
-    "gameImg": "https://asset-a.grid.id/crop/0x0:0x0/700x465/photo/2022/07/08/6ebaff4b-0bff-493f-9e0d-8b1f3276-20220708013259.jpg",
-    "youtubeUrl": "https://www.youtube.com/watch?v=rBZ_q6wIJKY",
-    "gameUrl": "https://nba.2k.com/2k23/",
-    "releaseDate": "2022-09-09",
-    "developer": "Tencent Games",
-    "genre": "Simulation Video Game, Sports Video Game, Simulation Game, Simulation, Sports"
   }
 ]
