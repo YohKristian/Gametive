@@ -144,7 +144,6 @@ export default function SelectLocation({ state }) {
 		}
 		setDataLocation((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
 		setEventData((prev) => ({ ...prev, ...dataLocation, DistrictId: value }));
-		console.log(dataLocation);
 	};
 	// console.log(provData?.filter((x) => x.value == Location.ProvinceId));
 
@@ -177,5 +176,4 @@ export default function SelectLocation({ state }) {
 			</>
 		);
 	}
-
 }

@@ -172,6 +172,7 @@ beforeAll(async () => {
 		x.updatedAt = new Date();
 		x.password = hashPassword(x.password);
 	});
+
 	await queryInterface.bulkInsert("Users", users, {});
 
 	let games = JSON.parse(fs.readFileSync("./data/games.json", "utf-8"));
