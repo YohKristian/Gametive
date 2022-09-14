@@ -43,8 +43,9 @@ module.exports = class gamesController {
 			const gamesCache = await redis.get("app:games");
 
 			if (gamesCache) {
+				console.log("cached");
 				const games = JSON.parse(gamesCache);
-				res.status(200).json(games || { message: "there is no data" });
+				res.status(200).json({ ...games, cached: true } || { message: "there is no data" });
 			} else {
 				const { limit, offset } = getPagination(page, size);
 				const fetchResponse = await Game.findAndCountAll({
