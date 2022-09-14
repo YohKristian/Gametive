@@ -65,7 +65,7 @@ export const deleteGame = (gameId, cb) =>
     async () => {
         try {
             const { data } = await axios(baseURL + `/games/${+gameId}`, {
-                method: "DELETE",
+                method: "PATCH",
                 headers: {
                     access_token: localStorage.access_token
                 }
