@@ -90,7 +90,6 @@ export default function DetailGame() {
 			navigate("/login");
 		}
 	};
-	// console.log(detail);
 	return !loading ? (
 		<>
 			<div className="detail">

@@ -38,7 +38,7 @@ export default function ModalBracket(props) {
 		},
    *  */
 
-	const { dataMatch, participant, setModalShow, submitNewBracket, detail } = props.state;
+	const { dataMatch, participant, setModalShow, detail } = props.state;
 
 	const [match, setMatch] = useState(initial);
 	const dispatch = useDispatch();
@@ -98,11 +98,11 @@ export default function ModalBracket(props) {
 			return x;
 		});
 		dispatch(editBracket(id, JSON.stringify({ ...detail, match: newMatch })))
-			.then(console.log)
+			.then((res) => {
+				setModalShow(false);
+				window.location.reload(false);
+			})
 			.catch(console.log);
-		// setSingleMatch((prev) => ({ ...prev, ...match }));
-
-		setModalShow(false);
 	}
 
 	return (
@@ -113,7 +113,7 @@ export default function ModalBracket(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Container>
+				{/* <Container>
 					<Row>
 						<Col>
 							<pre>match : {JSON.stringify(match, null, 2)}</pre>
@@ -122,7 +122,7 @@ export default function ModalBracket(props) {
 							<pre>dataMatch : {JSON.stringify(dataMatch, null, 2)}</pre>
 						</Col>
 					</Row>
-				</Container>
+				</Container> */}
 				<div>
 					{/* {JSON.stringify(participant)} */}
 					<label>Team 1</label>
