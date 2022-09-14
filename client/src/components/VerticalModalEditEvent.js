@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
-import { addEvent, editEvent } from "../store/actions";
+import { addEvent, editEvent, fetchYourEvents } from "../store/actions";
 import SelectLocation from "./SelectLocation";
 import { fetchGames } from "../store/actions/games";
 import { fetchEventDetail } from "../store/actions";
@@ -108,9 +108,13 @@ export default function VerticalModalEditEvent(props) {
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 		setEventData((prev) => ({ ...prev, ...eventData }));
-		dispatch(editEvent(eventData.id, eventData)).catch((err) => {
-			errorPopup(err);
-		});
+		dispatch(editEvent(eventData.id, eventData))
+			.then(() => {
+				return dispatch(fetchYourEvents("", 1))
+			})
+			.catch((err) => {
+				errorPopup(err);
+			});
 	};
 
 	if (!loading) {
