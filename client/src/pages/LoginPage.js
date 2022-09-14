@@ -38,6 +38,7 @@ export default function LoginPage() {
 	useEffect(() => {
 		const callback = handleCredentialResponse;
 		const google = window.google;
+    
 		google.accounts.id.initialize({
 			client_id: "859738134038-o13q0rhpmhqjemomlmjjevkc2tuh6qc2.apps.googleusercontent.com",
 			callback,
