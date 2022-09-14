@@ -5,6 +5,7 @@ import { fetchYourEvents } from "../store/actions";
 import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
 import LoadingAnimation from "./LoadingAnimation";
 import VerticalModalEditEvent from "./VerticalModalEditEvent";
+const currentTime = new Date();
 
 export default function SearchGames() {
     const navigate = useNavigate();
@@ -110,7 +111,7 @@ export default function SearchGames() {
                                             }
 
                                             <br></br>
-                                            {(event.eventStatus === "Pending" || event.eventStatus === "Active") &&
+                                            {(new Date(event.eventDate) <= currentTime && (event.eventStatus === "Pending" || event.eventStatus === "Active")) &&
                                                 < div className="edit-event">
                                                     <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white", width: "15%" }} onClick={toDetail(event.id)}> Edit Bracket</button>
                                                 </div>
