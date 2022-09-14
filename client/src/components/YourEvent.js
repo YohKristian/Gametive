@@ -91,14 +91,14 @@ export default function SearchGames() {
                                         <p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
                                         <p><i className="bi bi-cash"></i> {event.price === 0 ? "Free" : rupiahFormat(event.price)}</p>
                                         <p><i className="fa-solid fa-gamepad"></i> {event.Game.name} <i className="fa-solid fa-slash"></i> {event.Game.genre}</p>
-                                        <div className="edit-event">
+                                        {event.eventStatus === "Pending" && <div className="edit-event">
                                             <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={() => { setModal(true); }}> Edit Event</button>
                                             <VerticalModalEditEvent
                                                 show={modal}
                                                 onHide={() => setModal(false)}
                                                 event_id={event.id}
                                             />
-                                        </div>
+                                        </div>}
                                     </div>
                                 </div>
                             </div>
