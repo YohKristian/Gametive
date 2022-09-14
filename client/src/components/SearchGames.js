@@ -97,7 +97,10 @@ export default function SearchGames() {
 									</div>
 									<div>
 										<h1 className="fw-bold">{event.name}</h1>
-										<span className="status" style={{ ...statusColor(event.eventStatus) }}>{event.eventStatus}</span>
+										<div>
+											<span className="status" style={{ ...statusColor(event.eventStatus) }}>{event.eventStatus}</span>
+											<span className="status" style={{ marginLeft: 5, backgroundColor: "#E0E0E0", color: "#757575" }}>{event.eventType}</span>
+										</div>
 										<div>
 											<p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
 											<p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>

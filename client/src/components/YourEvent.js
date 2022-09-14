@@ -67,6 +67,17 @@ export default function SearchGames() {
         fetchData();
     }, [page]);
 
+    const statusColor = (value) => {
+		const styleObj = {
+			Pending: ["#FFF9C4", "#F9A825"],
+			Active: ["#C8E6C9", "#1B5E20"],
+			Finished: ["#FFCCBC", "#BF360C"],
+			Archived: ["#C5CAE9", "#1A237E"],
+		};
+		const [backgroundColor, color] = styleObj[value];
+		return { backgroundColor, color };
+	};
+
     return (
         <div className="main-page">
             <h1 className="event-title">Your Events</h1>
@@ -92,7 +103,10 @@ export default function SearchGames() {
                                     </div>
                                     <div>
                                         <h1 style={{ fontWeight: "bold" }}>{event.name}</h1>
-                                        <span className="status">{event.eventType}</span>
+                                        <div>
+											<span className="status" style={{ ...statusColor(event.eventStatus) }}>{event.eventStatus}</span>
+											<span className="status" style={{ marginLeft: 5, backgroundColor: "#E0E0E0", color: "#757575" }}>{event.eventType}</span>
+										</div>
                                         <div>
                                             <p><i className="bi bi-geo-alt-fill"></i> {event.Location.name}</p>
                                             <p><i className="bi bi-flag-fill"></i> {dateFormat(event.eventDate)}</p>
