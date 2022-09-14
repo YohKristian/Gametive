@@ -97,7 +97,7 @@ export default function ParticipantRegistration() {
                     <div className="event-img">
                         <img src={eventPoster} alt={eventName} />
                     </div>
-                    <h3 className="fw-bold mt-2">Participate to Event {eventName}</h3>
+                    <h3 className="mt-2">Participate to Event <b>{eventName}</b></h3>
                     <h3 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <b>{rupiahFormat(eventPrice)}</b>}</h3>
                     {eventPrice !== 0 && <h3 className="mt-2">Service Fee : <b>{rupiahFormat(5000)}</b></h3>}
                     <h3 className="mt-2">Event Date Start : <b>{dateFormat(eventDate)}</b></h3>
