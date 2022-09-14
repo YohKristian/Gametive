@@ -3,11 +3,12 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { errorPopup } from "../helpers";
-import { addEvent, editEvent } from "../store/actions";
+import { addEvent, editEvent, fetchYourEvents } from "../store/actions";
 import SelectLocation from "./SelectLocation";
 import { fetchGames } from "../store/actions/games";
 import { fetchEventDetail } from "../store/actions";
 import Select from "react-select";
+import dayjs from "dayjs";
 
 let initial = {
 	eventName: "",
@@ -25,10 +26,10 @@ let initial = {
 	DistrictId: 0,
 };
 const sizeDefault = [
-		{ value: 4, label: "4 Teams" },
-		{ value: 8, label: "8 Teams" },
-		{ value: 16, label: "16 Teams" },
-	],
+	{ value: 4, label: "4 Teams" },
+	{ value: 8, label: "8 Teams" },
+	{ value: 16, label: "16 Teams" },
+],
 	typeDefault = [
 		{ value: "Offline", label: "Offline" },
 		{ value: "Online", label: "Online" },
@@ -62,17 +63,10 @@ export default function VerticalModalEditEvent(props) {
 					Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
 				} = data;
 
-				// Eksperimental
-				// let populateDate = new Date(eventDate);
-				// let newFormat = ``;
-
-				// if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
-				//     newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
-				// } else if ((populateDate.getDate()) < 10) {
-				//     newFormat = `${populateDate.getFullYear()}-${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
-				// } else if ((populateDate.getMonth()) < 10) {
-				//     newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
-				// }
+				let populateDate
+				if (eventDate) {
+					populateDate = dayjs(eventDate).format('YYYY-MM-DDTHH:mm');
+				}
 
 				setValueSelect({
 					size: sizeDefault.filter((x) => x.value === data.size),
@@ -85,8 +79,7 @@ export default function VerticalModalEditEvent(props) {
 					id,
 					eventName,
 					eventPoster,
-					eventDate,
-					// eventDate: newFormat,
+					eventDate: populateDate,
 					eventType,
 					description,
 					rules,
@@ -115,9 +108,13 @@ export default function VerticalModalEditEvent(props) {
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 		setEventData((prev) => ({ ...prev, ...eventData }));
-		dispatch(editEvent(eventData.id, eventData)).catch((err) => {
-			errorPopup(err);
-		});
+		dispatch(editEvent(eventData.id, eventData))
+			.then(() => {
+				return dispatch(fetchYourEvents("", 1))
+			})
+			.catch((err) => {
+				errorPopup(err);
+			});
 	};
 
 	if (!loading) {
