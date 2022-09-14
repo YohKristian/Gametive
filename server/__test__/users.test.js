@@ -18,6 +18,14 @@ beforeAll(async () => {
 			updatedAt: new Date(),
 		},
 		{
+			username: "customer",
+			email: "customer@gmail.com",
+			password: hashPassword("password"),
+			role: "Customer",
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+		{
 			username: "administrator",
 			email: "administrator@gmail.com",
 			password: hashPassword("password"),
@@ -28,25 +36,21 @@ beforeAll(async () => {
 	]);
 
 	// .then(() => {
-	await queryInterface.bulkInsert(
-		"Teams",
-		[
-			{
-				name: "testingTeam",
-				CaptainName: "customer01",
-				MemberName1: "member1",
-				MemberName2: "member2",
-				MemberName3: "member3",
-				MemberName4: "member4",
-				BenchMemberName1: "bench1",
-				BenchMemberName2: "bench2",
-				statusTeam: "Active",
-				createdAt: new Date(),
-				updatedAt: new Date(),
-			},
-		],
-		{},
-	);
+	await queryInterface.bulkInsert("Teams", [
+		{
+			name: "testingTeam",
+			CaptainName: "customer",
+			MemberName1: "member1",
+			MemberName2: "member2",
+			MemberName3: "member3",
+			MemberName4: "member4",
+			BenchMemberName1: "bench1",
+			BenchMemberName2: "bench2",
+			statusTeam: "Active",
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	]);
 	// })
 	// .then(() => {
 	await queryInterface.bulkInsert("Games", [
@@ -101,20 +105,16 @@ beforeAll(async () => {
 	]);
 	// })
 	// .then(() => {
-	await queryInterface.bulkInsert(
-		"Participants",
-		[
-			{
-				TeamId: 1,
-				EventId: 1,
-				statusPay: "Paid",
-				paymentDate: new Date(),
-				createdAt: new Date(),
-				updatedAt: new Date(),
-			},
-		],
-		{},
-	);
+	await queryInterface.bulkInsert("Participants", [
+		{
+			TeamId: 1,
+			EventId: 1,
+			statusPay: "Paid",
+			paymentDate: new Date(),
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	]);
 	// });
 });
 
@@ -451,17 +451,20 @@ describe("GET All User history", () => {
 	let access_token;
 	describe("Success fetch all user history", () => {
 		it("Should return object with data history", async () => {
-			let admin_login = await request(app).post("/users/login").send({ username: "customer01", password: "password" });
-			access_token = admin_login.body.access_token;
+			let response = await request(app).post("/users/login").send({ username: "customer", password: "password" });
+			access_token = response.body.access_token;
 
-			let response = await request(app).get("/users/history").set("access_token", access_token);
+			response = await request(app).get("/users/history").set("access_token", access_token);
 
-			console.log(response.body);
+			expect(response.status).toBe(200);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("Teams", expect.any(Array));
+			expect(response.body).toHaveProperty("username", "customer");
 		});
 	});
 });
 
-describe("DESTROY Account - FOR ADMIN ONLY", () => {
+describe("DELETE Account - FOR ADMIN ONLY", () => {
 	let access_token = null;
 	describe("Success delete user", () => {
 		it("should return object with username and message", async () => {
@@ -483,7 +486,6 @@ describe("DESTROY Account - FOR ADMIN ONLY", () => {
 			let response = await request(app).post("/users/login").send(body);
 			access_token = response.body.access_token;
 			//
-			console.log(response.body);
 			response = await request(app).delete("/users/1000").set("access_token", access_token);
 
 			expect(response.status).toBe(404);

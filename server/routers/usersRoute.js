@@ -7,11 +7,10 @@ users.post("/login", usersController.login);
 users.post("/google", usersController.googleSignIn);
 users.post("/register", usersController.create);
 users.post("/registerAdmin", usersController.createAdmin);
+users.get("/history", authentication, Authorization.customer, usersController.fetchAllHistory);
 users.get("/:username", usersController.fetchOne);
-
 //AUTHENTICATION HERE
 users.use(authentication);
-users.get("/history", Authorization.customer, usersController.fetchAllHistory);
 users.get("/", Authorization.admin, usersController.fetchAll);
 users.put("/:username", Authorization.customer, usersController.update);
 users.put("/admin/:userId", Authorization.admin, usersController.updateAdmin);

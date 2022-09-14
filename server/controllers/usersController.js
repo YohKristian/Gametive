@@ -243,7 +243,7 @@ module.exports = class usersController {
 			const id = req.params.userId; //from authentication
 			const findUser = await User.findByPk(id);
 			if (!findUser) throw { code: 9 };
-			await User.destroy({ where: { id } });
+			await User.update({ status: "Inactive" }, { where: { id } });
 			res.status(200).json({ id: +id, message: "user has been deleted" });
 		} catch (error) {
 			next(error);
