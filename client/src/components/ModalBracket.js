@@ -6,6 +6,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Select from "react-select";
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editBracket } from "../store/actions";
+import { useLocation } from "react-router-dom";
 
 let initial = {
 	id: 0,
@@ -35,9 +38,12 @@ export default function ModalBracket(props) {
 		},
    *  */
 
-	const { dataMatch, setSingleMatch, participant } = props.state;
+	const { dataMatch, participant, setModalShow, detail } = props.state;
 
 	const [match, setMatch] = useState(initial);
+	const dispatch = useDispatch();
+	const { pathname } = useLocation();
+	const id = pathname.split("/")[2];
 
 	useMemo(() => setMatch({ ...initial, ...dataMatch }), [dataMatch]);
 
@@ -87,10 +93,17 @@ export default function ModalBracket(props) {
 
 	function submitMatch(e) {
 		e.preventDefault();
-		setSingleMatch(match);
+		let newMatch = detail.match.map((x) => {
+			if (x.id == match.id) x = match;
+			return x;
+		});
+		dispatch(editBracket(id, JSON.stringify({ ...detail, match: newMatch })))
+			.then((res) => {
+				setModalShow(false);
+				window.location.reload(false);
+			})
+			.catch(console.log);
 	}
-
-	console.log(participant, "ini participant");
 
 	return (
 		<Modal {...props} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
@@ -100,7 +113,7 @@ export default function ModalBracket(props) {
 				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<Container>
+				{/* <Container>
 					<Row>
 						<Col>
 							<pre>match : {JSON.stringify(match, null, 2)}</pre>
@@ -109,7 +122,7 @@ export default function ModalBracket(props) {
 							<pre>dataMatch : {JSON.stringify(dataMatch, null, 2)}</pre>
 						</Col>
 					</Row>
-				</Container>
+				</Container> */}
 				<div>
 					{/* {JSON.stringify(participant)} */}
 					<label>Team 1</label>
