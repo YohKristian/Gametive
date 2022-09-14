@@ -10,9 +10,9 @@ module.exports = class participantsController {
 			const findEvent = await Event.findOne({
 				include: { model: User, attributes: ["username"] },
 				where: {
-					id: +EventId
-				}
-			})
+					id: +EventId,
+				},
+			});
 
 			if (req.user.username === findEvent.User.username) throw { code: 81 };
 
@@ -20,6 +20,8 @@ module.exports = class participantsController {
 				where: { TeamId, EventId },
 				defaults: { TeamId, EventId, paymentDate: new Date() },
 			});
+
+			console.log(createResponse.dataValues, "<----------");
 
 			if (!created && createResponse.statusPay === "Paid") throw { code: 80 };
 
@@ -50,6 +52,7 @@ module.exports = class participantsController {
 			next(error);
 		}
 	}
+
 	static async fetchOneParticipantByEventId(req, res, next) {
 		try {
 			const { eventId } = req.params;
@@ -74,6 +77,7 @@ module.exports = class participantsController {
 			next(error);
 		}
 	}
+
 	static async updateByTeamId(req, res, next) {
 		let t = await sequelize.transaction();
 		try {

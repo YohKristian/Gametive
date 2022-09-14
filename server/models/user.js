@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 		static associate(models) {
 			// define association here
 			User.hasMany(models.Event);
-			User.hasMany(models.Team, { foreignKey: "CaptainName", sourceKey: 'username' });
+			User.hasMany(models.Team, { foreignKey: "CaptainName", sourceKey: "username" });
 		}
 	}
 	User.init(
@@ -64,6 +64,11 @@ module.exports = (sequelize, DataTypes) => {
 			role: {
 				type: DataTypes.STRING,
 				defaultValue: "Customer",
+			},
+			status: {
+				allowNull: false,
+				defaultValue: "Active",
+				type: DataTypes.STRING,
 			},
 		},
 		{

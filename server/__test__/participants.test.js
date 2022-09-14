@@ -6,6 +6,7 @@ const { queryInterface } = sequelize;
 
 // Token from login test
 let customer_token = "";
+let not_organizer_token = "";
 
 beforeAll(() => {
 	// Insert Dummy User
@@ -71,6 +72,19 @@ beforeAll(() => {
 						MemberName4: "member4",
 						BenchMemberName1: "bench1",
 						BenchMemberName2: "bench2",
+						statusTeam: "Active",
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					},
+					{
+						name: "testingTeam2 Cust1",
+						CaptainName: "customer1",
+						MemberName1: "member11",
+						MemberName2: "member21",
+						MemberName3: "member31",
+						MemberName4: "member41",
+						BenchMemberName1: "bench11",
+						BenchMemberName2: "bench21",
 						statusTeam: "Active",
 						createdAt: new Date(),
 						updatedAt: new Date(),
@@ -198,10 +212,9 @@ describe("POST Customers Login", () => {
 	describe("Success Login Get Token", () => {
 		it("should return object of token", async () => {
 			const body = { username: "customer", password: "12345" };
-
 			const response = await request(app).post("/users/login").send(body);
-
 			customer_token = response.body.access_token;
+
 			expect(response.status).toBe(200);
 		});
 	});
@@ -252,8 +265,12 @@ describe("GET All Participants", () => {
 
 	describe("Success POST Create Participants - token customer", () => {
 		it("should return an object of participants", async () => {
-			const response = await request(app).post(`/participants`).set("access_token", customer_token).send({
-				TeamId: 1,
+			let body = { username: "customer1", password: "12345" };
+			let response = await request(app).post("/users/login").send(body);
+			not_organizer_token = response.body.access_token;
+
+			response = await request(app).post(`/participants`).set("access_token", not_organizer_token).send({
+				TeamId: 4,
 				EventId: 1,
 			});
 
@@ -272,8 +289,8 @@ describe("GET All Participants", () => {
 	describe("Success PUT Update Status Pay By Event Id and Team Id - token customer", () => {
 		it("should return an object of participants", async () => {
 			const EventId = 1;
-			const TeamId = 1;
-			const response = await request(app).put(`/participants/${EventId}/${TeamId}`).set("access_token", customer_token);
+			const TeamId = 4;
+			const response = await request(app).put(`/participants/${EventId}/${TeamId}`).set("access_token", not_organizer_token);
 
 			expect(response.status).toBe(200);
 			expect(response.body).toBeInstanceOf(Object);
@@ -290,10 +307,23 @@ describe("GET All Participants", () => {
 		});
 	});
 
+	describe("failed create participant - participant already paid", () => {
+		it("should return object with code and message", async () => {
+			const body = { TeamId: 4, EventId: 1 };
+			const response = await request(app).post("/participants").send(body).set("access_token", not_organizer_token);
+
+			expect(response.status).toBe(400);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 80);
+			expect(response.body).toHaveProperty("message", "team already registered!");
+		});
+	});
+
 	describe("Success DELETE Participants By Event Id and Team Id - token customer", () => {
 		it("should return an object of participant", async () => {
 			const EventId = 1;
-			const TeamId = 1;
+			const TeamId = 4;
+
 			const response = await request(app).delete(`/participants/${EventId}/${TeamId}`).set("access_token", customer_token);
 
 			expect(response.status).toBe(200);
@@ -323,17 +353,6 @@ describe("GET All Participants", () => {
 });
 
 describe("POST create participant", () => {
-	describe("Success create participant", () => {
-		it("should return created response", async () => {
-			const body = { TeamId: 1, EventId: 1 };
-			const response = await request(app).post("/participants").send(body).set("access_token", customer_token);
-
-			expect(response.status).toBe(201);
-			expect(response.body).toBeInstanceOf(Object);
-			expect(response.body).toHaveProperty("statusPay", "Unpaid");
-		});
-	});
-
 	describe("failed create participant - invalid form", () => {
 		it("should return object with code and message", async () => {
 			const body = {};
@@ -345,30 +364,9 @@ describe("POST create participant", () => {
 			expect(response.body).toHaveProperty("message", "invalid form data, please check your input");
 		});
 	});
-
-	describe("failed create participant - participant already paid", () => {
-		it("should return object with code and message", async () => {
-			const body = { TeamId: 2, EventId: 1 };
-			const response = await request(app).post("/participants").send(body).set("access_token", customer_token);
-
-			expect(response.status).toBe(400);
-			expect(response.body).toBeInstanceOf(Object);
-			expect(response.body).toHaveProperty("code", 80);
-			expect(response.body).toHaveProperty("message", "team already registered!");
-		});
-	});
 });
 
 describe("PUT update payment", () => {
-	describe("Success change status payment", () => {
-		it("Should return said participant with changed status", async () => {
-			let response = await request(app).put("/participants/1/1").set("access_token", customer_token);
-
-			expect(response.status).toBe(200);
-			expect(response.body).toHaveProperty("statusPay", "Paid");
-		});
-	});
-
 	describe("failed change status payment - participant not found", () => {
 		it("Should return object with code and message", async () => {
 			let response = await request(app).put("/participants/999/999").set("access_token", customer_token);

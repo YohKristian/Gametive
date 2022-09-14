@@ -24,6 +24,7 @@ let initial = {
 	RegencyId: 0,
 	DistrictId: 0,
 };
+
 const sizeDefault = [
 	{ value: 4, label: "4 Teams" },
 	{ value: 8, label: "8 Teams" },

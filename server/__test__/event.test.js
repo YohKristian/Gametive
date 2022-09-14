@@ -110,7 +110,7 @@ beforeAll(() => {
 					eventPoster: "https://th.bing.com/th/id/OIP.C_o9I8YHGohNXfbsCcS7rQHaEK?pid=ImgDet&rs=1",
 					eventDate: "2022-09-21",
 					eventType: "Offline",
-					UserId: 1,
+					UserId: 2,
 					GameId: 1,
 					LocationId: 1,
 					size: 16,
@@ -915,11 +915,24 @@ describe("PUT Bracket for specific events", () => {
 		});
 	});
 
-	describe("Failed edit Bracket - id not found", () => {
+	describe("Failed edit Bracket - the editor is not the user responsible", () => {
 		it("should return object with code and message", async () => {
 			const body = { bracket: newBracket };
 
-			const response = await request(app).put("/events/1000/bracket").send(body).set("access_token", customer_token);
+			const response = await request(app).put("/events/3/bracket").send(body).set("access_token", customer_token);
+
+			expect(response.status).toBe(403);
+			expect(response.body).toBeInstanceOf(Object);
+			expect(response.body).toHaveProperty("code", 5);
+			expect(response.body).toHaveProperty("message", "invalid authorization");
+		});
+	});
+
+	describe("Failed edit Bracket - the editor is not the user responsible", () => {
+		it("should return object with code and message", async () => {
+			const body = { bracket: newBracket };
+
+			const response = await request(app).put("/events/10/bracket").send(body).set("access_token", customer_token);
 
 			expect(response.status).toBe(404);
 			expect(response.body).toBeInstanceOf(Object);
