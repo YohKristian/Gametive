@@ -10,7 +10,7 @@ export default function ParticipantRegistration() {
     const navigate = useNavigate();
 
     const { state } = useLocation();
-    const { eventId, eventName, eventPrice, eventDate } = state;
+    const { eventId, eventName, eventPrice, eventDate, eventPoster } = state;
 
     const [teamId, setTeamId] = useState("");
 
@@ -94,10 +94,13 @@ export default function ParticipantRegistration() {
                     <div className="img">
                         <img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
                     </div>
-                    <h3 className="fw-bold mt-2">Participate to Event {eventName}</h3>
-                    <h3 className="fw-bold mt-2">Registration Fee : {eventPrice === 0 ? "Free" : rupiahFormat(eventPrice)}</h3>
-                    {eventPrice !== 0 && <h3 className="fw-bold mt-2">Service Fee : {rupiahFormat(5000)}</h3>}
-                    <h3 className="fw-bold mt-2">Event Date Start : {dateFormat(eventDate)}</h3>
+                    <div className="event-img">
+                        <img src={eventPoster} alt={eventName} />
+                    </div>
+                    <h3 className="mt-2">Participate to Event <b>{eventName}</b></h3>
+                    <h3 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <b>{rupiahFormat(eventPrice)}</b>}</h3>
+                    {eventPrice !== 0 && <h3 className="mt-2">Service Fee : <b>{rupiahFormat(5000)}</b></h3>}
+                    <h3 className="mt-2">Event Date Start : <b>{dateFormat(eventDate)}</b></h3>
                     <form onSubmit={handleOnSubmitForm}>
                         <label htmlFor="teamName">Team Name</label>
                         <select id="teamName" value={teamId} onChange={handlerOnChangeForm} style={{ padding: 8, outline: "none", border: "none", borderRadius: 5 }}>
