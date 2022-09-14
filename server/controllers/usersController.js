@@ -17,6 +17,7 @@ module.exports = class usersController {
 			const loginResponse = await User.findOne({
 				where: {
 					[Op.or]: [{ username: username }, { email: username }],
+					status: "Active"
 				},
 				attributes: { exclude: ["createdAt", "updatedAt"] },
 			});
