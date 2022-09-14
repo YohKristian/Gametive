@@ -12,26 +12,26 @@ export default function SearchGames() {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
     const [keyword, setKeyword] = useState();
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(1);
     const [modal, setModal] = useState(false);
 
     const pageNumber = (page) => {
-        let pagination = []
+        let pagination = [];
         for (let i = 1; i <= page; i++) {
-            pagination.push(i)
+            pagination.push(i);
         }
-        return pagination
-    }
+        return pagination;
+    };
 
     const handlePage = (page) => {
         if (page >= yourEvents.totalPages) {
-            setPage(yourEvents.totalPages)
+            setPage(yourEvents.totalPages);
         } else if (page < 1) {
-            setPage(1)
+            setPage(1);
         } else {
-            setPage(page)
+            setPage(page);
         }
-    }
+    };
 
     const fetchData = () => {
         dispatch(fetchYourEvents(keyword, page))
@@ -45,7 +45,7 @@ export default function SearchGames() {
     const handleKeyword = (e) => {
         const { value } = e.target;
         setKeyword(value);
-        setPage(1)
+        setPage(1);
     };
 
     const handleSearch = () => {

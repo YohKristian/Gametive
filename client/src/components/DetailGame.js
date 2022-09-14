@@ -15,7 +15,6 @@ export default function DetailGame() {
 	const { eventDetailReducer } = useSelector((state) => state);
 	const [detail, setDetail] = useState({});
 	const [loading, setLoading] = useState(true);
-	const [newDetail, setNewDetail] = useState({});
 	const [location, setLocation] = useState({
 		province: "",
 		regency: "",
@@ -50,18 +49,6 @@ export default function DetailGame() {
 	useEffect(() => {
 		getFullLocation();
 	}, [detail, location.province, location.regency]);
-
-	useEffect(() => {
-		console.log(newDetail, "ini new detail");
-		if (newDetail) {
-			dispatch(editBracket(id, JSON.stringify(newDetail)))
-				.then(() => {
-					this.setState({});
-				})
-				.catch(console.log);
-		}
-		// 	//dispatch -> then -> navigate to this page again / reload -> window.location.reload()
-	}, [newDetail]);
 
 	const getFullLocation = async () => {
 		try {
@@ -103,86 +90,84 @@ export default function DetailGame() {
 			navigate("/login");
 		}
 	};
-	// console.log(detail);
 	return !loading ? (
-		<div className="detail">
-			<div className="event">
-				<div className="event-img">
-					<img src={detail.eventPoster} alt="" />
-				</div>
-
-				<div>
-					<h1 className="fw-bold">{detail.name}</h1>
-					<span className="status" style={{ ...statusColor(detail.eventStatus) }}>
-						{detail.eventStatus}
-					</span>
-					<h2>Description</h2>
-					<p>{detail.description}</p>
-					<h2>Rules</h2>
-					<p>{detail.rules}</p>
-					<div>
-						<p>
-							<i className="bi bi-geo-alt-fill"></i>Jakarta Selatan
-						</p>
-						<p>
-							<i className="bi bi-flag-fill"></i>
-							{dateFormat(detail.eventDate)}
-						</p>
-						<p>
-							<i className="bi bi-cash"></i>
-							{detail.price === 0 ? "Free" : rupiahFormat(detail.price)}
-						</p>
-						<p>
-							<i className="fa-solid fa-map"></i>
-							<a
-								href="#"
-								target="_blank"
-								onClick={(event) => {
-									event.preventDefault();
-									showInMapClicked(`${location.province} ${location.regency} ${location.district}`);
-								}}
-							>
-								{location.province} - {location.regency} {location.district ? `- ${location.district}` : ""}
-							</a>
-						</p>
+		<>
+			<div className="detail">
+				<div className="event">
+					<div className="event-img">
+						<img src={detail.eventPoster} alt="" />
 					</div>
-					<div className="button">
-						{eventTime > currentTime && (
-							<button className="regis" onClick={handlerOnClick}>
-								Register event!
+
+					<div>
+						<h1 className="fw-bold">{detail.name}</h1>
+						<span className="status" style={{ ...statusColor(detail.eventStatus) }}>
+							{detail.eventStatus}
+						</span>
+						<h2>Description</h2>
+						<p>{detail.description}</p>
+						<h2>Rules</h2>
+						<p>{detail.rules}</p>
+						<div>
+							<p>
+								<i className="bi bi-geo-alt-fill"></i>Jakarta Selatan
+							</p>
+							<p>
+								<i className="bi bi-flag-fill"></i>
+								{dateFormat(detail.eventDate)}
+							</p>
+							<p>
+								<i className="bi bi-cash"></i>
+								{detail.price === 0 ? "Free" : rupiahFormat(detail.price)}
+							</p>
+							<p>
+								<i className="fa-solid fa-map"></i>
+								<a
+									href="#"
+									target="_blank"
+									onClick={(event) => {
+										event.preventDefault();
+										showInMapClicked(`${location.province} ${location.regency} ${location.district}`);
+									}}
+								>
+									{location.province} - {location.regency} {location.district ? `- ${location.district}` : ""}
+								</a>
+							</p>
+						</div>
+						<div className="button">
+							{eventTime > currentTime && (
+								<button className="regis" onClick={handlerOnClick}>
+									Register event!
+								</button>
+							)}
+							<button className="back" onClick={() => navigate(-1)}>
+								Back
 							</button>
-						)}
-						<button className="back" onClick={() => navigate(-1)}>
-							Back
-						</button>
-					</div>
-					<div>
-						{/* {JSON.stringify(detail)} */}
-						{eventTime <= currentTime && (
-							<BracketViewer state={{ detail: JSON.parse(detail.Bracket) }} set_detail={setNewDetail} />
-						)}
-					</div>
-				</div>
-			</div>
-			<div
-				onClick={() => {
-					window.open(game.gameUrl, "_blank");
-				}}
-				className="game"
-			>
-				<div className="game-img">
-					<img src={game.gameImg} alt="" />
-					<div>
-						<h1 className="fw-bold">{game.name}</h1>
-						<p>Release date: {formatDate(game.releaseDate)}</p>
-						<p>Developer: {game.developer}</p>
-						<p>Genre: {game.genre}</p>
+						</div>
 					</div>
 				</div>
 
-				<div></div>
+				<div
+					onClick={() => {
+						window.open(game.gameUrl, "_blank");
+					}}
+					className="game"
+				>
+					<div className="game-img">
+						<img src={game.gameImg} alt="" />
+						<div>
+							<h1 className="fw-bold">{game.name}</h1>
+							<p>Release date: {formatDate(game.releaseDate)}</p>
+							<p>Developer: {game.developer}</p>
+							<p>Genre: {game.genre}</p>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
+			<div className={"mb-3"}>
+				{/* {JSON.stringify(detail)} */}
+				{eventTime <= currentTime && <BracketViewer state={{ detail: JSON.parse(detail.Bracket), id }} />}
+			</div>
+		</>
 	) : (
 		<LoadingAnimation />
 	);
