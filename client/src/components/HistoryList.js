@@ -59,6 +59,6 @@ export default function HistoryList() {
             </div>
         </div>
     ) : (
-        <LoadingAnimation />
+        <LoadingAnimation/>
     )
 }

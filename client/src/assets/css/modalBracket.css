@@ -1,0 +1,68 @@
+.modal-bracket {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-bracket input,
+.modal-bracket select{
+  border-radius: 5px;
+  border: 2px solid gainsboro;
+  outline: none;
+}
+
+.modal-bracket > * {
+  margin: 5px 0;
+}
+
+.modal-bracket button {
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.modal-bracket > div:nth-child(1) {
+  display: flex;
+}
+
+.modal-bracket > div:nth-child(1) > div:nth-child(1) {flex: 1;}
+.modal-bracket > div:nth-child(1) > div:nth-child(2) {width: 80px;}
+.modal-bracket > div:nth-child(1) > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-bracket > div:nth-child(1) > div > * {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 5px;
+} 
+
+.modal-bracket > div:nth-child(1) > div select,
+.modal-bracket > div:nth-child(1) > div input {
+  padding: 5px;
+}
+
+.modal-bracket .result {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-bracket .result > div > button:nth-child(1) {background-color: blue; color: white;}
+.modal-bracket .result > div > button:nth-child(2) {background-color: gray; color: white;}
+.modal-bracket .result > div > button:nth-child(3) {background-color: red; color: white;}
+.modal-bracket .result > div > button {
+  margin: 0 10px;
+}
+
+.modal-bracket > div:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+}
+.modal-bracket > div:nth-child(3) input { padding: 6px; }
+
+.modal-bracket button {
+  background-color: orange;
+  color: #F5F5F5;
+  margin: 10px 0;
+}

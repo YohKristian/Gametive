@@ -44,7 +44,9 @@ export default function GameRow(props) {
         <>
             <tr>
                 <th scope="row">{props.game.name}</th>
-                <td><img style={{ width: '100px', height: '100px' }} src={props.game.gameImg} alt={props.game.name} /></td>
+                <td>
+                    <img src={props.game.gameImg} alt={props.game.name} />
+                </td>
                 <td>{dateFormat(props.game.releaseDate)}</td>
                 <td>{props.game.developer}</td>
                 <td>{props.game.genre}</td>

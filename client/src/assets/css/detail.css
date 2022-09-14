@@ -44,7 +44,7 @@
 
 .game-img>img,
 .event-img>img {
-  width: 120%;
+  height: 100%;
 }
 
 .detail>.game>.game-img>div {

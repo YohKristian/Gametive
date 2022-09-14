@@ -20,4 +20,5 @@ table tbody tr:hover {
 
 table img {
   width: 150px;
+  aspect-ratio: 6/4;
 }
