@@ -84,7 +84,7 @@ export default function SearchGames() {
                             {yourEvents.items.map((event, idx) => (
                                 <div className="search-item" key={idx}>
                                     <div className="img">
-                                        <img src={event.eventPoster} alt="" onClick={toDetail(event.id)} />
+                                        <img src={event.eventPoster} alt="" />
                                     </div>
                                     <div>
                                         <h1 style={{ fontWeight: "bold" }}>{event.name}</h1>
@@ -102,6 +102,12 @@ export default function SearchGames() {
                                                         onHide={() => setModal(false)}
                                                         event_id={event.id}
                                                     />
+                                                </div>
+                                            }
+                                            <br></br>
+                                            {(event.eventStatus === "Pending" || event.eventStatus === "Active") &&
+                                                < div className="edit-event">
+                                                    <button className="btn" style={{ backgroundColor: "#FF8C00", color: "white" }} onClick={toDetail(event.id)}> Edit Bracket</button>
                                                 </div>
                                             }
                                         </div>
