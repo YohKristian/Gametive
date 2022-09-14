@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { errorPopup } from "../helpers";
-import { addEvent, editEvent } from "../store/actions";
+import { editEvent, fetchYourEvents } from "../store/actions";
 import SelectLocation from "./SelectLocation";
 import { fetchGames } from "../store/actions/games";
 import { fetchEventDetail } from "../store/actions";
 import Select from "react-select";
+import dayjs from "dayjs";
 
 let initial = {
 	eventName: "",
@@ -24,17 +25,17 @@ let initial = {
 	DistrictId: 0,
 };
 const sizeDefault = [
-		{ value: 4, label: "4 Teams" },
-		{ value: 8, label: "8 Teams" },
-		{ value: 16, label: "16 Teams" },
-	],
+	{ value: 4, label: "4 Teams" },
+	{ value: 8, label: "8 Teams" },
+	{ value: 16, label: "16 Teams" },
+],
 	typeDefault = [
 		{ value: "Offline", label: "Offline" },
 		{ value: "Online", label: "Online" },
 	];
 
-export default function EventEdit(props) {
-	let { pathname } = useLocation();
+export default function EventEdit() {
+	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [gameList, setGameList] = useState([]);
@@ -44,7 +45,7 @@ export default function EventEdit(props) {
 
 	useEffect(() => {
 		dispatch(fetchGames((_, { items }) => setGameList(items.map((el) => ({ value: el.id, label: el.name })))));
-		dispatch(fetchEventDetail(props.id))
+		dispatch(fetchEventDetail(id))
 			.then((data) => {
 				const {
 					id,
@@ -60,6 +61,11 @@ export default function EventEdit(props) {
 					Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
 				} = data;
 
+				let populateDate
+				if (eventDate) {
+					populateDate = dayjs(eventDate).format('YYYY-MM-DDTHH:mm');
+				}
+
 				setValueSelect({
 					size: sizeDefault.filter((x) => x.value === data.size),
 					type: typeDefault.filter((x) => x.value === data.eventType),
@@ -71,7 +77,7 @@ export default function EventEdit(props) {
 					id,
 					eventName,
 					eventPoster,
-					eventDate,
+					eventDate: populateDate,
 					eventType,
 					description,
 					rules,
@@ -102,12 +108,16 @@ export default function EventEdit(props) {
 		setEventData((prev) => ({ ...prev, ...eventData }));
 		dispatch(editEvent(eventData.id, eventData))
 			.then(() => {
-				navigate("/search");
+				return dispatch(fetchYourEvents("", 1))
+			})
+			.then(() => {
+				navigate("/event")
 			})
 			.catch((err) => {
 				errorPopup(err);
 			});
 	};
+
 
 	if (!loading) {
 		return (
@@ -116,7 +126,9 @@ export default function EventEdit(props) {
 					<div className="img">
 						<img src="https://i.ibb.co/NN0tH4t/GAMETIVE-LOGO-BAR.png" alt="" />
 					</div>
-					<h3 className="fw-bold mt-2">Event</h3>
+					<br></br>
+					<h3 className="fw-bold mt-2">Update Event</h3>
+					<hr className="my-4" style={{ width: "100%" }}></hr>
 					<form onSubmit={handleOnSubmitForm}>
 						<div>
 							<div>
@@ -210,7 +222,8 @@ export default function EventEdit(props) {
 								)}
 							</div>
 						</div>
-						<button type="submit">Create</button>
+						<br></br>
+						<button type="submit">Update</button>
 					</form>
 				</div>
 			</section>
