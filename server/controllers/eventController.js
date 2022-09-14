@@ -244,9 +244,9 @@ class Controller {
 
 			let dataBracket = await Event.findByPk(id, { transaction: t });
 
-			if (dataBracket.id !== req.user.id) throw { code: 5 };
-
 			if (!dataBracket) throw { code: 404 };
+
+			if (dataBracket.id !== req.user.id) throw { code: 5 };
 
 			dataBracket = { ...dataBracket.dataValues, Bracket: JSON.parse(dataBracket.Bracket) };
 			let newBracket = { ...dataBracket.Bracket, participant: newParticipant, stage: newStage, match: newMatch };

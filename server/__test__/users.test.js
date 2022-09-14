@@ -7,8 +7,8 @@ const { queryInterface } = sequelize;
 //TEST WILL HAVE
 //CREATE 3 USERS -> LOGIN 1 OF THEM -> FIND THEM ALL USING LOGIN TOKEN -> FIND ONE OF THEM -> TEST FAILED CONDITION
 
-beforeAll(() => {
-	return queryInterface.bulkInsert("Users", [
+beforeAll(async () => {
+	await queryInterface.bulkInsert("Users", [
 		{
 			username: "customer01",
 			email: "customer01@gmail.com",
@@ -26,14 +26,106 @@ beforeAll(() => {
 			updatedAt: new Date(),
 		},
 	]);
+
+	// .then(() => {
+	await queryInterface.bulkInsert(
+		"Teams",
+		[
+			{
+				name: "testingTeam",
+				CaptainName: "customer01",
+				MemberName1: "member1",
+				MemberName2: "member2",
+				MemberName3: "member3",
+				MemberName4: "member4",
+				BenchMemberName1: "bench1",
+				BenchMemberName2: "bench2",
+				statusTeam: "Active",
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+		],
+		{},
+	);
+	// })
+	// .then(() => {
+	await queryInterface.bulkInsert("Games", [
+		{
+			name: "League of Legends: Wild Rift",
+			gameImg:
+				"https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+			youtubeUrl: "https://www.youtube.com/watch?v=TFzkbos0oeo",
+			gameUrl: "https://wildrift.leagueoflegends.com/en-gb/",
+			releaseDate: "2020-10-27",
+			developer: "RIOT GAMES",
+			genre: "MOBA",
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	]);
+	// })
+	// .then(() => {
+	await queryInterface.bulkInsert("Locations", [
+		{
+			name: "Jl. Jakarta",
+			ProvinceId: 31,
+			RegencyId: 3101,
+			DistrictId: 3101010,
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	]);
+	// })
+	// .then(() => {
+	await queryInterface.bulkInsert("Events", [
+		{
+			name: "League of Legends: Wild Rift - Esport",
+			description:
+				"Thank you to all the teams who competed during the season one global championship! We also want to give a huge shout out to all the fans who tuned in during Icons and made this event unforgettable. While this season has wrapped up, stay tuned for more Wild Rift esports announcements coming soon!",
+			price: 120000,
+			rules:
+				"Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+			size: "4",
+			eventStatus: "Active",
+			eventPoster: "https://th.bing.com/th/id/OIP.C_o9I8YHGohNXfbsCcS7rQHaEK?pid=ImgDet&rs=1",
+			eventDate: "2022-09-21",
+			eventType: "Offline",
+			UserId: 1,
+			GameId: 1,
+			LocationId: 1,
+			size: 8,
+			Bracket: JSON.stringify(require("../template/8slot.json")),
+			createdAt: new Date(),
+			updatedAt: new Date(),
+		},
+	]);
+	// })
+	// .then(() => {
+	await queryInterface.bulkInsert(
+		"Participants",
+		[
+			{
+				TeamId: 1,
+				EventId: 1,
+				statusPay: "Paid",
+				paymentDate: new Date(),
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			},
+		],
+		{},
+	);
+	// });
 });
 
 afterAll(() => {
-	return queryInterface.bulkDelete("Users", null, {
-		truncate: true,
-		cascade: true,
-		restartIdentity: true,
-	});
+	return queryInterface
+		.bulkDelete("Users", null, {
+			truncate: true,
+			cascade: true,
+			restartIdentity: true,
+		})
+		.then(() => {});
 });
 
 describe("POST Account Register", () => {
@@ -355,17 +447,19 @@ describe("POST Create admin account", () => {
  * ! TODO FOR AFTERNOON
  */
 
-// describe("GET All User history", () => {
-// 	let access_token;
-// 	describe("Success fetch all user history", () => {
-// 		it("Should return object with data history", async () => {
-// 			let admin_login = await request(app).post("/users/login").send({ username: "customer01", password: "password" });
-// 			access_token = admin_login.body.access_token;
+describe("GET All User history", () => {
+	let access_token;
+	describe("Success fetch all user history", () => {
+		it("Should return object with data history", async () => {
+			let admin_login = await request(app).post("/users/login").send({ username: "customer01", password: "password" });
+			access_token = admin_login.body.access_token;
 
-// 			let response = await request;
-// 		});
-// 	});
-// });
+			let response = await request(app).get("/users/history").set("access_token", access_token);
+
+			console.log(response.body);
+		});
+	});
+});
 
 describe("DESTROY Account - FOR ADMIN ONLY", () => {
 	let access_token = null;
@@ -389,6 +483,7 @@ describe("DESTROY Account - FOR ADMIN ONLY", () => {
 			let response = await request(app).post("/users/login").send(body);
 			access_token = response.body.access_token;
 			//
+			console.log(response.body);
 			response = await request(app).delete("/users/1000").set("access_token", access_token);
 
 			expect(response.status).toBe(404);

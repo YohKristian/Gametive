@@ -4,7 +4,7 @@ const { comparePassword } = require("../helpers/bcryptjs");
 const { createToken } = require("../helpers/jsonwebtoken");
 const { redis } = require("../config/redis");
 const { getPagination, getPagingData } = require("../helpers/pagination");
-const { OAuth2Client } = require('google-auth-library')
+const { OAuth2Client } = require("google-auth-library");
 // 			await redis.del("store:users_fetchAll");
 
 module.exports = class usersController {
@@ -31,7 +31,9 @@ module.exports = class usersController {
 				role: loginResponse.role,
 			});
 
-			res.status(200).json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username, role: loginResponse.role });
+			res
+				.status(200)
+				.json({ login: Boolean(loginResponse), access_token: token, username: loginResponse.username, role: loginResponse.role });
 		} catch (error) {
 			next(error);
 		}
@@ -39,14 +41,14 @@ module.exports = class usersController {
 
 	static async googleSignIn(req, res, next) {
 		try {
-			const { token_google } = req.headers
+			const { token_google } = req.headers;
 
-			const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+			const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 			const ticket = await client.verifyIdToken({
 				idToken: token_google,
-				audience: process.env.GOOGLE_CLIENT_ID
-			})
-			const payload = ticket.getPayload()
+				audience: process.env.GOOGLE_CLIENT_ID,
+			});
+			const payload = ticket.getPayload();
 			const [user, created] = await User.findOrCreate({
 				where: {
 					email: payload.email,
@@ -58,19 +60,22 @@ module.exports = class usersController {
 					password: "password_google",
 				},
 				hooks: false,
-			})
+			});
 
 			const token = createToken({
 				username: user.username,
 				email: user.email,
 				id: user.id,
 				role: user.role,
-			})
+			});
 			res.status(200).json({
-				login: Boolean(user), access_token: token, username: user.username, role: user.role
-			})
+				login: Boolean(user),
+				access_token: token,
+				username: user.username,
+				role: user.role,
+			});
 		} catch (error) {
-			next(error)
+			next(error);
 		}
 	}
 
@@ -183,7 +188,11 @@ module.exports = class usersController {
 
 			//if correct, proceed to update the newPassword into database
 
-			if (dataCorrect) newData = await User.update({ password: newPassword }, { where: { id }, returning: true, individualHooks: true, transaction: t });
+			if (dataCorrect)
+				newData = await User.update(
+					{ password: newPassword },
+					{ where: { id }, returning: true, individualHooks: true, transaction: t },
+				);
 
 			//check newData
 			if (!newData) throw { code: 8 };
@@ -251,17 +260,17 @@ module.exports = class usersController {
 						model: Participant,
 						attributes: { exclude: ["createdAt", "updatedAt"] },
 						where: {
-							statusPay: "Paid"
+							statusPay: "Paid",
 						},
 						include: {
 							model: Event,
-							attributes: ["name", "eventDate", "price"]
-						}
+							attributes: ["name", "eventDate", "price"],
+						},
 					},
 				},
 				where: {
-					id: req.user.id
-				}
+					id: req.user.id,
+				},
 			});
 
 			res.status(200).json(fetchResponse);

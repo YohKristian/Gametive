@@ -32,7 +32,7 @@ afterAll(async () => {
 describe("POST Admin Login", () => {
 	describe("Success Login Get Token", () => {
 		it("should return object of token", async () => {
-			const body = { username: "admin", password: "12345" };
+			const body = { username: "fajar", password: "12345" };
 
 			const response = await request(app).post("/users/login").send(body);
 
