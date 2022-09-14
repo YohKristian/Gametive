@@ -70,5 +70,41 @@
     "releaseDate": "2018-03-19",
     "developer": "Tencent Games",
     "genre": "Battle royale"
+  },
+  {
+    "name": "Testing 1",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 2",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 3",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 4",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
   }
 ]

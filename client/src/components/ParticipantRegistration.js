@@ -87,6 +87,10 @@ export default function ParticipantRegistration() {
         setTeamId(e.target.value);
     }
 
+    const clickCreate = () => {
+        navigate("/team-list")
+    }
+
     return loading ? (
         <>
             <section className="ev-reg">
@@ -104,18 +108,27 @@ export default function ParticipantRegistration() {
                     <h5 className="mt-2">Event Date Start : <b>{dateFormat(eventDate)}</b></h5>
                     <hr className="my-4" style={{ width: "100%" }}></hr>
                     <form onSubmit={handleOnSubmitForm}>
-                        <label htmlFor="teamName">Team Name</label>
-                        <select id="teamName" value={teamId} onChange={handlerOnChangeForm} style={{
-                            padding: 8, outline: "none", border: "none", borderRadius: 5, width: "100%",
-                            maxWidth: "400px"
-                        }}>
-                            <option value="" disabled hidden>-- Choose Your Team --</option>
-                            {teams.map(team => {
-                                return <option value={team.id} key={team.id} style={{ padding: 8 }}>{team.name}</option>
-                            })}
-                        </select>
-                        <br></br>
-                        <button type="submit" style={{ marginTop: 16 }}>Register to event</button>
+                        {teams.length == 0 ?
+                            <>
+                                <h5 style={{ color: "orange" }}><b>You don't have any team!</b></h5>
+                                <br></br>
+                                <button onClick={() => clickCreate()}>Create Team</button>
+                            </>
+                            :
+                            <>
+                                <label htmlFor="teamName">Team Name</label>
+                                <select id="teamName" value={teamId} onChange={handlerOnChangeForm} style={{
+                                    padding: 8, outline: "none", border: "none", borderRadius: 5, width: "100%",
+                                    maxWidth: "400px", marginTop: "10px"
+                                }}>
+                                    <option value="" disabled hidden>-- Choose Your Team --</option>
+                                    {teams.map(team => {
+                                        return <option value={team.id} key={team.id} style={{ padding: 8 }}>{team.name}</option>
+                                    })}
+                                </select>
+                                <button type="submit" style={{ marginTop: "30px" }}>Register to event</button>
+                            </>
+                        }
                     </form>
                 </div>
             </section>
