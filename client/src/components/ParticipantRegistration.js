@@ -41,7 +41,7 @@ export default function ParticipantRegistration() {
                     return dispatch(registerParticipantToBracket({ EventId: +eventId, TeamId: +teamId }));
                 })
                 .then(() => {
-                    navigate("/");
+                    navigate("/history-list");
                     successPopup("Success Register!");
                 })
                 .catch((err) => {
@@ -60,7 +60,7 @@ export default function ParticipantRegistration() {
                     window.snap.pay(token, {
                         onSuccess: function (result) {
                             /* You may add your own implementation here */
-                            navigate("/");
+                            navigate("/history-list");
                             successPopup("payment success!"); console.log(result);
                         },
                         onPending: function (result) {
