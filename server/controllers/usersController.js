@@ -140,6 +140,7 @@ module.exports = class usersController {
 					username: {
 						[Op.iLike]: `%${search}%`,
 					},
+					status: "Active"
 				},
 				limit: limit,
 				offset: offset,
