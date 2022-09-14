@@ -32,7 +32,9 @@ const sizeDefault = [
 		{ value: "Offline", label: "Offline" },
 		{ value: "Online", label: "Online" },
 	];
-export default function EventEdit() {
+
+export default function EventEdit(props) {
+	console.log(props);
 	let { pathname } = useLocation();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -43,7 +45,7 @@ export default function EventEdit() {
 
 	useEffect(() => {
 		dispatch(fetchGames((_, { items }) => setGameList(items.map((el) => ({ value: el.id, label: el.name })))));
-		dispatch(fetchEventDetail(19))
+		dispatch(fetchEventDetail(props.id))
 			.then((data) => {
 				const {
 					id,

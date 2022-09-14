@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editBracket } from "../store/actions";
 import ModalBracket from "./ModalBracket";
 
-export default function BracketViewer({ set_detail, state: { detail } }) {
+export default function BracketViewer({ state: { detail, id } }) {
 	const [modalShow, setModalShow] = useState(false);
 	const [singleMatch, setSingleMatch] = useState({});
 	const [dataMatch, setDataMatch] = useState({});
+	const dispatch = useDispatch();
 	//wack hack
 	let counter = 1;
 
@@ -39,33 +42,38 @@ export default function BracketViewer({ set_detail, state: { detail } }) {
 		};
 	}
 
+	async function submitNewBracket() {
+		// console.log(detail.match, "ini detail");
+		console.log(singleMatch);
+		let newData = detail.match.map((x) => {
+			if (x.id == singleMatch.id) x = singleMatch;
+			return x;
+		});
+		// console.log(detail, "before");
+		// console.log({ ...detail, match: newData }, "ini new data");
+		console.log({ ...detail, match: newData }, "after");
+		console.log(newData, "new data");
+		// dispatch(editBracket(id, JSON.stringify(newData)))
+		// 	.then(console.log)
+		// 	.catch(console.log);
+		// set_detail({ ...detail, match: newData });
+	}
+
 	useEffect(() => {
 		render();
 	}, []);
 
-	useEffect(() => {
-		// console.log(detail.match, "ini detail");
-		if (singleMatch) {
-			let newData = detail.match.map((x) => {
-				if (x.id == singleMatch.id) x = singleMatch;
-				return x;
-			});
-			// console.log(detail, "before");
-			// console.log(newData, "ini new data");
-			// console.log({ ...detail, match: newData }, "after");
-			set_detail({ ...detail, match: newData });
-		}
-	}, [singleMatch]);
+	// useEffect(, [singleMatch]);
 
-	console.log(detail, "ini detail");
+	// console.log(detail, "ini detail");
 
 	return detail ? (
 		<div>
-			<pre>{JSON.stringify(detail.participant, null, 2)}</pre>
+			<pre>singleMatch:{JSON.stringify(singleMatch, null, 2)}</pre>
 			<ModalBracket
 				show={modalShow}
 				onHide={() => setModalShow(false)}
-				state={{ dataMatch, setSingleMatch, participant: detail?.participant }}
+				state={{ dataMatch, setSingleMatch, participant: detail?.participant, detail, submitNewBracket, setModalShow }}
 			/>
 			<div id="bracket" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div>
 		</div>
