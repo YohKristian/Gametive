@@ -22,18 +22,18 @@ let initial = {
 export default function ModalBracket(props) {
   /**
    * "match": [
-		{
-			"id": 0,
-			"number": 1,
-			"stage_id": 0,
-			"group_id": 0,
-			"round_id": 0,
-			"child_count": 0,
-			"status": 2,
-			"opponent1": { "id": 0, "position": 1, "score": 2, "result": "loss" },
-			"opponent2": { "id": 1, "position": 2, "score": 2, "result": "win" }
+    {
+      "id": 0,
+      "number": 1,
+      "stage_id": 0,
+      "group_id": 0,
+      "round_id": 0,
+      "child_count": 0,
+      "status": 2,
+      "opponent1": { "id": 0, "position": 1, "score": 2, "result": "loss" },
+      "opponent2": { "id": 1, "position": 2, "score": 2, "result": "win" }
       "match_url": ""
-		},
+    },
    *  */
 
   const { dataMatch, participant, setModalShow, detail } = props.state;
@@ -89,14 +89,14 @@ export default function ModalBracket(props) {
     setMatch({ ...match, opponent2: { ...match.opponent2, id: value } });
   }
 
-  function submitMatch(e) {
-    e.preventDefault();
+  function submitMatch() {
     let newMatch = detail.match.map((x) => {
       if (x.id == match.id) x = match;
       return x;
     });
     dispatch(editBracket(id, JSON.stringify({ ...detail, match: newMatch })))
       .then((res) => {
+        console.log(res);
         setModalShow(false);
         window.location.reload(false);
       })
@@ -149,14 +149,14 @@ export default function ModalBracket(props) {
             <input
               type="number"
               name="opponent1"
-              value={match.opponent1?.score}
+              defaultValue={match.opponent1?.score}
               onChange={changeMatch}
             />
             <label>Score</label>
             <input
               type="number"
               name="opponent2"
-              value={match.opponent2?.score}
+              defaultValue={match.opponent2?.score}
               onChange={changeMatch}
             />
           </div>
