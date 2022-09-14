@@ -44,7 +44,7 @@ export default function FooterBar() {
                 <a href="https://www.arenaofvalor.com/" className="text-reset">Arena Of Valor</a>
               </p>
               <p>
-                <a href="https://playvalorant.com/id-id/" className="text-reset">Valorant</a>
+                <a href="https://www.dota2.com/home" className="text-reset">Dota 2</a>
               </p>
             </div>
 
@@ -53,6 +53,9 @@ export default function FooterBar() {
                 &#8205;
               </h6>
               <p>
+                <a href="https://playvalorant.com/id-id/" className="text-reset">Valorant</a>
+              </p>
+              <p>
                 <a href="https://blog.counter-strike.net/" className="text-reset">CS : GO</a>
               </p>
               <p>
@@ -60,6 +63,21 @@ export default function FooterBar() {
               </p>
               <p>
                 <a href="https://www.pubgmobile.com/id/home.shtml" className="text-reset">PUBG Mobile</a>
+              </p>
+            </div>
+
+            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <h6 className="text-uppercase fw-bold mb-4">
+                &#8205;
+              </h6>
+              <p>
+                <a href="https://nba.2k.com/2k23/" className="text-reset">NBA 2K23</a>
+              </p>
+              <p>
+                <a href="https://tk7.tekken.com/" className="text-reset">TEKKEN 7</a>
+              </p>
+              <p>
+                <a href="https://www.ea.com/en-gb/games/fifa/fifa-23" className="text-reset">FIFA 23</a>
               </p>
             </div>
 

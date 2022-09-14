@@ -78,7 +78,7 @@ export default function EventRegistration() {
 				</div>
 				<br></br>
 				<h3 className="fw-bold mt-2">Event</h3>
-				<br></br>
+				<hr className="my-4" style={{ width: "100%" }}></hr>
 				<form onSubmit={handleOnSubmitForm}>
 					<div>
 						<div>
@@ -167,6 +167,7 @@ export default function EventRegistration() {
 							)}
 						</div>
 					</div>
+					<br></br>
 					<button type="submit">Create</button>
 				</form>
 			</div>
