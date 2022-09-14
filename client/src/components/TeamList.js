@@ -23,7 +23,6 @@ export default function TeamList() {
 				errorPopup(error);
 			})
 			.finally(() => setLoading(false));
-		// setLoading(false);
 	};
 
 	useEffect(() => {
@@ -97,10 +96,10 @@ export default function TeamList() {
 									</button>
 									<VerticalModalAddTeam show={modalTeam} onHide={() => setModalTeam(false)} />
 								</div>
-								<div className="row" style={{ marginLeft: "6.5%" }}>
+								<div className="row team-list" style={{ marginLeft: "6.5%" }}>
 									{teams.map((team, idx) => (
 										<div className="col-12 col-md-4" key={idx}>
-											<div className="card rounded shadow text-white mb-3" style={{ maxWidth: "18rem", height: "550px" }}>
+											<div className="card rounded shadow text-white mb-3" style={{ maxWidth: "18rem", height: "400px" }}>
 												<div className="card-header" style={{ backgroundColor: "orange" }}>
 													<div
 														style={{
@@ -164,6 +163,7 @@ export default function TeamList() {
 															<div>{team.MemberName3 && team.MemberName3}</div>
 															<div>{team.MemberName4 && team.MemberName4}</div>
 															<div>{team.MemberName5 && team.MemberName5}</div>
+															<br></br>
 															<b>Benches</b>
 															<div>{team.BenchMemberName1 && team.BenchMemberName1}</div>
 															<div>{team.BenchMemberName2 && team.BenchMemberName2}</div>
@@ -175,6 +175,7 @@ export default function TeamList() {
 															<div>{team.MemberName2 && "3"}</div>
 															<div>{team.MemberName3 && "4"}</div>
 															<div>{team.MemberName4 && "5"}</div>
+															<br></br>
 															<b>No</b>
 															<div>{team.BenchMemberName1 && "1"}</div>
 															<div>{team.BenchMemberName2 && "2"}</div>

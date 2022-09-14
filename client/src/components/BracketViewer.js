@@ -56,6 +56,9 @@ export default function BracketViewer({ state: { detail, id, username } }) {
 				state={{ dataMatch, setSingleMatch, participant: detail?.participant, detail, setModalShow }}
 			/>
 			<div id="bracket" className="brackets-viewer w-100" onClick={(match) => matchInfo(match)}></div>
+			<div className="mx-auto text-center">
+				<p style={{ fontSize: "0.8rem", color: "red" }}>* Klik pada bracket untuk mengedit.</p>
+			</div>
 		</div>
 	) : (
 		<div>Loading...</div>

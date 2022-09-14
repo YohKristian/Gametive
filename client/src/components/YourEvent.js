@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { fetchYourEvents } from "../store/actions";
 import { dateFormat, errorPopup, rupiahFormat } from "../helpers";
 import LoadingAnimation from "./LoadingAnimation";
-import VerticalModalEditEvent from "./VerticalModalEditEvent";
 const currentTime = new Date();
 
 export default function SearchGames() {
@@ -15,6 +14,10 @@ export default function SearchGames() {
   const [keyword, setKeyword] = useState();
   const [page, setPage] = useState(1);
   const [modal, setModal] = useState(false);
+
+  const onClickEdit = (id) => {
+    navigate("/event-edit/" + id);
+  }
 
   const pageNumber = (page) => {
     let pagination = [];
@@ -157,17 +160,10 @@ export default function SearchGames() {
                                 backgroundColor: "#FF8C00",
                                 color: "white",
                               }}
-                              onClick={() => {
-                                setModal(true);
-                              }}
+                              onClick={() => onClickEdit(event.id)}
                             >
                               Edit Event
                             </button>
-                            <VerticalModalEditEvent
-                              show={modal}
-                              onHide={() => setModal(false)}
-                              event_id={event.id}
-                            />
                           </>
                         )}
                         {new Date(event.eventDate) <= currentTime &&
@@ -192,39 +188,42 @@ export default function SearchGames() {
               ))}
             </div>
             {yourEvents.items.length > 0 && (
-              <nav>
-                <ul className="pagination">
-                  <li className="page-item">
-                    <a
-                      className="page-link"
-                      onClick={() => handlePage(yourEvents.currentPage - 1)}
-                    >
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li className="page-item pagination">
-                    {pageNumber(yourEvents.totalPages).map((x, idx) => {
-                      return (
-                        <a
-                          key={idx}
-                          className="page-link"
-                          onClick={() => handlePage(x)}
-                        >
-                          {x}
-                        </a>
-                      );
-                    })}
-                  </li>
-                  <li className="page-item">
-                    <a
-                      className="page-link"
-                      onClick={() => handlePage(yourEvents.currentPage + 1)}
-                    >
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <>
+                <nav>
+                  <ul className="pagination">
+                    <li className="page-item">
+                      <a
+                        className="page-link"
+                        onClick={() => handlePage(yourEvents.currentPage - 1)}
+                      >
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li className="page-item pagination">
+                      {pageNumber(yourEvents.totalPages).map((x, idx) => {
+                        return (
+                          <a
+                            key={idx}
+                            className={yourEvents.currentPage === x ? "page-link active" : "page-link"}
+                            onClick={() => handlePage(x)}
+                          >
+                            {x}
+                          </a>
+                        );
+                      })}
+                    </li>
+                    <li className="page-item">
+                      <a
+                        className="page-link"
+                        onClick={() => handlePage(yourEvents.currentPage + 1)}
+                      >
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                <br></br>
+              </>
             )}
           </>
         ) : (
