@@ -7,6 +7,7 @@ import { errorPopup } from "../helpers";
 import { updateUsersPassword } from "../store/action/usersAction";
 import { editEvent } from "../store/action/eventsActions";
 import SelectLocation from "./SelectLocation";
+import dayjs from "dayjs";
 
 export default function VerticalModalEditEvent(props) {
 	const dispatch = useDispatch();
@@ -32,26 +33,20 @@ export default function VerticalModalEditEvent(props) {
 			}),
 		);
 
-		// Eksperimental
-		let populateDate = new Date(detailEvent.eventDate);
-		let newFormat = ``;
-
-		if ((populateDate.getDate()) < 10 && (populateDate.getMonth()) < 10) {
-			newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
-		} else if ((populateDate.getDate()) < 10) {
-			newFormat = `${populateDate.getFullYear()}-${populateDate.getMonth() + 1}-0${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
-		} else if ((populateDate.getMonth()) < 10) {
-			newFormat = `${populateDate.getFullYear()}-0${populateDate.getMonth() + 1}-${populateDate.getDate()}T${populateDate.getHours()}:${populateDate.getMinutes()}`
+		let populateDate
+		if (detailEvent.eventDate) {
+			populateDate = dayjs(detailEvent.eventDate).format('YYYY-MM-DDTHH:mm');
 		}
 
 		setNewEvent({
 			...detailEvent,
-			eventDate: newFormat,
+			eventDate: populateDate,
 		});
 	}, [detailEvent]);
 
 	const inputEditEvent = (e) => {
 		const { name, value } = e.target;
+
 		setNewEvent({
 			...newEvent,
 			[name]: value,
@@ -78,7 +73,7 @@ export default function VerticalModalEditEvent(props) {
 		let newInput = {
 			eventName,
 			eventPoster,
-			eventDate: new Date(eventDate),
+			eventDate,
 			eventType,
 			description,
 			rules,
