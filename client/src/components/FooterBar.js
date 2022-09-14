@@ -66,23 +66,6 @@ export default function FooterBar() {
               </p>
             </div>
 
-            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">
-                &#8205;
-              </h6>
-              <p>
-                <a href="https://nba.2k.com/2k23/" className="text-reset">NBA 2K23</a>
-              </p>
-              <p>
-                <a href="https://tk7.tekken.com/" className="text-reset">TEKKEN 7</a>
-              </p>
-              <p>
-                <a href="https://www.ea.com/en-gb/games/fifa/fifa-23" className="text-reset">FIFA 23</a>
-              </p>
-            </div>
-
-
-
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
               <h6 className="text-uppercase fw-bold mb-4">Hubungi Kami</h6>

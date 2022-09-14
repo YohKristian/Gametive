@@ -102,15 +102,16 @@ export default function EventRow({ item, handlerOnClickEdit }) {
             </option>
           </select>
         </td>
-        <td>
-          <div className="d-flex flex-column">
+        <td className="action">
+          <div>
             <button
               type="button"
               className="btn btn-secondary"
               style={{ marginBottom: "10px" }}
               onClick={handlerOnClickEdit}
             >
-              <i className="bi bi-pencil-square"> Edit</i>
+              <i className="bi bi-pencil-square"></i>
+              <span>Edit</span>
             </button>
           </div>
         </td>

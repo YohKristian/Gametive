@@ -120,15 +120,15 @@ export default function VerticalModalEditEvent(props) {
 	if (!loading) {
 		return (
 			<>
-				<Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+				<Modal {...props} size="xl" aria-labelledby="contained-modal-title-vcenter" centered>
 					<Modal.Header closeButton>
 						<Modal.Title id="contained-modal-title-vcenter">Update your event</Modal.Title>
 					</Modal.Header>
-					<Modal.Body>
+					<Modal.Body style={{backgroundColor: "#F5F5F5"}}>
 						<form onSubmit={handleOnSubmitForm}>
-							<div className="card-body text-center" style={{ paddingLeft: "5", paddingRight: "5" }}>
+							<div className="card-body" style={{ paddingLeft: "5", paddingRight: "5" }}>
 								<div className="row">
-									<div className="form-outline mb-4 col-6">
+									<div className="form-outline mb-4 col-lg-6 col-sm-12">
 										<label htmlFor="eventName" className="form-label">
 											Event Name
 										</label>
@@ -141,7 +141,6 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventPoster" className="form-label">
 											Event Poster
 										</label>
@@ -154,7 +153,6 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventDate" className="form-label">
 											Event date
 										</label>
@@ -166,11 +164,11 @@ export default function VerticalModalEditEvent(props) {
 											value={eventData.eventDate}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventDescription" className="form-label">
 											Description
 										</label>
 										<textarea
+											style={{height: 100}}
 											id="eventDescription"
 											placeholder="Detail of the events"
 											name="description"
@@ -178,11 +176,11 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventRule" className="form-label">
 											Rule
 										</label>
 										<textarea
+											style={{height: 100}}
 											id="eventRule"
 											placeholder="Rule for the event"
 											name="rules"
@@ -190,7 +188,6 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventType" className="form-label">
 											Event type
 										</label>
@@ -201,7 +198,7 @@ export default function VerticalModalEditEvent(props) {
 											options={typeDefault}
 										/>
 									</div>
-									<div className="form-outline mb-4 col-6">
+									<div className="form-outline mb-4 col-lg-6 col-sm-12">
 										<label htmlFor="eventPrice" className="form-label">
 											Registration Fee
 										</label>
@@ -214,7 +211,6 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										<label htmlFor="eventSize" className="form-label">
 											Max Participants
 										</label>
@@ -223,18 +219,17 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleSelectOption("size", e)}
 											options={sizeDefault}
 										/>
-										<br></br>
 										<label htmlFor="GamesId">Games</label>
 										<Select
 											defaultValue={valueSelect.game}
 											onChange={(e) => handleSelectOption("GameId", e)}
 											options={gameList}
 										/>
-										<br></br>
 										<label htmlFor="eventRule" className="form-label">
 											Address
 										</label>
 										<textarea
+											style={{height: 100}}
 											id="eventRule"
 											placeholder="Alamat Detail"
 											name="locationName"
@@ -242,7 +237,6 @@ export default function VerticalModalEditEvent(props) {
 											onChange={(e) => handleOnChangeForm(e)}
 											className="form-control"
 										/>
-										<br></br>
 										{(valueSelect.Location || eventData.eventType === "Offline") && (
 											<>
 												<label htmlFor="eventRule" className="form-label">
@@ -252,7 +246,6 @@ export default function VerticalModalEditEvent(props) {
 											</>
 										)}
 									</div>
-									<br></br>
 									<button
 										className="btn btn-lg"
 										style={{ width: "96%", backgroundColor: "orange", color: "white", margin: "auto" }}
@@ -265,11 +258,6 @@ export default function VerticalModalEditEvent(props) {
 							</div>
 						</form>
 					</Modal.Body>
-					<Modal.Footer>
-						<button className="btn" style={{ backgroundColor: "orange", color: "white" }} onClick={props.onHide}>
-							Close
-						</button>
-					</Modal.Footer>
 				</Modal>
 			</>
 		);

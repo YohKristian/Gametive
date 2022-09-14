@@ -25,6 +25,16 @@
   width: 100%;
 }
 
+.ev-reg .event-img {
+  width: 100%;
+  max-width: 600px;
+  margin: 15px 0;
+}
+
+.ev-reg .event-img > img {
+  height: 100%;
+}
+
 .ev-reg form {
   width: 100%;
   display: flex;

@@ -34,14 +34,14 @@ export default function VerticalModalEditEvent(props) {
 		);
 
 		let populateDate
-		if (detailEvent.eventDate) {
+		if (detailEvent.Location && detailEvent.eventDate) {
 			populateDate = dayjs(detailEvent.eventDate).format('YYYY-MM-DDTHH:mm');
+			setNewEvent({
+				...detailEvent,
+				eventDate: populateDate,
+				locationName: detailEvent.Location.name
+			});
 		}
-
-		setNewEvent({
-			...detailEvent,
-			eventDate: populateDate,
-		});
 	}, [detailEvent]);
 
 	const inputEditEvent = (e) => {
@@ -56,7 +56,7 @@ export default function VerticalModalEditEvent(props) {
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 
-		setNewEvent((prev) => ({ ...prev, ...detailEvent }));
+		// setNewEvent((prev) => ({ ...prev, ...detailEvent }));
 		let {
 			name: eventName,
 			eventPoster,
@@ -70,6 +70,9 @@ export default function VerticalModalEditEvent(props) {
 			Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
 		} = newEvent;
 
+		// console.log(newEvent, "CEK FORM");
+		// console.log(newEvent.Location, "CEK FORM LOCATION");
+
 		let newInput = {
 			eventName,
 			eventPoster,
@@ -81,12 +84,12 @@ export default function VerticalModalEditEvent(props) {
 			size,
 			GameId,
 			ProvinceId,
-			locationName,
+			locationName: newEvent.locationName,
 			RegencyId,
 			DistrictId,
 		};
 
-		console.log(newInput.DistrictId, "newInput");
+		// console.log(newInput, "CEK INPUT");
 		dispatch(
 			editEvent(detailEvent.id, newInput, (error, success) => {
 				if (error) {
@@ -260,7 +263,7 @@ export default function VerticalModalEditEvent(props) {
 								</textarea>
 							</div>
 
-							<SelectLocation state={{ setLocation, Location: newEvent.Location }} />
+							{newEvent.eventType === "Offline" ? <SelectLocation state={{ setLocation, Location: newEvent.Location }} /> : null}
 
 							{/* <div className="form-outline mb-4">
                 <label className="form-label" htmlFor="genre">

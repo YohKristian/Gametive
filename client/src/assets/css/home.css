@@ -50,14 +50,7 @@
 }
 
 .img-us {
-  width: 60rem;
-}
-
-@media only screen and (max-width: 1920px) {
-
-  .img-us {
-    width: 40rem;
-  }
+  width: 50rem;
 }
 
 
