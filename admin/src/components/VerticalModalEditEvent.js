@@ -56,7 +56,7 @@ export default function VerticalModalEditEvent(props) {
 	const handleOnSubmitForm = (e) => {
 		e.preventDefault();
 
-		setNewEvent((prev) => ({ ...prev, ...detailEvent }));
+		// setNewEvent((prev) => ({ ...prev, ...detailEvent }));
 		let {
 			name: eventName,
 			eventPoster,
@@ -70,7 +70,8 @@ export default function VerticalModalEditEvent(props) {
 			Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
 		} = newEvent;
 
-		console.log(newEvent, "CEK FORM");
+		// console.log(newEvent, "CEK FORM");
+		// console.log(newEvent.Location, "CEK FORM LOCATION");
 
 		let newInput = {
 			eventName,
@@ -82,13 +83,13 @@ export default function VerticalModalEditEvent(props) {
 			price,
 			size,
 			GameId,
-			ProvinceId: newEvent.ProvinceId,
+			ProvinceId,
 			locationName: newEvent.locationName,
-			RegencyId: newEvent.RegencyId,
-			DistrictId: newEvent.DistrictId,
+			RegencyId,
+			DistrictId,
 		};
 
-		console.log(newInput, "CEK INPUT");
+		// console.log(newInput, "CEK INPUT");
 		dispatch(
 			editEvent(detailEvent.id, newInput, (error, success) => {
 				if (error) {
