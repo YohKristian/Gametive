@@ -156,8 +156,11 @@ class Controller {
 	static async showEventDetail(req, res, next) {
 		try {
 			const { id } = req.params;
-			const data = await Event.findOne({ where: { id: id }, include: [Game, Location] });
-			console.log(data.dataValues);
+			const data = await Event.findOne({
+				where: { id: id },
+				include: [Game, Location, { model: User, attributes: ["username"] }],
+			});
+
 			if (!data) throw { code: 20 };
 			res.status(200).json(data);
 		} catch (error) {
@@ -240,6 +243,8 @@ class Controller {
 			let { participant: newParticipant, stage: newStage, match: newMatch } = JSON.parse(bracket);
 
 			let dataBracket = await Event.findByPk(id, { transaction: t });
+
+			if (dataBracket.id !== req.user.id) throw { code: 5 };
 
 			if (!dataBracket) throw { code: 404 };
 
