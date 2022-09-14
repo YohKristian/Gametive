@@ -22,8 +22,9 @@ export default function HistoryList() {
 
     return loading ? (
         <>
-            <div style={{ marginTop: "10vh" }} className="history-list text-center">
-                <h1>History List</h1>
+            <h1 className="event-title">History List</h1>
+            <hr className="my-4"></hr>
+            <div style={{ marginTop: "50px" }} className="history-list text-center">
                 <p style={{ color: "red" }}>* Event Fee sudah termasuk Service Fee seharga Rp 5.000,00</p>
                 <table className="table table-striped">
                     <thead>
