@@ -62,10 +62,6 @@ export default function ParticipantRegistration() {
                             /* You may add your own implementation here */
                             navigate("/history-list");
                             successPopup("payment success!"); console.log(result);
-                            dispatch(registerParticipantToBracket({ EventId: +eventId, TeamId: +teamId }))
-                                .catch((err) => {
-                                    errorPopup(err);
-                                });
                         },
                         onPending: function (result) {
                             /* You may add your own implementation here */

@@ -164,8 +164,7 @@ module.exports = class participantsController {
 			});
 		} catch (error) {
 			await t.rollback();
-			// next(error);
-			res.status(500).json(error)
+			next(error);
 		}
 	}
 	static async deleteParticipantById(req, res, next) {
