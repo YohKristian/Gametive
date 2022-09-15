@@ -31,7 +31,7 @@
   margin: 15px 0;
 }
 
-.ev-reg .event-img > img {
+.ev-reg .event-img>img {
   height: 100%;
 }
 
@@ -104,4 +104,16 @@
 
 .select-team :active {
   border: none;
+}
+
+.ev-reg form button {
+  border: none;
+  background-color: orange;
+  width: 100%;
+  max-width: 400px;
+  padding: 6px;
+  border-radius: 5px;
+  color: #f5f5f5;
+  font-weight: bold;
+  margin-right: 5px;
 }

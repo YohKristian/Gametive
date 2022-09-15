@@ -21,6 +21,7 @@ export default function FooterBar() {
               <h6 className="text-uppercase fw-bold mb-4">
                 <div className="img">
                   <img src={logo} alt="" />
+                  <div style={{ border: "1px solid white", opacity: 0.8 }}></div>
                 </div>
               </h6>
               <p>
@@ -31,6 +32,7 @@ export default function FooterBar() {
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
                 MOBA Games
+                <hr style={{ border: "1px solid white", marginTop: "20px", opacity: 0.8 }}></hr>
               </h6>
               <p>
                 <a href="https://wildrift.leagueoflegends.com/en-gb/" className="text-reset">LoL : Wild Rift</a>
@@ -49,6 +51,7 @@ export default function FooterBar() {
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
                 FPS & BR Games
+                <hr style={{ border: "1px solid white", marginTop: "20px", opacity: 0.8 }}></hr>
               </h6>
               <p>
                 <a href="https://playvalorant.com/id-id/" className="text-reset">Valorant</a>
@@ -66,7 +69,10 @@ export default function FooterBar() {
 
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
-              <h6 className="text-uppercase fw-bold mb-4">Hubungi Kami</h6>
+              <h6 className="text-uppercase fw-bold mb-4">
+                Hubungi Kami
+                <hr style={{ border: "1px solid white", marginTop: "20px", opacity: 0.8 }}></hr>
+              </h6>
               <p><i className="fas fa-home me-3"></i> Jakarta, Indonesia</p>
               <p>
                 <i className="fas fa-envelope me-3"></i>

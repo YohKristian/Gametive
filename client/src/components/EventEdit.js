@@ -224,7 +224,10 @@ export default function EventEdit() {
 							</div>
 						</div>
 						<br></br>
-						<button type="submit">Update</button>
+						<div className="row d-flex justify-content-center">
+							<button type="submit" className="col-2">Back</button>
+							<button type="submit" className="col-2">Update</button>
+						</div>
 					</form>
 				</div>
 			</section>
