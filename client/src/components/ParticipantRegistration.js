@@ -103,9 +103,18 @@ export default function ParticipantRegistration() {
                     </div>
                     <h3 className="mt-2"><b>{eventName}</b></h3>
                     <hr className="my-4" style={{ width: "100%" }}></hr>
-                    <h5 className="mt-2">Registration Fee : {eventPrice === 0 ? "Free" : <b>{rupiahFormat(eventPrice)}</b>}</h5>
-                    {eventPrice !== 0 && <h5 className="mt-2">Service Fee : <b>{rupiahFormat(5000)}</b></h5>}
-                    <h5 className="mt-2">Event Date Start : <b>{dateFormat(eventDate)}</b></h5>
+                    <div style={{ display: "flex", fontSize: 14 }}>
+                        <div style={{ display: "flex", flexDirection: "column", paddingRight: 5 }}>
+                            <span>Registration Fee</span>
+                            {eventPrice !== 0 && <span>Service Fee</span>}
+                            <span>Event Date Start</span>
+                        </div>
+                        <div style={{ display: "flex", flexDirection: "column", textAlign: "right", paddingLeft: 5 }}>
+                            <b>{eventPrice === 0 ? "Free" : rupiahFormat(eventPrice)}</b>
+                            {eventPrice !== 0 && <b>{rupiahFormat(5000)}</b>}
+                            <b>{dateFormat(eventDate)}</b>
+                        </div>
+                    </div>
                     <hr className="my-4" style={{ width: "100%" }}></hr>
                     <form onSubmit={handleOnSubmitForm}>
                         {teams.length == 0 ?

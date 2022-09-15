@@ -228,9 +228,9 @@ export default function EventEdit() {
 							</div>
 						</div>
 						<br></br>
-						<div className="row d-flex justify-content-center">
-							<button onClick={clickBack} className="col-2">Back</button>
-							<button type="submit" className="col-2">Update</button>
+						<div className="">
+							<button type="submit">Update</button>
+							<button onClick={clickBack}>Back</button>
 						</div>
 					</form>
 				</div>
