@@ -16,7 +16,7 @@ module.exports = {
     events.forEach(x => {
       x.createdAt = new Date();
       x.updatedAt = new Date();
-      x.Bracket = JSON.stringify(JSON.parse(fs.readFileSync("./template/4slot.json", "utf-8")))
+      x.Bracket = JSON.stringify(JSON.parse(fs.readFileSync(`./template/${x.size}slot.json`, "utf-8")));
     });
     await queryInterface.bulkInsert("Events", events, {});
   },
