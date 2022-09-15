@@ -45,8 +45,8 @@ class MidtransController {
 
 			const [text, time, teamId, eventId] = order_id.split("-");
 
-			// if (transaction_status !== "capture" || transaction_status !== "settlement") throw { code: 101 };
-			console.log("MASUK 1");
+			if (transaction_status !== "capture" && transaction_status !== "settlement") throw { code: 101 };
+
 			const fetchResponse = await Participant.findOne({
 				where: {
 					EventId: +eventId,
@@ -61,7 +61,7 @@ class MidtransController {
 				paidStatus: "Paid",
 				currentDate: new Date(),
 			};
-			console.log("MASUK 2");
+
 			await Participant.update(
 				{
 					statusPay: payload.paidStatus,
@@ -75,7 +75,7 @@ class MidtransController {
 					transaction: t,
 				},
 			);
-			console.log("MASUK 3");
+
 			const fetchAllBracket = await Participant.findAll({
 				include: Team,
 				where: {
@@ -85,7 +85,7 @@ class MidtransController {
 				order: [["paymentDate", "ASC"]],
 				transaction: t,
 			});
-			console.log("MASUK 4");
+
 			const findEvent = await Event.findOne({
 				where: {
 					id: +eventId,
@@ -103,7 +103,7 @@ class MidtransController {
 				oldBracket.participant[idx].name = Bracket.Team.name;
 				oldBracket.participant[idx].TeamId = Bracket.Team.id;
 			});
-			console.log("MASUK 5 looping bracket");
+
 			await Event.update(
 				{ Bracket: JSON.stringify(oldBracket) },
 				{
@@ -113,11 +113,11 @@ class MidtransController {
 					transaction: t,
 				},
 			);
-			console.log("MASUK 6");
+
 			await t.commit();
 			await redis.del("app:participants");
 			await redis.del("app:participantId");
-			console.log("MASUK 7");
+
 			res.status(200).json({
 				message: "Success payment",
 			});
