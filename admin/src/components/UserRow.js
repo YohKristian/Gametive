@@ -3,7 +3,8 @@ import VerticalModalEditPasswordUser from "../components/VerticalModalEditPasswo
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from "react-redux";
 import { deleteUser, fetchUsers } from "../store/action/usersAction";
-import { errorPopup } from "../helpers";
+import { errorPopup, infoPopup, successPopup } from "../helpers";
+import Swal from "sweetalert2";
 
 export default function UserRow(props) {
     const dispatch = useDispatch();
@@ -11,21 +12,35 @@ export default function UserRow(props) {
     const [modalShow, setModalShow] = useState(false);
 
     const handlerOnClickDelete = () => {
-        dispatch(
-            deleteUser(props.user.id, (error, success) => {
-                if (error) {
-                    return errorPopup(error);
-                }
-                // console.log(success)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: false,
+            denyButtonText: `Cancel`,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(
+                    deleteUser(props.user.id, (error, success) => {
+                        if (error) {
+                            return errorPopup(error);
+                        }
+                        successPopup("Success delete user")
 
-                dispatch(fetchUsers(1, { query: "" }, (error, success) => {
-                    if (error) {
-                        return errorPopup(error);
-                    }
-                    // console.log(success);
-                }));
-            })
-        )
+                        dispatch(fetchUsers(1, { query: "" }, (error, success) => {
+                            if (error) {
+                                return errorPopup(error);
+                            }
+                        }));
+                    })
+                )
+            } else if (result.isDenied) {
+                infoPopup("Delete cancelled")
+            }
+        })
     }
 
     return (

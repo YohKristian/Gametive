@@ -50,12 +50,16 @@ const slideVideo = [
     legend: "Arena of Valor",
   },
   {
+    url: "https://www.youtube.com/embed/-cSFPIwMEq4",
+    legend: "DOTA 2",
+  },
+  {
     url: "https://www.youtube.com/embed/h7MYJghRWt0",
     legend: "Valorant",
   },
   {
     url: "https://www.youtube.com/embed/edYCtaNueQY",
-    legend: "CSGO",
+    legend: "CS:GO",
   },
   {
     url: "https://www.youtube.com/embed/oq2Rz2I11l0",

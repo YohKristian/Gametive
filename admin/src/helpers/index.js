@@ -33,6 +33,13 @@ export const errorPopup = (error) => {
   });
 };
 
+export const infoPopup = (message) => {
+  Toast.fire({
+    icon: "info",
+    title: message,
+  });
+};
+
 export const rupiahFormat = (num) => `Rp. ${num?.toLocaleString("id-ID")},00`;
 export const dateFormat = (date) => {
   if (date) {

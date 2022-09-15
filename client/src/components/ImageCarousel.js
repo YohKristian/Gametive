@@ -23,15 +23,19 @@ const getConfigurableProps = () => ({
 const slideImage = [
   {
     img: "https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt949920a2daca917e/5fad835646f622769b5edc16/LoL_WR_KV_Wallpaper_1920x1080.jpg",
-    legend: "Wild rift",
+    legend: "Wild Rift",
   },
   {
     img: "https://www.pockettactics.com/wp-content/uploads/2021/01/mobile-legends-wallpaper-6.jpg",
-    legend: "Mobile legends",
+    legend: "Mobile Legends",
   },
   {
     img: "https://images6.alphacoders.com/110/1103575.jpg",
     legend: "Arena Of Valor",
+  },
+  {
+    img: "https://images2.alphacoders.com/474/474206.jpg",
+    legend: "DOTA 2",
   },
   {
     img: "https://pt.moyens.net/wp-content/uploads/2022/02/1644959338_O-Valorant-esta-sendo-desenvolvido-pela-Riot-para-as-plataformas.jpg",

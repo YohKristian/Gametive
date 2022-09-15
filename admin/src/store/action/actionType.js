@@ -1,4 +1,4 @@
-export const baseURL = 'http://localhost:3000';
+export const baseURL = 'https://gametive.herokuapp.com';
 
 export const FETCH_ALL_EVENT = 'fetchevent/success';
 export const FETCH_ALL_GAME = 'fetchgame/success';

@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux"
-import { dateFormat, errorPopup } from "../helpers";
+import { dateFormat, errorPopup, infoPopup, successPopup } from "../helpers";
 import { deleteGame, fetchGameDetail, fetchGames } from "../store/action/gamesAction";
 import VerticalModalEditGame from "../components/VerticalModalEditGame";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function GameRow(props) {
     const dispacth = useDispatch();
@@ -22,21 +23,36 @@ export default function GameRow(props) {
     }
 
     const handlerOnClickDelete = () => {
-        dispacth(
-            deleteGame(props.game.id, (error, success) => {
-                if (error) {
-                    return errorPopup(error);
-                }
-                // console.log(success)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: false,
+            denyButtonText: `Cancel`,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispacth(
+                    deleteGame(props.game.id, (error, success) => {
+                        if (error) {
+                            return errorPopup(error);
+                        }
+                        successPopup("Success delete game")
 
-                dispacth(fetchGames(1, { query: "" }, (error, success) => {
-                    if (error) {
-                        return errorPopup(error);
-                    }
-                    // console.log(success);
-                }));
-            })
-        );
+                        dispacth(fetchGames(1, { query: "" }, (error, success) => {
+                            if (error) {
+                                return errorPopup(error);
+                            }
+                            // console.log(success);
+                        }));
+                    })
+                );
+            } else if (result.isDenied) {
+                infoPopup("Delete cancelled")
+            }
+        })
     }
 
     return (

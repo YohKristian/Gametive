@@ -24,18 +24,16 @@ export default function FooterBar() {
                 </div>
               </h6>
               <p>
-                Website mengenai event-event game terkait e-sport yang tersebar luas di indonesia
+                Website mengenai event-event game terkait e-sport yang tersebar luas di indonesia.
               </p>
             </div>
 
-
-
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                Games
+                MOBA Games
               </h6>
               <p>
-                <a href="https://wildrift.leagueoflegends.com/en-gb/" className="text-reset">LoL : Wildrift</a>
+                <a href="https://wildrift.leagueoflegends.com/en-gb/" className="text-reset">LoL : Wild Rift</a>
               </p>
               <p>
                 <a href="https://m.mobilelegends.com/en" className="text-reset">Mobile Legends</a>
@@ -44,13 +42,13 @@ export default function FooterBar() {
                 <a href="https://www.arenaofvalor.com/" className="text-reset">Arena Of Valor</a>
               </p>
               <p>
-                <a href="https://www.dota2.com/home" className="text-reset">Dota 2</a>
+                <a href="https://www.dota2.com/home" className="text-reset">DOTA 2</a>
               </p>
             </div>
 
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">
-                &#8205;
+                FPS & BR Games
               </h6>
               <p>
                 <a href="https://playvalorant.com/id-id/" className="text-reset">Valorant</a>
@@ -59,7 +57,7 @@ export default function FooterBar() {
                 <a href="https://blog.counter-strike.net/" className="text-reset">CS : GO</a>
               </p>
               <p>
-                <a href="https://ff.garena.com/en/" className="text-reset">Garena Free Fire</a>
+                <a href="https://ff.garena.com/en/" className="text-reset">Free Fire</a>
               </p>
               <p>
                 <a href="https://www.pubgmobile.com/id/home.shtml" className="text-reset">PUBG Mobile</a>
@@ -72,10 +70,10 @@ export default function FooterBar() {
               <p><i className="fas fa-home me-3"></i> Jakarta, Indonesia</p>
               <p>
                 <i className="fas fa-envelope me-3"></i>
-                gametive@mail.com
+                gametiveid@gmail.com
               </p>
-              <p><i className="fas fa-phone me-3"></i> +62 0899606060</p>
-              <p><i className="fas fa-print me-3"></i> (021) 555 5555</p>
+              <p><i className="fas fa-phone me-3"></i> +62 8138589730</p>
+              <p><i className="fas fa-print me-3"></i> (021) 555 538540</p>
             </div>
 
           </div>
