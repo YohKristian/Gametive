@@ -45,7 +45,7 @@ class MidtransController {
 
 			const [text, time, teamId, eventId] = order_id.split("-");
 
-			if (transaction_status !== "capture" || transaction_status !== "settlement") throw { code: 101 };
+			// if (transaction_status !== "capture" || transaction_status !== "settlement") throw { code: 101 };
 
 			const fetchResponse = await Participant.findOne({
 				where: {
