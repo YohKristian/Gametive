@@ -119,6 +119,10 @@ export default function EventEdit() {
 			});
 	};
 
+	const clickBack = () => {
+		navigate("/event")
+	}
+
 
 	if (!loading) {
 		return (
@@ -225,7 +229,7 @@ export default function EventEdit() {
 						</div>
 						<br></br>
 						<div className="row d-flex justify-content-center">
-							<button type="submit" className="col-2">Back</button>
+							<button onClick={clickBack} className="col-2">Back</button>
 							<button type="submit" className="col-2">Update</button>
 						</div>
 					</form>
