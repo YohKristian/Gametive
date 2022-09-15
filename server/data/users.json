@@ -106,5 +106,47 @@
     "email": "sneyking@gmail.com",
     "password": "12345",
     "role": "Customer"
+  },
+  {
+    "username": "Seleri",
+    "email": "Seleri@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Fly",
+    "email": "Fly@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Jabz",
+    "email": "Jabz@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "gpk",
+    "email": "gpk@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "iNSaNiA",
+    "email": "iNSaNiA@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "xNova",
+    "email": "xNova@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "SoNNeikO",
+    "email": "SoNNeikO@gmail.com",
+    "password": "12345",
+    "role": "Customer"
   }
 ]
