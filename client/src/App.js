@@ -35,7 +35,7 @@ function RequireAuth({ children }) {
 	)
 		return children;
 	const { access_token } = localStorage;
-	if (!access_token) return <Navigate to={"/login"} />;
+	if (!access_token) return <Navigate to={"/login"} replace={true} />;
 	return children;
 }
 
