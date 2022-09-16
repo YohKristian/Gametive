@@ -34,12 +34,13 @@ export default function VerticalModalEditEvent(props) {
 		);
 
 		let populateDate
-		if (detailEvent.Location && detailEvent.eventDate) {
+		if (detailEvent.Location && detailEvent.eventDate && detailEvent.Game) {
 			populateDate = dayjs(detailEvent.eventDate).format('YYYY-MM-DDTHH:mm');
 			setNewEvent({
 				...detailEvent,
 				eventDate: populateDate,
-				locationName: detailEvent.Location.name
+				locationName: detailEvent.Location.name,
+				GameId: detailEvent.Game.id
 			});
 		}
 	}, [detailEvent]);
@@ -66,12 +67,12 @@ export default function VerticalModalEditEvent(props) {
 			rules,
 			price,
 			size,
-			Game: { id: GameId },
+			GameId,
 			Location: { name: locationName, ProvinceId, RegencyId, DistrictId },
 		} = newEvent;
 
 		// console.log(newEvent, "CEK FORM");
-		// console.log(newEvent.Location, "CEK FORM LOCATION");
+		// console.log(newEvent.Game, "CEK FORM GAME");
 
 		let newInput = {
 			eventName,
