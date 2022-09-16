@@ -134,7 +134,7 @@ export default function DetailGame() {
 							</p>}
 						</div>
 						<div className="button">
-							{(eventTime > currentTime && detail.eventStatus === "Active" || detail.User.username !== localStorage.username) && (
+							{((eventTime > currentTime && detail.eventStatus === "Active") || detail.User.username !== localStorage.username) && (
 								<button className="regis" onClick={handlerOnClick}>
 									Register event!
 								</button>
