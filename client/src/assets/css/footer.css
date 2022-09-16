@@ -1,0 +1,26 @@
+/* footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 80px;
+  background-color: orange;
+  color: #F5F5F5;
+} */
+
+/* footer>div {
+  flex: 1;
+  margin: 0 20px;
+  text-align: center;
+  font-weight: bold;
+} */
+
+footer {
+  background-color: orange;
+  color: #F5F5F5;
+}
+
+footer .img img {
+  width: 60%;
+  position: relative;
+  bottom: 10px;
+}

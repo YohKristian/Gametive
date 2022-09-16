@@ -1,0 +1,143 @@
+.detail {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0 20px;
+}
+
+.detail>.game {
+  align-self: flex-start;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+}
+
+.detail>* {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 10px;
+  flex: 1;
+}
+
+.game-img,
+.event-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 6/4;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+.game-img {
+  justify-content: start;
+  position: relative;
+}
+
+.game-img>img {
+  filter: brightness(40%);
+  transform: scale(1);
+  transition: all 0.5s ease-in-out;
+}
+
+.game-img>img,
+.event-img>img {
+  height: 100%;
+}
+
+.detail>.game>.game-img>div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #f5f5f5;
+  text-align: left;
+  padding: 30px;
+}
+
+.detail>.event>div:nth-child(2)>* {
+  margin: 15px 0;
+  word-wrap: break-word
+}
+
+.detail .game:hover {
+  cursor: pointer;
+}
+
+.detail .game:hover .game-img>img {
+  transform: scale(1.3);
+}
+
+.detail>.event span.status {
+  font-weight: bold;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+.detail>.event>h2 {
+  font-weight: lighter;
+}
+
+.detail>.event .button {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail>.event .button button {
+  margin-top: 30px;
+}
+
+.detail>.event .button .regis {
+  background-color: orange;
+  font-weight: bold;
+  border: none;
+  color: #f5f5f5;
+  padding: 10px 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.detail>.event .button .back {
+  background-color: gray;
+  border: none;
+  color: #f5f5f5;
+  padding: 5px 15px;
+  border-radius: 10px;
+  align-self: flex-start;
+}
+
+.bi-geo-alt-fill,
+.bi-flag-fill,
+.bi-cash,
+.fa-map {
+  margin-right: 15px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .detail {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail>.game {
+    position: unset;
+    align-self: unset;
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .detail {
+    margin: 80px 10px;
+  }
+  .detail>.game {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,76 @@
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffcc6e;
+  height: 100vh;
+}
+
+.login-page > div {
+  width: 500px;
+  background-color: #F5F5F5;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.login-page > div > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page > div > form > .img > img {
+  width: 100%;
+}
+
+.login-page form > * {
+  margin: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.login-page form > h2 {
+  margin: 30px 0;
+}
+
+.login-page form > label {
+  margin: 20px 0 10px;
+  color: #b9b9b9;
+  font-size: 14px;
+}
+
+.login-page form > input {
+  position: relative;
+  margin: 0;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 12px;
+  text-align: left;
+}
+
+.login-page form > button {
+  padding: 12px;
+  font-weight: bold;
+  color: #F5F5F5;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+}
+
+.login-page form > .g-sign-in {
+  width: 200px;
+  height: 50px;
+  background-color: gainsboro;
+  border-radius: 5px;
+}
+
+.login-page form > p {
+  border-top: 1px solid black;
+  padding-top: 10px;
+}
+
+.login-page form > p > a {
+  font-weight: bold;
+}

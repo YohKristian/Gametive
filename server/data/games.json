@@ -1,0 +1,110 @@
+[
+  {
+    "name": "League of Legends: Wild Rift",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Mobile Legends: Bang Bang",
+    "gameImg": "https://cdn0-production-images-kly.akamaized.net/Hyl2S_OHDEDCGayRTeriz3hPi38=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3488932/original/008102000_1624278462-Mobile_Legends_11.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=cftqT7au9gk",
+    "gameUrl": "https://m.mobilelegends.com/en",
+    "releaseDate": "2016-07-14",
+    "developer": "Moonton",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Arena Of Valor",
+    "gameImg": "https://gamebrott.com/wp-content/uploads/2020/11/arena_of_valor.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=JM_UdSUW1ao",
+    "gameUrl": "https://www.arenaofvalor.com/",
+    "releaseDate": "2016-10-13",
+    "developer": "Tencent Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "DOTA 2",
+    "gameImg": "https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg?t=1662588548",
+    "youtubeUrl": "https://www.youtube.com/watch?v=SmnqsdeHFT0",
+    "gameUrl": "https://www.dota2.com",
+    "releaseDate": "2013-07-09",
+    "developer": "Valve Corporation",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "VALORANT",
+    "gameImg": "https://cdn1-production-images-kly.akamaized.net/2cz3nNAb61C_WtZDIByp9jys2Ww=/1200x675/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3142622/original/000361800_1591163362-valorant-2.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=IhhjcB2ZjIM",
+    "gameUrl": "https://playvalorant.com/id-id/",
+    "releaseDate": "2020-06-02",
+    "developer": "Riot Games",
+    "genre": "First Person Shooter"
+  },
+  {
+    "name": "CS:GO",
+    "gameImg": "https://estnn.com/wp-content/uploads/2022/05/20491388.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=edYCtaNueQY",
+    "gameUrl": "https://blog.counter-strike.net/",
+    "releaseDate": "2012-08-21",
+    "developer": "Valve Corporation",
+    "genre": "First Person Shooter"
+  },
+  {
+    "name": "Garena Free Fire",
+    "gameImg": "https://aidsindonesia.or.id/wp-content/uploads/2021/12/Garena-Free-Fire.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=pKUu6PKNyzk",
+    "gameUrl": "https://ff.garena.com/en/",
+    "releaseDate": "2017-12-04",
+    "developer": "111dots Studio",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "PUBG Mobile",
+    "gameImg": "https://c4.wallpaperflare.com/wallpaper/320/205/156/pubg-mobile-wallpaper-preview.jpg",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uCd6tbUAy6o",
+    "gameUrl": "https://www.pubgmobile.com/id/home.shtml",
+    "releaseDate": "2018-03-19",
+    "developer": "Tencent Games",
+    "genre": "Battle royale"
+  },
+  {
+    "name": "Testing 1",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 2",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 3",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  },
+  {
+    "name": "Testing 4",
+    "gameImg": "https://www.riotgames.com/darkroom/1440/08bcc251757a1f64e30e0d7e8c513d35:be16374e056f8268996ef96555c7a113/wr-cb1-announcementarticle-banner-1920x1080.png",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TFzkbos0oeo",
+    "gameUrl": "https://wildrift.leagueoflegends.com/en-gb/",
+    "releaseDate": "2020-10-27",
+    "developer": "Riot Games",
+    "genre": "Multiplayer Online Battle Arena"
+  }
+]

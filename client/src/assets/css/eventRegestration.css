@@ -1,0 +1,132 @@
+.ev-reg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb74d;
+  min-height: 100vh;
+  padding: 150px;
+}
+
+.ev-reg > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 40px 30px;
+  border-radius: 10px;
+}
+
+.ev-reg > div > .img {
+  width: 250px;
+}
+
+.ev-reg > div > .img > img {
+  width: 100%;
+}
+
+.ev-reg .event-img {
+  width: 100%;
+  max-width: 600px;
+  margin: 15px 0;
+}
+
+.ev-reg .event-img > img {
+  height: 100%;
+}
+
+.ev-reg form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ev-reg form > div {
+  width: 100%;
+  display: flex;
+}
+
+.ev-reg form > div > div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 10px;
+}
+
+.ev-reg form > div > div > * {
+  margin: 5px 0;
+}
+
+.ev-reg form > div > div input,
+.ev-reg form > div > div textarea,
+.ev-reg form > div > div select {
+  padding: 8px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.ev-reg form > div > div textarea {
+  height: 200px;
+}
+
+.ev-reg form > button {
+  border: none;
+  background-color: orange;
+  width: 100%;
+  max-width: 400px;
+  padding: 6px;
+  border-radius: 5px;
+  color: #f5f5f5;
+  font-weight: bold;
+}
+
+.ev-reg form > div:nth-last-child(1) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+.ev-reg form > div > button {
+  border: none;
+  width: 100%;
+  max-width: 400px;
+  padding: 6px;
+  border-radius: 5px;
+  color: #f5f5f5;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.ev-reg form > div > button:nth-child(2) {
+  background-color: gray;
+  width: 70px;
+}
+.ev-reg form > div > button:nth-child(1) {
+  background-color: #ffb74d;
+}
+
+@media only screen and (max-width: 1200px) {
+  .ev-reg {
+    padding: 100px 10px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .ev-reg > div > form > div {
+    flex-direction: column;
+  }
+}
+
+.select-team {
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+  background-color: orange;
+  color: #f5f5f5;
+}
+
+.select-team :active {
+  border: none;
+}

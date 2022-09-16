@@ -1,0 +1,56 @@
+@import "./assets/css/style.css";
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  transition: 0.3s;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-link {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  color: black;
+}
+
+.page-link:hover {
+  cursor: pointer;
+}
+
+.page-link.active {
+  border: none;
+  background-color: orange;
+  color: white;
+  z-index: 1 !important;
+}
+
+.dont-have {
+  margin-top: 15%;
+  margin-bottom: 20%;
+  font-weight: bolder;
+  color: orange;
+}
+
+.font-link {
+  font-family: "Montserrat", sans-serif;
+}
+
+.dont-have-team {
+  margin-top: 20%;
+  font-weight: bolder;
+  color: orange;
+  text-align: center;
+}
+
+.list-team {
+  margin-top: 80px;
+}
+
+.add-team {
+  text-align: center;
+  margin-bottom: 40px;
+}

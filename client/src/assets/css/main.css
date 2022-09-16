@@ -1,0 +1,6 @@
+@import "./detail.css";
+@import "./searchPage.css";
+
+main {
+  min-height: 100vh;
+}

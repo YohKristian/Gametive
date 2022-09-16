@@ -1,0 +1,152 @@
+[
+  {
+    "username": "fajar",
+    "email": "fajar@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "joshua",
+    "email": "joshua@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "rama",
+    "email": "rama@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "rizki",
+    "email": "rizki@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "steven",
+    "email": "steven@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "yohanes",
+    "email": "yohanes@gmail.com",
+    "password": "12345",
+    "role": "Admin"
+  },
+  {
+    "username": "Andi",
+    "email": "andi@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Budi",
+    "email": "budi@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Coki",
+    "email": "coki@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Dendi",
+    "email": "dendi@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Misha",
+    "email": "misha@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Miposhka",
+    "email": "miposhka@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Stinger",
+    "email": "stinger@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Monet",
+    "email": "monet@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Matthew",
+    "email": "matthew@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "JaCkky",
+    "email": "jackky@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "MoonMeander",
+    "email": "moonmeander@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Sneyking",
+    "email": "sneyking@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Seleri",
+    "email": "Seleri@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Fly",
+    "email": "Fly@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "Jabz",
+    "email": "Jabz@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "gpk",
+    "email": "gpk@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "iNSaNiA",
+    "email": "iNSaNiA@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "xNova",
+    "email": "xNova@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  },
+  {
+    "username": "SoNNeikO",
+    "email": "SoNNeikO@gmail.com",
+    "password": "12345",
+    "role": "Customer"
+  }
+]

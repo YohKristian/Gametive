@@ -1,0 +1,178 @@
+[
+	{
+		"name": "Natus Vincere",
+		"CaptainName": "Dendi",
+		"MemberName1": "Antonov",
+		"MemberName2": "XBOCT",
+		"MemberName3": "Puppey",
+		"MemberName4": "Dmitriy",
+		"BenchMemberName1": "Arteezy",
+		"BenchMemberName2": "Sumail",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "OG",
+		"CaptainName": "Misha",
+		"MemberName1": "bzm",
+		"MemberName2": "ATF",
+		"MemberName3": "Taiga",
+		"MemberName4": "Yuragi",
+		"BenchMemberName1": "Topson",
+		"BenchMemberName2": "N0tail",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Team Spirit",
+		"CaptainName": "Miposhka",
+		"MemberName1": "Mira",
+		"MemberName2": "Collapse",
+		"MemberName3": "TORONTOTOKYO",
+		"MemberName4": "Yatoro",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "beastcoast",
+		"CaptainName": "Stinger",
+		"MemberName1": "Scofield",
+		"MemberName2": "Wisper",
+		"MemberName3": "Chris Luck",
+		"MemberName4": "K1",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Team Aster",
+		"CaptainName": "Monet",
+		"MemberName1": "Ori",
+		"MemberName2": "Xxs",
+		"MemberName3": "BoBoKa",
+		"MemberName4": "皮球",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Thunder Awaken",
+		"CaptainName": "Matthew",
+		"MemberName1": "Sacred",
+		"MemberName2": "Pandaboo",
+		"MemberName3": "Darkmago",
+		"MemberName4": "Pakazs",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "BOOM Esports",
+		"CaptainName": "JaCkky",
+		"MemberName1": "Yopaj",
+		"MemberName2": "Fbz",
+		"MemberName3": "Tims",
+		"MemberName4": "skem",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "TSM",
+		"CaptainName": "MoonMeander",
+		"MemberName1": "DuBu",
+		"MemberName2": "SabeRLight-",
+		"MemberName3": "Bryle",
+		"MemberName4": "Timado",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Tundra Esports",
+		"CaptainName": "Sneyking",
+		"MemberName1": "skiter",
+		"MemberName2": "Nine",
+		"MemberName3": "33",
+		"MemberName4": "Saksa",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Gaimin Gladiators",
+		"CaptainName": "Seleri",
+		"MemberName1": "tOfu",
+		"MemberName2": "Ace",
+		"MemberName3": "BOOM",
+		"MemberName4": "DyrachYO",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Evil Geniuses",
+		"CaptainName": "Fly",
+		"MemberName1": "Cr1t-",
+		"MemberName2": "Nightfall",
+		"MemberName3": "Abed",
+		"MemberName4": "Arteezy",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Fnatic",
+		"CaptainName": "Jabz",
+		"MemberName1": "DJ",
+		"MemberName2": "Jaunuel",
+		"MemberName3": "Armel",
+		"MemberName4": "Raven",
+		"BenchMemberName1": "Palos",
+		"BenchMemberName2": "Timado",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Outsiders",
+		"CaptainName": "gpk",
+		"MemberName1": "DM",
+		"MemberName2": "RAMZES666",
+		"MemberName3": "yamich",
+		"MemberName4": "Xakoda",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Team Liquid",
+		"CaptainName": "iNSaNiA",
+		"MemberName1": "Boxi",
+		"MemberName2": "zai",
+		"MemberName3": "miCKe",
+		"MemberName4": "MATUMBAMAN",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "Royal Never Give Up",
+		"CaptainName": "xNova",
+		"MemberName1": "kaka",
+		"MemberName2": "Chalice",
+		"MemberName3": "Somnus丶M",
+		"MemberName4": "Ghost",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	},
+	{
+		"name": "BetBoom Team",
+		"CaptainName": "SoNNeikO",
+		"MemberName1": "RodjER",
+		"MemberName2": "Noticed",
+		"MemberName3": "Larl",
+		"MemberName4": "Daxak",
+		"BenchMemberName1": "",
+		"BenchMemberName2": "",
+		"statusTeam": "Active"
+	}
+]

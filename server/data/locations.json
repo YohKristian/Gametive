@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Jl. Jakarta",
+    "ProvinceId": 31,
+    "RegencyId": 3171,
+    "DistrictId": 3171060
+  },
+  {
+    "name": "Jl. Surabaya",
+    "ProvinceId": 35,
+    "RegencyId": 3578,
+    "DistrictId": 3578090
+  }
+]

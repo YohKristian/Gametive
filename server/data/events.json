@@ -1,0 +1,44 @@
+[
+	{
+		"name": "League of Legends: Wild Rift - Esport",
+		"description": "Thank you to all the teams who competed during the season one global championship! We also want to give a huge shout out to all the fans who tuned in during Icons and made this event unforgettable. While this season has wrapped up, stay tuned for more Wild Rift esports announcements coming soon!",
+		"price": 120000,
+		"rules": "Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+		"eventStatus": "Active",
+		"eventPoster": "https://i.ytimg.com/vi/TrXQ6_LCBFU/maxresdefault.jpg",
+		"eventDate": "2022-09-21",
+		"eventType": "Offline",
+		"UserId": 3,
+		"GameId": 1,
+		"LocationId": 1,
+		"size": 8
+	},
+	{
+		"name": "ONE Esports Dota 2 Jakarta",
+		"description": "ONE Esports partner with PGL to bring a new series of $500,000 USD tournaments for Dota 2.[1] The ONE Esports Dota 2 Invitational Jakarta, held in the Indonesia Convention Exhibition, will have 12 of the world's best team clash in November 2020.",
+		"price": 250000,
+		"rules": "Memasuki season pertama esports Wild Rift, peraturan dan kebijakan kompetisi dibuat untuk melindungi integritas kompetitif dan memastikan ekosistem yang sehat bagi tim, pemain, serta penyelenggara turnamen. Kebijakan dan aturan kompetitif global lengkap dapat ditemukan di sini. - https://www.dropbox.com/sh/z509gfeyo5vnjet/AABPuvrFcgXX5MdQC5DSU1jaa?dl=0",
+		"eventStatus": "Active",
+		"eventPoster": "https://cdn0-production-images-kly.akamaized.net/3yNCa6vHMltMGm6GKNYqFq6CisI=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3060497/original/076042000_1582677047-one-esports.jpg",
+		"eventDate": "2022-11-23",
+		"eventType": "Offline",
+		"UserId": 6,
+		"GameId": 8,
+		"LocationId": 1,
+		"size": 8
+	},
+	{
+		"name": "ONE Esports Dota 2 Invitationals",
+		"description": "ONE Esports partner with PGL to bring a new series of $500,000 USD tournaments for Dota 2.[1] The ONE Esports Dota 2 Invitational Jakarta, held in the Indonesia Convention Exhibition, will have 12 of the world's best team clash in November 2020.",
+		"price": 180000,
+		"rules": "Selection Priority for game one is determined by a coin toss. Alternates for game two. Coin toss is used again if there is a third game. ",
+		"eventStatus": "Active",
+		"eventPoster": "https://static.republika.co.id/uploads/images/inpicture_slide/one-esports-dota_200304211713-772.jpg",
+		"eventDate": "2022-11-23",
+		"eventType": "Offline",
+		"UserId": 1,
+		"GameId": 8,
+		"LocationId": 1,
+		"size": 16
+	}
+]

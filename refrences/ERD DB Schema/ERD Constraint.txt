@@ -1,0 +1,14 @@
+All Table and All field not null not empty
+<Table> - <field>
+User - username & email unique
+User - password minimum length 5
+User - role default value 'Customer'
+Event - price minimum 0
+Event - eventStatus default value 'Pending'
+Event - Bracket allow empty allow null
+Game - genre allow empty allow null
+Participant - statusPay default values 'Unpaid'
+Team - MemberName1-4 allow empty allow null
+Team - BenchMemberName1-2 allow empty allow null
+Team - statusTeam allow empty allow null default values 'Active'
+Location - DistrictId default values 0

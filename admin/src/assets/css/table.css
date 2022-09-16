@@ -1,0 +1,41 @@
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 20px;
+}
+
+table th {
+  background-color: orange;
+}
+
+table tr {
+  box-shadow: 0 0 10px silver;
+  border-radius: 10px;
+  margin: 20px 0;
+  transition: all 0.3s;
+}
+
+table tbody tr:hover {
+  box-shadow: 0 0px 15px silver;
+}
+
+table img {
+  width: 150px;
+  aspect-ratio: 6/4;
+}
+
+table tr td.action > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table tr td.action > div button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+}
+
+table tr td.action > div button i{
+  margin-right: 5px;
+}

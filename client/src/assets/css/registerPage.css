@@ -1,0 +1,79 @@
+.register-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffcc6e;
+  height: 100vh;
+}
+
+.register-page > div {
+  width: 500px;
+  background-color: #f5f5f5;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.register-page > div > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-page > div > form > .img > img {
+  width: 100%;
+}
+
+.register-page form > * {
+  margin: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.register-page form > h2 {
+  margin: 30px 0;
+}
+
+.register-page form > label {
+  margin: 20px 0 10px;
+  color: rgb(185, 185, 185);
+  font-size: 14px;
+}
+
+.register-page form > input {
+  margin: 0;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 12px;
+  text-align: left;
+}
+
+.register-page form > button {
+  padding: 12px;
+  font-weight: bold;
+  color: #f5f5f5;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+}
+
+.register-page form > p {
+  border-top: 1px solid black;
+  padding-top: 10px;
+}
+
+.register-page form > p > a {
+  font-weight: bold;
+}
+
+.bi-exclamation-triangle-fill {
+  color: #eb2f06;
+  position: relative;
+  top: 11px;
+  cursor: pointer;
+}
+
+.bi-exclamation-triangle-fill:hover {
+  color: #e55039;
+}

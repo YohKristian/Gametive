@@ -1,0 +1,17 @@
+.ModalTitleTnC {
+  font-family: sans-serif;
+}
+
+.TnC > h3 {
+  font-family: monospace;
+}
+
+.TnC > ol > li {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+  letter-spacing: 0.07rem;
+  line-height: 1.6rem;
+  word-spacing: 0.2rem;
+}
